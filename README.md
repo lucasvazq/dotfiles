@@ -1,6 +1,17 @@
+
+##<p align="center">Manjaro i3 personal dotfiles</p>
+_<p align="center">Improved for productivity with Python 🐍, VSCode and Github.</p>_
+<p align="center">
+
+![w](https://github.githubassets.com/favicons/favicon.png)
+![Screenshot](./screenshot.png)
+</p>
+
+🌟 **bk**: special script that's run in every boot and change randonmly the background and all color scheme. You also can run it throught terminal
+
 # Installation
 
-Run the following command
+Run the following commands
 ```
 cd
 git clone git@github.com:lucasvazq/dotfiles
@@ -10,19 +21,26 @@ cd dotfiles
 
 After restart, there's some manual installation steps
 
-**Add-ons for firefox**
+#### Add-ons for firefox
+
 https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
 Click the Pywalfox icon to access the settings and click "Fetch Pywal colors"
 
-**Github setup**
-`git config --global user.name "YOUR_NAME"`
-`git config --global user.email "YOUR_EMAIL"`
-https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+
+#### Github setup
+
+```
+git config --global user.name "YOUR_NAME"
+git config --global user.email "YOUR_EMAIL"
+```
+
+Read: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+
 
 # Cheatsheet
 
 Keybinds
-```
+```sh
 # Browser
 $mod+F1                       Open Firefox
 $mod+Shift+F1                 Open Google chrome
@@ -74,15 +92,15 @@ $mod+0                        Select system mode
 ```
 
 Terminal commands
-```
+```sh
 # Funny
-bk                            Change background image and all color scheme. Args: None | image file path
+bk                            Change background image and general color scheme. Args: None | custom image
 cow                           A psychedelic cow taht tells your fortune
 lolban                        Print a rainbow message. Args: message
 
 # Productivity
 ed                            Open code editor
-cud                           Change utc date. Args: None | (hour [,minutes])
+cud                           Change UTC timezone. Args: None | (hour [,minutes])
 
 # Python
 deactivate_python             Deactivate Python environment if any

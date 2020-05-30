@@ -40,7 +40,7 @@ cud() {
 }
 
 bk() {
-  # Run bk command and neofetch
+  # Run bk script and neofetch
   sh ~/.local/bin/bk.sh>>/dev/null $1
   clear
   neofetch
