@@ -1,0 +1,352 @@
+##############################################################################
+# HELP
+##############################################################################
+###### Reload
+# i3-msg reload
+# i3-msg restart
+#
+##### Browsers
+# $mod+F1                       exec firefox
+# $mod+Shift+F1                 exec google-chrome-stable
+#
+##### Editor
+# $mod+F2                       exec code
+#
+##### Folder Manager
+# $mod+F3                       exec pcmanfm
+# $mod+Shift+F3                 exec pcmanfm_pkexec
+#
+##### Keyboard layout
+# $mod+q                        us
+# $mod+w                        es
+#
+##### Terminal
+# $mod+Return                   exec alacritty
+#
+##### Audio
+# $mod+Ctrl+m                   exec pulseeffects
+#
+##### App menu
+# $mod+d                        exec rofi
+# $mod+Shift+d                  exec rofimoji
+# $mod+z                        exec morc_menu
+#
+##### Print
+# Print                         exec i3-scrot
+# $mod+Shift+Print              exec i3-scrot -s
+#
+##### Windows
+# ARROWS: Up(k), Dowm(j), Left(h), Right(l)
+# $mod+Shift+q                  kill container
+# $mod+f                        fullscreen mode for container
+# $mod+Shift+space              toggle container tiling/floating
+# $mod+space                    change focus between tiling/floating
+# $mod+Ctrl+space               toggle split mode between horizontal and vertical
+# $mod+<ARROWS>                 focus container up|down|left|right
+# $mod+Shift+<ARROWS>           move container up|down|left|right
+# $mod+Ctrl+<Right(l)>          workspace next
+# $mod+Ctrl+<Left(h)>           workspace prev
+# $mod+<NUMBERS 1-9>            switch to N workspace
+# $mod+Ctrl+<NUMBERS 1-9>       move container to workspace N
+# $mod+Shift+<NUMBERS 1-9>      move to N workspace with actual container
+# $mod+r                        resize
+#
+##### Power
+# $mod+0                        system mode
+
+
+##############################################################################
+# Default config
+##############################################################################
+
+
+# Set mod key. Mod4=<Super>
+set $mod Mod4
+
+# Font for window titles
+font xft:JetBrainsMono Nerd Font Mono 10
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border normal
+default_floating_border normal
+hide_edge_borders none
+
+
+##############################################################################
+# Autostart applications
+##############################################################################
+
+
+exec --no-startup-id ~/.local/bin/bk.sh
+exec --no-startup-id numlockx
+exec --no-startup-id fix_xcursor
+exec --no-startup-id polybar default
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id picom -b
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec firefox'
+exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
+exec --no-startup-id i3-msg 'workspace 3:Terminal; append_layout ~/.i3/workspace-Terminal.json; exec alacritty'
+exec --no-startup-id i3-msg 'workspace 1:Web'
+
+
+##############################################################################
+# Sound
+##############################################################################
+
+
+bindsym $mod+Ctrl+m exec pulseeffects
+exec --no-startup-id pulseaudio
+exec --no-startup-id volumeicon
+
+
+##############################################################################
+# Apps
+##############################################################################
+
+
+bindsym $mod+F1 exec firefox
+bindsym $mod+Shift+F1 exec google-chrome-stable
+bindsym $mod+F2 exec code
+bindsym $mod+F3 exec pcmanfm
+bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Shift+d exec --no-startup-id rofimoji
+bindsym $mod+Return exec alacritty
+
+
+##############################################################################
+# Keyboard layout
+##############################################################################
+
+
+bindsym $mod+q exec setxkbmap -layout us
+bindsym $mod+w exec setxkbmap -layout es
+
+
+##############################################################################
+# Focus
+##############################################################################
+# Use Mouse+$mod to drag floating windows
+
+
+focus_on_window_activation none
+floating_modifier $mod
+focus_follows_mouse no
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# Select focus
+bindsym $mod+k focus up
+bindsym $mod+j focus down
+bindsym $mod+h focus left
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+##############################################################################
+# Screen mode
+##############################################################################
+
+
+# toggle split mode between horizontal and vertical
+bindsym $mod+Ctrl+space split toggle
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# navigate workspaces next / previous
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+h workspace prev
+
+# alterantively, you can use the cursor keys:
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+
+##############################################################################
+# Workspaces
+##############################################################################
+
+
+# Workspace names
+set $ws1 "1:Web"
+set $ws2 "2:Ed"
+set $ws3 "3:Terminal"
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+
+# Open specific applications in floating mode
+for_window [class="^.*"] border pixel 2
+for_window [title="qpaeq"] floating enable border pixel 1
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="fpakman"] floating enable
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Manjaro-hello"] floating enable
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+
+# switch to workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "$resize"
+set $resize Resize using ARROWS. (Esc)ape to exit
+mode "$resize" {
+    bindsym k resize shrink width 5 px or 5 ppt
+    bindsym j resize grow height 5 px or 5 ppt
+    bindsym h resize shrink height 5 px or 5 ppt
+    bindsym l resize grow width 5 px or 5 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Escape mode "default"
+}
+
+
+##############################################################################
+# Power
+##############################################################################
+
+
+# Set shut down, restart and locking features
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown, (Esc)ape
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym Shift+r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym Escape mode "default"
+}
+
+
+##############################################################################
+# Color
+##############################################################################
+
+
+# Get colors from ~/.Xresources
+set_from_resource $color0 color0
+set_from_resource $color1 color1
+set_from_resource $color2 color2
+set_from_resource $color3 color3
+set_from_resource $color4 color4
+set_from_resource $color5 color5
+set_from_resource $color6 color6
+set_from_resource $color7 color7
+set_from_resource $color8 color8
+set_from_resource $color9 color9
+set_from_resource $color10 color10
+set_from_resource $color11 color11
+set_from_resource $color12 color12
+set_from_resource $color13 color13
+set_from_resource $color14 color14
+set_from_resource $color15 color15
+
+# class                 border      background  text        indicator   child_border
+client.focused          $color1     $color1     $color7     $color1
+client.focused_inactive $color0     $color0     $color7     $color0
+client.unfocused        $color0     $color0     $color7     $color0
+client.urgent           $color1     $color1     $color7     $color1
+client.placeholder      $color0     $color0     $color7     $color0
+client.background       $color0
+
+
+
+##############################################################################
+# i3-gaps
+##############################################################################
+
+
+smart_gaps on
+smart_borders on
