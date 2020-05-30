@@ -19,9 +19,10 @@ cd dotfiles
 
 After restart, there's some manual installation steps
 
-#### Add-ons for firefox
+#### Firefox Add-ons
 
 https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
+
 Click the Pywalfox icon to access the settings and click "Fetch Pywal colors"
 
 
