@@ -1,13 +1,11 @@
-
-##<p align="center">Manjaro i3 personal dotfiles</p>
-_<p align="center">Improved for productivity with Python 🐍, VSCode and Github.</p>_
+<h2 align="center">Manjaro i3 personal dotfiles</h1>
+<p align="center">Improved for productivity with Python 🐍, VSCode and Github.</p>
 <p align="center">
 
-![w](https://github.githubassets.com/favicons/favicon.png)
 ![Screenshot](./screenshot.png)
 </p>
 
-🌟 **bk**: special script that's run in every boot and change randonmly the background and all color scheme. You also can run it throught terminal
+🌟 **bk**: special script that's run in every boot and change randomly the background and all color schemes. Also, you can run it through terminal in any moment.
 
 # Installation
 
@@ -95,8 +93,8 @@ Terminal commands
 ```sh
 # Funny
 bk                            Change background image and general color scheme. Args: None | custom image
-cow                           A psychedelic cow taht tells your fortune
-lolban                        Print a rainbow message. Args: message
+cow                           A psychedelic cow that tells your fortune
+lolban                        Print a rainbow message. Args: the message
 
 # Productivity
 ed                            Open code editor
