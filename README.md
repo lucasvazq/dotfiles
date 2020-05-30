@@ -1,4 +1,4 @@
-<h2 align="center">Manjaro i3 personal dotfiles</h1>
+<h2 align="center">Minimalistic Manjaro i3 personal dotfiles</h1>
 <p align="center">Improved for productivity with Python 🐍, VSCode and Github.</p>
 <p align="center">
 
