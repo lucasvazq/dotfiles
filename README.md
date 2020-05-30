@@ -37,7 +37,7 @@ Read: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ss
 
 # Cheatsheet
 
-Keybinds
+Keybinds ($mod = Windows|Super|Mod4 key)
 ```sh
 # Browser
 $mod+F1                       Open Firefox
