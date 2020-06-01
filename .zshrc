@@ -56,12 +56,11 @@ lolban() {
   if [ ! -z "$1" ]; then
     # Cool fonts list:
     # ~/.local/share/figlet-fonts/3d.flf
-    figlet $1 -f ~/.local/share/figlet-fonts/3d.flf | lolcat
+    figlet $@ -f ~/.local/share/figlet-fonts/3d.flf | lolcat
   else
     echo Miss message
   fi
 }
-
 
 # ============================================================================
 # Python
