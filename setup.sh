@@ -35,7 +35,6 @@ code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension shd101wyy.markdown-preview-enhanced
 code --install-extension VisualStudioExptTeam.vscodeintellicode
-code --install-extension yzhang.markdown-all-in-one
 
 # Browsers
 yay -S firefox tor-browser google-chrome-stable
