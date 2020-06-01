@@ -54,7 +54,7 @@ cow() {
 lolban() {
   # Print rainbow message with special ascii font
   if [ ! -z "$1" ]; then
-    # Good fonts list:
+    # Cool fonts list:
     # ~/.local/share/figlet-fonts/3d.flf
     figlet $1 -f ~/.local/share/figlet-fonts/3d.flf | lolcat
   else
