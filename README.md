@@ -104,3 +104,8 @@ cud                           Change UTC timezone. Args: None | (hour [,minutes]
 # Python
 deactivate_python             Deactivate Python environment if any
 ```
+
+# Todo
+
+- Gif of bk command
+- Nodejs support
