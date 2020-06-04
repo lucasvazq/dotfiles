@@ -49,7 +49,7 @@ chsh -s $(which zsh) $USER
 yay -S rofi rofimoji polybar
 
 # Others
-yay -S unzip numlockx perl-anyevent-i3 cowsay fortune-mod figlet pipes.sh lolcat
+yay -S unzip zip numlockx perl-anyevent-i3 cowsay fortune-mod figlet pipes.sh lolcat
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 
 # Edition
