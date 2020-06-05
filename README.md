@@ -109,3 +109,6 @@ deactivate_python             Deactivate Python environment if any
 
 - Gif of bk command
 - Nodejs support
+- Remove firefox and pywalfox. Make chrome main browser
+- Remove pywal for vscode
+- Make workspace space style
