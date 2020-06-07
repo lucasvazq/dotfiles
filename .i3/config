@@ -6,7 +6,7 @@
 # i3-msg restart
 #
 ##### Browsers
-# $mod+F1                       exec firefox
+# $mod+F1                       exec brave
 # $mod+Shift+F1                 exec google-chrome-stable
 #
 ##### Editor
@@ -80,13 +80,13 @@ hide_edge_borders none
 exec --no-startup-id ~/.local/bin/bk.sh
 exec --no-startup-id numlockx
 exec --no-startup-id fix_xcursor
-exec --no-startup-id polybar default
+exec --no-startup-id polybar custom
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec firefox'
+exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave'
 exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
 exec --no-startup-id i3-msg 'workspace 3:Terminal; append_layout ~/.i3/workspace-Terminal.json; exec alacritty'
 exec --no-startup-id i3-msg 'workspace 1:Web'
@@ -107,7 +107,7 @@ exec --no-startup-id volumeicon
 ##############################################################################
 
 
-bindsym $mod+F1 exec firefox
+bindsym $mod+F1 exec brave
 bindsym $mod+Shift+F1 exec google-chrome-stable
 bindsym $mod+F2 exec code
 bindsym $mod+F3 exec pcmanfm
@@ -242,36 +242,11 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 
-# Open specific applications in floating mode
+# Specify open type
 for_window [class="^.*"] border pixel 2
-for_window [title="qpaeq"] floating enable border pixel 1
-for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
-for_window [title="File Transfer*"] floating enable
-for_window [class="fpakman"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
+for_window [class="^Pulseeffects$"] floating enable border pixel 2
+for_window [class="^Pavucontrol$"] floating enable border pixel 2
+for_window [class="^Nm\\-connection\\-editor$"] floating enable border pixel 2
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -347,6 +322,4 @@ client.background       $color0
 # i3-gaps
 ##############################################################################
 
-
-smart_gaps on
-smart_borders on
+gaps inner 10
