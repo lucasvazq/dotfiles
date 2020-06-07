@@ -46,6 +46,9 @@ neo() {
   trap clear INT
 
   neofetch --backend w3m --source ~/Pictures/Fetch\ Images/astronaut.jpg  --loop --xoffset 10 --yoffset 10 --size 237px --gap -1
+
+  # Retrun as success after press Ctrl+C
+  return 0
 }
 
 bk() {
