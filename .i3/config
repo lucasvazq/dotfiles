@@ -77,7 +77,7 @@ hide_edge_borders none
 ##############################################################################
 
 
-exec --no-startup-id bk
+exec --no-startup-id image-of-the-day
 exec --no-startup-id numlockx
 exec --no-startup-id fix_xcursor
 exec --no-startup-id polybar custom
