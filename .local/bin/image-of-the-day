@@ -29,7 +29,7 @@ def main():
         destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
         with open(destination_path, "wb") as file:
             file.write(image.content)
-        return subprocess.call(['bk', destination_path])
+        subprocess.call(['bk', destination_path])
 
 
 if __name__ == "__main__":
