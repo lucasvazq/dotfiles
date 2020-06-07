@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+"""
+Executable module that run bk script trying to passing the Astronomy Picture of the Day as argument.
+Source: https://apod.nasa.gov/apod/astropix.html
+"""
+import re
+import requests
+import subprocess
+from pathlib import Path
+
+
+def main():
+    """
+    Script responsible for obtaining the image of the day and running the bk script passing that image as an argument.
+    Some changes to the NASA image of the day landing page, or connection problems, may generate exceptions. If this
+    fail, we run bk script without arguments.
+    The image is saved in ~/Pictures/Wallpapers folder.
+    """
+    nasa_base_url = "https://apod.nasa.gov"
+    try:
+        api_response = requests.get(f"{nasa_base_url}/apod/astropix.html")
+        if regex_match := re.search(r"href=\"(?P<image>image\/\d{4}\/[\w\d_]+.jpg)", api_response.text):
+            image_path = regex_match.groups()[0]
+            image = requests.get(f"{nasa_base_url}/{image_path}")
+    except Exception:
+        subprocess.call(['bk'])
+    else:
+        image_name = image_path.split("/")[-1]
+        destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
+        with open(destination_path, "wb") as file:
+            file.write(image.content)
+        return subprocess.call(['bk', destination_path])
+
+
+if __name__ == "__main__":
+    main()
