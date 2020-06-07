@@ -15,7 +15,7 @@ else
 fi
 
 # Change wallpaper
-nitrogen --set-scaled $WALLPAPER
+nitrogen --set-zoom-fill $WALLPAPER
 
 # Change polybar and terminal colors
 wal -i $WALLPAPER
