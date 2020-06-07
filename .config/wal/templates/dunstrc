@@ -2,7 +2,7 @@
     frame_color = "{foreground}"
     separator_color = "{background}"
     alignment = center
-    browser = firefox
+    browser = brave
     show_indicators = yes # Display indicators for URLs (U) and actions (A).
     format = "%a %s %p\n%b"
     geometry = "0x0-40+63"
