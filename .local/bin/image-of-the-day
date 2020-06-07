@@ -7,9 +7,10 @@ import re
 import requests
 import subprocess
 from pathlib import Path
+from typing import NoReturn
 
 
-def main():
+def main() -> NoReturn:
     """
     Script responsible for obtaining the image of the day and running the bk script passing that image as an argument.
     Some changes to the NASA image of the day landing page, or connection problems, may generate exceptions. If this
