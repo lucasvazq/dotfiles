@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Executable module that run bk script trying to passing the Astronomy Picture of the Day as argument.
+Executable module thats run bk script trying to passing the Astronomy Picture of the Day as argument.
 Source: https://apod.nasa.gov/apod/astropix.html
 """
 import re
@@ -12,7 +12,7 @@ from typing import NoReturn
 
 def main() -> NoReturn:
     """
-    Script responsible for obtaining the image of the day and running the bk script passing that image as an argument.
+    Script responsible for obtaining the Astronomy Picture of the Day and running the bk script passing that image as an argument.
     Some changes to the NASA image of the day landing page, or connection problems, may generate exceptions. If this
     fail, we run bk script without arguments.
     The image is saved in ~/Pictures/Wallpapers folder.
