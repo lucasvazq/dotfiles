@@ -34,7 +34,7 @@ Add github SSH key: https://help.github.com/es/github/authenticating-to-github/a
 Keybinds ($mod = Windows|Super|Mod4 key)
 ```sh
 # Browser
-$mod+F1                       Open Firefox
+$mod+F1                       Open Brave
 $mod+Shift+F1                 Open Google chrome
 
 # Editor
