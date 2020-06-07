@@ -9,7 +9,7 @@
 
 # Installation
 
-Run the following commands
+Run the following commands (These restart the system at the end)
 ```
 cd
 git clone git@github.com:lucasvazq/dotfiles
@@ -19,13 +19,6 @@ cd dotfiles
 
 After restart, there's some manual installation steps
 
-#### Firefox Add-ons
-
-https://addons.mozilla.org/en-US/firefox/addon/pywalfox/
-
-Click the Pywalfox icon to access the settings and click "Fetch Pywal colors"
-
-
 #### Github setup
 
 ```
@@ -33,7 +26,7 @@ git config --global user.name "YOUR_NAME"
 git config --global user.email "YOUR_EMAIL"
 ```
 
-Read: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+Add github SSH key: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
 
 # Cheatsheet
@@ -109,6 +102,4 @@ deactivate_python             Deactivate Python environment if any
 
 - Gif of bk command
 - Nodejs support
-- Remove firefox and pywalfox. Make chrome main browser
-- Remove pywal for vscode
 - Make workspace space style
