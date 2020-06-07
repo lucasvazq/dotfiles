@@ -25,7 +25,7 @@ rm ~/.config/compton.conf
 ####################
 
 # Editor
-yay -S visual-studio-code-bin
+yay -S visual-studio-code-bin neovim gedit
 code --install-extension christian-kohler.path-intellisense
 code --install-extension CoenraadS.bracket-pair-colorizer
 code --install-extension dlasagno.wal-theme
@@ -40,17 +40,22 @@ code --install-extension VisualStudioExptTeam.vscodeintellicode
 yay -S firefox tor-browser google-chrome-stable
 
 # Terminal
-yay -S alacritty neofetch neovim
+yay -S alacritty neofetch cowsay fortune-mod figlet pipes.sh lolcat
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 rm ~/.zshrc.pre-oh-my-zsh
 chsh -s $(which zsh) $USER
+git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
+git clone https://gitlab.com/dwt1/shell-color-scripts.git
+sudo mkdir /opt/shell-color-scripts
+sudo mv ~/shell-color-scripts/colorscripts /opt/shell-color-scripts
+sudo mv ~/shell-color-scripts/colorscript.sh /usr/bin/colorscript
+rm -rf ~/shell-color-scripts
 
 # Desktop manager
 yay -S rofi rofimoji polybar
 
 # Others
-yay -S unzip zip numlockx perl-anyevent-i3 cowsay fortune-mod figlet pipes.sh lolcat shell-color-scripts
-git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
+yay -S unzip zip numlockx perl-anyevent-i3
 
 # Edition
 yay -S inkscape pinta
