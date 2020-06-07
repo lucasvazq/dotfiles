@@ -105,6 +105,7 @@ rm screenshot.png
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/bk
+chmod 711 ~/.local/bin/image-of-the-day
 
 # Restart system
 shutdown -r now
