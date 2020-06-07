@@ -81,8 +81,7 @@ git config --global color.diff.new "green bold"
 git config --global color.diff.whitespace "red reverse"
 
 # Python
-pip install pipenv virtualenvwrapper ipython pywal pywalfox --user
-pywalfox setup
+pip install pipenv virtualenvwrapper ipython pywal --user
 
 # Fonts
 yay -S noto-fonts-emoji
