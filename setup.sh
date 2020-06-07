@@ -37,7 +37,7 @@ code --install-extension shd101wyy.markdown-preview-enhanced
 code --install-extension VisualStudioExptTeam.vscodeintellicode
 
 # Browsers
-yay -S firefox tor-browser google-chrome-stable
+yay -S brave google-chrome-stable tor-browser
 
 # Terminal
 yay -S alacritty neofetch cowsay fortune-mod figlet pipes.sh lolcat
