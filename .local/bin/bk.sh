@@ -24,6 +24,3 @@ wal -i $WALLPAPER
 ln -sf ${HOME}/.cache/wal/dunstrc ${HOME}/.config/dunst/dunstrc
 pkill dunst
 dunst &
-
-# Change firefox color
-pywalfox update
