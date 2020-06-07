@@ -104,7 +104,7 @@ rm -rf dotfiles
 rm screenshot.png
 
 # Give permissions to commands
-chmod 711 ~/.local/bin/bk.sh
+chmod 711 ~/.local/bin/bk
 
 # Restart system
 shutdown -r now
