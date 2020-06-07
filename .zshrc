@@ -39,11 +39,20 @@ cud() {
   fi
 }
 
+neo() {
+  # Run custom neofetch config
+
+  # If Ctrl+C is pressed we clear the screen
+  trap clear INT
+
+  neofetch --backend w3m --source ~/Pictures/Fetch\ Images/astronaut.jpg  --loop --xoffset 10 --yoffset 10 --size 237px --gap -1
+}
+
 bk() {
   # Run bk script and neofetch
   sh bk>>/dev/null $1
   clear
-  neofetch
+  neo
 }
 
 cow() {
@@ -61,6 +70,7 @@ lolban() {
     echo Miss message
   fi
 }
+
 
 # ============================================================================
 # Python
