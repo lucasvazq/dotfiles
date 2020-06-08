@@ -45,7 +45,7 @@ neo() {
   # If Ctrl+C is pressed we clear the screen
   trap clear INT
 
-  neofetch --backend w3m --source ~/Pictures/Fetch\ Images/astronaut.jpg  --loop --xoffset 10 --yoffset 10 --size 237px --gap -1
+  neofetch --backend w3m --source ~/.config/neofetch/astronaut.jpg  --loop --xoffset 10 --yoffset 10 --size 237px --gap -1
 
   # Return as success after press Ctrl+C
   return 0
