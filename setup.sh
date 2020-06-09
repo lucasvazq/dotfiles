@@ -29,14 +29,15 @@ rm ~/.config/compton.conf
 # Editor
 yay -S visual-studio-code-bin neovim gedit
 code --install-extension christian-kohler.path-intellisense
-code --install-extension CoenraadS.bracket-pair-colorizer
 code --install-extension dlasagno.wal-theme
-code --install-extension eamodio.gitlens
 code --install-extension ms-python.python
 code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension shd101wyy.markdown-preview-enhanced
-code --install-extension VisualStudioExptTeam.vscodeintellicode
+code --install-extension usernamehw.highlight-logical-line
+code --install-extension visualstudioexptteam.vscodeintellicode
+code --install-extension vsls-contrib.gistfs
+code --install-extension waderyan.gitblame
 
 # Browsers
 yay -S brave google-chrome-stable tor-browser
