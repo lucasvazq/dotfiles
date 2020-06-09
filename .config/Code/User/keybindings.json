@@ -1,0 +1,49 @@
+[
+    {
+        "key": "ctrl+k o",
+        "command": "revealFileInOS"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.toggleMaximizedPanel",
+    },
+    {
+        "key": "ctrl+;",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "ctrl+;",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+pagedown",
+        "command": "workbench.action.previousPanelView",
+        "when": "panelFocus"
+    },
+    {
+        "key": "ctrl+pageup",
+        "command": "workbench.action.nextPanelView",
+        "when": "panelFocus"
+    },
+    {
+        "key": "shift+alt+left",
+        "command": "cursorWordPartLeftSelect",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+alt+right",
+        "command": "cursorWordPartRightSelect",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+left",
+        "command": "cursorWordPartLeft",
+        "when": "editorTextFocus",
+    },
+    {
+        "key": "alt+right",
+        "command": "cursorWordPartRight",
+        "when": "editorTextFocus",
+    }
+]
