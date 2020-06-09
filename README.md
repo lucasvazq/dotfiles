@@ -113,3 +113,4 @@ deactivate_python           Deactivate Python environment if any
 
 - Gif of bk command
 - Nodejs support
+- Implement space dumpster
