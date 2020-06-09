@@ -106,4 +106,4 @@ rm screenshot.png
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/bk
-chmod 711 ~/.local/bin/image-of-the-day
+chmod 711 ~/.local/bin/picture-of-the-day
