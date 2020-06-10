@@ -1,8 +1,11 @@
-<h2 align="center">Minimalistic Manjaro i3 Starship dotfiles</h1>
+<h1 align="center">Minimalistic Manjaro i3 Starship dotfiles</h1>
 <p align="center">
 
-![Screenshot](./screenshot.png)
-_“Orion over Argentine Mountains” - Picture of the day by Nicolas Tabbush. June 9th, 2020_
+  ![Screenshot](./screenshot.png)
+</p>
+
+<p align="right">
+  “Orion over Argentine Mountains” - Picture of the day by Nicolas Tabbush. June 9th, 2020
 </p>
 
 Every time your Starship turns on, the (https://apod.nasa.gov/apod/astropix.html)[Astronomy Picture of the Day] is selected as your new wallpaper.
