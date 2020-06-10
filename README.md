@@ -8,7 +8,7 @@ Every time your Starship turns on, the (https://apod.nasa.gov/apod/astropix.html
 Based on the colors of this image, the general color scheme of the rest of the components of your ship was established.
 I've improved the ship for Python snake hunting, while the command center is built with Vscode and communications are made with the Octocat.
 
-# Ready, Set, Launch
+# Ready, Set, Launch 🚀
 
 Run the following commands
 ```sh
@@ -28,11 +28,9 @@ git config --global user.email "YOUR_EMAIL"
 
 Add SSH key: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
-
 # Command Center Management
 
 #### Windows Manager
-
 ```
 Keybinds ($mod = Windows|Super|Mod4 key)
 
@@ -93,11 +91,12 @@ picture-of-the-day          Set the Astronomy Picture of the Day as
                             background and pimp the ship with the image color
                             schema. If there is not intergalactic connection,
                             the background comes from an anonymous painter
-                            alien.
+                            alien
 bk                          Change background image and general color scheme.
-                            Args: None | custom image
-lolban                      Print a rainbow message.
-                            Args: message
+                            Without args, it's setup a random image from
+                            ~/Pictures/Wallpapers. Else, it's setup the image
+                            your pass as argument. Args: None | custom image
+lolban                      Print a rainbow message. Args: message
 cow                         A psychedelic cow that tells your fortune
 neo                         Take selfie from space
 
@@ -111,6 +110,5 @@ deactivate_python           Deactivate Python environment if any
 
 # Future travels
 
-- Gif of bk command
 - Nodejs support
 - Implement space dumpster

@@ -46,7 +46,7 @@ font-0 = "JetBrainsMono Nerd Font Mono:size=10"
 wm-restack = i3
 modules-left = i3
 modules-center = cpu cpu-temperature-1 cpu-temperature-2 separator gpu-temperature-1 gpu-temperature-2 separator ram separator swap separator filesystem
-modules-right = volume separator date separator wifi
+modules-right = audio-config volume separator date separator wifi
 
 
 ; Workspaces
@@ -155,7 +155,15 @@ format-underline = ${colors.color1}
 label = " GPU: %temperature-c% "
 
 
-; Volume
+; Audio
+
+[module/audio-config]
+type = custom/text
+content = 醙
+content-underline = ${colors.color1}
+click-right = pavucontrol
+click-left = pulseeffects
+
 [module/volume]
 type = internal/pulseaudio
 

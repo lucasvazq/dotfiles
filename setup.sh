@@ -1,8 +1,11 @@
 #!/bin/bash
+# Setup the dotfiles
 
-####################
-# Init
-####################
+
+##############################################################################
+# Basic config
+##############################################################################
+
 
 # Config yay
 yay --save --nocleanmenu --nodiffmenu
@@ -22,9 +25,11 @@ yay -R deluge hexchat
 rm -rf ~/.config/hexchat
 rm ~/.config/compton.conf
 
-####################
+
+##############################################################################
 # Install apps
-####################
+##############################################################################
+
 
 # Editor
 yay -S visual-studio-code-bin neovim gedit
@@ -40,10 +45,10 @@ code --install-extension vsls-contrib.gistfs
 code --install-extension waderyan.gitblame
 
 # Browsers
-yay -S brave google-chrome-stable tor-browser
+yay -S brave google-chrome-stable
 
 # Terminal
-yay -S alacritty neofetch cowsay fortune-mod figlet pipes.sh lolcat
+yay -S alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 rm ~/.zshrc.pre-oh-my-zsh
 chsh -s $(which zsh) $USER
@@ -94,9 +99,10 @@ rm JetBrainsMono.zip
 fc-cache ~/.local/share/fonts
 
 
-####################
-# Dotfiles
-####################
+##############################################################################
+# Paste and configure dotfiles
+##############################################################################
+
 
 # Paste dotfiles and remove directory
 mv ./* ~/
@@ -105,5 +111,7 @@ rm -rf dotfiles
 rm screenshot.png
 
 # Give permissions to commands
+chmod 711 ~/.local/bin/audio
 chmod 711 ~/.local/bin/bk
 chmod 711 ~/.local/bin/picture-of-the-day
+chmod 711 ~/.local/bin/sleep-monitor

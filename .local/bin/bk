@@ -1,6 +1,4 @@
 #!/bin/sh
-
-
 # Change background image and set color scheme
 # Args:
 #   $1 (optional): Wallpaper. If not provided, a one random is selected from

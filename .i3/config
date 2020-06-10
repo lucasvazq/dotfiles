@@ -77,29 +77,21 @@ hide_edge_borders none
 ##############################################################################
 
 
-exec --no-startup-id picture-of-the-day
+exec --no-startup-id audio
+exec --no-startup-id sleep-monitor
 exec --no-startup-id numlockx
 exec --no-startup-id fix_xcursor
-exec --no-startup-id polybar custom
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
+exec --no-startup-id picture-of-the-day
+exec --no-startup-id polybar custom
 exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave'
 exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
 exec --no-startup-id i3-msg 'workspace 3:Terminal; append_layout ~/.i3/workspace-Terminal.json; exec alacritty'
 exec --no-startup-id i3-msg 'workspace 1:Web'
-
-
-##############################################################################
-# Sound
-##############################################################################
-
-
-bindsym $mod+Ctrl+m exec pulseeffects
-exec --no-startup-id pulseaudio
-exec --no-startup-id volumeicon
 
 
 ##############################################################################
@@ -116,6 +108,7 @@ bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Ctrl+m exec pulseeffects
 bindsym $mod+Shift+d exec --no-startup-id rofimoji
 bindsym $mod+Return exec alacritty
 
@@ -246,7 +239,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 for_window [class="^.*"] border pixel 2
 for_window [class="^Pulseeffects$"] floating enable border pixel 2
 for_window [class="^Pavucontrol$"] floating enable border pixel 2
-for_window [class="^Nm\\-connection\\-editor$"] floating enable border pixel 2
+for_window [class="^Nm-connection-editor$"] floating enable border pixel 2
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus

@@ -11,8 +11,7 @@
    "percent": 1,
    "swallows": [
       {
-         "class": "^Brave\\-browser$",
-         "instance": "^Navigator$"
+         "class": "^Brave-browser$"
       }
    ],
    "type": "con"
