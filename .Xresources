@@ -1,0 +1,55 @@
+!! Reload:
+! xrdb -merge ~/.Xresources
+
+!! Basic config
+URxvt*font:                         xft:JetBrainsMono Nerd Font Mono:pixelsize=15:minspace=False
+URxvt*inheritPixmap:                true
+URxvt*transparent:                  true
+
+!! Keybindings
+URxvt.iso14755:                     false
+URxvt.keysym.Shift-Control-V:       eval:paste_clipboard
+URxvt.keysym.Shift-Control-C:       eval:selection_to_clipboard
+
+!! Rofi
+rofi.color-enabled:                 true
+rofi.separator-style:               solid
+rofi.sidebar-mode:                  false
+rofi.lines:                         5
+rofi.font:                          JetBrainsMono Nerd Font Mono 10
+rofi.bw:                            1
+rofi.columns:                       2
+rofi.padding:                       5
+rofi.fixed-num-lines:               true
+rofi.hide-scrollbar:                true
+
+!! Colors
+! It's really doesn't matter bc pywal
+!
+! Color type                        Light / Dark
+! Black                             0-8
+! Red                               1-9
+! Green                             2-10
+! Yellow                            3-11
+! Blue                              4-12
+! Magenta                           5-13
+! Cyan                              6-14
+! White                             7-15
+*color0:                            #000000
+*color1:                            #ffffff
+*color2:                            #ff0000
+*color3:                            #00ff00
+*color4:                            #00ffff
+*color5:                            #0000ff
+*color6:                            #ffff00
+*color7:                            #00ffff
+*color8:                            #ffffff
+*color9:                            #888888
+*color10:                           #ffffff
+*color11:                           #ff0000
+*color12:                           #00ff00
+*color13:                           #00ffff
+*color14:                           #0000ff
+*color15:                           #ffff00
+*background:                        #00ffff
+*foreground:                        #ffffff

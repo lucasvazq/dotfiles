@@ -1,0 +1,6 @@
+window:
+  padding:
+    x: 20
+    y: 10
+
+background_opacity: 0.6

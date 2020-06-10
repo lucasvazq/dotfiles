@@ -1,5 +1,5 @@
 #!/bin/sh
-# Sleep Monitor after X seconds
+# Sleep Monitor after 120 seconds
 
 
-xset dpms 5 5 5
+xset dpms 120 120 120
