@@ -16,7 +16,7 @@ I've improved the ship for Python snake hunting, while the command center is bui
 
 Run the following commands
 ```sh
-cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles # Positionate and dowload the repo
+cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles # Positionate and download the repo
 ./setup.sh  # Start launch
 shutdown -r now # restart the system
 ```
