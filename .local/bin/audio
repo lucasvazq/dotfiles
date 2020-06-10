@@ -2,6 +2,7 @@
 # Start pulseaudio and pulseeffects at backend.
 # It's must be start before polybar.
 
+
 pulseaudio &
 sleep 10 # wait pulseaudio starts before run pulseeffects
 pulseeffects --gapplication-service &
