@@ -8,7 +8,7 @@
   “Orion over Argentine Mountains” - Picture of the day by Nicolas Tabbush. June 9th, 2020
 </p>
 
-Every time your Starship turns on, the (https://apod.nasa.gov/apod/astropix.html)[Astronomy Picture of the Day] is selected as your new wallpaper.
+Every time your Starship turns on, the [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html) is selected as your new wallpaper.
 Based on the colors of this image, the general color scheme of the rest of the components of your ship was established.
 I've improved the ship for Python snake hunting, while the command center is built with Vscode and communications are made with the Octocat.
 
