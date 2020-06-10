@@ -1,4 +1,4 @@
-<h1 align="center">Minimalistic Manjaro i3 Starship dotfiles</h1>
+<h1 align="center">Minimalistic i3 Starship dotfiles</h1>
 <p align="center">
 
   ![Screenshot](./screenshot.png)
