@@ -63,14 +63,13 @@ rm -rf ~/shell-color-scripts
 yay -S rofi rofimoji polybar
 
 # Others
-yay -S unzip zip numlockx perl-anyevent-i3
+yay -S mplayer unzip zip numlockx perl-anyevent-i3
 
 # Edition
 yay -S inkscape pinta
 
 # Audio
-# Run pulseaudio builtin installer
-install_pulse
+install_pulse # Run pulseaudio builtin installer
 yay -S pulseeffects
 
 # Git setup
