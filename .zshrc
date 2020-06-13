@@ -3,6 +3,11 @@
 # ============================================================================
 
 
+# Start new terminal with tmux
+if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+  tmux
+fi
+
 # Load color scheme from pywal
 cat ~/.cache/wal/sequences
 
@@ -40,22 +45,28 @@ cud() {
 }
 
 neo() {
+  echo neo
   # Run custom neofetch config
 
   # If Ctrl+C is pressed we clear the screen
   trap clear INT
 
-  neofetch --backend w3m --source ~/.config/neofetch/astronaut.jpg  --loop --xoffset 10 --yoffset 10 --size 237px --gap -1
+  neofetch --backend w3m --source ~/.config/neofetch/astronaut.jpg --loop --xoffset 10 --yoffset 10 --size 220px --gap -1
 
   # Return as success after press Ctrl+C
   return 0
 }
 
 bk() {
-  # Run bk script and neofetch
-  sh bk>>/dev/null $1
+  # Change background and run neo function
+  sh change-background>>/dev/null $1
   clear
   neo
+}
+
+fav() {
+  # Set preferred background and color schema
+  change-background ~/Pictures/Wallpapers/OrionMountains_Tabbush_2048.jpg
 }
 
 cow() {
@@ -91,4 +102,21 @@ deactivate_python() {
   if [[ python_env == "1" ]]; then
     deactivate
   fi
+}
+
+
+# ============================================================================
+# Workspaces
+# ============================================================================
+
+
+# We use two workspaces, one for home works and other for the job works.
+source ~/Workspace/.homerc
+source ~/Workspace/.jobrc
+
+cleanworkspace() {
+  # Clean all workspaces
+  # It's mean all virtual and variable environments setted by workspaces are removed
+  wh_cleanall
+  wj_cleanall
 }

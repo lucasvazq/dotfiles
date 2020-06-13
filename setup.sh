@@ -103,14 +103,17 @@ fc-cache ~/.local/share/fonts
 ##############################################################################
 
 
-# Paste dotfiles and remove directory
+# Paste dotfiles and clean directory
 mv ./* ~/
 cd ..
 rm -rf dotfiles
-rm screenshot.png
+rm screenshot.png setup.sh LICENCE README.md
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/audio
-chmod 711 ~/.local/bin/bk
+chmod 711 ~/.local/bin/change-background
 chmod 711 ~/.local/bin/picture-of-the-day
 chmod 711 ~/.local/bin/sleep-monitor
+
+# Run picture-of-the-day one time per day at 00:00
+(crontab -l ; echo "00 00 * * * picture-of-the-day") | crontab -

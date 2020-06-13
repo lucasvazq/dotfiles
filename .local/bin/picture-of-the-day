@@ -1,36 +1,46 @@
 #!/usr/bin/env python
 """
-Executable module thats run bk script trying to passing the Astronomy Picture of the Day as argument.
+Executable module thats run change-background script trying to passing the Astronomy Picture of the Day as argument.
 Source: https://apod.nasa.gov/apod/astropix.html
 """
 import re
 import requests
-import subprocess
+import shlex, subprocess
 from pathlib import Path
 from typing import NoReturn
 
 
 def main() -> NoReturn:
     """
-    Script responsible for obtaining the Astronomy Picture of the Day and running the bk script passing that image as an argument.
+    Script responsible for obtaining the Astronomy Picture of the Day and running change-background script passing that image as an argument.
     Some changes to the NASA image of the day landing page, or connection problems, may generate exceptions. If this
-    fail, we run bk script without arguments.
+    fail, we set a random background and schema colors.
     The image is saved in ~/Pictures/Wallpapers folder.
     """
     nasa_base_url = "https://apod.nasa.gov"
     try:
-        api_response = requests.get(f"{nasa_base_url}/apod/astropix.html")
-        if regex_match := re.search(r"href=\"(?P<image>image\/\d{4}\/[\w\d_]+.jpg)", api_response.text):
-            image_path = regex_match.groups()[0]
-            image = requests.get(f"{nasa_base_url}/{image_path}")
-    except Exception:
-        subprocess.call(['bk'])
-    else:
+        web_response = requests.get(f"{nasa_base_url}/apod/astropix.html")
+
+        # Download and save picture of the day
+        image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
+        image_path = image_match.groups()[0]
+        image = requests.get(f"{nasa_base_url}/{image_path}")
         image_name = image_path.split("/")[-1]
         destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
         with open(destination_path, "wb") as file:
             file.write(image.content)
-        subprocess.call(['bk', destination_path])
+
+        # Add description exif tag to the image
+        description_match = re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text)
+        description = description_match.groups()[0].strip()
+        subprocess.call(shlex.split(f"exiftool -overwrite_original -Description=\"{description}\" {destination_path}"))
+
+        # Set the new wallpaper and color schema
+        subprocess.call(['change-background', destination_path])
+
+    except Exception:
+        # Set a random wallpaper and color schema
+        subprocess.call(['change-background'])
 
 
 if __name__ == "__main__":

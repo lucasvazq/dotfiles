@@ -12,6 +12,9 @@ else
     WALLPAPER=${WALLPAPERS[RANDOM % ${#WALLPAPERS[@]}]}
 fi
 
+# Set new description for polybar
+exiftool -S -Description $WALLPAPER | grep -Po '(?<=Description: ).*' > ~/.config/polybar/image-description.txt
+
 # Change wallpaper
 nitrogen --set-zoom-fill $WALLPAPER
 

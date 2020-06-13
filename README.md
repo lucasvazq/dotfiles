@@ -100,6 +100,7 @@ bk                          Change background image and general color scheme.
                             Without args, it's setup a random image from
                             ~/Pictures/Wallpapers. Else, it's setup the image
                             your pass as argument. Args: None | custom image
+fav                         Select preferred background and color schema
 lolban                      Print a rainbow message. Args: message
 cow                         A psychedelic cow that tells your fortune
 neo                         Take selfie from space
@@ -113,6 +114,6 @@ deactivate_python           Deactivate Python environment if any
 ``` 
 
 # Future travels
-
 - Nodejs support
 - Implement space dumpster
+- Take the black sky away from our astronaut
