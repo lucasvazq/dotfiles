@@ -3,6 +3,7 @@
 
   ![Screenshot](./screenshot.png)
 </p>
+
 When a new day starts, the [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html) is selected as your new wallpaper.
 Based on the colors of this image, the general color scheme of the rest of the components of your ship was established.
 I've improved it for Python snake hunting, while the command center is built with Vscode and communications are done with Octocat.
