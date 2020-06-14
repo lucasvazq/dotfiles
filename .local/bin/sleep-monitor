@@ -1,5 +1,6 @@
 #!/bin/sh
-# Sleep Monitor after 120 seconds
+# Script for sleeping the monitor
 
 
+sleep 30 # Wait to avoid overwriting
 xset dpms 120 120 120

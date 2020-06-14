@@ -1,6 +1,8 @@
-prompt_root() {
+prompt_session() {
   if [[ $UID -eq 0 ]]; then
     echo -n "%{%F{yellow}%}⚡%{%F{default}%} "
+  else
+    echo -n "$(cat ~/.config/wal/image-description.txt) "
   fi
 }
 
@@ -73,7 +75,7 @@ prompt_end() {
 
 build_prompt() {
   RETVAL=$?
-  prompt_root
+  prompt_session
   prompt_virtualenv
   prompt_dir
   prompt_git

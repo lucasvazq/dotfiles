@@ -3,12 +3,15 @@
 # ============================================================================
 
 
-# Start new terminal with tmux
+# Start new terminals with tmux
 if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+  # Prevent lose color scheme for new tmux sessions
+  wal -R -e -q
+
   tmux
 fi
 
-# Load color scheme from pywal
+# Load pywal color scheme for new terminals
 cat ~/.cache/wal/sequences
 
 # Basic zsh config
@@ -37,7 +40,7 @@ cud() {
       minutes=$(date +%M)
     fi
     seconds=$(date +%S)
-    sudo date +%T -s $hour:$minutes:$seconds>>/dev/null
+    sudo date +%T -s $hour:$minutes:$seconds >> /dev/null
     echo AFTER: $(date +%T)
   else
     date +%T
@@ -51,7 +54,7 @@ neo() {
   # If Ctrl+C is pressed we clear the screen
   trap clear INT
 
-  neofetch --backend w3m --source ~/.config/neofetch/astronaut.jpg --loop --xoffset 10 --yoffset 10 --size 220px --gap -1
+  neofetch
 
   # Return as success after press Ctrl+C
   return 0
@@ -59,14 +62,14 @@ neo() {
 
 bk() {
   # Change background and run neo function
-  sh change-background>>/dev/null $1
+  sh change-background >> /dev/null $1
   clear
   neo
 }
 
 fav() {
-  # Set preferred background and color schema
-  change-background ~/Pictures/Wallpapers/OrionMountains_Tabbush_2048.jpg
+  # Set preferred color schema
+  wal -q --theme base16-materia
 }
 
 cow() {

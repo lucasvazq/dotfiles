@@ -50,8 +50,8 @@ $mod+F3                     Open file browser
 $mod+Shift+F3               Open file browser in root mode
 
 # Keyboard layout
-$mod+q                      Change keyboard to US style
-$mod+w                      Change keyboard to ES style
+$mod+q                      Change keyboard to US style 🇺🇸
+$mod+w                      Change keyboard to ES style 🇪🇦
 
 # Terminal
 $mod+Return                 Open terminal
@@ -100,7 +100,7 @@ bk                          Change background image and general color scheme.
                             Without args, it's setup a random image from
                             ~/Pictures/Wallpapers. Else, it's setup the image
                             your pass as argument. Args: None | custom image
-fav                         Select preferred background and color schema
+fav                         Select preferred color schema
 lolban                      Print a rainbow message. Args: message
 cow                         A psychedelic cow that tells your fortune
 neo                         Take selfie from space

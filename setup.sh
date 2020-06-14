@@ -63,7 +63,7 @@ rm -rf ~/shell-color-scripts
 yay -S rofi rofimoji polybar
 
 # Others
-yay -S mplayer unzip zip numlockx perl-anyevent-i3
+yay -S mplayer unzip zip numlockx unclutter perl-anyevent-i3
 
 # Edition
 yay -S inkscape pinta
@@ -110,10 +110,10 @@ rm -rf dotfiles
 rm screenshot.png setup.sh LICENCE README.md
 
 # Give permissions to commands
-chmod 711 ~/.local/bin/audio
 chmod 711 ~/.local/bin/change-background
 chmod 711 ~/.local/bin/picture-of-the-day
 chmod 711 ~/.local/bin/sleep-monitor
+chmod 711 ~/.local/bin/start-script
 
 # Run picture-of-the-day one time per day at 00:00
 (crontab -l ; echo "00 00 * * * picture-of-the-day") | crontab -
