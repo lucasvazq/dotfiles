@@ -159,7 +159,7 @@ label = " GPU: %temperature-c% "
 
 [module/audio-config]
 type = custom/text
-content = 醙
+content = " 醙"
 content-underline = ${colors.color1}
 click-right = pavucontrol
 click-left = pulseeffects
