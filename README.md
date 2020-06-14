@@ -3,14 +3,9 @@
 
   ![Screenshot](./screenshot.png)
 </p>
-
-<p align="right">
-  “Orion over Argentine Mountains” - Picture of the day by Nicolas Tabbush. June 9th, 2020
-</p>
-
-Every time your Starship turns on, the [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html) is selected as your new wallpaper.
+When a new day starts, the [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html) is selected as your new wallpaper.
 Based on the colors of this image, the general color scheme of the rest of the components of your ship was established.
-I've improved the ship for Python snake hunting, while the command center is built with Vscode and communications are made with the Octocat.
+I've improved it for Python snake hunting, while the command center is built with Vscode and communications are done with Octocat.
 
 # Ready, Set, Launch 🚀
 
@@ -21,15 +16,13 @@ cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles # Positionate a
 shutdown -r now # restart the system
 ```
 
-After restart, there's some manual installation steps
+After rebooting, there are other commands you should run on the fly
 
-#### Establish the communication channel with Octocat
-
+##### Establish the communication channel with Octocat
 ```sh
 git config --global user.name "YOUR_NAME"
 git config --global user.email "YOUR_EMAIL"
 ```
-
 Add SSH key: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
 # Command Center Management
@@ -114,6 +107,7 @@ deactivate_python           Deactivate Python environment if any
 ``` 
 
 # Future travels
+
 - Nodejs support
 - Implement space dumpster
 - Take the black sky away from our astronaut
