@@ -27,6 +27,7 @@
     startup_notification = false
     font = JetBrainsMono Nerd Font Mono 10
     markup = yes
+    icon_path = /usr/share/icons/Adwaita/16x16/legacy/
 
 [urgency_low]
     background = "{foreground}"
