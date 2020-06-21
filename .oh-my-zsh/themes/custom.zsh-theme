@@ -7,9 +7,12 @@ prompt_session() {
 }
 
 prompt_virtualenv() {
-  local virtualenv_path="$VIRTUAL_ENV"
-  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    echo -n "(`basename $virtualenv_path`) "
+  if [[ -n $VIRTUAL_ENV && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
+    if [[ $VIRTUAL_ENV == $HOME/.Envs/Python* ]]; then
+      echo -n "🐍 $(basename $VIRTUAL_ENV) "
+    else
+      echo -n "($(basename $VIRTUAL_ENV)) "
+    fi
   fi
 }
 
