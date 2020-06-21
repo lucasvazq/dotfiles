@@ -43,11 +43,11 @@
     {
         "key": "alt+left",
         "command": "cursorWordPartLeft",
-        "when": "editorTextFocus",
+        "when": "editorTextFocus"
     },
     {
         "key": "alt+right",
         "command": "cursorWordPartRight",
-        "when": "editorTextFocus",
+        "when": "editorTextFocus"
     }
 ]
