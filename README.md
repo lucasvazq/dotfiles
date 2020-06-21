@@ -1,4 +1,7 @@
 <h1 align="center">Minimalistic i3 Starship dotfiles</h1>
+
+![Super-Linter](https://github.com/lucasvazq/dotfiles/workflows/Super-Linter/badge.svg)
+
 <p align="center">
 
   ![Screenshot](./screenshot.png)
