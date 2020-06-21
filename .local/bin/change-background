@@ -1,5 +1,6 @@
 #!/bin/sh
 # Change background image and set color scheme
+#
 # Args:
 #   $1 (optional): Wallpaper. If not provided, a one random is selected from
 #     ~/Pictures/Wallpapers
@@ -19,7 +20,7 @@ exiftool -S -Description $WALLPAPER | grep -Po '(?<=Description: ).*' > ~/.confi
 nitrogen --set-zoom-fill $WALLPAPER
 
 # Change polybar and terminal colors
-wal -i $WALLPAPER
+wal -q -i $WALLPAPER
 
 # Change dunst color
 ln -sf ${HOME}/.cache/wal/dunstrc ${HOME}/.config/dunst/dunstrc

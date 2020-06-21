@@ -1,6 +1,7 @@
 #!/bin/sh
 # In this script, scripts are executed that require some time to wait before being invoked.
 
+
 # Run pulseaudio
 pkill pulseaudio
 pulseaudio &
@@ -8,8 +9,12 @@ pulseaudio &
 # Wait a few seconds for pulseaudio to start before executing the rest of the scripts
 sleep 5
 
-# Run pulseeffects that depends of polybar
+# Run pulseeffects and volumeicon that depends of pulseaudio
 pulseeffects --gapplication-service &
+volumeicon &
 
-# Run picture-of-the-day script thats run polybar. Polybar has a volume module that's depend of pulseaudio
+# Polybar has a volume module that's depend of pulseaudio
+polybar custom &
+
+# Run picture-of-the-day script thats run polybar.
 picture-of-the-day

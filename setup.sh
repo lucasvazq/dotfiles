@@ -16,8 +16,8 @@ yay -Syu
 # Update timezone
 timedatectl set-ntp true
 
-# Make workspaces
-mkdir ~/Workspace
+# Make useful dirs
+mkdir -p ~/{.Envs,Workspace/Home,Workspace/Job}
 
 # Clean unused apps, folders and files
 rm -rf Desktop Music Public Templates Videos
@@ -29,6 +29,12 @@ rm ~/.config/compton.conf
 ##############################################################################
 # Install apps
 ##############################################################################
+
+
+# PostgreSQL
+yay -S postgresql
+sudo systemctl enable postgresql.service
+psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
 
 
 # Editor
@@ -48,7 +54,7 @@ code --install-extension waderyan.gitblame
 yay -S brave google-chrome-stable
 
 # Terminal
-yay -S alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat
+yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 rm ~/.zshrc.pre-oh-my-zsh
 chsh -s $(which zsh) $USER
@@ -107,7 +113,7 @@ fc-cache ~/.local/share/fonts
 mv ./* ~/
 cd ..
 rm -rf dotfiles
-rm screenshot.png setup.sh LICENCE README.md
+rm .git .github screenshot.png setup.sh LICENCE CONTRIBUTING.md CODE_OF_CONDUCT.md README.md SECURITY.md
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background

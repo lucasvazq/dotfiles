@@ -44,11 +44,11 @@
 # $mod+Ctrl+space               toggle split mode between horizontal and vertical
 # $mod+<ARROWS>                 focus container up|down|left|right
 # $mod+Shift+<ARROWS>           move container up|down|left|right
-# $mod+Ctrl+<Right(l)>          workspace next
-# $mod+Ctrl+<Left(h)>           workspace prev
-# $mod+<NUMBERS 1-9>            switch to N workspace
-# $mod+Ctrl+<NUMBERS 1-9>       move container to workspace N
-# $mod+Shift+<NUMBERS 1-9>      move to N workspace with actual container
+# $mod+Ctrl+<Right(l)>          desktop workspace next
+# $mod+Ctrl+<Left(h)>           desktop workspace prev
+# $mod+<NUMBERS 1-9>            switch to N desktop workspace
+# $mod+Ctrl+<NUMBERS 1-9>       move container to N desktop workspace
+# $mod+Shift+<NUMBERS 1-9>      move to N desktop workspace with actual container
 # $mod+r                        resize
 #
 ##### Power
@@ -77,7 +77,7 @@ hide_edge_borders none
 ##############################################################################
 
 
-exec --no-startup-id audio
+exec --no-startup-id start-script
 exec --no-startup-id sleep-monitor
 exec --no-startup-id numlockx
 exec --no-startup-id fix_xcursor
@@ -86,8 +86,6 @@ exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-exec --no-startup-id picture-of-the-day
-exec --no-startup-id polybar custom
 exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave'
 exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
 exec --no-startup-id i3-msg 'workspace 3:Terminal; append_layout ~/.i3/workspace-Terminal.json; exec alacritty'
@@ -132,7 +130,7 @@ focus_on_window_activation none
 floating_modifier $mod
 focus_follows_mouse no
 
-# kill focused window
+# Kill focused window
 bindsym $mod+Shift+q kill
 
 # Select focus
@@ -140,8 +138,6 @@ bindsym $mod+k focus up
 bindsym $mod+j focus down
 bindsym $mod+h focus left
 bindsym $mod+l focus right
-
-# alternatively, you can use the cursor keys:
 bindsym $mod+Up focus up
 bindsym $mod+Down focus down
 bindsym $mod+Left focus left
@@ -152,11 +148,9 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Right move right
 
 
@@ -165,33 +159,31 @@ bindsym $mod+Shift+Right move right
 ##############################################################################
 
 
-# toggle split mode between horizontal and vertical
+# Toggle split mode between horizontal and vertical
 bindsym $mod+Ctrl+space split toggle
 
-# toggle fullscreen mode for the focused container
+# Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# navigate workspaces next / previous
+# Navigate through desktop workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
 bindsym $mod+Ctrl+l workspace next
 bindsym $mod+Ctrl+h workspace prev
 
-# alterantively, you can use the cursor keys:
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
-
 
 ##############################################################################
-# Workspaces
+# Desktop Workspaces
 ##############################################################################
 
 
-# Workspace names
+# Names
 set $ws1 "1:Web"
 set $ws2 "2:Ed"
 set $ws3 "3:Terminal"
@@ -202,7 +194,7 @@ set $ws7 7
 set $ws8 8
 set $ws9 9
 
-# switch to workspace
+# Switch
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -213,7 +205,7 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
-# Move focused container to workspace
+# Move focused container to N desktop workspace
 bindsym $mod+Ctrl+1 move container to workspace $ws1
 bindsym $mod+Ctrl+2 move container to workspace $ws2
 bindsym $mod+Ctrl+3 move container to workspace $ws3
@@ -224,7 +216,7 @@ bindsym $mod+Ctrl+7 move container to workspace $ws7
 bindsym $mod+Ctrl+8 move container to workspace $ws8
 bindsym $mod+Ctrl+9 move container to workspace $ws9
 
-# Move to workspace with focused container
+# Move to N desktop workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -241,7 +233,7 @@ for_window [class="^Pulseeffects$"] floating enable border pixel 2
 for_window [class="^Pavucontrol$"] floating enable border pixel 2
 for_window [class="^Nm-connection-editor$"] floating enable border pixel 2
 
-# switch to workspace with urgent window automatically
+# Switch to desktop workspace with urgent window automatically
 for_window [urgent=latest] focus
 
 # Resize window (you can also use the mouse for that)
@@ -265,7 +257,7 @@ mode "$resize" {
 ##############################################################################
 
 
-# Set shut down, restart and locking features
+# Set system mode
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown, (Esc)ape
 mode "$mode_system" {

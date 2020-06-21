@@ -4,6 +4,10 @@
         "command": "revealFileInOS"
     },
     {
+        "key": "ctrl+k 0",
+        "command": "workbench.files.action.showActiveFileInExplorer"
+    },
+    {
         "key": "ctrl+j",
         "command": "workbench.action.toggleMaximizedPanel",
     },
@@ -17,12 +21,12 @@
         "when": "terminalFocus"
     },
     {
-        "key": "ctrl+pagedown",
+        "key": "ctrl+pageup",
         "command": "workbench.action.previousPanelView",
         "when": "panelFocus"
     },
     {
-        "key": "ctrl+pageup",
+        "key": "ctrl+pagedown",
         "command": "workbench.action.nextPanelView",
         "when": "panelFocus"
     },
