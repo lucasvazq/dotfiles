@@ -80,6 +80,7 @@ yay -S pulseeffects
 
 # Git setup
 yay -S github-cli diff-so-fancy
+git config pull.rebase false
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global color.ui true
 git config --global color.diff-highlight.oldNormal "red bold"
@@ -112,8 +113,10 @@ fc-cache ~/.local/share/fonts
 # Paste dotfiles and clean directory
 mv ./* ~/
 cd ..
-rm -rf dotfiles
-rm .git .github screenshot.png setup.sh LICENCE CONTRIBUTING.md CODE_OF_CONDUCT.md README.md SECURITY.md
+rm -rf .github dotfiles
+rm .git .gitignore
+rm screenshot.png setup.sh
+rm LICENCE CONTRIBUTING.md CODE_OF_CONDUCT.md README.md SECURITY.md
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background

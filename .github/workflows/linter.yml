@@ -1,0 +1,16 @@
+# Github Super-linter
+
+
+name: Super-Linter
+
+jobs:
+  build:
+    name: Super-Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Super-Linter
+        uses: github/super-linter@v2.1.0
