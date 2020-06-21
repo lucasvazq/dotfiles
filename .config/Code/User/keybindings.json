@@ -9,7 +9,7 @@
     },
     {
         "key": "ctrl+j",
-        "command": "workbench.action.toggleMaximizedPanel",
+        "command": "workbench.action.toggleMaximizedPanel"
     },
     {
         "key": "ctrl+;",
