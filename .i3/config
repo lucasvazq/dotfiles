@@ -77,7 +77,8 @@ hide_edge_borders none
 ##############################################################################
 
 
-exec --no-startup-id audio
+exec --no-startup-id start-script
+exec --no-startup-id volumeicon
 exec --no-startup-id sleep-monitor
 exec --no-startup-id numlockx
 exec --no-startup-id fix_xcursor
@@ -86,8 +87,6 @@ exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
-exec --no-startup-id picture-of-the-day
-exec --no-startup-id polybar custom
 exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave'
 exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
 exec --no-startup-id i3-msg 'workspace 3:Terminal; append_layout ~/.i3/workspace-Terminal.json; exec alacritty'
@@ -177,7 +176,7 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# navigate workspaces next / previous
+# navigate desktop workspaces next / previous
 bindsym $mod+Ctrl+l workspace next
 bindsym $mod+Ctrl+h workspace prev
 
@@ -187,7 +186,7 @@ bindsym $mod+Ctrl+Left workspace prev
 
 
 ##############################################################################
-# Workspaces
+# Desktop workspaces
 ##############################################################################
 
 

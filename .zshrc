@@ -47,6 +47,17 @@ cud() {
   fi
 }
 
+pk() {
+  # Port kill
+  # Args:
+  #   $1: Port
+  if [ ! -z "$1" ]; then
+    kill -9 $(lsof -t -i:$1)
+  else
+    echo Miss port
+  fi
+}
+
 neo() {
   echo neo
   # Run custom neofetch config
@@ -62,6 +73,8 @@ neo() {
 
 bk() {
   # Change background and run neo function
+  # Args:
+  #   $1 (optional): Background image
   sh change-background >> /dev/null $1
   clear
   neo
@@ -79,6 +92,8 @@ cow() {
 
 lolban() {
   # Print rainbow message with special ascii font
+  # Args:
+  #   $1: Message
   if [ ! -z "$1" ]; then
     # Cool fonts list:
     # ~/.local/share/figlet-fonts/3d.flf
@@ -107,19 +122,47 @@ deactivate_python() {
   fi
 }
 
+drs() {
+  # Run Django server
+  # Args:
+  #   $1 (optional): Port
+  if [ ! -z "$1" ]; then
+    python manage.py runserver 127.0.0.1:$1
+  else
+    python manage.py runserver
+  fi
+}
 
-# ============================================================================
-# Workspaces
-# ============================================================================
+hl() {
+  # Heroku local
+  heroku local
+}
 
+dsh() {
+  # Django shell
+  # Args:
+  #   $1 (optional): Tenant schema, from django-tenants package
+  #     https://github.com/django-tenants/django-tenants
+  if [ ! -z "$1" ]; then
+    python manage.py tenant_command shell --schema=$1
+  else
+  	python manage.py shell
+  fi
+}
 
-# We use two workspaces, one for home works and other for the job works.
-source ~/Workspace/.homerc
-source ~/Workspace/.jobrc
-
-cleanworkspace() {
-  # Clean all workspaces
-  # It's mean all virtual and variable environments setted by workspaces are removed
-  wh_cleanall
-  wj_cleanall
+hrs() {
+  # Heroku remote shell
+  # Args:
+  #   $1: Review app name
+  #   $2 (optional): Tenant schema, from django-tenants package
+  #     https://github.com/django-tenants/django-tenants
+  if [ ! -z "$1" ]; then
+    if [ ! -z "$2" ]; then
+      heroku run python manage.py tenant_command shell --schema=$2 -a $1
+    else
+      heroku run python manage.py shell -a $1
+    fi
+  else
+    echo Miss positional-only arguments: Review app, Tenant (optional)
+  fi
 }

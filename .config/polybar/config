@@ -49,7 +49,7 @@ modules-center = cpu cpu-temperature-1 cpu-temperature-2 separator gpu-temperatu
 modules-right = audio-config volume separator date separator wifi
 
 
-; Workspaces
+; Desktop workspaces
 [module/i3]
 type = internal/i3
 strip-wsnumbers = true
