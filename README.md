@@ -1,4 +1,7 @@
-<h1 align="center">Minimalistic i3 Starship dotfiles</h1>
+<span align="center">
+
+  # Minimalistic i3 Starship dotfiles
+</span>
 
 ![Super-Linter](https://github.com/lucasvazq/dotfiles/workflows/Super-Linter/badge.svg)
 
@@ -11,7 +14,9 @@ When a new day starts, the [Astronomy Picture of the Day](https://apod.nasa.gov/
 Based on the colors of this image, the general color scheme of the rest of the components of your ship was established.
 I've improved it for Python hunting, while the command center is built with Vscode, the database is handled by psqalien and communications are done with Octocat and Heroku.
 
-# Ready, Set, Launch 🚀
+🧲 ⚡ **Requirements:** Manjaro I3
+
+## Ready, Set, Launch 🚀
 
 Run the following commands
 ```sh
@@ -22,18 +27,18 @@ shutdown -r now # Restart the system
 
 After rebooting, there are other commands you should run on the fly
 
-##### Establish the communication channel with Octocat and Heroku
+**Establish the communication channel with Octocat and Heroku**
 ```sh
 heroku login
 git config --global user.name "YOUR_NAME"
 git config --global user.email "YOUR_EMAIL"
 ```
-Add SSH key: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
+[Add SSH key](https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
 
-# Command Center Management
+## Command Center Management
 
-#### Windows Manager
-```
+**Windows Manager**
+```txt
 Keybinds ($mod = Windows|Super|Mod4 key)
 
 # Browser
@@ -86,8 +91,8 @@ $mod+Shift+<NUMBERS 1-9>    Move to N workspace with actual container
 $mod+0                      Select ship mode
 ```
 
-#### Terminal commands
-```
+**Terminal commands**
+```txt
 # Tachyon Laser
 picture-of-the-day          Set the Astronomy Picture of the Day as
                             background and pimp the ship with the image color
@@ -109,10 +114,4 @@ cud                         Change UTC timezone. Args: None | (hour [,minutes])
 
 # Python
 deactivate_python           Deactivate Python environment if any
-``` 
-
-# Future travels
-
-- Nodejs support
-- Implement space dumpster
-- Take the black sky away from our astronaut
+```

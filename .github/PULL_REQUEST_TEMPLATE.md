@@ -1,12 +1,17 @@
-<!-- The title of your PR must follow the format "PR: Issue <issue number>: <issue title>" -->
-<!-- If your PR isn't related to an issue, use this format: "PR: <short description>" -->
+---
+name: PR
+about: ''
+title: 'PR: '
+labels: ''
+assignees: ''
 
-Fixes: #
+---
 
-# Description <!-- (Remove this section if there is nothing to comment on.) -->
+**Fixes**
+Links to issues that this PR fix, if it's applicable
 
-<!-- Leave here some comment if you'd like -->
+**Description**
+Some description of the PR
 
-# How to Test <!-- (Remove this section if it is not applicable.) -->
-
-<!-- Tests description or steps -->
+**How to Test**
+Steps to test this feature or fix, if it's correspond
