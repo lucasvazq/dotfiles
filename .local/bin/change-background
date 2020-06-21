@@ -19,7 +19,7 @@ exiftool -S -Description $WALLPAPER | grep -Po '(?<=Description: ).*' > ~/.confi
 nitrogen --set-zoom-fill $WALLPAPER
 
 # Change polybar and terminal colors
-wal -i $WALLPAPER
+wal -q -i $WALLPAPER
 
 # Change dunst color
 ln -sf ${HOME}/.cache/wal/dunstrc ${HOME}/.config/dunst/dunstrc
