@@ -1,11 +1,3 @@
----
-name: PR
-about: ''
-title: 'PR: '
-labels: ''
-assignees: ''
-
----
 
 **Fixes**
 Links to issues that this PR fix, if it's applicable
