@@ -3,20 +3,22 @@
 
 name: Super-Linter
 
-'on':
+on:
   push:
+    branches-ignore:
+      - master
   pull_request:
     branches:
       - master
 
 jobs:
-  build:
-    name: Super-Linter
+  super-linter:
+    name: Linter
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Super-Linter
+      - name: Lint
         uses: github/super-linter@v2.1.0
