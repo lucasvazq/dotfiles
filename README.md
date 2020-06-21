@@ -1,6 +1,6 @@
 <span align="center">
 
-  # Minimalistic i3 Starship dotfiles
+# Minimalistic i3 Starship dotfiles
 </span>
 
 ![Super-Linter](https://github.com/lucasvazq/dotfiles/workflows/Super-Linter/badge.svg)

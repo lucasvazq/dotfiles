@@ -57,7 +57,7 @@ yay -S brave google-chrome-stable
 yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 rm ~/.zshrc.pre-oh-my-zsh
-chsh -s $(which zsh) "$USER"
+chsh -s "$(which zsh) $USER"
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
 sudo mkdir /opt/shell-color-scripts
