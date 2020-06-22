@@ -3,7 +3,8 @@
 
 
 # Run pulseaudio
-pkill pulseaudio
+pkill pulseaudio &
+sleep 1
 pulseaudio &
 
 # Wait a few seconds for pulseaudio to start before executing the rest of the scripts
@@ -15,6 +16,7 @@ volumeicon &
 
 # Polybar has a volume module that's depend of pulseaudio
 polybar custom &
+
 
 # Run picture-of-the-day script thats run polybar.
 picture-of-the-day

@@ -94,24 +94,33 @@ $mod+0                      Select ship mode
 **Terminal commands**
 ```txt
 # Tachyon Laser
-picture-of-the-day          Set the Astronomy Picture of the Day as
-                            background and pimp the ship with the image color
-                            schema. If there is not intergalactic connection,
-                            the background comes from an anonymous painter
-                            alien
 bk                          Change background image and general color scheme.
                             Without args, it's setup a random image from
                             ~/Pictures/Wallpapers. Else, it's setup the image
-                            your pass as argument. Args: None | custom image
+                            your pass as argument
 fav                         Select preferred color schema
-lolban                      Print a rainbow message. Args: message
+lolban                      Print a rainbow message
 cow                         A psychedelic cow that tells your fortune
 neo                         Take selfie from space
 
 # Productivity
 ed                          Open code editor
-cud                         Change UTC timezone. Args: None | (hour [,minutes])
+cud                         Change UTC timezone. You can pass hours and minutes
+                            or just nothig for restore time
+wgc                         Clone a repo in any of the workspaces
+
+# Servers
+drs                         Run Django server
+hl                          Run Heroku local
+ds                          Open Django shell. You can specify a db schema
+hrs                         Open Django shell in a Heroku App. You can specify
+                            a db schema
+hrq                         Open PostgreSQL CLI in a Heroku App
 
 # Python
-deactivate_python           Deactivate Python environment if any
+pyc                         Create Python environment
+pya                         Activate Python environment
+pyl                         List all Python environments
+pyr                         Remove Python environment
+pyd                         Deactivate Python environment if any
 ```

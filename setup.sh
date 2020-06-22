@@ -20,10 +20,11 @@ timedatectl set-ntp true
 mkdir -p ~/{.Envs,Workspace/Home,Workspace/Job}
 
 # Clean unused apps, folders and files
-rm -rf Desktop Music Public Templates Videos
+yay -S trash-cli
+trash Desktop Music Public Templates Videos
 yay -R deluge hexchat
-rm -rf ~/.config/hexchat
-rm ~/.config/compton.conf
+trash ~/.config/hexchat
+trash ~/.config/compton.conf
 
 
 ##############################################################################
@@ -56,14 +57,14 @@ yay -S brave google-chrome-stable
 # Terminal
 yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-rm ~/.zshrc.pre-oh-my-zsh
+trash ~/.zshrc.pre-oh-my-zsh
 chsh -s "$(which zsh) $USER"
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
 sudo mkdir /opt/shell-color-scripts
 sudo mv ~/shell-color-scripts/colorscripts /opt/shell-color-scripts
 sudo mv ~/shell-color-scripts/colorscript.sh /usr/bin/colorscript
-rm -rf ~/shell-color-scripts
+trash -rf ~/shell-color-scripts
 
 # Desktop manager
 yay -S rofi rofimoji polybar
@@ -101,7 +102,7 @@ pip install pipenv virtualenvwrapper ipython pywal --user
 yay -S noto-fonts-emoji
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
 unzip -d ~/.local/share/fonts JetBrainsMono.zip
-rm JetBrainsMono.zip
+trash JetBrainsMono.zip
 fc-cache ~/.local/share/fonts
 
 
@@ -113,10 +114,10 @@ fc-cache ~/.local/share/fonts
 # Paste dotfiles and clean directory
 mv ./* ~/
 cd ..
-rm -rf .github dotfiles
-rm .git .gitignore
-rm screenshot.png setup.sh
-rm LICENCE CONTRIBUTING.md CODE_OF_CONDUCT.md README.md SECURITY.md
+trash -rf .github dotfiles
+trash .git .gitignore
+trash screenshot.png setup.sh
+trash LICENCE CONTRIBUTING.md CODE_OF_CONDUCT.md README.md SECURITY.md
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background

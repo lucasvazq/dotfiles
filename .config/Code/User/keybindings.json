@@ -1,5 +1,9 @@
 [
     {
+        "key": "ctrl+k ;",
+        "command": "gistpad.gists.focus"
+    },
+    {
         "key": "ctrl+k o",
         "command": "revealFileInOS"
     },

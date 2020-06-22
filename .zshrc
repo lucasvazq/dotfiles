@@ -29,18 +29,6 @@ source $ZSH/oh-my-zsh.sh
 # ============================================================================
 
 
-neo() {
-  # Run custom neofetch config
-
-  # If Ctrl+C is pressed we clear the screen
-  trap clear INT
-
-  neofetch
-
-  # Return as success after press Ctrl+C
-  return 0
-}
-
 bk() {
   # Change background and run neo function
   #
@@ -56,11 +44,6 @@ fav() {
   wal -q --theme base16-materia
 }
 
-cow() {
-  # A psychedelic cow that tells your fortune
-  fortune | cowsay -w -f three-eyes | lolcat
-}
-
 lolban() {
   # Print rainbow message with special ascii font
   #
@@ -73,6 +56,23 @@ lolban() {
   else
     echo Miss message
   fi
+}
+
+cow() {
+  # A psychedelic cow that tells your fortune
+  fortune | cowsay -w -f three-eyes | lolcat
+}
+
+neo() {
+  # Run custom neofetch config
+
+  # If Ctrl+C is pressed we clear the screen
+  trap clear INT
+
+  neofetch
+
+  # Return as success after press Ctrl+C
+  return 0
 }
 
 
@@ -168,11 +168,11 @@ hl() {
   heroku local
 }
 
-dsh() {
+ds() {
   # Open Django shell
   #
   # Args:
-  #   $1 (optional): Tenant schema
+  #   $1 (optional): DB schema
   if [ ! -z "$1" ]; then
     python manage.py tenant_command shell --schema=$1
   else
@@ -181,11 +181,11 @@ dsh() {
 }
 
 hrs() {
-  # Open Django shell in remote Heroku App
+  # Open Django shell in a remote Heroku App
   #
   # Args:
   #   $1: Heroku App
-  #   $2 (optional): Tenant schema
+  #   $2 (optional): DB schema
   if [ ! -z "$1" ]; then
     if [ ! -z "$2" ]; then
       heroku run python manage.py tenant_command shell --schema=$2 -a $1
@@ -198,7 +198,7 @@ hrs() {
 }
 
 hrq() {
-  # Run postgresql interface in Heroku App
+  # Run PostgreSQL CLI in a Heroku App
   #
   # Args:
   #   $1: Heroku App
@@ -250,7 +250,7 @@ pya() {
 }
 
 pyl() {
-  # List Python environments
+  # List all Python environments
   lsvirtualenv
 }
 
