@@ -158,7 +158,7 @@ label = " GPU: %temperature-c% "
 ; Date
 [module/date]
 type = custom/script
-exec = date +%H:%M
+exec = date "+%m/%d %H:%M"
 interval = 1
 label = " %output% "
 format-underline = ${colors.color1}
