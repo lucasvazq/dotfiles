@@ -110,6 +110,7 @@ neo                         Take selfie from space
 
 # Productivity
 ed                          Open code editor
+open                        Open link with the default browser
 cud                         Change the timezone based on UTC. You can pass the
                             year, month, day, hour or minute. Otherwise, if you
                             don't pass any arguments, the time sets to auto

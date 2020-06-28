@@ -91,8 +91,20 @@ neo() {
 # ============================================================================
 
 
-# Alias for editor
+# Alias for open the default UI editor
 alias ed=code
+
+open () {
+  # Open link in default browser
+  # 
+  # Args:
+  #   $1: Link
+  if [ ! -z "$1" ]; then
+    $BROWSER $1
+  else
+    echo Miss link
+  fi
+}
 
 cud() {
   # Interact with the current datetime
