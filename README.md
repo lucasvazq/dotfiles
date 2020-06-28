@@ -110,13 +110,15 @@ neo                         Take selfie from space
 
 # Productivity
 ed                          Open code editor
-cud                         Change UTC timezone. You can pass hours and minutes
-                            or just nothig for restore time
+cud                         Change the timezone based on UTC. You can pass the
+                            year, month, day, hour or minute. Otherwise, if you
+                            don't pass any arguments, the time sets to auto
 wgc                         Clone a repo in any of the workspaces
+pk                          Kill a process running in a custom port
 
 # Servers
-drs                         Run Django server
-hl                          Run Heroku local
+drs                         Run Django server. You can specify the port
+hl                          Run Heroku server. You can specify the port
 ds                          Open Django shell. You can specify a db schema
 hrs                         Open Django shell in a Heroku App. You can specify
                             a db schema

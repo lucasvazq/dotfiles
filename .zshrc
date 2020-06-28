@@ -206,7 +206,7 @@ wgc() {
       echo Miss Repo
     fi
   else
-    echo Miss positional-only arguments. Workspace "( \"h\" | \"j\" )" and Repo
+    echo Miss positional-only parameters. Workspace "( \"h\" | \"j\" )" and Repo
   fi
 }
 
@@ -281,7 +281,7 @@ hrs() {
       heroku run python manage.py shell -a $1
     fi
   else
-    echo Miss positional-only arguments: Heroku App, Tenant (optional)
+    echo Miss positional-only parameters: Heroku App, Tenant (optional)
   fi
 }
 
@@ -321,7 +321,7 @@ pyc() {
       echo Miss Env name
     fi
   else
-    echo Miss positional-only arguments: Python source, Env name
+    echo Miss positional-only parameters: Python source, Env name
   fi
 }
 
