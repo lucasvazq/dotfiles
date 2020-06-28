@@ -5,19 +5,19 @@
 
 # Start new terminals with tmux and add pywal color scheme
 if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
-  # Prevent lose color scheme for news tmux sessions
+  # Prevent lose color scheme for new tmux sessions
   wal -R -e -q
 
   tmux
 else
-  # Add terminal color to alacritty
+  # Add terminal color to main terminal
   cat ~/.cache/wal/sequences
 fi
 
-# Programs path
+# Custom programs path
 source ~/Programs/.programsrc
 
-# Basic zsh config
+# Zsh config
 export ZSH=~/.oh-my-zsh
 ZSH_THEME="custom"
 plugins=(git virtualenv shrink-path)
@@ -30,10 +30,14 @@ source $ZSH/oh-my-zsh.sh
 
 
 bk() {
-  # Change background and run neo function
-  #
+  # Change background and color schema, and run neo function
+  # The color schema is setted using the selected background
+  # 
   # Args:
-  #   $1 (optional): custom image
+  #   $1 (optional): wallpaper path
+  # 
+  # Without args:
+  #   Select a random wallpaper
   sh change-background >> /dev/null $1
   clear
   neo
@@ -46,7 +50,7 @@ fav() {
 
 lolban() {
   # Print rainbow message with special ascii font
-  #
+  # 
   # Args:
   #   $1: Message
   if [ ! -z "$1" ]; then
@@ -59,14 +63,14 @@ lolban() {
 }
 
 cow() {
-  # A psychedelic cow that tells your fortune
+  # Invoke a psychedelic cow that tells your fortune
   fortune | cowsay -w -f three-eyes | lolcat
 }
 
 neo() {
   # Run custom neofetch config
 
-  # If Ctrl+C is pressed we clear the screen
+  # If Ctrl+C is pressed, we clear the screen
   trap clear INT
 
   neofetch
@@ -76,6 +80,7 @@ neo() {
 }
 
 
+# LINE TO 79 OR 80?
 # ============================================================================
 # Productivity
 # ============================================================================
@@ -85,42 +90,99 @@ neo() {
 alias ed=code
 
 cud() {
-  # Set UTC date
-  # If not arguments passed, it restart datetime to default value
-  #
+  # Interact with the current datetime
+  # You can change the datetime using UTC timezone passing, in the follow
+  # order, year, month, days, hours and/or minutes.
+  # All of these args are optional, and you can pass year without passing month
+  # using the next format: "cud 2020", set the actual year to 2020, keeping all
+  # other values.
+  # Also, you can pass month ignoring year using asterisk (*). E.g. "cud * 12",
+  # set the actual month to December, keeping all other values.
+  # Other example: "cud * * * 15 12" set the time to UTC 3:12 p.m. maintaining
+  # the actual year, month and day.
+  # If not arguments passed, it's set the time to auto
+  # 
   # Args:
-  #   $1: Hours
-  #   $2 (optional): Minutes
-  #
+  #   $1 (optional): Year
+  #   $2 (optional): Month
+  #   $3 (optional): Day
+  #   $4 (optional): Hours
+  #   $5 (optional): Minutes
+  # 
   # Without Args:
-  #   Restore default date
+  #   Set the time to auto
+  # 
+  # TODO:
+  #   What to do with leap years?
+  echo BEFORE: $(date +"%Y-%m-%d %H:%M:%S")
   if [ ! -z "$1" ]; then
-    local utc_difference hour minutes seconds
-
-    if [ timedatectl show --property NTPSynchronized | grep -Po '(?<=NTPSynchronized=).*' == 'no' ]; then
+    if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
       timedatectl setq-ntp false
     fi
 
-    utc_difference=3
-    hour=$(($uno - $utc_difference))
-    if [ ! -z "$2" ]; then
-      minutes=$2
+    local year month day hour minute
+
+    if [[ $1 && "$1" != "*" ]]; then
+      year=$1
     else
-      minutes=$(date +%M)
+      year=$(date +%Y)
     fi
-    seconds=$(date +%S)
-  
-    echo BEFORE: $(date +%T)
-    sudo date +%T -s $hour:$minutes:$seconds >> /dev/null
-    echo AFTER: $(date +%T)
+
+    if [[ $2 && "$2" != "*" ]]; then
+      month=$2
+    else
+      month=$(date +%m)
+    fi
+
+    if [[ $3 && "$3" != "*" ]]; then
+      day=$3
+    else
+      day=$(date +%d)
+    fi
+
+    if [[ $4 && "$4" != "*" ]]; then
+
+      # Fix UTC differences
+
+      local timezone diff
+      timezone=$(date +%Z)
+
+      # - Get the absolute value of the difference
+      diff=$(echo $timezone | grep -Po '(?<=\+|-)[0-9]+')
+
+      # - When it's positive
+      if [[ $(echo $timezone | grep -Po '[+](?<=[0-9])*') ]]; then
+        hour=$(($4 + $diff))
+      
+      # - When it's negative
+      elif [[ $(echo $timezone | grep -Po '[-](?<=[0-9])*') ]]; then
+        hour=$(($4 - $diff))
+
+      # - Whatever
+      else
+        hour=$4
+      fi
+
+    else
+      hour=$(date +%H)
+    fi
+
+    if [[ $5 && "$5" != "*" ]]; then
+      minute=$5
+    else
+      minute=$(date +%M)
+    fi
+
+    sudo date -s "$year-$month-$day $hour:$minute:$(date +%S)" >> /dev/null
   else
     timedatectl set-ntp true
   fi
+  echo AFTER: $(date +"%Y-%m-%d %H:%M:%S")
 }
 
 wgc() {
   # Clone git repository in the appropiated workspace
-  #
+  # 
   # Args:
   #   $1: "h" | "j": Clone for Home or Job workspace
   #   $2: Repo
@@ -145,6 +207,22 @@ wgc() {
   fi
 }
 
+pk() {
+  # Terminate all processes related to a port
+  # 
+  # Args:
+  #   $1: Port
+  if [ ! -z "$1" ]; then
+    local processes
+    processes=$(lsof -t -i:$1)
+    if [ processes ]; then
+      kill -9 processes
+    fi
+  else
+    echo Miss port
+  fi
+}
+
 
 # ============================================================================
 # Servers
@@ -152,8 +230,8 @@ wgc() {
 
 
 drs() {
-  # Run Django server
-  #
+  # Run Django server in localhost
+  # 
   # Args:
   #   $1 (optional): Port
   if [ ! -z "$1" ]; then
@@ -164,25 +242,32 @@ drs() {
 }
 
 hl() {
-  # Run Heroku
-  heroku local
+  # Run Heroku server in localhost
+  # 
+  # Args:
+  #   $1 (optional) - Port
+  if [ ! -z "$1" ]; then
+    heroku local -p $1
+  else
+    heroku local
+  fi
 }
 
 ds() {
   # Open Django shell
-  #
+  # 
   # Args:
   #   $1 (optional): DB schema
   if [ ! -z "$1" ]; then
     python manage.py tenant_command shell --schema=$1
   else
-  	python manage.py shell
+    python manage.py shell
   fi
 }
 
 hrs() {
   # Open Django shell in a remote Heroku App
-  #
+  # 
   # Args:
   #   $1: Heroku App
   #   $2 (optional): DB schema
@@ -199,7 +284,7 @@ hrs() {
 
 hrq() {
   # Run PostgreSQL CLI in a Heroku App
-  #
+  # 
   # Args:
   #   $1: Heroku App
   if [ ! -z "$1" ]; then
@@ -221,7 +306,7 @@ source ~/.local/bin/virtualenvwrapper.sh
 
 pyc() {
   # Create Python environment
-  #
+  # 
   # Args:
   #   $1: Python source
   #   $2: Env name
@@ -239,7 +324,7 @@ pyc() {
 
 pya() {
   # Activate Python environment
-  #
+  # 
   # Args:
   #   $1: Env name
   if [ ! -z "$1" ]; then
@@ -256,7 +341,7 @@ pyl() {
 
 pyr() {
   # Remove Python environment
-  #
+  # 
   # Args:
   #   $1: Env name
   if [ ! -z "$1" ]; then
@@ -277,7 +362,8 @@ pyd() {
 # ============================================================================
 # Workspaces
 # ============================================================================
-# We use two workspaces, one for home works and other for the job works.
+# We use two workspaces for store repos, one for home works and other for the
+# job works
 
 
 WORKSPACE_HOME=~/Workspace/Home
@@ -287,7 +373,8 @@ source ~/Workspace/.jobrc
 
 cleanworkspaces() {
   # Clean all workspaces
-  # It's mean all virtual and variable environments setted by workspaces are removed
+  # It's mean all virtual and variable environments setted by workspaces are
+  # removed
   wh_cleanall
   wj_cleanall
 }

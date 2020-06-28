@@ -10,9 +10,11 @@
   ![Screenshot](./screenshot.png)
 </p>
 
-When a new day starts, the [Astronomy Picture of the Day](https://apod.nasa.gov/apod/astropix.html) is selected as your new wallpaper.
+When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper.
 Based on the colors of this image, the general color scheme of the rest of the components of your ship was established.
 I've improved it for Python hunting, while the command center is built with Vscode, the database is handled by psqalien and communications are done with Octocat and Heroku.
+
+[astropix]: https://apod.nasa.gov/apod/astropix.html
 
 🧲 ⚡ **Requirements:** Manjaro I3
 
@@ -33,7 +35,9 @@ heroku login
 git config --global user.name "YOUR_NAME"
 git config --global user.email "YOUR_EMAIL"
 ```
-[Add SSH key](https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
+[Add SSH key][github_ssh_key_help]
+
+[github_ssh_key_help]: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
 ## Command Center Management
 
@@ -98,6 +102,7 @@ bk                          Change background image and general color scheme.
                             Without args, it's setup a random image from
                             ~/Pictures/Wallpapers. Else, it's setup the image
                             your pass as argument
+desc                        Print the description of the Astronomic Picture of the Day
 fav                         Select preferred color schema
 lolban                      Print a rainbow message
 cow                         A psychedelic cow that tells your fortune
