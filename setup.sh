@@ -116,10 +116,10 @@ fc-cache ~/.local/share/fonts
 # Paste dotfiles and clean directory
 mv ./* ~/
 cd ..
-trash -rf .github dotfiles
-trash .git .gitignore
-trash screenshot.png setup.sh
-trash LICENCE CONTRIBUTING.md CODE_OF_CONDUCT.md README.md SECURITY.md
+trash dotfiles .github .git CODE_OF_CONDUCT.md CONTRIBUTING.md LICENCE README.md screenshot.png SECURITY.md setup.sh
+
+# Update git config
+git config --global core.excludesfile ~/.config/git/.gitignore
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background

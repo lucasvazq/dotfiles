@@ -10,7 +10,7 @@ if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
 
   tmux
 else
-  # Add terminal color to main terminal
+  # Add wal color schema to main terminal
   cat ~/.cache/wal/sequences
 fi
 
@@ -19,7 +19,7 @@ source ~/Programs/.programsrc
 
 # Zsh config
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="custom"
+ZSH_THEME=custom
 plugins=(git virtualenv shrink-path)
 source $ZSH/oh-my-zsh.sh
 
@@ -42,6 +42,12 @@ bk() {
   clear
   neo
 }
+
+desc() {
+  # Print the description of the Astronomic Picture of the Day
+  cat ~/.config/wal/image-description.txt
+}
+desc # Run at start
 
 fav() {
   # Set preferred color schema
@@ -80,7 +86,6 @@ neo() {
 }
 
 
-# LINE TO 79 OR 80?
 # ============================================================================
 # Productivity
 # ============================================================================
@@ -111,10 +116,6 @@ cud() {
   # 
   # Without Args:
   #   Set the time to auto
-  # 
-  # TODO:
-  #   What to do with leap years?
-  echo BEFORE: $(date +"%Y-%m-%d %H:%M:%S")
   if [ ! -z "$1" ]; then
     if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
       timedatectl setq-ntp false
@@ -153,7 +154,7 @@ cud() {
       # - When it's positive
       if [[ $(echo $timezone | grep -Po '[+](?<=[0-9])*') ]]; then
         hour=$(($4 + $diff))
-      
+
       # - When it's negative
       elif [[ $(echo $timezone | grep -Po '[-](?<=[0-9])*') ]]; then
         hour=$(($4 - $diff))
@@ -173,11 +174,13 @@ cud() {
       minute=$(date +%M)
     fi
 
+    echo BEFORE: $(date +"%Y-%m-%d %H:%M:%S")
     sudo date -s "$year-$month-$day $hour:$minute:$(date +%S)" >> /dev/null
+    echo AFTER: $(date +"%Y-%m-%d %H:%M:%S")
   else
     timedatectl set-ntp true
+    echo RESTORED: $(date +"%Y-%m-%d %H:%M:%S")
   fi
-  echo AFTER: $(date +"%Y-%m-%d %H:%M:%S")
 }
 
 wgc() {
@@ -254,14 +257,14 @@ hl() {
 }
 
 ds() {
-  # Open Django shell
+  # Open Django extended shell
   # 
   # Args:
   #   $1 (optional): DB schema
   if [ ! -z "$1" ]; then
-    python manage.py tenant_command shell --schema=$1
+    python manage.py tenant_command shell_plus --print-sql --schema=$1
   else
-    python manage.py shell
+    python manage.py shell_plus --print-sql
   fi
 }
 
@@ -353,7 +356,7 @@ pyr() {
 
 pyd() {
   # Deactivate Python environment
-  if [[ $(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")') == "1" ]]; then
+  if [[ $(python -c 'import os; print(1 if os.getenv("VIRTUAL_ENV") else 0)') == "1" ]]; then
     deactivate
   fi
 }

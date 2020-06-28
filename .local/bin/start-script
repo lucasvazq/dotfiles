@@ -2,19 +2,24 @@
 # In this script, scripts are executed that require some time to wait before being invoked.
 
 
+sleep 10
+
+
 # Run pulseaudio
 pkill pulseaudio &
-sleep 1
-pulseaudio &
+# sleep 5
+# pulseaudio &
 
 # Wait a few seconds for pulseaudio to start before executing the rest of the scripts
-sleep 5
+sleep 10
 
 # Run pulseeffects and volumeicon that depends of pulseaudio
 pulseeffects --gapplication-service &
 volumeicon &
 
 # Polybar has a volume module that's depend of pulseaudio
+pulseaudio &
+sleep 1
 polybar custom &
 
 

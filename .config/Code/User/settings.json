@@ -3,7 +3,6 @@
     "editor.lineHeight": 17,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "python.jediEnabled": false,
     "editor.wordWrap": "wordWrapColumn",
     "editor.wrappingIndent": "same",
     "editor.wordWrapColumn": 119,
@@ -16,8 +15,24 @@
     "search.searchOnType": false,
     "search.showLineNumbers": true,
     "workbench.colorTheme": "Wal",
-    "comments.openPanel": "neverOpen",
-    "debug.internalConsoleOptions": "neverOpen",
-    "debug.openDebug": "neverOpen",
-    "debug.showInStatusBar": "never"
+    "python.languageServer": "Microsoft",
+    "explorer.autoReveal": false,
+    "files.exclude": {
+        "**/**.pyc": true,
+        "**/htmlcov": true,
+        "**/locale": true
+    },
+    "git.enabled": false,
+    "git.path": null,
+    "git.autofetch": false,
+    "telemetry.enableTelemetry": false,
+    "files.watcherExclude": {
+        "**/**": true
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": false,
+    "window.menuBarVisibility": "toggle",
+    "workbench.sideBar.location": "right",
+    "editor.minimap.enabled": false
 }
