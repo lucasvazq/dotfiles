@@ -46,7 +46,7 @@ font-0 = "JetBrainsMono Nerd Font Mono:size=10"
 wm-restack = i3
 modules-left = i3
 modules-center = cpu cpu-temperature-1 cpu-temperature-2 separator gpu-temperature-1 gpu-temperature-2 separator ram separator swap separator filesystem
-modules-right = audio-config volume separator date separator wifi
+modules-right = date separator audio-config volume separator wifi
 
 
 ; Workspaces
@@ -155,6 +155,15 @@ format-underline = ${colors.color1}
 label = " GPU: %temperature-c% "
 
 
+; Date
+[module/date]
+type = custom/script
+exec = date +%H:%M
+interval = 1
+label = " %output% "
+format-underline = ${colors.color1}
+
+
 ; Audio
 
 [module/audio-config]
@@ -172,21 +181,6 @@ label-volume = " VOL: %percentage%% "
 
 format-muted-underline = ${colors.color1}
 label-muted = " VOL: MUTE "
-
-
-; Date
-; Click to change to alternative date format
-[module/date]
-type = internal/date
-interval = 1
-format-underline = ${colors.color1}
-label = " DATE: %date% %time% "
-
-date = %d/%m
-date-alt = %d-%m-%Y
-
-time = %H:%M
-time-alt = %H:%M:%S
 
 
 ; Networks

@@ -5,21 +5,21 @@
 
 # Start new terminals with tmux and add pywal color scheme
 if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
-  # Prevent lose color scheme for news tmux sessions
+  # Prevent lose color scheme for new tmux sessions
   wal -R -e -q
 
   tmux
 else
-  # Add terminal color to alacritty
+  # Add wal color schema to main terminal
   cat ~/.cache/wal/sequences
 fi
 
-# Programs path
+# Custom programs path
 source ~/Programs/.programsrc
 
-# Basic zsh config
+# Zsh config
 export ZSH=~/.oh-my-zsh
-ZSH_THEME="custom"
+ZSH_THEME=custom
 plugins=(git virtualenv shrink-path)
 source $ZSH/oh-my-zsh.sh
 
@@ -29,41 +29,34 @@ source $ZSH/oh-my-zsh.sh
 # ============================================================================
 
 
-neo() {
-  # Run custom neofetch config
-
-  # If Ctrl+C is pressed we clear the screen
-  trap clear INT
-
-  neofetch
-
-  # Return as success after press Ctrl+C
-  return 0
-}
-
 bk() {
-  # Change background and run neo function
-  #
+  # Change background and color schema, and run neo function
+  # The color schema is setted using the selected background
+  # 
   # Args:
-  #   $1 (optional): custom image
+  #   $1 (optional): wallpaper path
+  # 
+  # Without args:
+  #   Select a random wallpaper
   sh change-background >> /dev/null $1
   clear
   neo
 }
+
+desc() {
+  # Print the description of the Astronomic Picture of the Day
+  cat ~/.config/wal/image-description.txt
+}
+desc # Run at start
 
 fav() {
   # Set preferred color schema
   wal -q --theme base16-materia
 }
 
-cow() {
-  # A psychedelic cow that tells your fortune
-  fortune | cowsay -w -f three-eyes | lolcat
-}
-
 lolban() {
   # Print rainbow message with special ascii font
-  #
+  # 
   # Args:
   #   $1: Message
   if [ ! -z "$1" ]; then
@@ -75,52 +68,136 @@ lolban() {
   fi
 }
 
+cow() {
+  # Invoke a psychedelic cow that tells your fortune
+  fortune | cowsay -w -f three-eyes | lolcat
+}
+
+neo() {
+  # Run custom neofetch config
+
+  # If Ctrl+C is pressed, we clear the screen
+  trap clear INT
+
+  neofetch
+
+  # Return as success after press Ctrl+C
+  return 0
+}
+
 
 # ============================================================================
 # Productivity
 # ============================================================================
 
 
-# Alias for editor
+# Alias for open the default UI editor
 alias ed=code
 
-cud() {
-  # Set UTC date
-  # If not arguments passed, it restart datetime to default value
-  #
+open () {
+  # Open link in default browser
+  # 
   # Args:
-  #   $1: Hours
-  #   $2 (optional): Minutes
-  #
-  # Without Args:
-  #   Restore default date
+  #   $1: Link
   if [ ! -z "$1" ]; then
-    local utc_difference hour minutes seconds
+    $BROWSER $1
+  else
+    echo Miss link
+  fi
+}
 
-    if [ timedatectl show --property NTPSynchronized | grep -Po '(?<=NTPSynchronized=).*' == 'no' ]; then
+cud() {
+  # Interact with the current datetime
+  # You can change the datetime using UTC timezone passing, in the follow
+  # order, year, month, days, hours and/or minutes.
+  # All of these args are optional, and you can pass year without passing month
+  # using the next format: "cud 2020", set the actual year to 2020, keeping all
+  # other values.
+  # Also, you can pass month ignoring year using asterisk (*). E.g. "cud * 12",
+  # set the actual month to December, keeping all other values.
+  # Other example: "cud * * * 15 12" set the time to UTC 3:12 p.m. maintaining
+  # the actual year, month and day.
+  # If not arguments passed, it's set the time to auto
+  # 
+  # Args:
+  #   $1 (optional): Year
+  #   $2 (optional): Month
+  #   $3 (optional): Day
+  #   $4 (optional): Hours
+  #   $5 (optional): Minutes
+  # 
+  # Without Args:
+  #   Set the time to auto
+  if [ ! -z "$1" ]; then
+    if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
       timedatectl setq-ntp false
     fi
 
-    utc_difference=3
-    hour=$(($uno - $utc_difference))
-    if [ ! -z "$2" ]; then
-      minutes=$2
+    local year month day hour minute
+
+    if [[ $1 && "$1" != "*" ]]; then
+      year=$1
     else
-      minutes=$(date +%M)
+      year=$(date +%Y)
     fi
-    seconds=$(date +%S)
-  
-    echo BEFORE: $(date +%T)
-    sudo date +%T -s $hour:$minutes:$seconds >> /dev/null
-    echo AFTER: $(date +%T)
+
+    if [[ $2 && "$2" != "*" ]]; then
+      month=$2
+    else
+      month=$(date +%m)
+    fi
+
+    if [[ $3 && "$3" != "*" ]]; then
+      day=$3
+    else
+      day=$(date +%d)
+    fi
+
+    if [[ $4 && "$4" != "*" ]]; then
+
+      # Fix UTC differences
+
+      local timezone diff
+      timezone=$(date +%Z)
+
+      # - Get the absolute value of the difference
+      diff=$(echo $timezone | grep -Po '(?<=\+|-)[0-9]+')
+
+      # - When it's positive
+      if [[ $(echo $timezone | grep -Po '[+](?<=[0-9])*') ]]; then
+        hour=$(($4 + $diff))
+
+      # - When it's negative
+      elif [[ $(echo $timezone | grep -Po '[-](?<=[0-9])*') ]]; then
+        hour=$(($4 - $diff))
+
+      # - Whatever
+      else
+        hour=$4
+      fi
+
+    else
+      hour=$(date +%H)
+    fi
+
+    if [[ $5 && "$5" != "*" ]]; then
+      minute=$5
+    else
+      minute=$(date +%M)
+    fi
+
+    echo BEFORE: $(date +"%Y-%m-%d %H:%M:%S")
+    sudo date -s "$year-$month-$day $hour:$minute:$(date +%S)" >> /dev/null
+    echo AFTER: $(date +"%Y-%m-%d %H:%M:%S")
   else
     timedatectl set-ntp true
+    echo RESTORED: $(date +"%Y-%m-%d %H:%M:%S")
   fi
 }
 
 wgc() {
   # Clone git repository in the appropiated workspace
-  #
+  # 
   # Args:
   #   $1: "h" | "j": Clone for Home or Job workspace
   #   $2: Repo
@@ -141,7 +218,23 @@ wgc() {
       echo Miss Repo
     fi
   else
-    echo Miss positional-only arguments. Workspace "( \"h\" | \"j\" )" and Repo
+    echo Miss positional-only parameters. Workspace "( \"h\" | \"j\" )" and Repo
+  fi
+}
+
+pk() {
+  # Terminate all processes related to a port
+  # 
+  # Args:
+  #   $1: Port
+  if [ ! -z "$1" ]; then
+    local processes
+    processes=$(lsof -t -i:$1)
+    if [ processes ]; then
+      kill -9 processes
+    fi
+  else
+    echo Miss port
   fi
 }
 
@@ -152,8 +245,8 @@ wgc() {
 
 
 drs() {
-  # Run Django server
-  #
+  # Run Django server in localhost
+  # 
   # Args:
   #   $1 (optional): Port
   if [ ! -z "$1" ]; then
@@ -164,28 +257,35 @@ drs() {
 }
 
 hl() {
-  # Run Heroku
-  heroku local
+  # Run Heroku server in localhost
+  # 
+  # Args:
+  #   $1 (optional) - Port
+  if [ ! -z "$1" ]; then
+    heroku local -p $1
+  else
+    heroku local
+  fi
 }
 
-dsh() {
-  # Open Django shell
-  #
+ds() {
+  # Open Django extended shell
+  # 
   # Args:
-  #   $1 (optional): Tenant schema
+  #   $1 (optional): DB schema
   if [ ! -z "$1" ]; then
-    python manage.py tenant_command shell --schema=$1
+    python manage.py tenant_command shell_plus --print-sql --schema=$1
   else
-  	python manage.py shell
+    python manage.py shell_plus --print-sql
   fi
 }
 
 hrs() {
-  # Open Django shell in remote Heroku App
-  #
+  # Open Django shell in a remote Heroku App
+  # 
   # Args:
   #   $1: Heroku App
-  #   $2 (optional): Tenant schema
+  #   $2 (optional): DB schema
   if [ ! -z "$1" ]; then
     if [ ! -z "$2" ]; then
       heroku run python manage.py tenant_command shell --schema=$2 -a $1
@@ -193,13 +293,13 @@ hrs() {
       heroku run python manage.py shell -a $1
     fi
   else
-    echo Miss positional-only arguments: Heroku App, Tenant (optional)
+    echo Miss positional-only parameters: Heroku App, Tenant (optional)
   fi
 }
 
 hrq() {
-  # Run postgresql interface in Heroku App
-  #
+  # Run PostgreSQL CLI in a Heroku App
+  # 
   # Args:
   #   $1: Heroku App
   if [ ! -z "$1" ]; then
@@ -221,7 +321,7 @@ source ~/.local/bin/virtualenvwrapper.sh
 
 pyc() {
   # Create Python environment
-  #
+  # 
   # Args:
   #   $1: Python source
   #   $2: Env name
@@ -233,13 +333,13 @@ pyc() {
       echo Miss Env name
     fi
   else
-    echo Miss positional-only arguments: Python source, Env name
+    echo Miss positional-only parameters: Python source, Env name
   fi
 }
 
 pya() {
   # Activate Python environment
-  #
+  # 
   # Args:
   #   $1: Env name
   if [ ! -z "$1" ]; then
@@ -250,13 +350,13 @@ pya() {
 }
 
 pyl() {
-  # List Python environments
+  # List all Python environments
   lsvirtualenv
 }
 
 pyr() {
   # Remove Python environment
-  #
+  # 
   # Args:
   #   $1: Env name
   if [ ! -z "$1" ]; then
@@ -268,7 +368,7 @@ pyr() {
 
 pyd() {
   # Deactivate Python environment
-  if [[ $(python -c 'import sys; print ("1" if hasattr(sys, "real_prefix") else "0")') == "1" ]]; then
+  if [[ $(python -c 'import os; print(1 if os.getenv("VIRTUAL_ENV") else 0)') == "1" ]]; then
     deactivate
   fi
 }
@@ -277,7 +377,8 @@ pyd() {
 # ============================================================================
 # Workspaces
 # ============================================================================
-# We use two workspaces, one for home works and other for the job works.
+# We use two workspaces for store repos, one for home works and other for the
+# job works
 
 
 WORKSPACE_HOME=~/Workspace/Home
@@ -287,7 +388,8 @@ source ~/Workspace/.jobrc
 
 cleanworkspaces() {
   # Clean all workspaces
-  # It's mean all virtual and variable environments setted by workspaces are removed
+  # It's mean all virtual and variable environments setted by workspaces are
+  # removed
   wh_cleanall
   wj_cleanall
 }

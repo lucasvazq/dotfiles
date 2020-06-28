@@ -1,18 +1,6 @@
-prompt_session() {
-  if [[ $UID -eq 0 ]]; then
-    echo -n "%{%F{yellow}%}⚡%{%F{default}%} "
-  else
-    echo -n "$(cat ~/.config/wal/image-description.txt) "
-  fi
-}
-
 prompt_virtualenv() {
   if [[ -n $VIRTUAL_ENV && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    if [[ $VIRTUAL_ENV == $HOME/.Envs/Python* ]]; then
-      echo -n "🐍 $(basename $VIRTUAL_ENV) "
-    else
-      echo -n "($(basename $VIRTUAL_ENV)) "
-    fi
+    echo -n "[$(basename $VIRTUAL_ENV)] "
   fi
 }
 
@@ -25,13 +13,6 @@ prompt_git() {
   if [[ "$(git config --get oh-my-zsh.hide-status 2>/dev/null)" = 1 ]]; then
     return
   fi
-  local PL_BRANCH_CHAR
-  () {
-    local LC_ALL="" LC_CTYPE="en_US.UTF-8"
-
-    # 
-    PL_BRANCH_CHAR=$'\ue0a0'
-  }
   local ref dirty mode repo_path
 
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
@@ -63,14 +44,14 @@ prompt_git() {
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
-    echo -n "${ref/refs\/heads\//$PL_BRANCH_CHAR }${vcs_info_msg_0_%% }${mode}"
+    echo -n "${ref/refs\/heads\//}${vcs_info_msg_0_%% }${mode}"
   fi
   echo -n "%{%F{default}%} "
 }
 
 prompt_end() {
   if [[ $RETVAL -ne 0 ]]; then
-    echo -n "%{%F{red}%}✘%{%F{default}%} "
+    echo -n "%{%F{red}%}x%{%F{default}%} "
   else
     echo -n "➜ "
   fi
@@ -78,7 +59,6 @@ prompt_end() {
 
 build_prompt() {
   RETVAL=$?
-  prompt_session
   prompt_virtualenv
   prompt_dir
   prompt_git
