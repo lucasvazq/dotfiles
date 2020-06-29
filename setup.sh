@@ -42,6 +42,7 @@ yay -S visual-studio-code-bin neovim gedit
 code --install-extension batisteo.vscode-django
 code --install-extension christian-kohler.path-intellisense
 code --install-extension dlasagno.wal-theme
+code --install-extension iocave.customize-ui
 code --install-extension mrorz.language-gettext
 code --install-extension ms-python.python
 code --install-extension ms-vsliveshare.vsliveshare
@@ -83,7 +84,8 @@ yay -S pulseeffects
 
 # Git setup
 yay -S github-cli diff-so-fancy
-git config pull.rebase false
+git config --global pull.rebase false
+git config --global core.excludesfile ~/.config/git/.gitignore
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global color.ui true
 git config --global color.diff-highlight.oldNormal "red bold"
@@ -117,9 +119,6 @@ fc-cache ~/.local/share/fonts
 mv ./* ~/
 cd ..
 trash dotfiles .github .git CODE_OF_CONDUCT.md CONTRIBUTING.md LICENCE README.md screenshot.png SECURITY.md setup.sh
-
-# Update git config
-git config --global core.excludesfile ~/.config/git/.gitignore
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background

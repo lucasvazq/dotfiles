@@ -1,38 +1,46 @@
 {
-    "editor.fontFamily": "'JetBrainsMono Nerd Font'",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans'",
     "editor.lineHeight": 17,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.wrappingIndent": "same",
-    "editor.wordWrapColumn": 119,
     "editor.rulers": [
         79,
         119
     ],
-    "gitblame.ignoreWhitespace": true,
-    "workbench.startupEditor": "none",
-    "search.searchOnType": false,
-    "search.showLineNumbers": true,
-    "workbench.colorTheme": "Wal",
-    "python.languageServer": "Microsoft",
+    "editor.suggestSelection": "first",
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 119,
+    "editor.wrappingIndent": "same",
     "explorer.autoReveal": false,
     "files.exclude": {
-        "**/**.pyc": true,
+        "**/**.pyc": true
+    },
+    "search.exclude": {
         "**/htmlcov": true,
         "**/locale": true
     },
-    "git.enabled": false,
-    "git.path": null,
-    "git.autofetch": false,
+    "search.searchOnType": false,
+    "search.showLineNumbers": true,
     "telemetry.enableTelemetry": false,
-    "files.watcherExclude": {
-        "**/**": true
-    },
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.statusBar.visible": true,
-    "workbench.activityBar.visible": false,
     "window.menuBarVisibility": "toggle",
+    "workbench.activityBar.visible": false,
+    "workbench.colorTheme": "Wal",
+    "workbench.iconTheme": "material-icon-theme",
     "workbench.sideBar.location": "right",
-    "editor.minimap.enabled": false
+    "workbench.startupEditor": "none",
+    "workbench.statusBar.visible": true,
+    "customizeUI.stylesheet": {
+        "#ms-vsliveshare\\.vsliveshare": "display: none",
+        "#status\\.editor\\.indentation": "display: none",
+        "#status\\.editor\\.eol": "display: none",
+        "#status\\.feedback": "display: none",
+        "#status\\.scm": "display: none",
+        "#WakaTime\\.vscode-wakatime": "display: none",
+        "#workbench\\.parts\\.editor .editor-actions": "display: none",
+        "#workbench\\.parts\\.panel .title-actions": "display: none",
+        "#workbench\\.parts\\.sidebar .composite.title": "display: none",
+        "#workbench\\.view\\.explorer": "margin-top: 35px"
+    },
+    "gitblame.ignoreWhitespace": true,
+    "python.languageServer": "Microsoft",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }
