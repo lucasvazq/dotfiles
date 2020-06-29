@@ -29,6 +29,8 @@
     "workbench.startupEditor": "none",
     "workbench.statusBar.visible": true,
     "customizeUI.stylesheet": {
+        ".decorationsOverviewRuler": "display: none",
+        ".monaco-split-view2.vertical > .split-view-container > .split-view-view.visible": "margin-top: 1px",
         "#ms-vsliveshare\\.vsliveshare": "display: none",
         "#status\\.editor\\.indentation": "display: none",
         "#status\\.editor\\.eol": "display: none",
@@ -36,9 +38,13 @@
         "#status\\.scm": "display: none",
         "#WakaTime\\.vscode-wakatime": "display: none",
         "#workbench\\.parts\\.editor .editor-actions": "display: none",
+        "#workbench\\.parts\\.editor .scroll-decoration": "display: none",
+        "#workbench\\.parts\\.panel .composite.title": "margin-top: -1px",
         "#workbench\\.parts\\.panel .title-actions": "display: none",
         "#workbench\\.parts\\.sidebar .composite.title": "display: none",
-        "#workbench\\.view\\.explorer": "margin-top: 35px"
+        "#workbench\\.parts\\.statusbar": "margin-top: -2px",
+        "#workbench\\.view\\.explorer": "margin-top: 35px",
+        "body > .monaco-workbench > .monaco-grid-view > .monaco-grid-branch-node > .monaco-split-view2 > .split-view-container > .split-view-view > .monaco-grid-branch-node .monaco-split-view2.horizontal > .split-view-container > .split-view-view.visible": "margin-top: -2px"
     },
     "gitblame.ignoreWhitespace": true,
     "python.languageServer": "Microsoft",
