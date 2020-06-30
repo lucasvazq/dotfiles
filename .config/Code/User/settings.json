@@ -46,6 +46,7 @@
         "#workbench\\.view\\.explorer": "margin-top: 35px",
         "body > .monaco-workbench > .monaco-grid-view > .monaco-grid-branch-node > .monaco-split-view2 > .split-view-container > .split-view-view > .monaco-grid-branch-node .monaco-split-view2.horizontal > .split-view-container > .split-view-view.visible": "margin-top: -2px"
     },
+    "gistpad.comments.showThread": "never",
     "gitblame.ignoreWhitespace": true,
     "python.languageServer": "Microsoft",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
