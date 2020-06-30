@@ -43,6 +43,7 @@ code --install-extension batisteo.vscode-django
 code --install-extension christian-kohler.path-intellisense
 code --install-extension dlasagno.wal-theme
 code --install-extension iocave.customize-ui
+code --install-extension magicstack.magicpython
 code --install-extension mrorz.language-gettext
 code --install-extension ms-python.python
 code --install-extension ms-vsliveshare.vsliveshare
@@ -53,6 +54,7 @@ code --install-extension usernamehw.highlight-logical-line
 code --install-extension visualstudioexptteam.vscodeintellicode
 code --install-extension vsls-contrib.gistfs
 code --install-extension waderyan.gitblame
+code --install-extension wholroyd.jinja
 
 # Browsers
 yay -S brave google-chrome-stable
