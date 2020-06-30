@@ -49,10 +49,12 @@ _The works that we do as hobbies are stored in `~/Workspaces/H`, those that we c
 _Everything related with the command interpreter, that are related to the H folder, are stored in `~/Workspaces/.hrc`. Everything related to the other folder, in `~/Workspaces/.jrc`._
 
 Considering the words above, there are a couple of things to know to approach this methodology:
-- The `wgc` command allows us to directly clone a repository in one of these workspaces.
-An example usage is `wgc h git@github.com:jackfrued/Python-100-Days.git`,
-this clones [this][python_100_days] repo into H folder.
-- In `~/.zshrc` there is a function called `cleanworkspaces` which calls two functions that are located in `.jrc` and` .hrc`. These functions are intended to clear all the virtual env and env variables related to their workspaces. In other words, the function found in `.jrc` should remove all non-default variables and virtual envs that are activated with some function that the user runs when working with a particular repository located in `~/Workspaces/J/`. In conclusion, when `cleanworkspaces` is called, all environment variables and virtual spaces are cleaned, and the benefit we can obtan from this is when the use of this function is automated for when we want to change the environment in which we are developing.
+
+- The **wgc** command allows us to directly clone a repository in one of these workspaces.
+An example usage is: `wgc h git@github.com:jackfrued/Python-100-Days.git`
+This clones [this][python_100_days] repo into H folder.
+
+- In `~/.zshrc` there is a function called **cleanworkspaces** which calls two functions that are located in `.jrc` and` .hrc`. These functions are intended to clear all the virtual env and env variables related to their workspaces. In other words, the function found in `.jrc` should remove all non-default variables and virtual envs that are activated with some function that the user runs when working with a particular repository located in `~/Workspaces/J/`. In conclusion, when **cleanworkspaces** is called, all environment variables and virtual spaces are cleaned, and the benefit we can obtan from this is when the use of this function is automated for when we want to change the environment in which we are developing.
 
 [python_100_days]: https://github.com/jackfrued/Python-100-Days
 
