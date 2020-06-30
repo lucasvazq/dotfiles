@@ -51,7 +51,7 @@ _Everything related with the command interpreter, that are related to the H fold
 Considering the words above, there are a couple of things to know to approach this methodology:
 
 - The **wgc** command allows us to directly clone a repository in one of these workspaces.
-<br>An example usage is: `wgc h git@github.com:jackfrued/Python-100-Days.git`, this clones [this][python_100_days] repo into H folder.
+<br>An example usage is: `wgc h git@github.com:jackfrued/Python-100-Days.git`, this clones [Python-100-Days][python_100_days] repo into H folder.
 
 [python_100_days]: https://github.com/jackfrued/Python-100-Days
 
