@@ -39,7 +39,24 @@ git config --global user.email "YOUR_EMAIL"
 
 [github_ssh_key_help]: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
-## Command Center Management
+## Travel guide
+
+### How to drive through the meteorites
+_The idea of ​​this setup is based on the fact that I consider there are two different moments in which we develop things. The first moment is when we do it for personal enjoyment, far from any responsibility that commits third parties. This moment is associated with when we do it for pleasure and develop for the simple fact of developing._
+_The second situation in which we can find ourselves developing is when we do it because we have a responsibility with a third party, that is, when we are doing a job._
+_This is why it seemed appropriate to me to have two separate folders where the works we carry out are kept, depending on the situation we are in when we develop them._
+_The works that we do as hobbies are stored in `~/Workspaces/H`, those that we carry out under responsibilities are located in `~/Workspaces/J`._
+_Everything related with the command interpreter, that are related to the H folder, are stored in `~/Workspaces/.hrc`. Everything related to the other folder, in `~/Workspaces/.jrc`._
+
+Considering the words above, there are a couple of things to know to approach this methodology:
+- The `wgc` command allows us to directly clone a repository in one of these workspaces.
+An example usage is `wgc h git@github.com:jackfrued/Python-100-Days.git`,
+this clones [this][python_100_days] repo into H folder.
+- In `~/.zshrc` there is a function called `cleanworkspaces` which calls two functions that are located in `.jrc` and` .hrc`. These functions are intended to clear all the virtual env and env variables related to their workspaces. In other words, the function found in `.jrc` should remove all non-default variables and virtual envs that are activated with some function that the user runs when working with a particular repository located in `~/Workspaces/J/`. In conclusion, when `cleanworkspaces` is called, all environment variables and virtual spaces are cleaned, and the benefit we can obtan from this is when the use of this function is automated for when we want to change the environment in which we are developing.
+
+[python_100_days]: https://github.com/jackfrued/Python-100-Days
+
+### Command center manager
 
 **Windows Manager**
 ```txt
@@ -85,11 +102,11 @@ $mod+Shift+space            Toggle windows mode between tiling/floating
 $mod+space                  Change focus between tiling/floating windows
 $mod+Ctrl+space             Toggle split mode between horizontal and vertical
 $mod+<ARROWS>               Focus window up|down|left|right
-$mod+Ctrl+<Right(l)>        Next workspace
-$mod+Ctrl+<Left(h)>         Prev workspace
-$mod+<NUMBERS 1-9>          Switch to N workspace
-$mod+Ctrl+<NUMBERS 1-9>     Move window to workspace N
-$mod+Shift+<NUMBERS 1-9>    Move to N workspace with actual container
+$mod+Ctrl+<Right(l)>        Next desktop workspace
+$mod+Ctrl+<Left(h)>         Prev desktop workspace
+$mod+<NUMBERS 1-9>          Switch to N desktop workspace
+$mod+Ctrl+<NUMBERS 1-9>     Move window to desktop workspace N
+$mod+Shift+<NUMBERS 1-9>    Move to N desktop workspace with actual container
 
 # System mode
 $mod+0                      Select ship mode
@@ -97,7 +114,7 @@ $mod+0                      Select ship mode
 
 **Terminal commands**
 ```txt
-# Tachyon Laser
+# Weird things
 bk                          Change background image and general color scheme.
                             Without args, it's setup a random image from
                             ~/Pictures/Wallpapers. Else, it's setup the image

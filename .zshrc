@@ -25,7 +25,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 # ============================================================================
-# Tachyon Laser
+# Weird things
 # ============================================================================
 
 
@@ -199,16 +199,16 @@ wgc() {
   # Clone git repository in the appropiated workspace
   # 
   # Args:
-  #   $1: "h" | "j": Clone for Home or Job workspace
+  #   $1: "h" | "j": Clone for H or J workspace
   #   $2: Repo
   if [ ! -z "$1" ]; then
     if [ ! -z "$2" ]; then
       case $1 in
-        h)
-          git -C ~/Workspace/Home clone $2
+        h|H)
+          git -C ~/Workspaces/H clone $2
           ;;
-        j)
-          git -C ~/Workspace/Job clone $2
+        j|J)
+          git -C ~/Workspaces/J clone $2
           ;;
         *)
           echo Bad workspace
@@ -377,18 +377,16 @@ pyd() {
 # ============================================================================
 # Workspaces
 # ============================================================================
-# We use two workspaces for store repos, one for home works and other for the
-# job works
 
 
-WORKSPACE_HOME=~/Workspace/Home
-WORKSPACE_JOB=~/Workspace/Job
-source ~/Workspace/.homerc
-source ~/Workspace/.jobrc
+WORKSPACE_H=~/Workspaces/H
+WORKSPACE_J=~/Workspaces/J
+source ~/Workspaces/.hrc
+source ~/Workspaces/.jrc
 
 cleanworkspaces() {
   # Clean all workspaces
-  # It's mean all virtual and variable environments setted by workspaces are
+  # It's mean all env vars and virtual envs setted by the workspaces are
   # removed
   wh_cleanall
   wj_cleanall
