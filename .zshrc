@@ -51,7 +51,11 @@ desc # Run at start
 
 fav() {
   # Set preferred color schema
-  wal -q --theme base16-materia
+  # Good themes:
+  # - base16-materia
+  # - sexy-gnometerm
+  # - sexy-theme2
+  wal -q --theme sexy-gnometerm
 }
 
 lolban() {
