@@ -43,13 +43,16 @@ code --install-extension batisteo.vscode-django
 code --install-extension christian-kohler.path-intellisense
 code --install-extension dlasagno.wal-theme
 code --install-extension iocave.customize-ui
+code --install-extension krnik.vscode-jumpy
 code --install-extension magicstack.magicpython
+code --install-extension mechatroner.rainbow-csv
 code --install-extension mrorz.language-gettext
 code --install-extension ms-python.python
 code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension pkief.material-icon-theme
 code --install-extension shd101wyy.markdown-preview-enhanced
+code --install-extension usernamehw.errorlens
 code --install-extension usernamehw.highlight-logical-line
 code --install-extension visualstudioexptteam.vscodeintellicode
 code --install-extension vsls-contrib.gistfs

@@ -41,6 +41,10 @@
         "#workbench\\.parts\\.editor .scroll-decoration": "display: none",
         "#workbench\\.parts\\.panel .composite.title": "margin-top: -1px",
         "#workbench\\.parts\\.panel .title-actions": "display: none",
+        "#workbench\\.parts\\.panel [title^='Problems']": "display: none",
+        "#workbench\\.parts\\.panel [title^='Output']": "display: none",
+        "#workbench\\.parts\\.panel [title^='Debug Console']": "display: none",
+        "#workbench\\.parts\\.panel [title^='Comments']": "display: none",
         "#workbench\\.parts\\.sidebar .composite.title": "display: none",
         "#workbench\\.parts\\.statusbar": "margin-top: -2px",
         "#workbench\\.view\\.explorer": "margin-top: 35px",
@@ -49,5 +53,6 @@
     "gistpad.comments.showThread": "never",
     "gitblame.ignoreWhitespace": true,
     "python.languageServer": "Microsoft",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "window.zoomLevel": 0
 }
