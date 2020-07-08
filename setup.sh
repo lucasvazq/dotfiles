@@ -17,7 +17,7 @@ yay -Syu
 timedatectl set-ntp true
 
 # Make useful dirs
-mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J}
+mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J,Workspaces/.workspaces}
 
 # Clean unused apps, folders and files
 yay -S trash-cli
@@ -39,6 +39,8 @@ psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
 
 # Editor
 yay -S visual-studio-code-bin neovim gedit
+code --install-extension alefragnani.numbered-bookmarks
+code --install-extension alefragnani.project-manager
 code --install-extension batisteo.vscode-django
 code --install-extension christian-kohler.path-intellisense
 code --install-extension dlasagno.wal-theme
@@ -50,8 +52,11 @@ code --install-extension mrorz.language-gettext
 code --install-extension ms-python.python
 code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension msjsdiag.debugger-for-chrome
+code --install-extension oderwat.indent-rainbow
 code --install-extension pkief.material-icon-theme
+code --install-extension ryu1kn.text-marker
 code --install-extension shd101wyy.markdown-preview-enhanced
+code --install-extension sourcery.sourcery
 code --install-extension usernamehw.errorlens
 code --install-extension usernamehw.highlight-logical-line
 code --install-extension visualstudioexptteam.vscodeintellicode

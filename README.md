@@ -39,6 +39,12 @@ git config --global user.email "YOUR_EMAIL"
 
 [github_ssh_key_help]: https://help.github.com/es/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account
 
+**Add Sourcery token**
+Sign In and obtain a token. [Link][token_link]
+Then, search for sourcery in the VSCode settings and enter the token into the Sourcery Token field.
+
+[token_link]: https://sourcery.ai/download/?editor=vscode
+
 ## Travel guide
 
 ### How to drive through the meteorites

@@ -36,7 +36,6 @@
         "#status\\.editor\\.eol": "display: none",
         "#status\\.feedback": "display: none",
         "#status\\.scm": "display: none",
-        "#WakaTime\\.vscode-wakatime": "display: none",
         "#workbench\\.parts\\.editor .editor-actions": "display: none",
         "#workbench\\.parts\\.editor .scroll-decoration": "display: none",
         "#workbench\\.parts\\.panel .composite.title": "margin-top: -1px",
@@ -52,7 +51,20 @@
     },
     "gistpad.comments.showThread": "never",
     "gitblame.ignoreWhitespace": true,
+    "indentRainbow.colors": [
+        "rgba(0, 0, 0, 0.85)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(255, 255, 255, 0.15)",
+        "rgba(255, 255, 255, 0.15)",
+        "rgba(255, 255, 255, 0.3)",
+        "rgba(255, 255, 255, 0.3)",
+        "rgba(255, 255, 255, 0.3)",
+    ],
+    "indentRainbow.errorColor": "rgba(255, 255, 255,0.6)",
+    "indentRainbow.tabmixColor": "rgba(255, 0, 0, 0.6)",
     "python.languageServer": "Microsoft",
+    "textmarker.autoSelectDistinctiveTextColor": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "window.zoomLevel": 0
 }
