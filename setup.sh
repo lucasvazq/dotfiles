@@ -87,7 +87,7 @@ code --install-extension waderyan.gitblame
 code --install-extension wholroyd.jinja
 code --install-extension ybaumes.highlight-trailing-white-spaces
 
-# Image edition
+# Image editors
 yay -S inkscape pinta
 
 # Others
