@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-Executable module thats set the background and color schema based in the Astronomy Picture of the Day.
+An executable module that's set the background and the color schema, based in the Astronomy Picture of the Day.
 
-Atronomy Picture of the Day: https://apod.nasa.gov/apod/astropix.html
+Astronomy Picture of the Day: https://apod.nasa.gov/apod/astropix.html
 """
 import re
 import requests
@@ -13,9 +13,9 @@ from typing import NoReturn
 
 def main() -> NoReturn:
     """
-    Set background and color schema based on the result of the Astronomy Picture of the Day
+    Set the background and the color schema based on the Astronomy Picture of the Day page.
 
-    Some changes to the source or connection problems, may generate exceptions. If this ocurrs, we set a random
+    Some changes to site structure or connection problems may generate exceptions. If this occurs, we set a random
     background and schema colors.
     The image is saved in ~/Pictures/Wallpapers folder.
     """
@@ -23,7 +23,7 @@ def main() -> NoReturn:
     try:
         web_response = requests.get(f"{nasa_base_url}/apod/astropix.html")
 
-        # Download and save picture of the day
+        # Download and save the picture of the day
         image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
         image_path = image_match.groups()[0]
         image = requests.get(f"{nasa_base_url}/{image_path}")
@@ -32,16 +32,16 @@ def main() -> NoReturn:
         with open(destination_path, "wb") as file:
             file.write(image.content)
 
-        # Add description exif tag to the image
+        # Add EXIF description tag to the image
         description_match = re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text)
         description = description_match.groups()[0].strip()
         subprocess.call(shlex.split(f"exiftool -overwrite_original -Description=\"{description}\" {destination_path}"))
 
-        # Set the new wallpaper and color schema
+        # Set the new wallpaper and color scheme
         subprocess.call(['change-background', destination_path])
 
     except Exception:
-        # Set a random wallpaper and color schema
+        # Set a random wallpaper and color scheme
         subprocess.call(['change-background'])
 
 

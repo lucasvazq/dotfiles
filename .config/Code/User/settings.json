@@ -22,12 +22,15 @@
     "search.showLineNumbers": true,
     "telemetry.enableTelemetry": false,
     "window.menuBarVisibility": "toggle",
+    "window.zoomLevel": -1,
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Wal",
-    "workbench.iconTheme": "material-icon-theme",
+    "workbench.iconTheme": "quill-icons",
     "workbench.sideBar.location": "right",
     "workbench.startupEditor": "none",
     "workbench.statusBar.visible": true,
+    "autoHide.autoHidePanel": false,
+    "autoHide.hideOnOpen": false,
     "customizeUI.stylesheet": {
         ".decorationsOverviewRuler": "display: none",
         ".monaco-split-view2.vertical > .split-view-container > .split-view-view.visible": "margin-top: 1px",
@@ -44,6 +47,7 @@
         "#workbench\\.parts\\.panel [title^='Output']": "display: none",
         "#workbench\\.parts\\.panel [title^='Debug Console']": "display: none",
         "#workbench\\.parts\\.panel [title^='Comments']": "display: none",
+        "#workbench\\.parts\\.sidebar": "padding-bottom: 3rem",
         "#workbench\\.parts\\.sidebar .composite.title": "display: none",
         "#workbench\\.parts\\.statusbar": "margin-top: -2px",
         "#workbench\\.view\\.explorer": "margin-top: 35px",
@@ -73,12 +77,12 @@
         "rgba(0, 0, 0, 0)"
     ],
     "indentRainbow.errorColor": "rgba(255, 255, 0, 0.15)",
-    "indentRainbow.includedLanguages": [
-        "python"
+    "indentRainbow.excludedLanguages": [
+        "html",
+        "plaintext",
     ],
     "indentRainbow.tabmixColor": "rgba(255, 0, 0, 0.15)",
     "python.languageServer": "Microsoft",
     "textmarker.autoSelectDistinctiveTextColor": true,
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "window.zoomLevel": 0
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }

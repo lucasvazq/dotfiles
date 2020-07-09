@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup the dotfiles
+# Setup dotfiles
 
 
 ##############################################################################
@@ -32,12 +32,32 @@ trash ~/.config/compton.conf
 ##############################################################################
 
 
-# PostgreSQL
-yay -S postgresql
-sudo systemctl enable postgresql.service
-psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
+# Launcher
+yay -S rofi rofimoji
 
-# Editor
+# Status bar
+polybar
+
+# Audio
+install_pulse # Run pulseaudio builtin installer
+yay -S pulseeffects
+
+# Browsers
+yay -S brave google-chrome-stable
+
+# Terminal
+yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+trash ~/.zshrc.pre-oh-my-zsh
+chsh -s "$(which zsh) $USER"
+git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
+git clone https://gitlab.com/dwt1/shell-color-scripts.git
+sudo mkdir /opt/shell-color-scripts
+sudo mv ~/shell-color-scripts/colorscripts /opt/shell-color-scripts
+sudo mv ~/shell-color-scripts/colorscript.sh /usr/bin/colorscript
+trash -rf ~/shell-color-scripts
+
+# Code editors
 yay -S visual-studio-code-bin neovim gedit
 code --install-extension alefragnani.bookmarks
 code --install-extension alefragnani.project-manager
@@ -67,35 +87,13 @@ code --install-extension waderyan.gitblame
 code --install-extension wholroyd.jinja
 code --install-extension ybaumes.highlight-trailing-white-spaces
 
-# Browsers
-yay -S brave google-chrome-stable
-
-# Terminal
-yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-trash ~/.zshrc.pre-oh-my-zsh
-chsh -s "$(which zsh) $USER"
-git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
-git clone https://gitlab.com/dwt1/shell-color-scripts.git
-sudo mkdir /opt/shell-color-scripts
-sudo mv ~/shell-color-scripts/colorscripts /opt/shell-color-scripts
-sudo mv ~/shell-color-scripts/colorscript.sh /usr/bin/colorscript
-trash -rf ~/shell-color-scripts
-
-# Desktop manager
-yay -S rofi rofimoji polybar
+# Image edition
+yay -S inkscape pinta
 
 # Others
 yay -S mplayer unzip zip numlockx unclutter perl-anyevent-i3
 
-# Edition
-yay -S inkscape pinta
-
-# Audio
-install_pulse # Run pulseaudio builtin installer
-yay -S pulseeffects
-
-# Git setup
+# Git
 yay -S github-cli diff-so-fancy
 git config --global pull.rebase false
 git config --global core.excludesfile ~/.config/git/.gitignore
@@ -115,6 +113,11 @@ git config --global color.diff.whitespace "red reverse"
 # Python
 pip install pipenv virtualenvwrapper ipython pywal --user
 
+# PostgreSQL
+yay -S postgresql
+sudo systemctl enable postgresql.service
+psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
+
 # Fonts
 yay -S noto-fonts-emoji
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
@@ -124,7 +127,7 @@ fc-cache ~/.local/share/fonts
 
 
 ##############################################################################
-# Paste and configure dotfiles
+# Paste and setup dotfiles
 ##############################################################################
 
 

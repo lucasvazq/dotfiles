@@ -74,6 +74,16 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
+        "key": "ctrl+shift+k",
+        "command": "indentation-level-movement.moveDown",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+k",
+        "command": "indentation-level-movement.selectDown",
+        "when": "editorTextFocus"
+    },
+    {
         "key": "alt+l",
         "command": "cursorUp",
         "when": "textInputFocus"
@@ -92,6 +102,16 @@
         "key": "ctrl+alt+l",
         "command": "editor.action.moveLinesUpAction",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "indentation-level-movement.moveUp",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+l",
+        "command": "indentation-level-movement.selectUp",
+        "when": "editorTextFocus"
     },
     {
         "key": "alt+[",
@@ -203,6 +223,23 @@
         "key": "alt+t",
         "command": "extension.jumpy-exit",
         "when": "editorTextFocus && jumpy.isInJumpMode"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "bookmarks.toggle",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+q",
+        "command": "bookmarks.listFromAllFiles"
+    },
+    {
+        "key": "alt+h",
+        "command": "textmarker.toggleHighlight"
+    },
+    {
+        "key": "shift+alt+h",
+        "command": "textmarker.unhighlight"
     },
     {
         "key": "ctrl+alt+[",

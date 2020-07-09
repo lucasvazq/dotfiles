@@ -1,58 +1,9 @@
 ##############################################################################
-# HELP
+# Help
 ##############################################################################
-###### Reload
+##### Reload
 # i3-msg reload
 # i3-msg restart
-#
-##### Browsers
-# $mod+F1                       exec brave
-# $mod+Shift+F1                 exec google-chrome-stable
-#
-##### Editor
-# $mod+F2                       exec code
-#
-##### Folder Manager
-# $mod+F3                       exec pcmanfm
-# $mod+Shift+F3                 exec pcmanfm_pkexec
-#
-##### Keyboard layout
-# $mod+q                        us
-# $mod+w                        es
-#
-##### Terminal
-# $mod+Return                   exec alacritty
-#
-##### Audio
-# $mod+Ctrl+m                   exec pulseeffects
-#
-##### App menu
-# $mod+d                        exec rofi
-# $mod+Shift+d                  exec rofimoji
-# $mod+z                        exec morc_menu
-#
-##### Print
-# Print                         exec i3-scrot
-# $mod+Shift+Print              exec i3-scrot -s
-#
-##### Windows
-# ARROWS: Up(k), Dowm(j), Left(h), Right(l)
-# $mod+Shift+q                  kill container
-# $mod+f                        fullscreen mode for container
-# $mod+Shift+space              toggle container tiling/floating
-# $mod+space                    change focus between tiling/floating
-# $mod+Ctrl+space               toggle split mode between horizontal and vertical
-# $mod+<ARROWS>                 focus container up|down|left|right
-# $mod+Shift+<ARROWS>           move container up|down|left|right
-# $mod+Ctrl+<Right(l)>          desktop workspace next
-# $mod+Ctrl+<Left(h)>           desktop workspace prev
-# $mod+<NUMBERS 1-9>            switch to N desktop workspace
-# $mod+Ctrl+<NUMBERS 1-9>       move container to N desktop workspace
-# $mod+Shift+<NUMBERS 1-9>      move to N desktop workspace with actual container
-# $mod+r                        resize
-#
-##### Power
-# $mod+0                        system mode
 
 
 ##############################################################################
@@ -177,7 +128,7 @@ bindsym $mod+Ctrl+h workspace prev
 
 
 ##############################################################################
-# Desktop Workspaces
+# Desktop workspaces
 ##############################################################################
 
 
