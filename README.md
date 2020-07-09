@@ -22,9 +22,14 @@ I've improved it for Python hunting, while the command center is built with Vsco
 
 Run the following commands
 ```sh
-cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles # Positionate and download the repo
-./setup.sh # Start launch
-shutdown -r now # Restart the system
+# Positionate in the home folder and download the repo
+cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles
+
+# 🔥 Start launch 🔥
+./setup.sh
+
+# 🚨 Restart the system 🚨
+shutdown -r now
 ```
 
 After rebooting, there are other commands you should run on the fly
