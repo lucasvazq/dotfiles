@@ -79,7 +79,7 @@
     "indentRainbow.errorColor": "rgba(255, 255, 0, 0.15)",
     "indentRainbow.excludedLanguages": [
         "html",
-        "plaintext",
+        "plaintext"
     ],
     "indentRainbow.tabmixColor": "rgba(255, 0, 0, 0.15)",
     "python.languageServer": "Microsoft",
