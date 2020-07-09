@@ -22,7 +22,7 @@ I've improved it for Python hunting, while the command center is built with Vsco
 
 Run the following commands
 ```sh
-# Positionate in the home folder and download the repo
+# ⚙ Go to the home folder and clone the repo ⚙
 cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles
 
 # 🔥 Start launch 🔥
