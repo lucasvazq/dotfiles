@@ -74,7 +74,7 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "alt+;",
+        "key": "alt+l",
         "command": "cursorUp",
         "when": "textInputFocus"
     },
@@ -222,8 +222,7 @@
     },
     {
         "key": "alt+,",
-        "command": "workbench.action.focusActiveEditorGroup",
-        "when": "terminalFocus"
+        "command": "workbench.action.focusActiveEditorGroup"
     },
     {
         "key": "ctrl+k alt+j",
@@ -240,6 +239,10 @@
     {
         "key": "ctrl+k shift+alt+;",
         "command": "workbench.action.moveEditorToRightGroup"
+    },
+    {
+        "key": "ctrl+k alt+u",
+        "command": "workbench.action.keepEditor"
     },
     {
         "key": "alt+n",

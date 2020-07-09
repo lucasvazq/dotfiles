@@ -39,12 +39,14 @@ psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
 
 # Editor
 yay -S visual-studio-code-bin neovim gedit
-code --install-extension alefragnani.numbered-bookmarks
+code --install-extension alefragnani.bookmarks
 code --install-extension alefragnani.project-manager
 code --install-extension batisteo.vscode-django
+code --install-extension cdonohue.quill-icons
 code --install-extension christian-kohler.path-intellisense
 code --install-extension dlasagno.wal-theme
 code --install-extension iocave.customize-ui
+code --install-extension kaiwood.indentation-level-movement
 code --install-extension krnik.vscode-jumpy
 code --install-extension magicstack.magicpython
 code --install-extension mechatroner.rainbow-csv
@@ -53,8 +55,8 @@ code --install-extension ms-python.python
 code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension oderwat.indent-rainbow
-code --install-extension pkief.material-icon-theme
 code --install-extension ryu1kn.text-marker
+code --install-extension sirmspencer.vscode-autohide
 code --install-extension shd101wyy.markdown-preview-enhanced
 code --install-extension sourcery.sourcery
 code --install-extension usernamehw.errorlens
@@ -63,6 +65,7 @@ code --install-extension visualstudioexptteam.vscodeintellicode
 code --install-extension vsls-contrib.gistfs
 code --install-extension waderyan.gitblame
 code --install-extension wholroyd.jinja
+code --install-extension ybaumes.highlight-trailing-white-spaces
 
 # Browsers
 yay -S brave google-chrome-stable

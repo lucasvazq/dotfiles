@@ -9,12 +9,14 @@
 1.2 - [Insert](#insert)
 1.3 - [Delete](#delete)
 1.4 - [Jumpy](#jumpy)
-1.5 - [Groups](#groups)
-1.6 - [Problems](#problems)
-1.7 - [Suggestions](#suggestions)
-1.8 - [References](#references)
-1.9 - [Definitions](#definitions)
-1.10 - [Refactorization](#refactorization)
+1.5 - [Bookmarks](#bookmarks)
+1.6 - [Textmarker](#textmarker)
+1.7 - [Groups](#groups)
+1.8 - [Problems](#problems)
+1.9 - [Suggestions](#suggestions)
+1.10 - [References](#references)
+1.11 - [Definitions](#definitions)
+1.12 - [Refactorization](#refactorization)
 2 - [Lists](#lists)
 3 - [Search](#search)
 4 - [Terminal](#terminal)
@@ -48,12 +50,16 @@ cursorDown:                                         Alt+k
 cursorDownSelect:                                   Shift+k
 editor.action.insertCursorBelow:                    Shift+Alt+k
 editor.action.moveLinesDownAction:                  Ctrl+Alt+k
+indentation-level-movement.moveDown:                Ctrl+Shift+k
+indentation-level-movement.selectDown:              Ctrl+Shift+Alt+k
 
 # Up
 cursorUp:                                           Alt+l
 cursorUpSelect:                                     Shift+l
 editor.action.insertCursorAbove:                    Shift+Alt+l
 editor.action.moveLinesUpAction:                    Ctrl+Alt+l
+indentation-level-movement.moveUp:                  Ctrl+Shift+l
+indentation-level-movement.selectUp:                Ctrl+Shift+Alt+l
 
 # PageUp
 cursorPageUp:                                       Alt+[
@@ -105,13 +111,29 @@ extension.jumpy-enter:                              Alt+t
 extension.jumpy-exit:                               Alt+t
 ```
 
+### Bookmarks
+```yaml
+bookmarks.toggle:                                   Ctrl+q
+bookmarks.listFromAllFiles:                         Ctrl+Alt+q
+```
+
+### Textmarker
+```yaml
+textmarker.toggleHighlight:                         Alt+h
+textmarker.unhighlight:                             Shift+h
+```
+
 ### Groups
 ```yaml
+# Focus
+workbench.action.keepEditor:                        Ctrl+k Alt+u
+workbench.action.focusActiveEditorGroup:            Alt+,
 workbench.action.previousEditorInGroup:             Ctrl+Alt+[
 workbench.action.nextEditorInGroup:                 Ctrl+Alt+'
+
+# Move
 workbench.action.moveEditorLeftInGroup:             Ctrl+Shift+Alt+[
 workbench.action.moveEditorRightInGroup:            Ctrl+Shift+Alt+'
-workbench.action.focusActiveEditorGroup:            Alt+,
 workbench.action.moveActiveEditorGroupLeft:         Ctrl+k Alt+j
 workbench.action.moveEditorToLeftGroup:             Ctrl+k Shift+Alt+j
 workbench.action.moveActiveEditorGroupRight:        Ctrl+k Alt+;
