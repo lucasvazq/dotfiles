@@ -10,6 +10,10 @@
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 119,
     "editor.wrappingIndent": "same",
+    "emmet.includeLanguages": {
+        "django-html": "html",
+        "jinja": "html"
+    },
     "explorer.autoReveal": false,
     "files.exclude": {
         "**/**.pyc": true
@@ -76,11 +80,13 @@
         "rgba(0, 0, 0, 0)",
         "rgba(0, 0, 0, 0)"
     ],
-    "indentRainbow.errorColor": "rgba(255, 255, 0, 0.15)",
     "indentRainbow.excludedLanguages": [
+        "django-html",
         "html",
+        "jinja",
         "plaintext"
     ],
+    "indentRainbow.errorColor": "rgba(255, 255, 0, 0.15)",
     "indentRainbow.tabmixColor": "rgba(255, 0, 0, 0.15)",
     "python.languageServer": "Microsoft",
     "textmarker.autoSelectDistinctiveTextColor": true,
