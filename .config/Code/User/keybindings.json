@@ -179,24 +179,6 @@
         "when": "textInputFocus && !editorReadonly"
     },
     {
-        "key": "alt+o",
-        "command": "deleteRight",
-        "when": "textInputFocus"
-    },
-    {
-        "key": "ctrl+o",
-        "command": "deleteWordRight",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "shift+alt+o",
-        "command": "deleteWordEndRight"
-    },
-    {
-        "key": "ctrl+shift+alt+o",
-        "command": "deleteWordPartRight"
-    },
-    {
         "key": "alt+i",
         "command": "deleteLeft",
         "when": "textInputFocus"
@@ -213,6 +195,24 @@
     {
         "key": "ctrl+shift+alt+i",
         "command": "deleteWordPartLeft"
+    },
+    {
+        "key": "alt+o",
+        "command": "deleteRight",
+        "when": "textInputFocus"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "deleteWordRight",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+alt+o",
+        "command": "deleteWordEndRight"
+    },
+    {
+        "key": "ctrl+shift+alt+o",
+        "command": "deleteWordPartRight"
     },
     {
         "key": "alt+t",
@@ -242,6 +242,14 @@
         "command": "textmarker.unhighlight"
     },
     {
+        "key": "ctrl+k alt+u",
+        "command": "workbench.action.keepEditor"
+    },
+    {
+        "key": "alt+,",
+        "command": "workbench.action.focusActiveEditorGroup"
+    },
+    {
         "key": "ctrl+alt+[",
         "command": "workbench.action.previousEditorInGroup"
     },
@@ -256,10 +264,6 @@
     {
         "key": "ctrl+shift+alt+'",
         "command": "workbench.action.moveEditorRightInGroup"
-    },
-    {
-        "key": "alt+,",
-        "command": "workbench.action.focusActiveEditorGroup"
     },
     {
         "key": "ctrl+k alt+j",
@@ -278,8 +282,9 @@
         "command": "workbench.action.moveEditorToRightGroup"
     },
     {
-        "key": "ctrl+k alt+u",
-        "command": "workbench.action.keepEditor"
+        "key": "shift+alt+n",
+        "command": "editor.action.marker.prev",
+        "when": "editorFocus"
     },
     {
         "key": "alt+n",
@@ -287,18 +292,13 @@
         "when": "editorFocus"
     },
     {
-        "key": "shift+alt+n",
-        "command": "editor.action.marker.prev",
-        "when": "editorFocus"
+        "key": "alt+l",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
     {
         "key": "alt+k",
         "command": "selectNextSuggestion",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "key": "alt+l",
-        "command": "selectPrevSuggestion",
         "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
     },
     {
@@ -307,13 +307,13 @@
         "when": "suggestWidgetVisible && textInputFocus"
     },
     {
-        "key": "alt+q",
-        "command": "goToNextReference",
+        "key": "shift+alt+q",
+        "command": "goToPreviousReference",
         "when": "inReferenceSearchEditor || referenceSearchVisible"
     },
     {
-        "key": "shift+alt+q",
-        "command": "goToPreviousReference",
+        "key": "alt+q",
+        "command": "goToNextReference",
         "when": "inReferenceSearchEditor || referenceSearchVisible"
     },
     {
@@ -382,23 +382,23 @@
         "when": "listFocus && !inputFocus"
     },
     {
-        "key": "alt+w",
-        "command": "editor.action.nextMatchFindAction",
-        "when": "editorFocus"
-    },
-    {
         "key": "shift+alt+w",
         "command": "editor.action.previousMatchFindAction",
         "when": "editorFocus"
     },
     {
-        "key": "ctrl+alt+w",
-        "command": "editor.action.nextSelectionMatchFindAction",
+        "key": "alt+w",
+        "command": "editor.action.nextMatchFindAction",
         "when": "editorFocus"
     },
     {
         "key": "ctrl+shift+alt+w",
         "command": "editor.action.previousSelectionMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+alt+w",
+        "command": "editor.action.nextSelectionMatchFindAction",
         "when": "editorFocus"
     },
     {
@@ -412,13 +412,13 @@
         "when": "editorFocus && findWidgetVisible"
     },
     {
-        "key": "alt+w",
-        "command": "search.action.focusNextSearchResult",
+        "key": "shift+alt+w",
+        "command": "search.action.focusPreviousSearchResult",
         "when": "hasSearchResult || inSearchEditor"
     },
     {
-        "key": "shift+alt+w",
-        "command": "search.action.focusPreviousSearchResult",
+        "key": "alt+w",
+        "command": "search.action.focusNextSearchResult",
         "when": "hasSearchResult || inSearchEditor"
     },
     {
@@ -440,13 +440,13 @@
         "when": "listFocus && searchViewletVisible && !inputFocus"
     },
     {
-        "key": "alt+k",
-        "command": "history.showNext",
+        "key": "alt+l",
+        "command": "history.showPrevious",
         "when": "historyNavigationEnabled && historyNavigationWidget"
     },
     {
-        "key": "alt+l",
-        "command": "history.showPrevious",
+        "key": "alt+k",
+        "command": "history.showNext",
         "when": "historyNavigationEnabled && historyNavigationWidget"
     },
     {

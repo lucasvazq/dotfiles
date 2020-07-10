@@ -92,17 +92,17 @@ editor.action.insertLineAfter:                      Alt+u
 ```yaml
 editor.action.deleteLines:                          Ctrl+Shift+i
 
-# Right
-deleteRight:                                        Alt+o
-deleteWordRight:                                    Ctrl+o
-deleteWordEndRight:                                 Shift+Alt+o
-deleteWordPartRight:                                Ctrl+Shift+Alt+o
-
 # Left
 deleteLeft:                                         Alt+i
 deleteWordLeft:                                     Ctrl+i
 deleteWordEndLeft:                                  Shift+Alt+i
 deleteWordPartLeft:                                 Ctrl+Shift+Alt+i
+
+# Right
+deleteRight:                                        Alt+o
+deleteWordRight:                                    Ctrl+o
+deleteWordEndRight:                                 Shift+Alt+o
+deleteWordPartRight:                                Ctrl+Shift+Alt+o
 ```
 
 ### Jumpy
@@ -142,21 +142,21 @@ workbench.action.moveEditorToRightGroup:            Ctrl+k Shift+Alt+;
 
 ### Problems
 ```yaml
-editor.action.marker.next:                          Alt+n
 editor.action.marker.prev:                          Shift+Alt+n
+editor.action.marker.next:                          Alt+n
 ```
 
 ### Suggestions
 ```yaml
-selectNextSuggestion:                               Alt+k
 selectPrevSuggestion:                               Alt+l
+selectNextSuggestion:                               Alt+k
 acceptSelectedSuggestion:                           Alt+u
 ```
 
 ### References
 ```yaml
-goToNextReference:                                  Alt+q
 goToPreviousReference:                              Shift+Alt+q
+goToNextReference:                                  Alt+q
 closeReferenceSearch:                               Alt+p
 ```
 
@@ -192,16 +192,16 @@ list.select:                                        Alt+u
 ## Search
 ```yaml
 # Text editor search
-editor.action.nextMatchFindAction:                  Alt+w
 editor.action.previousMatchFindAction:              Shift+Alt+w
-editor.action.nextSelectionMatchFindAction:         Ctrl+Alt+w
+editor.action.nextMatchFindAction:                  Alt+w
 editor.action.previousSelectionMatchFindAction:     Ctrl+Shift+Alt+w
+editor.action.nextSelectionMatchFindAction:         Ctrl+Alt+w
 editor.action.replaceAll:                           Ctrl+Shift+Alt+1
 closeFindWidget:                                    Alt+p
 
 # File search
-search.action.focusNextSearchResult:                Alt+w
 search.action.focusPreviousSearchResult:            Shift+Alt+w
+search.action.focusNextSearchResult:                Alt+w
 search.action.expandSearchResults:                  Ctrl+k Ctrl+j
 search.action.collapseSearchResults:                Ctrl+k Ctrl+0
 search.action.focusQueryEditorWidget:               Alt+p
