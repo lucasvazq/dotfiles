@@ -64,6 +64,7 @@ code --install-extension alefragnani.project-manager
 code --install-extension batisteo.vscode-django
 code --install-extension cdonohue.quill-icons
 code --install-extension christian-kohler.path-intellisense
+code --install-extension chunsen.bracket-select
 code --install-extension dlasagno.wal-theme
 code --install-extension iocave.customize-ui
 code --install-extension kaiwood.indentation-level-movement

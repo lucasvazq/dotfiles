@@ -215,6 +215,7 @@ history.ShowPrevious:                               Alt+l
 workbench.action.search.toggleQueryDetails:         Ctrl+Shift+Alt+f
 toggleFindWholeWord:                                Alt+m
 toggleSearchWholeWord:                              Alt+m
+toggleFindInSelection:                              Alt+v
 ```
 
 ## Terminal

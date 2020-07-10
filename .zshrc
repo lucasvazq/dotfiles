@@ -54,6 +54,7 @@ fav() {
   # Set preferred color schema
   # Good themes:
   # - base16-materia
+  # - base16-materialer
   # - sexy-gnometerm
   # - sexy-theme2
   wal -q --theme sexy-gnometerm
