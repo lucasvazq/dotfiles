@@ -1,4 +1,5 @@
 {
+    "editor.find.seedSearchStringFromSelection": false,
     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans'",
     "editor.lineHeight": 17,
     "editor.rulers": [
@@ -45,6 +46,7 @@
         "#status\\.scm": "display: none",
         "#workbench\\.parts\\.editor .editor-actions": "display: none",
         "#workbench\\.parts\\.editor .scroll-decoration": "display: none",
+        "#workbench\\.parts\\.editor .split-view-view.visible:before": "display: none",
         "#workbench\\.parts\\.panel": "padding-bottom: 1rem; margin-bottom: -2rem; margin-top: -0.25rem",
         "#workbench\\.parts\\.panel .composite.title": "margin-top: -2px",
         "#workbench\\.parts\\.panel .title-actions": "display: none",

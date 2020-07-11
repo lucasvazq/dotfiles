@@ -189,10 +189,6 @@
         "when": "textInputFocus && !editorReadonly"
     },
     {
-        "key": "shift+alt+i",
-        "command": "deleteWordEndLeft"
-    },
-    {
         "key": "ctrl+shift+alt+i",
         "command": "deleteWordPartLeft"
     },
@@ -207,22 +203,8 @@
         "when": "textInputFocus && !editorReadonly"
     },
     {
-        "key": "shift+alt+o",
-        "command": "deleteWordEndRight"
-    },
-    {
         "key": "ctrl+shift+alt+o",
         "command": "deleteWordPartRight"
-    },
-    {
-        "key": "alt+t",
-        "command": "extension.jumpy-enter",
-        "when": "editorTextFocus && !jumpy.isInJumpMode"
-    },
-    {
-        "key": "alt+t",
-        "command": "extension.jumpy-exit",
-        "when": "editorTextFocus && jumpy.isInJumpMode"
     },
     {
         "key": "ctrl+q",
@@ -236,10 +218,6 @@
     {
         "key": "alt+h",
         "command": "textmarker.toggleHighlight"
-    },
-    {
-        "key": "shift+alt+h",
-        "command": "textmarker.unhighlight"
     },
     {
         "key": "ctrl+k alt+u",
@@ -257,6 +235,7 @@
         "key": "ctrl+alt+'",
         "command": "workbench.action.nextEditorInGroup"
     },
+
     {
         "key": "ctrl+shift+alt+[",
         "command": "workbench.action.moveEditorLeftInGroup"
@@ -266,20 +245,20 @@
         "command": "workbench.action.moveEditorRightInGroup"
     },
     {
-        "key": "ctrl+k alt+j",
-        "command": "workbench.action.moveActiveEditorGroupLeft"
-    },
-    {
         "key": "ctrl+k shift+alt+j",
         "command": "workbench.action.moveEditorToLeftGroup"
     },
     {
-        "key": "ctrl+k alt+;",
-        "command": "workbench.action.moveActiveEditorGroupRight"
-    },
-    {
         "key": "ctrl+k shift+alt+;",
         "command": "workbench.action.moveEditorToRightGroup"
+    },
+    {
+        "key": "ctrl+k alt+j",
+        "command": "workbench.action.moveActiveEditorGroupLeft"
+    },
+    {
+        "key": "ctrl+k alt+;",
+        "command": "workbench.action.moveActiveEditorGroupRight"
     },
     {
         "key": "shift+alt+n",
@@ -307,14 +286,14 @@
         "when": "suggestWidgetVisible && textInputFocus"
     },
     {
-        "key": "shift+alt+q",
-        "command": "goToPreviousReference",
-        "when": "inReferenceSearchEditor || referenceSearchVisible"
+        "key": "alt+p",
+        "command": "hideSuggestWidget",
+        "when": "suggestWidgetVisible && textInputFocus"
     },
     {
-        "key": "alt+q",
-        "command": "goToNextReference",
-        "when": "inReferenceSearchEditor || referenceSearchVisible"
+        "key": "shift+alt+q",
+        "command": "editor.action.goToReferences",
+        "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
     },
     {
         "key": "alt+p",
@@ -383,21 +362,11 @@
     },
     {
         "key": "shift+alt+w",
-        "command": "editor.action.previousMatchFindAction",
-        "when": "editorFocus"
-    },
-    {
-        "key": "alt+w",
-        "command": "editor.action.nextMatchFindAction",
-        "when": "editorFocus"
-    },
-    {
-        "key": "ctrl+shift+alt+w",
         "command": "editor.action.previousSelectionMatchFindAction",
         "when": "editorFocus"
     },
     {
-        "key": "ctrl+alt+w",
+        "key": "alt+w",
         "command": "editor.action.nextSelectionMatchFindAction",
         "when": "editorFocus"
     },
@@ -412,6 +381,10 @@
         "when": "editorFocus && findWidgetVisible"
     },
     {
+        "key": "ctrl+shift+alt+w",
+        "command": "search.action.focusSearchList"
+    },
+    {
         "key": "shift+alt+w",
         "command": "search.action.focusPreviousSearchResult",
         "when": "hasSearchResult || inSearchEditor"
@@ -424,15 +397,6 @@
     {
         "key": "ctrl+k ctrl+j",
         "command": "search.action.expandSearchResults"
-    },
-    {
-        "key": "ctrl+k ctrl+0",
-        "command": "search.action.collapseSearchResults"
-    },
-    {
-        "key": "alt+p",
-        "command": "search.action.focusQueryEditorWidget",
-        "when": "inSearchEditor"
     },
     {
         "key": "alt+p",

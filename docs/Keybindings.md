@@ -95,20 +95,12 @@ editor.action.deleteLines:                          Ctrl+Shift+i
 # Left
 deleteLeft:                                         Alt+i
 deleteWordLeft:                                     Ctrl+i
-deleteWordEndLeft:                                  Shift+Alt+i
 deleteWordPartLeft:                                 Ctrl+Shift+Alt+i
 
 # Right
 deleteRight:                                        Alt+o
 deleteWordRight:                                    Ctrl+o
-deleteWordEndRight:                                 Shift+Alt+o
 deleteWordPartRight:                                Ctrl+Shift+Alt+o
-```
-
-### Jumpy
-```yaml
-extension.jumpy-enter:                              Alt+t
-extension.jumpy-exit:                               Alt+t
 ```
 
 ### Bookmarks
@@ -120,7 +112,6 @@ bookmarks.listFromAllFiles:                         Ctrl+Alt+q
 ### Textmarker
 ```yaml
 textmarker.toggleHighlight:                         Alt+h
-textmarker.unhighlight:                             Shift+h
 ```
 
 ### Groups
@@ -131,13 +122,17 @@ workbench.action.focusActiveEditorGroup:            Alt+,
 workbench.action.previousEditorInGroup:             Ctrl+Alt+[
 workbench.action.nextEditorInGroup:                 Ctrl+Alt+'
 
-# Move
+# Move editor in the same group
 workbench.action.moveEditorLeftInGroup:             Ctrl+Shift+Alt+[
 workbench.action.moveEditorRightInGroup:            Ctrl+Shift+Alt+'
-workbench.action.moveActiveEditorGroupLeft:         Ctrl+k Alt+j
+
+# Move editor through the groups
 workbench.action.moveEditorToLeftGroup:             Ctrl+k Shift+Alt+j
-workbench.action.moveActiveEditorGroupRight:        Ctrl+k Alt+;
 workbench.action.moveEditorToRightGroup:            Ctrl+k Shift+Alt+;
+
+# Move group
+workbench.action.moveActiveEditorGroupLeft:         Ctrl+k Alt+j
+workbench.action.moveActiveEditorGroupRight:        Ctrl+k Alt+;
 ```
 
 ### Problems
@@ -151,12 +146,12 @@ editor.action.marker.next:                          Alt+n
 selectPrevSuggestion:                               Alt+l
 selectNextSuggestion:                               Alt+k
 acceptSelectedSuggestion:                           Alt+u
+hideSuggestWidget:                                  Alt+p
 ```
 
 ### References
 ```yaml
-goToPreviousReference:                              Shift+Alt+q
-goToNextReference:                                  Alt+q
+editor.action.goToReferences:                       Shift+Alt+q
 closeReferenceSearch:                               Alt+p
 ```
 
@@ -192,24 +187,21 @@ list.select:                                        Alt+u
 ## Search
 ```yaml
 # Text editor search
-editor.action.previousMatchFindAction:              Shift+Alt+w
-editor.action.nextMatchFindAction:                  Alt+w
-editor.action.previousSelectionMatchFindAction:     Ctrl+Shift+Alt+w
-editor.action.nextSelectionMatchFindAction:         Ctrl+Alt+w
+editor.action.previousSelectionMatchFindAction:     Shift+Alt+w
+editor.action.nextSelectionMatchFindAction:         Alt+w
 editor.action.replaceAll:                           Ctrl+Shift+Alt+1
 closeFindWidget:                                    Alt+p
 
 # File search
+search.action.focusSearchList:                      Ctrl+Shift+Alt+w
 search.action.focusPreviousSearchResult:            Shift+Alt+w
 search.action.focusNextSearchResult:                Alt+w
 search.action.expandSearchResults:                  Ctrl+k Ctrl+j
-search.action.collapseSearchResults:                Ctrl+k Ctrl+0
-search.action.focusQueryEditorWidget:               Alt+p
 search.action.cancel:                               Alt+p
 
 # History Navigation
-history.showNext:                                   Alt+k
 history.ShowPrevious:                               Alt+l
+history.showNext:                                   Alt+k
 
 # Miscellaneous
 workbench.action.search.toggleQueryDetails:         Ctrl+Shift+Alt+f
@@ -239,7 +231,6 @@ revealFileInOS:                                     Ctrl+k o
 
 # Edition
 renameFile:                                         Alt+y
-cancelRenameInput:                                  Alt+p
 filesExplorer.cancelCut:                            Alt+p
 ```
 
