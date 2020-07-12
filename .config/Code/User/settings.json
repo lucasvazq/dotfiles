@@ -91,7 +91,7 @@
     ],
     "indentRainbow.errorColor": "rgba(255, 255, 0, 0.15)",
     "indentRainbow.tabmixColor": "rgba(255, 0, 0, 0.15)",
-    "python.languageServer": "Microsoft",
+    "python.languageServer": "Pylance",
     "textmarker.autoSelectDistinctiveTextColor": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
 }

@@ -301,6 +301,10 @@
         "when": "inReferenceSearchEditor && !config.editor.stablePeek"
     },
     {
+        "key": "ctrl+alt+e",
+        "command": "editor.action.showDefinitionPreviewHover"
+    },
+    {
         "key": "alt+e",
         "command": "editor.action.revealDefinition",
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
@@ -309,6 +313,11 @@
         "key": "ctrl+e",
         "command": "editor.action.peekDefinition",
         "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    },
+    {
+        "key": "alt+p",
+        "command": "closeParameterHints",
+        "when": "editorFocus && parameterHintsVisible"
     },
     {
         "key": "alt+y",
@@ -361,6 +370,16 @@
         "when": "listFocus && !inputFocus"
     },
     {
+        "key": "alt+v",
+        "command": "toggleFindInSelection",
+        "when": "editorFocus"
+    },
+    {
+        "key": "shift+alt+v",
+        "command": "addCursorsAtSearchResults",
+        "when": "fileMatchOrMatchFocus && searchViewletVisible"
+    },
+    {
         "key": "shift+alt+w",
         "command": "editor.action.previousSelectionMatchFindAction",
         "when": "editorFocus"
@@ -379,6 +398,26 @@
         "key": "alt+p",
         "command": "closeFindWidget",
         "when": "editorFocus && findWidgetVisible"
+    },
+    {
+        "key": "ctrl+shift+alt+1",
+        "command": "search.action.replaceAll",
+        "when": "replaceActive && searchViewletVisible && !findWidgetVisible"
+    },
+    {
+        "key": "ctrl+alt+k",
+        "command": "search.focus.previousInputBox",
+        "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible && !searchInputBoxFocus"
+    },
+    {
+        "key": "ctrl+alt+l",
+        "command": "search.focus.nextInputBox",
+        "when": "inSearchEditor && inputBoxFocus || inputBoxFocus && searchViewletVisible"
+    },
+    {
+        "key": "ctrl+shift+alt+f",
+        "command": "workbench.action.search.toggleQueryDetails",
+        "when": "inSearchEditor || searchViewletFocus"
     },
     {
         "key": "ctrl+shift+alt+w",
@@ -414,11 +453,6 @@
         "when": "historyNavigationEnabled && historyNavigationWidget"
     },
     {
-        "key": "ctrl+shift+alt+f",
-        "command": "workbench.action.search.toggleQueryDetails",
-        "when": "inSearchEditor || searchViewletFocus"
-    },
-    {
         "key": "alt+m",
         "command": "toggleFindWholeWord",
         "when": "editorFocus"
@@ -427,11 +461,6 @@
         "key": "alt+m",
         "command": "toggleSearchWholeWord",
         "when": "searchViewletFocus"
-    },
-    {
-        "key": "alt+v",
-        "command": "toggleFindInSelection",
-        "when": "editorFocus"
     },
     {
         "key": "alt+.",
@@ -444,6 +473,10 @@
     {
         "key": "ctrl+shift+alt+.",
         "command": "workbench.action.toggleMaximizedPanel"
+    },
+    {
+        "key": "ctrl+shift+b",
+        "command": "workbench.action.toggleSidebarVisibility"
     },
     {
         "key": "ctrl+k 0",

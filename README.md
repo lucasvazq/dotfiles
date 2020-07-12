@@ -67,3 +67,10 @@ Considering the words above, there are a couple of things to know to approach th
 [python_100_days]: https://github.com/jackfrued/Python-100-Days
 
 - In `~/.zshrc` there is a function called **cleanworkspaces** which calls two functions that are located in `.jrc` and`.hrc`. These functions are intended to clear all the virtual env and env variables related to their workspaces. In other words, the function found in `.jrc` should remove all non-default variables and virtual envs that are activated with some function that the user runs when working with a particular repository located in `~/Workspaces/J/`. In conclusion, when **cleanworkspaces** is called, all environment variables and virtual spaces are cleaned, and the benefit we can obtan from this is when the use of this function is automated for when we want to change the environment in which we are developing.
+
+### Command center
+
+Using this ship is difficult because the steering wheel has been very tunned.
+I leave at hand a document that helps to know the customized keyboard shortcuts and that also lists all the useful functions that are in the terminal.
+
+[Command center](./docs/command_center.md)
