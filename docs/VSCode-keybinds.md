@@ -1,4 +1,4 @@
-# VSCode Keybindings
+# VSCode Keybinds
 
 ## Index
 

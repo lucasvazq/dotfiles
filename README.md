@@ -70,60 +70,6 @@ Considering the words above, there are a couple of things to know to approach th
 
 ### Command center manager
 
-**Windows Manager**
-```txt
-Keybinds ($mod = Windows|Super|Mod4 key)
-
-# Browser
-$mod+F1                     Open Brave
-$mod+Shift+F1               Open Google chrome
-
-# Editor
-$mod+F2                     Open VSCode
-
-# Folder Manager
-$mod+F3                     Open file browser
-$mod+Shift+F3               Open file browser in root mode
-
-# Keyboard layout
-$mod+q                      Change keyboard to US style 🇺🇸
-$mod+w                      Change keyboard to ES style 🇪🇦
-
-# Terminal
-$mod+Return                 Open terminal
-
-# Audio
-$mod+Ctrl+m                 Open audio effects
-
-# App menu
-$mod+d                      Open run menu
-$mod+Shift+d                Open emoji menu
-$mod+z                      Open apps menu
-
-# Screenshot
-Print                       Full screen screenshot
-$mod+Shift+Print            Selectable area screenshot
-
-# Windows Management
-ARROWS: Up(k), Dowm(j), Left(h), Right(l)
-$mod+Shift+q                Kill actual window
-$mod+f                      Fullscreen mode for a window
-$mod+Shift+<ARROWS>         Move window up|down|left|right
-$mod+r                      Resize window
-$mod+Shift+space            Toggle windows mode between tiling/floating
-$mod+space                  Change focus between tiling/floating windows
-$mod+Ctrl+space             Toggle split mode between horizontal and vertical
-$mod+<ARROWS>               Focus window up|down|left|right
-$mod+Ctrl+<Right(l)>        Next desktop workspace
-$mod+Ctrl+<Left(h)>         Prev desktop workspace
-$mod+<NUMBERS 1-9>          Switch to N desktop workspace
-$mod+Ctrl+<NUMBERS 1-9>     Move window to desktop workspace N
-$mod+Shift+<NUMBERS 1-9>    Move to N desktop workspace with actual container
-
-# System mode
-$mod+0                      Select ship mode
-```
-
 **Terminal commands**
 ```txt
 # Weird things

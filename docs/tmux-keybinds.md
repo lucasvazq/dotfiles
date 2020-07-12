@@ -1,4 +1,4 @@
-# tmux Keybindings
+# tmux Keybinds
 
 ## Index
 
