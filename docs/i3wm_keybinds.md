@@ -12,8 +12,8 @@
 ```yaml
 $mod:                                               Windows|Super|Mod4 key
 $alt:                                               Alt|Mod1 key
-DIRECTION:                                          Left(j), Right(;), Down(k), Up(l)
-NUMBER:                                             1-9
+<D>:                                                Left(j), Right(;), Down(k), Up(l)
+<N>:                                                1-9
 ```
 
 ## Apps
@@ -50,10 +50,10 @@ i3-scrot -s:                                        $mod+Shift+Print
 
 # Focus
 focus mode_toggle:                                  $mod+space
-focus <DIRECTION>:                                  $mod+<DIRECTION>
+focus <D>:                                          $mod+<D>
 
 # Move
-move <DIRECTION>:                                   $mod+Shift+<DIRECTION>
+move <D>:                                           $mod+Shift+<D>
 
 # Screen mode
 floating_modifier:                                  $mod
@@ -64,8 +64,8 @@ fullscreen toggle:                                  $mod+f
 # Workspaces
 workspace prev:                                     $mod+Ctrl+j
 workspace next:                                     $mod+Ctrl+;
-workspace <NUMBER>:                                 $mod+<NUMBER>
-move container to workspace <NUMBER>:               $mod+Ctrl+<NUMBER>
+workspace <N>:                                      $mod+<N>
+move container to workspace <N>; workspace <N>:     $mod+Shift+<N>
 
 # Others
 $resize:                                            $mod+r
