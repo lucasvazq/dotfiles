@@ -1,5 +1,5 @@
 #!/bin/sh
-# In this script, scripts are executed that require some time to wait before being invoked.
+# In this script, we run startup programs that require timeouts before starts.
 
 
 sleep 10

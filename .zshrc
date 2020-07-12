@@ -10,14 +10,14 @@ if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
 
   tmux
 else
-  # Add wal color schema to main terminal
+  # Add wal color schema to the main terminal
   cat ~/.cache/wal/sequences
 fi
 
 # Custom programs path
 source ~/Programs/.programsrc
 
-# Zsh config
+# zsh config
 export ZSH=~/.oh-my-zsh
 ZSH_THEME=custom
 plugins=(git virtualenv shrink-path)
@@ -25,17 +25,18 @@ source $ZSH/oh-my-zsh.sh
 
 
 # ============================================================================
-# Weird things
+# Weird zone
 # ============================================================================
 
 
 bk() {
-  # Change background and color schema, and run neo function
-  # The color schema is setted using the selected background
-  # 
+  # Change background and color scheme, and run neo function
+  #
+  # The color scheme is set using the selected background
+  #
   # Args:
-  #   $1 (optional): wallpaper path
-  # 
+  #   $1 (optional): Wallpaper path
+  #
   # Without args:
   #   Select a random wallpaper
   sh change-background >> /dev/null $1
@@ -53,14 +54,15 @@ fav() {
   # Set preferred color schema
   # Good themes:
   # - base16-materia
+  # - base16-materialer
   # - sexy-gnometerm
   # - sexy-theme2
   wal -q --theme sexy-gnometerm
 }
 
 lolban() {
-  # Print rainbow message with special ascii font
-  # 
+  # Print a rainbow message with special ASCII font
+  #
   # Args:
   #   $1: Message
   if [ ! -z "$1" ]; then
@@ -78,14 +80,14 @@ cow() {
 }
 
 neo() {
-  # Run custom neofetch config
+  # Run a custom neofetch config
 
   # If Ctrl+C is pressed, we clear the screen
   trap clear INT
 
   neofetch
 
-  # Return as success after press Ctrl+C
+  # Return as a success after press Ctrl+C
   return 0
 }
 
@@ -99,8 +101,8 @@ neo() {
 alias ed=code
 
 open () {
-  # Open link in default browser
-  # 
+  # Open a link in the default browser
+  #
   # Args:
   #   $1: Link
   if [ ! -z "$1" ]; then
@@ -112,24 +114,23 @@ open () {
 
 cud() {
   # Interact with the current datetime
-  # You can change the datetime using UTC timezone passing, in the follow
-  # order, year, month, days, hours and/or minutes.
-  # All of these args are optional, and you can pass year without passing month
-  # using the next format: "cud 2020", set the actual year to 2020, keeping all
-  # other values.
-  # Also, you can pass month ignoring year using asterisk (*). E.g. "cud * 12",
-  # set the actual month to December, keeping all other values.
-  # Other example: "cud * * * 15 12" set the time to UTC 3:12 p.m. maintaining
-  # the actual year, month and day.
-  # If not arguments passed, it's set the time to auto
-  # 
+  #
+  # You can change the datetime using UTC timezone, passing, in the following order, year, month, days, hours, and/or
+  # minutes.
+  # All of these args are optional, and you can pass a year without passing month using the next format: "cud 2020".
+  # This set the actual year to 2020, keeping all other values.
+  # Also, you can pass month ignoring year using an asterisk (*). E.g. "cud * 12". This set the month to December,
+  # keeping all other values.
+  # Another example: "cud * * * 15 12" set the time to UTC 3:12 p.m. maintaining the year, month and day.
+  # If no arguments are passed, the time is set automatically.
+  #
   # Args:
   #   $1 (optional): Year
   #   $2 (optional): Month
   #   $3 (optional): Day
-  #   $4 (optional): Hours
-  #   $5 (optional): Minutes
-  # 
+  #   $4 (optional): Hour
+  #   $5 (optional): Minute
+  #
   # Without Args:
   #   Set the time to auto
   if [ ! -z "$1" ]; then
@@ -200,8 +201,8 @@ cud() {
 }
 
 wgc() {
-  # Clone git repository in the appropiated workspace
-  # 
+  # Clone git repository in the appropriated workspace
+  #
   # Args:
   #   $1: "h" | "j": Clone for H or J workspace
   #   $2: Repo
@@ -228,7 +229,7 @@ wgc() {
 
 pk() {
   # Terminate all processes related to a port
-  # 
+  #
   # Args:
   #   $1: Port
   if [ ! -z "$1" ]; then
@@ -250,7 +251,7 @@ pk() {
 
 drs() {
   # Run Django server in localhost
-  # 
+  #
   # Args:
   #   $1 (optional): Port
   if [ ! -z "$1" ]; then
@@ -262,9 +263,9 @@ drs() {
 
 hl() {
   # Run Heroku server in localhost
-  # 
+  #
   # Args:
-  #   $1 (optional) - Port
+  #   $1 (optional): Port
   if [ ! -z "$1" ]; then
     heroku local -p $1
   else
@@ -274,7 +275,7 @@ hl() {
 
 ds() {
   # Open Django extended shell
-  # 
+  #
   # Args:
   #   $1 (optional): DB schema
   if [ ! -z "$1" ]; then
@@ -285,8 +286,8 @@ ds() {
 }
 
 hrs() {
-  # Open Django shell in a remote Heroku App
-  # 
+  # Open Django shell in a Heroku App
+  #
   # Args:
   #   $1: Heroku App
   #   $2 (optional): DB schema
@@ -303,7 +304,7 @@ hrs() {
 
 hrq() {
   # Run PostgreSQL CLI in a Heroku App
-  # 
+  #
   # Args:
   #   $1: Heroku App
   if [ ! -z "$1" ]; then
@@ -324,10 +325,10 @@ export WORKON_HOME=~/.Envs/Python
 source ~/.local/bin/virtualenvwrapper.sh
 
 pyc() {
-  # Create Python environment
-  # 
+  # Create a python environment
+  #
   # Args:
-  #   $1: Python source
+  #   $1: Python interpreter source
   #   $2: Env name
   if [ ! -z "$1" ]; then
     if [ ! -z "$2" ]; then
@@ -342,8 +343,8 @@ pyc() {
 }
 
 pya() {
-  # Activate Python environment
-  # 
+  # Activate a python environment
+  #
   # Args:
   #   $1: Env name
   if [ ! -z "$1" ]; then
@@ -354,13 +355,13 @@ pya() {
 }
 
 pyl() {
-  # List all Python environments
+  # List all python environments
   lsvirtualenv
 }
 
 pyr() {
-  # Remove Python environment
-  # 
+  # Remove a python environment
+  #
   # Args:
   #   $1: Env name
   if [ ! -z "$1" ]; then
@@ -371,7 +372,7 @@ pyr() {
 }
 
 pyd() {
-  # Deactivate Python environment
+  # Deactivate the present python environment if any
   if [[ $(python -c 'import os; print(1 if os.getenv("VIRTUAL_ENV") else 0)') == "1" ]]; then
     deactivate
   fi
@@ -390,8 +391,8 @@ source ~/Workspaces/.jrc
 
 cleanworkspaces() {
   # Clean all workspaces
-  # It's mean all env vars and virtual envs setted by the workspaces are
-  # removed
+  #
+  # It's mean all env vars and virtual envs set by the workspaces are removed
   wh_cleanall
   wj_cleanall
 }

@@ -1,10 +1,10 @@
 #!/bin/bash
-# Setup the dotfiles
+# Setup dotfiles
 
 
-##############################################################################
+###############################################################################
 # Basic config
-##############################################################################
+###############################################################################
 
 
 # Config yay
@@ -17,7 +17,7 @@ yay -Syu
 timedatectl set-ntp true
 
 # Make useful dirs
-mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J}
+mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J,Workspaces/.workspaces}
 
 # Clean unused apps, folders and files
 yay -S trash-cli
@@ -27,34 +27,20 @@ trash ~/.config/hexchat
 trash ~/.config/compton.conf
 
 
-##############################################################################
+###############################################################################
 # Install apps
-##############################################################################
+###############################################################################
 
 
-# PostgreSQL
-yay -S postgresql
-sudo systemctl enable postgresql.service
-psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
+# Launcher
+yay -S rofi rofimoji
 
-# Editor
-yay -S visual-studio-code-bin neovim gedit
-code --install-extension batisteo.vscode-django
-code --install-extension christian-kohler.path-intellisense
-code --install-extension dlasagno.wal-theme
-code --install-extension iocave.customize-ui
-code --install-extension magicstack.magicpython
-code --install-extension mrorz.language-gettext
-code --install-extension ms-python.python
-code --install-extension ms-vsliveshare.vsliveshare
-code --install-extension msjsdiag.debugger-for-chrome
-code --install-extension pkief.material-icon-theme
-code --install-extension shd101wyy.markdown-preview-enhanced
-code --install-extension usernamehw.highlight-logical-line
-code --install-extension visualstudioexptteam.vscodeintellicode
-code --install-extension vsls-contrib.gistfs
-code --install-extension waderyan.gitblame
-code --install-extension wholroyd.jinja
+# Status bar
+polybar
+
+# Audio
+install_pulse # Run pulseaudio builtin installer
+yay -S pulseeffects
 
 # Browsers
 yay -S brave google-chrome-stable
@@ -71,20 +57,45 @@ sudo mv ~/shell-color-scripts/colorscripts /opt/shell-color-scripts
 sudo mv ~/shell-color-scripts/colorscript.sh /usr/bin/colorscript
 trash -rf ~/shell-color-scripts
 
-# Desktop manager
-yay -S rofi rofimoji polybar
+# Code editors
+yay -S visual-studio-code-bin neovim gedit
+code --install-extension alefragnani.bookmarks
+code --install-extension alefragnani.project-manager
+code --install-extension batisteo.vscode-django
+code --install-extension cdonohue.quill-icons
+code --install-extension christian-kohler.path-intellisense
+code --install-extension chunsen.bracket-select
+code --install-extension dlasagno.wal-theme
+code --install-extension iocave.customize-ui
+code --install-extension kaiwood.indentation-level-movement
+code --install-extension krnik.vscode-jumpy
+code --install-extension magicstack.magicpython
+code --install-extension mechatroner.rainbow-csv
+code --install-extension mrorz.language-gettext
+code --install-extension ms-python.python
+code --install-extension ms-python.vscode-pylance
+code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension msjsdiag.debugger-for-chrome
+code --install-extension oderwat.indent-rainbow
+code --install-extension ryu1kn.text-marker
+code --install-extension sirmspencer.vscode-autohide
+code --install-extension shd101wyy.markdown-preview-enhanced
+code --install-extension sourcery.sourcery
+code --install-extension usernamehw.errorlens
+code --install-extension usernamehw.highlight-logical-line
+code --install-extension visualstudioexptteam.vscodeintellicode
+code --install-extension vsls-contrib.gistfs
+code --install-extension waderyan.gitblame
+code --install-extension wholroyd.jinja
+code --install-extension ybaumes.highlight-trailing-white-spaces
+
+# Image editors
+yay -S inkscape pinta
 
 # Others
 yay -S mplayer unzip zip numlockx unclutter perl-anyevent-i3
 
-# Edition
-yay -S inkscape pinta
-
-# Audio
-install_pulse # Run pulseaudio builtin installer
-yay -S pulseeffects
-
-# Git setup
+# Git
 yay -S github-cli diff-so-fancy
 git config --global pull.rebase false
 git config --global core.excludesfile ~/.config/git/.gitignore
@@ -104,6 +115,11 @@ git config --global color.diff.whitespace "red reverse"
 # Python
 pip install pipenv virtualenvwrapper ipython pywal --user
 
+# PostgreSQL
+yay -S postgresql
+sudo systemctl enable postgresql.service
+psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
+
 # Fonts
 yay -S noto-fonts-emoji
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
@@ -112,15 +128,15 @@ trash JetBrainsMono.zip
 fc-cache ~/.local/share/fonts
 
 
-##############################################################################
-# Paste and configure dotfiles
-##############################################################################
+###############################################################################
+# Paste and setup dotfiles
+###############################################################################
 
 
 # Paste dotfiles and clean directory
 mv ./* ~/
 cd ..
-trash dotfiles .github .git CODE_OF_CONDUCT.md CONTRIBUTING.md LICENCE README.md screenshot.png SECURITY.md setup.sh
+trash dotfiles .github .git CODE_OF_CONDUCT.md CONTRIBUTING.md LICENCE README.md docs screenshot.png SECURITY.md setup.sh
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background

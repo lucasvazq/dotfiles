@@ -49,7 +49,7 @@ modules-center = cpu cpu-temperature-1 cpu-temperature-2 separator gpu-temperatu
 modules-right = date separator audio-config volume separator wifi
 
 
-; Desktop Workspaces
+; Desktop workspaces
 [module/i3]
 type = internal/i3
 strip-wsnumbers = true
@@ -112,7 +112,7 @@ label-unmounted = " DISK: %mountpoint%: not mounted "
 ; Temperatures
 ; Useful command:
 ; - sensors
-; To get Thermal zones run:
+; To get thermal zones run:
 ; - for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
 ; To get temperature sysfs path run:
 ; - for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
@@ -184,7 +184,7 @@ label-muted = " VOL: MUTE "
 
 
 ; Networks
-; To list run:
+; To list them run:
 ; - nmcli device status
 ; - nmcli connection show
 [module/wifi]
