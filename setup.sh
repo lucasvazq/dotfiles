@@ -2,9 +2,9 @@
 # Setup dotfiles
 
 
-##############################################################################
+###############################################################################
 # Basic config
-##############################################################################
+###############################################################################
 
 
 # Config yay
@@ -27,9 +27,9 @@ trash ~/.config/hexchat
 trash ~/.config/compton.conf
 
 
-##############################################################################
+###############################################################################
 # Install apps
-##############################################################################
+###############################################################################
 
 
 # Launcher
@@ -73,6 +73,7 @@ code --install-extension magicstack.magicpython
 code --install-extension mechatroner.rainbow-csv
 code --install-extension mrorz.language-gettext
 code --install-extension ms-python.python
+code --install-extension ms-python.vscode-pylance
 code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension oderwat.indent-rainbow
@@ -127,9 +128,9 @@ trash JetBrainsMono.zip
 fc-cache ~/.local/share/fonts
 
 
-##############################################################################
+###############################################################################
 # Paste and setup dotfiles
-##############################################################################
+###############################################################################
 
 
 # Paste dotfiles and clean directory

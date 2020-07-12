@@ -1,6 +1,4 @@
-# VSCode Keyboard layout
-
-![Keybindings](./keybindings.png)
+# VSCode Keybindings
 
 ## Index
 
@@ -42,7 +40,7 @@ cursorRight:                                        Alt+;
 cursorRightSelect:                                  Shift+Alt+;
 cursorWordStartRight:                               Ctrl+Alt+;
 cursorWordStartRightSelect:                         Ctrl+Shift+;
-cursorWordPartRight:                                Shift+Shift+;
+cursorWordPartRight:                                Shift+Alt+;
 cursorWordPartRightSelect:                          Ctrl+Shift+Alt+;
 
 # Down
@@ -157,8 +155,10 @@ closeReferenceSearch:                               Alt+p
 
 ### Definitions
 ```yaml
+editor.action.showDefinitionPreviewHover            Ctrl+Alt+e
 editor.action.revealDefinition:                     Alt+e
 editor.action.peekDefinition:                       Ctrl+e
+closeParameterHints:                                Alt+p
 ```
 
 ### Refactorization
@@ -187,12 +187,18 @@ list.select:                                        Alt+u
 ## Search
 ```yaml
 # Text editor search
+toggleFindInSelection:                              Alt+v
+addCursorsAtSearchResults:                          Shift+Alt+v
 editor.action.previousSelectionMatchFindAction:     Shift+Alt+w
 editor.action.nextSelectionMatchFindAction:         Alt+w
 editor.action.replaceAll:                           Ctrl+Shift+Alt+1
 closeFindWidget:                                    Alt+p
 
 # File search
+search.action.replaceAll:                           Ctrl+Shift+Alt+1
+search.focus.previousInputBox:                      Ctrl+Alt+k
+search.focus.nextInputBox:                          Ctrl+Alt+l
+workbench.action.search.toggleQueryDetails:         Ctrl+Shift+Alt+f
 search.action.focusSearchList:                      Ctrl+Shift+Alt+w
 search.action.focusPreviousSearchResult:            Shift+Alt+w
 search.action.focusNextSearchResult:                Alt+w
@@ -203,11 +209,9 @@ search.action.cancel:                               Alt+p
 history.ShowPrevious:                               Alt+l
 history.showNext:                                   Alt+k
 
-# Miscellaneous
-workbench.action.search.toggleQueryDetails:         Ctrl+Shift+Alt+f
+# Options
 toggleFindWholeWord:                                Alt+m
 toggleSearchWholeWord:                              Alt+m
-toggleFindInSelection:                              Alt+v
 ```
 
 ## Terminal
@@ -222,6 +226,11 @@ workbench.action.toggleMaximizedPanel:              Ctrl+Shift+Alt+.
 ```
 
 ## Files
+
+### Sidebar
+```yaml
+workbench.action.toggleSidebarVisibility:           Ctrl+Shift+B
+```
 
 ### OS
 ```yaml
