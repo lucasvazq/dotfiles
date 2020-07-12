@@ -1,9 +1,9 @@
-![Super-Linter](https://github.com/lucasvazq/dotfiles/workflows/Super-Linter/badge.svg?branch=master)
-
 <span align="center">
 
 # Minimalistic i3 Starship dotfiles
 </span>
+
+![Super-Linter](https://github.com/lucasvazq/dotfiles/workflows/Super-Linter/badge.svg?branch=master)
 
 <p align="center">
 
