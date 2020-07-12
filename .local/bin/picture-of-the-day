@@ -25,7 +25,7 @@ def main() -> NoReturn:
 
         # Download and save the picture of the day
         image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
-        image_path = image_match.groups()[0]
+        image_path = image_match.groupdict()['image']
         image = requests.get(f"{nasa_base_url}/{image_path}")
         image_name = image_path.split("/")[-1]
         destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
