@@ -11,7 +11,7 @@ The keyboard shortcuts were configured so that it can be used when possible.
 ![Keyboard layout](./keyboard_layout.png)
 
 - [i3wm keybinds](./i3wm_keybinds.md)
-- [VSCode keybinds](./vscode_keybinds.md)
+- [VSCode keybinds](./VSCode_keybinds.md)
 - [tmux keybinds](./tmux_keybinds.md)
 
 ## Terminal functions
