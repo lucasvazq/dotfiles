@@ -4,10 +4,9 @@
 
 1) [Prefix](#prefix)
 2) [copy-mode-vi](#copy-mode-vi)
-
-    2.1) [Cursor](#cursor)
-    2.2) [Search](#search)
-    2.3) [Copy](#copy)
+    - 1 [Cursor](#cursor)
+    - 2 [Search](#search)
+    - 3 [Copy](#copy)
 
 ## Prefix
 ```yaml
