@@ -1,17 +1,15 @@
-# Github Super-linter
+# Github Super-linter for master branch
 
 
-name: Super-Linter
+name: Super-Linter [master]
 
 on:
   push:
     branches:
       - master
-      - develop
   pull_request:
     branches:
       - master
-      - develop
 
 jobs:
   super-linter:
@@ -24,5 +22,3 @@ jobs:
 
       - name: Lint
         uses: github/super-linter@v2.1.0
-        env:
-          VALIDATE_ALL_CODEBASE: false
