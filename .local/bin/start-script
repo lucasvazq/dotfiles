@@ -2,26 +2,14 @@
 # In this script, we run startup programs that require timeouts before starts.
 
 
-sleep 10
-
-
-# Run pulseaudio
+# restart pulseaudio
 pkill pulseaudio &
-# sleep 5
-# pulseaudio &
+pulseaudio &
 
-# Wait a few seconds for pulseaudio to start before executing the rest of the scripts
-sleep 10
-
-# Run pulseeffects and volumeicon that depends of pulseaudio
+# Run pulseeffects, volumeicon and polybar that depends of pulseaudio
 pulseeffects --gapplication-service &
 volumeicon &
-
-# Polybar has a volume module that's depend of pulseaudio
-pulseaudio &
-sleep 1
 polybar custom &
-
 
 # Run picture-of-the-day script thats run polybar.
 picture-of-the-day
