@@ -1,0 +1,54 @@
+# Github Super-linter for develop branch
+
+
+name: Super-Linter [develop]
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  super-linter:
+    name: Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Lint
+        uses: github/super-linter@v2.1.0
+        env:
+          VALIDATE_ALL_CODEBASE: false
+
+      # Shellcheck
+
+      - name: shellcheck for .zshrc
+        uses: reviewdog/action-shellcheck@v1.0.0
+        with:
+          # .zshrc includes Programs/.programsrc, Workspaces/.hrc and Workspaces/.jrc
+          pattern: ".zshrc"
+
+      - name: shellcheck for .profile
+        uses: reviewdog/action-shellcheck@v1.0.0
+        with:
+          pattern: ".profile"
+
+      - name: shellcheck for .local/bin/change-brackground
+        uses: reviewdog/action-shellcheck@v1.0.0
+        with:
+          pattern: "change-background"
+
+      - name: shellcheck for .local/bin/sleep-monitor
+        uses: reviewdog/action-shellcheck@v1.0.0
+        with:
+          pattern: "sleep-monitor"
+
+      - name: shellcheck for .local/bin/start-script
+        uses: reviewdog/action-shellcheck@v1.0.0
+        with:
+          pattern: "start-script"

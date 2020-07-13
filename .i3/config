@@ -1,67 +1,21 @@
-##############################################################################
-# HELP
-##############################################################################
-###### Reload
+###############################################################################
+# Help
+###############################################################################
+##### Reload
 # i3-msg reload
 # i3-msg restart
-#
-##### Browsers
-# $mod+F1                       exec brave
-# $mod+Shift+F1                 exec google-chrome-stable
-#
-##### Editor
-# $mod+F2                       exec code
-#
-##### Folder Manager
-# $mod+F3                       exec pcmanfm
-# $mod+Shift+F3                 exec pcmanfm_pkexec
-#
-##### Keyboard layout
-# $mod+q                        us
-# $mod+w                        es
-#
-##### Terminal
-# $mod+Return                   exec alacritty
-#
-##### Audio
-# $mod+Ctrl+m                   exec pulseeffects
-#
-##### App menu
-# $mod+d                        exec rofi
-# $mod+Shift+d                  exec rofimoji
-# $mod+z                        exec morc_menu
-#
-##### Print
-# Print                         exec i3-scrot
-# $mod+Shift+Print              exec i3-scrot -s
-#
-##### Windows
-# ARROWS: Up(k), Dowm(j), Left(h), Right(l)
-# $mod+Shift+q                  kill container
-# $mod+f                        fullscreen mode for container
-# $mod+Shift+space              toggle container tiling/floating
-# $mod+space                    change focus between tiling/floating
-# $mod+Ctrl+space               toggle split mode between horizontal and vertical
-# $mod+<ARROWS>                 focus container up|down|left|right
-# $mod+Shift+<ARROWS>           move container up|down|left|right
-# $mod+Ctrl+<Right(l)>          desktop workspace next
-# $mod+Ctrl+<Left(h)>           desktop workspace prev
-# $mod+<NUMBERS 1-9>            switch to N desktop workspace
-# $mod+Ctrl+<NUMBERS 1-9>       move container to N desktop workspace
-# $mod+Shift+<NUMBERS 1-9>      move to N desktop workspace with actual container
-# $mod+r                        resize
-#
-##### Power
-# $mod+0                        system mode
 
 
-##############################################################################
+###############################################################################
 # Default config
-##############################################################################
+###############################################################################
 
 
-# Set mod key. Mod4=<Super>
+# Set mod key to Super key
 set $mod Mod4
+
+# Abbreviation for Alt key
+set $alt Mod1
 
 # Font for window titles
 font xft:JetBrainsMono Nerd Font Mono 10
@@ -72,15 +26,17 @@ default_floating_border normal
 hide_edge_borders none
 
 
-##############################################################################
-# Autostart applications
-##############################################################################
+###############################################################################
+# Apps
+###############################################################################
 
 
+##### Autostart
 exec --no-startup-id start-script
 exec --no-startup-id sleep-monitor
 exec --no-startup-id numlockx
 exec --no-startup-id fix_xcursor
+exec --no-startup-id unclutter
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
@@ -89,73 +45,46 @@ exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.js
 exec --no-startup-id i3-msg 'workspace 3:Terminal; append_layout ~/.i3/workspace-Terminal.json; exec alacritty'
 exec --no-startup-id i3-msg 'workspace 1:Web'
 
-
-##############################################################################
-# Apps
-##############################################################################
-
-
-bindsym $mod+F1 exec brave
-bindsym $mod+Shift+F1 exec google-chrome-stable
-bindsym $mod+F2 exec code
-bindsym $mod+F3 exec pcmanfm
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
+#### Keybinds
+bindsym $alt+1 exec brave
+bindsym $alt+Shift+1 exec google-chrome-stable
+bindsym $alt+2 exec code
+bindsym $alt+3 exec pcmanfm
+bindsym $alt+Shift+3 exec pcmanfm_pkexec
+bindsym $mod+Return exec alacritty
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Shift+d exec --no-startup-id rofimoji
+bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+Ctrl+m exec pulseeffects
 bindsym Print exec --no-startup-id i3-scrot
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
-bindsym $mod+z exec --no-startup-id morc_menu
-bindsym $mod+d exec --no-startup-id rofi -show run
-bindsym $mod+Ctrl+m exec pulseeffects
-bindsym $mod+Shift+d exec --no-startup-id rofimoji
-bindsym $mod+Return exec alacritty
 
 
-##############################################################################
-# Keyboard layout
-##############################################################################
+###############################################################################
+# Containers and desktop workspaces
+###############################################################################
 
 
-bindsym $mod+q exec setxkbmap -layout us
-bindsym $mod+w exec setxkbmap -layout es
-
-
-##############################################################################
-# Focus
-##############################################################################
-# Use Mouse+$mod to drag floating windows
-
-
+##### Focus
 focus_on_window_activation none
-floating_modifier $mod
 focus_follows_mouse no
+bindsym $mod+space focus mode_toggle
+bindsym $mod+j focus left
+bindsym $mod+semicolon focus right
+bindsym $mod+k focus down
+bindsym $mod+l focus up
 
-# Kill focused window
-bindsym $mod+Shift+q kill
+##### Move
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
 
-# Select focus
-bindsym $mod+k focus up
-bindsym $mod+j focus down
-bindsym $mod+h focus left
-bindsym $mod+l focus right
-bindsym $mod+Up focus up
-bindsym $mod+Down focus down
-bindsym $mod+Left focus left
-bindsym $mod+Right focus right
+##### Screen mode
+floating_modifier $mod
 
-# Move focused window
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+l move right
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Right move right
-
-
-##############################################################################
-# Screen mode
-##############################################################################
-
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
 
 # Toggle split mode between horizontal and vertical
 bindsym $mod+Ctrl+space split toggle
@@ -163,23 +92,7 @@ bindsym $mod+Ctrl+space split toggle
 # Toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# Toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# Change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# Navigate through desktop workspaces next / previous
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
-bindsym $mod+Ctrl+l workspace next
-bindsym $mod+Ctrl+h workspace prev
-
-
-##############################################################################
-# Desktop Workspaces
-##############################################################################
-
+##### Desktop workspaces
 
 # Names
 set $ws1 "1:Web"
@@ -191,6 +104,19 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
+
+# Specify open type
+for_window [class="^.*"] border pixel 2
+for_window [class="^Pulseeffects$"] floating enable border pixel 2
+for_window [class="^Pavucontrol$"] floating enable border pixel 2
+for_window [class="^Nm-connection-editor$"] floating enable border pixel 2
+
+# Switch to desktop workspace with urgent window automatically
+for_window [urgent=latest] focus
+
+# Navigate through desktop workspaces previous / next
+bindsym $mod+Ctrl+j workspace prev
+bindsym $mod+Ctrl+semicolon workspace next
 
 # Switch
 bindsym $mod+1 workspace $ws1
@@ -204,17 +130,6 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
 # Move focused container to N desktop workspace
-bindsym $mod+Ctrl+1 move container to workspace $ws1
-bindsym $mod+Ctrl+2 move container to workspace $ws2
-bindsym $mod+Ctrl+3 move container to workspace $ws3
-bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace $ws5
-bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace $ws7
-bindsym $mod+Ctrl+8 move container to workspace $ws8
-bindsym $mod+Ctrl+9 move container to workspace $ws9
-
-# Move to N desktop workspace with focused container
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -225,37 +140,37 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 
-# Specify open type
-for_window [class="^.*"] border pixel 2
-for_window [class="^Pulseeffects$"] floating enable border pixel 2
-for_window [class="^Pavucontrol$"] floating enable border pixel 2
-for_window [class="^Nm-connection-editor$"] floating enable border pixel 2
-
-# Switch to desktop workspace with urgent window automatically
-for_window [urgent=latest] focus
+##### Others
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "$resize"
 set $resize Resize using ARROWS. (Esc)ape to exit
 mode "$resize" {
-    bindsym k resize shrink width 5 px or 5 ppt
-    bindsym j resize grow height 5 px or 5 ppt
     bindsym h resize shrink height 5 px or 5 ppt
     bindsym l resize grow width 5 px or 5 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym j resize grow height 5 px or 5 ppt
+    bindsym k resize shrink width 5 px or 5 ppt
     bindsym Escape mode "default"
 }
 
-
-##############################################################################
-# Power
-##############################################################################
+# Kill actual container
+bindsym $mod+Shift+q kill
 
 
-# Set system mode
+###############################################################################
+# Keyboard layout
+###############################################################################
+
+
+bindsym $mod+q exec setxkbmap -layout us
+bindsym $mod+w exec setxkbmap -layout es
+
+
+###############################################################################
+# System mode
+###############################################################################
+
+
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (s)uspend, (h)ibernate, (Shift+r)eboot, (Shift+s)hutdown, (Esc)ape
 mode "$mode_system" {
@@ -268,9 +183,9 @@ mode "$mode_system" {
 }
 
 
-##############################################################################
+###############################################################################
 # Color
-##############################################################################
+###############################################################################
 
 
 # Get colors from ~/.Xresources
@@ -301,9 +216,9 @@ client.background       $color0
 
 
 
-##############################################################################
+###############################################################################
 # i3-gaps
-##############################################################################
+###############################################################################
 
 
 gaps inner 11

@@ -1,8 +1,8 @@
 #!/bin/sh
 # Change background image and set color scheme
-# 
+#
 # Args:
-#   $1 (optional): Wallpaper. If not provided, a one random is selected from
+#   $1 (optional): Wallpaper. If not provided, one random is selected from
 #     ~/Pictures/Wallpapers
 
 
@@ -13,7 +13,7 @@ else
     WALLPAPER=${WALLPAPERS[RANDOM % ${#WALLPAPERS[@]}]}
 fi
 
-# Set new description for polybar
+# Set a new description for polybar
 exiftool -S -Description $WALLPAPER | grep -Po '(?<=Description: ).*' > ~/.config/wal/image-description.txt
 
 # Change wallpaper
