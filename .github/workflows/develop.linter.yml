@@ -29,20 +29,26 @@ jobs:
 
       - name: shellcheck for .zshrc
         uses: reviewdog/action-shellcheck@v1.0.0
-        pattern: ".zshrc" # This includes Programs/.programsrc, Workspaces/.hrc and Workspaces/.jrc
+        with:
+          # .zshrc includes Programs/.programsrc, Workspaces/.hrc and Workspaces/.jrc
+          pattern: ".zshrc"
 
       - name: shellcheck for .profile
         uses: reviewdog/action-shellcheck@v1.0.0
-        pattern: ".profile"
+        with:
+          pattern: ".profile"
 
       - name: shellcheck for .local/bin/change-brackground
         uses: reviewdog/action-shellcheck@v1.0.0
-        pattern: "change-background"
+        with:
+          pattern: "change-background"
 
       - name: shellcheck for .local/bin/sleep-monitor
         uses: reviewdog/action-shellcheck@v1.0.0
-        pattern: "sleep-monitor"
+        with:
+          pattern: "sleep-monitor"
 
       - name: shellcheck for .local/bin/start-script
         uses: reviewdog/action-shellcheck@v1.0.0
-        pattern: "start-script"
+        with:
+          pattern: "start-script"
