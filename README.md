@@ -57,12 +57,12 @@ _The idea of ​​this setup is based on the fact that I consider there are two
 _The second situation in which we can find ourselves developing is when we do it because we have a responsibility with a third party, that is, when we are doing a job._
 _This is why it seemed appropriate to me to have two separate folders where the works we carry out are kept, depending on the situation we are in when we develop them._
 _The works that we do as hobbies are stored in `~/Workspaces/H`, those that we carry out under responsibilities are located in `~/Workspaces/J`._
-_Everything related with the command interpreter, that are related to the H folder, are stored in `~/Workspaces/.hrc`. Everything related to the other folder, in `~/Workspaces/.jrc`._
+_Everything related with the command interpreter, that are related to the **H** folder, are stored in `~/Workspaces/.hrc`. Everything related to the other folder, in `~/Workspaces/.jrc`._
 
 Considering the words above, there are a couple of things to know to approach this methodology:
 
 - The **wgc** command allows us to directly clone a repository in one of these workspaces.
-<br>An example usage is: `wgc h git@github.com:jackfrued/Python-100-Days.git`, this clones [Python-100-Days][python_100_days] repo into H folder.
+<br>An example usage is: `wgc h git@github.com:jackfrued/Python-100-Days.git`, this clones [Python-100-Days][python_100_days] repo into **H** folder.
 
 [python_100_days]: https://github.com/jackfrued/Python-100-Days
 
