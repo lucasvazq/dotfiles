@@ -1,3 +1,6 @@
+#!/bin/sh
+
+
 # ============================================================================
 # General config
 # ============================================================================
@@ -298,7 +301,7 @@ hrs() {
       heroku run python manage.py shell -a $1
     fi
   else
-    echo Miss positional-only parameters: Heroku App, Tenant (optional)
+    echo Miss positional-only parameters: Heroku App, Tenant \(optional\)
   fi
 }
 

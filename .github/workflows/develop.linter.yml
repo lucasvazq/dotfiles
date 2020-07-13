@@ -24,3 +24,25 @@ jobs:
         uses: github/super-linter@v2.1.0
         env:
           VALIDATE_ALL_CODEBASE: false
+
+      # Shellcheck
+
+      - name: shellcheck for .zshrc
+        uses: reviewdog/action-shellcheck@v1.0.0
+        pattern: ".zshrc" # This includes Programs/.programsrc, Workspaces/.hrc and Workspaces/.jrc
+
+      - name: shellcheck for .profile
+        uses: reviewdog/action-shellcheck@v1.0.0
+        pattern: ".profile"
+
+      - name: shellcheck for .local/bin/change-brackground
+        uses: reviewdog/action-shellcheck@v1.0.0
+        pattern: "change-background"
+
+      - name: shellcheck for .local/bin/sleep-monitor
+        uses: reviewdog/action-shellcheck@v1.0.0
+        pattern: "sleep-monitor"
+
+      - name: shellcheck for .local/bin/start-script
+        uses: reviewdog/action-shellcheck@v1.0.0
+        pattern: "start-script"
