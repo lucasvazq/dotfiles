@@ -1,5 +1,5 @@
 #!/bin/sh
-# In this script, we run startup programs that require timeouts before starts.
+# In this script, we run startup programs that require timeouts before starts
 
 
 # restart pulseaudio
@@ -11,5 +11,5 @@ pulseeffects --gapplication-service &
 volumeicon &
 polybar custom &
 
-# Run picture-of-the-day script thats run polybar.
+# Run picture-of-the-day script thats depends of polybar
 picture-of-the-day
