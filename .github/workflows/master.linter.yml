@@ -30,23 +30,28 @@ jobs:
         with:
           # .zshrc includes Programs/.programsrc, Workspaces/.hrc and Workspaces/.jrc
           pattern: ".zshrc"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
 
       - name: shellcheck for .profile
         uses: reviewdog/action-shellcheck@v1.0.0
         with:
           pattern: ".profile"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
 
       - name: shellcheck for .local/bin/change-brackground
         uses: reviewdog/action-shellcheck@v1.0.0
         with:
           pattern: "change-background"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
 
       - name: shellcheck for .local/bin/sleep-monitor
         uses: reviewdog/action-shellcheck@v1.0.0
         with:
           pattern: "sleep-monitor"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
 
       - name: shellcheck for .local/bin/start-script
         uses: reviewdog/action-shellcheck@v1.0.0
         with:
           pattern: "start-script"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
