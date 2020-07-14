@@ -286,18 +286,6 @@ ds() {
   fi
 }
 
-hrq() {
-  # Run PostgreSQL CLI in a Heroku App
-  #
-  # Args:
-  #   $1: Heroku App
-  if [ ! -z "$1" ]; then
-    heroku pg:psql -a $1
-  else
-    echo Miss Heroku App
-  fi
-}
-
 hrs() {
   # Open Django shell in a Heroku App
   #
@@ -312,6 +300,18 @@ hrs() {
     fi
   else
     echo Miss positional-only parameters: Heroku App, Tenant (optional)
+  fi
+}
+
+hrq() {
+  # Run PostgreSQL CLI in a Heroku App
+  #
+  # Args:
+  #   $1: Heroku App
+  if [ ! -z "$1" ]; then
+    heroku pg:psql -a $1
+  else
+    echo Miss Heroku App
   fi
 }
 

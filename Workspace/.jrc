@@ -1,4 +1,3 @@
-#!/bin/sh
 
 
 wj_cleanall() {
