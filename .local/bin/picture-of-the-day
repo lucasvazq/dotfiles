@@ -14,9 +14,10 @@ from typing import NoReturn
 
 def main() -> NoReturn:
     """
-    Set the background and the color schema based on the APD site
+    Set the background and the color scheme based on the APD* site
 
-    Astronomy Picture of the Day site: https://apod.nasa.gov/apod/astropix.html
+    * APD: Astronomy Picture of the Day
+    APD site: https://apod.nasa.gov/apod/astropix.html
 
     Some changes to site structure or connection problems may generate
     exceptions. If this occurs, we set a random background and schema colors.
