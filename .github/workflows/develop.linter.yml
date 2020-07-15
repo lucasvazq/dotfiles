@@ -32,7 +32,7 @@ jobs:
           pattern: ".profile"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       - name: shellcheck for ~/.zshrc
         uses: reviewdog/action-shellcheck@v1.0.0
@@ -40,7 +40,7 @@ jobs:
           pattern: ".zshrc"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       - name: shellcheck for ~/setup.sh
         uses: reviewdog/action-shellcheck@v1.0.0
@@ -48,7 +48,7 @@ jobs:
           pattern: "setup.sh"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       # - files of ~/.local/bin
 
@@ -58,7 +58,7 @@ jobs:
           pattern: "change-background"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       - name: shellcheck for ~/.local/bin/sleep-monitor
         uses: reviewdog/action-shellcheck@v1.0.0
@@ -66,7 +66,7 @@ jobs:
           pattern: "sleep-monitor"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       - name: shellcheck for ~/.local/bin/start-script
         uses: reviewdog/action-shellcheck@v1.0.0
@@ -74,7 +74,7 @@ jobs:
           pattern: "start-script"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       # - files of ~/.oh-my-zsh/themes
 
@@ -84,7 +84,7 @@ jobs:
           pattern: "custom.zsh-theme"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2016,2039,2091,2154
+          shellcheck_flags: '-s sh -e 1090,2004,2016,2039,2091,2154'
 
       # - files of ~/Programs
 
@@ -94,7 +94,7 @@ jobs:
           pattern: ".programsrc"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       # - files of ~/Workspaces
 
@@ -104,7 +104,7 @@ jobs:
           pattern: ".hrc"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
 
       - name: shellcheck for Workspaces/.jrc
         uses: reviewdog/action-shellcheck@v1.0.0
@@ -112,4 +112,4 @@ jobs:
           pattern: ".jrc"
           github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
           filter_mode: nofilter
-          shellcheck_flags: -s sh -e 1090,2004,2039
+          shellcheck_flags: '-s sh -e 1090,2004,2039'
