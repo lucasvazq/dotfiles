@@ -4,9 +4,6 @@
 name: Linter [develop]
 
 on:
-  push:
-    branches:
-      - develop
   pull_request:
     branches:
       - develop
