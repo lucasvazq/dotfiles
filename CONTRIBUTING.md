@@ -46,8 +46,8 @@ def main(excluded_files: Tuple[str], excluded_dirs: Tuple[str]) -> NoReturn:
     Copy all home changes to dotfiles repo
 
     Args:
-        excluded_files Tuple[str]: relative path of files to exclude
-        excluded_dirs Tuple[str]: relative path of dirs to exclude
+        excluded_files: relative path of files to exclude
+        excluded_dirs: relative path of dirs to exclude
     """
 
     root = pathlib.Path.cwd()
