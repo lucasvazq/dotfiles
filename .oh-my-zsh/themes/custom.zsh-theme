@@ -1,3 +1,6 @@
+#!/bin/sh
+
+
 prompt_virtualenv() {
   if [[ -n $VIRTUAL_ENV && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     echo -n "[$(basename "$VIRTUAL_ENV")] "
