@@ -136,7 +136,7 @@ fc-cache ~/.local/share/fonts
 # Paste dotfiles and clean directory
 mv ./* ~/
 cd ..
-trash dotfiles .github .git CODE_OF_CONDUCT.md CONTRIBUTING.md LICENCE README.md docs screenshot.png SECURITY.md setup.sh
+trash dotfiles .git .github CODE_OF_CONDUCT.md CONTRIBUTING.md LICENCE README.md docs screenshot.png SECURITY.md setup.sh
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background
