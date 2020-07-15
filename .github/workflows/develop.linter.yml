@@ -1,7 +1,7 @@
 # Github Super-linter for develop branch
 
 
-name: Super-Linter [develop]
+name: Linter [develop]
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - develop
 
 jobs:
-  super-linter:
+  linter:
     name: Linter
     runs-on: ubuntu-latest
 
@@ -20,7 +20,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Lint
+      - name: Super-Linter
         uses: github/super-linter@v2.1.0
         env:
           VALIDATE_ALL_CODEBASE: false
