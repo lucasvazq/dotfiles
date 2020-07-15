@@ -52,11 +52,11 @@ def main(excluded_files: Tuple[str], excluded_dirs: Tuple[str]) -> NoReturn:
 
     root = pathlib.Path.cwd()
 
-    if pathlib.Path(root).name != 'dotfiles':
+    if root.name != 'dotfiles':
         raise Exception('Need to be in dotfiles repo')
 
-    excluded_filespath = [pathlib.Path(root, file) for file in excluded_files]
-    excluded_dirspath = [pathlib.Path(root, dirpath) for dirpath in excluded_dirs]
+    excluded_filespath = [root.joinpath(filepath) for filepath in excluded_files]
+    excluded_dirspath = [root.joinpath(dirpath) for dirpath in excluded_dirs]
     files_to_update = []
     for subdir, dirs, files in os.walk(root):
         del dirs
