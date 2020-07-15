@@ -1,10 +1,6 @@
-#!/bin/sh
-# Custom theme for Oh-My-Zsh
-
-
 prompt_virtualenv() {
   if [[ -n $VIRTUAL_ENV && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    echo -n "[$(basename $VIRTUAL_ENV)] "
+    echo -n "[$(basename "$VIRTUAL_ENV")] "
   fi
 }
 
@@ -68,4 +64,4 @@ build_prompt() {
   prompt_git
   prompt_end
 }
-PROMPT='%{%f%b%k%}$(build_prompt)'
+export PROMPT='%{%f%b%k%}$(build_prompt)'
