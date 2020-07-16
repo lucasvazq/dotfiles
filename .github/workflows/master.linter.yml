@@ -55,7 +55,7 @@ jobs:
 
       # - files of ~/.local/bin
 
-      - name: shellcheck for ~/.local/bin/change-brackground
+      - name: shellcheck for ~/.local/bin/change-background
         uses: reviewdog/action-shellcheck@v1.3.0
         with:
           pattern: "change-background"
