@@ -275,7 +275,19 @@ hl() {
 }
 
 ds() {
-  # Open Django extended shell
+  # Open Django shell
+  #
+  # Args:
+  #   $1 (optional): DB schema
+  if [ -n "$1" ]; then
+    python manage.py tenant_command --schema="$1"
+  else
+    python manage.py shell
+  fi
+}
+
+dsp() {
+  # Open Django shell extended version
   #
   # Args:
   #   $1 (optional): DB schema
