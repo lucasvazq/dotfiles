@@ -26,6 +26,9 @@ export ZSH_THEME=custom
 export plugins=(git virtualenv shrink-path)
 source $ZSH/oh-my-zsh.sh
 
+# Custom ls config
+alias ls="ls -F -h --color=always -a"
+
 
 ###############################################################################
 # Weird zone
