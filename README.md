@@ -10,9 +10,9 @@
   ![Screenshot](./screenshot.png)
 </p>
 
-When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper.
-Based on the colors of this image, the general color scheme of the rest of the components of your ship was established.
-I've improved it for Python hunting, while the command center is built with Vscode, the database is handled by psqalien and communications are done with Octocat and Heroku.
+_When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
+_Based on the colors of this image, the general color scheme of the rest of the components of your ship was established._
+_I've improved it for Python hunting, while the command center is built with Vscode, the database is handled by psqalien and communications are done with Octocat and Heroku._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
