@@ -54,7 +54,7 @@ desc() {
   # Print the description of the Astronomic Picture of the Day
   cat ~/.config/wal/image-description.txt
 }
-desc # Run at start
+desc # run at start
 
 fav() {
   # Set preferred color schema

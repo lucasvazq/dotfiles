@@ -39,7 +39,7 @@ yay -S rofi rofimoji
 polybar
 
 # Audio
-install_pulse # Run pulseaudio builtin installer
+install_pulse # run pulseaudio builtin installer
 yay -S pulseeffects
 
 # Browsers

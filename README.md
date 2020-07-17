@@ -12,7 +12,7 @@
 
 _When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
 _Based on the colors of this image, the general color scheme of the rest of the components of your ship was established._
-_I've improved it for Python hunting, while the command center is built with Vscode, the database is handled by psqalien and communications are done with Octocat and Heroku._
+_I've improved it for coding in Python, using tmux and Vscode. Also, there are some default services: PostgreSQL for the database, Github for Git repository hosting and Heroku for creating apps._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
@@ -32,9 +32,9 @@ cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles
 shutdown -r now
 ```
 
-After rebooting, there are other commands you should run on the fly
+After rebooting, there are other things you should do manually
 
-**Establish the communication channel with Octocat and Heroku**
+**Establish secure communications with Github and Heroku**
 ```sh
 heroku login
 git config --global user.name "YOUR_NAME"
@@ -71,6 +71,6 @@ Considering the words above, there are a couple of things to know to approach th
 ### Command center
 
 Using this ship is difficult because the steering wheel has been very tunned.
-I leave at hand a document that helps to know the customized keyboard shortcuts and that also lists all the useful functions that are in the terminal.
+I leave at hand a document that helps to know the customized keyboard shortcuts used for VScode, tmux, and i3, and that also lists all the useful functions that are available for the shell.
 
 [Command center](./docs/command_center.md)
