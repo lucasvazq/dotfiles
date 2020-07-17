@@ -1,5 +1,5 @@
 #!/bin/sh
-# Run programs that have to be run synchronously
+# Run programs that have to run in chronological order
 
 
 # Restart pulseaudio
