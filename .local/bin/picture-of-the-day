@@ -6,12 +6,12 @@ Functions:
     main
 """
 import re
-import shlex
 import subprocess
 from pathlib import Path
-from typing import NoReturn
+from typing import NoReturn, Optional
 
 import requests
+from requests import exceptions as requests_exceptions
 
 
 def main() -> NoReturn:
@@ -25,30 +25,46 @@ def main() -> NoReturn:
     exceptions. If this occurs, we set a random background and schema colors.
     The image is saved in ~/Pictures/Wallpapers folder.
     """
+
+    def change_background(image_path: Optional[str] = None) -> NoReturn:
+        subprocess_args = ['change-background']
+        if image_path:
+            subprocess_args.append(image_path)
+        subprocess.call(subprocess_args)
+
     nasa_base_url = "https://apod.nasa.gov"
     try:
         web_response = requests.get(f"{nasa_base_url}/apod/astropix.html")
 
-        # Download and save the picture of the day
-        image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
-        image_path = image_match.groupdict()['image']
-        image = requests.get(f"{nasa_base_url}/{image_path}")
-        image_name = image_path.split("/")[-1]
-        destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
-        with open(destination_path, "wb") as file:
-            file.write(image.content)
+        if web_response.status_code != 200:
+            change_background()
 
-        # Add EXIF description tag to the image
-        description_match = re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text)
-        description = description_match.groups()[0].strip()
-        subprocess.call(shlex.split(f"exiftool -overwrite_original -Description=\"{description}\" {destination_path}"))
+        elif image_match := re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text):
+            # Save the image
+            image_path = image_match.groupdict()['image']
+            image = requests.get(f"{nasa_base_url}/{image_path}")
+            image_name = image_path.split("/")[-1]
+            destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
+            with open(destination_path, "wb") as file:
+                file.write(image.content)
 
-        # Set the new wallpaper and color scheme
-        subprocess.call(['change-background', destination_path])
+            # Add EXIF description tag to the image
+            if description_match := re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text):
+                description = description_match.groups()[0].strip()
+                subprocess.call((
+                    "exiftool",
+                    "-overwrite_original",
+                    f"-Description=\"{description}\"",
+                    f"{destination_path}",
+                ))
 
-    except Exception:
-        # Set a random wallpaper and color scheme
-        subprocess.call(['change-background'])
+            change_background(destination_path)
+
+        else:
+            change_background()
+
+    except requests_exceptions.RequestException:
+        change_background()
 
 
 if __name__ == "__main__":
