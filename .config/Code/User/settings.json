@@ -1,4 +1,5 @@
 {
+    "editor.accessibilitySupport": "on",
     "editor.find.seedSearchStringFromSelection": false,
     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans'",
     "editor.lineHeight": 17,

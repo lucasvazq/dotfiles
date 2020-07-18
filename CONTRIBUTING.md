@@ -10,7 +10,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 If you make changes in your local environment and want to update that changes to the dotfiles repo, here is a code that can help you.
 
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Executable module that copy all home changes to dotfiles repo
 
