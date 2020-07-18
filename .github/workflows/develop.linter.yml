@@ -23,6 +23,10 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           VALIDATE_BASH: false
 
+      - name: pylint
+        uses: cclauss/GitHub-Action-for-pylint@maste
+        args: pylint .local/bin/picture-of-the-day
+
       # Shellcheck
 
       # - files of ~/
