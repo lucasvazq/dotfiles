@@ -61,6 +61,7 @@
         "body > .monaco-workbench > .monaco-grid-view > .monaco-grid-branch-node > .monaco-split-view2 > .split-view-container > .split-view-view > .monaco-grid-branch-node .monaco-split-view2.horizontal > .split-view-container > .split-view-view.visible": "margin-top: -2px"
     },
     "gistpad.comments.showThread": "never",
+    "gistpad.scratchNotes.show": false,
     "gitblame.ignoreWhitespace": true,
     "indentRainbow.colors": [
         "rgba(0, 0, 0, 0.3)",
@@ -100,7 +101,9 @@
         "plaintext"
     ],
     "indentRainbow.errorColor": "rgba(255, 255, 0, 0.15)",
-    "indentRainbow.tabmixColor": "rgba(0, 0, 0, 0)",
+    "indentRainbow.ignoreLinePatterns" : [
+        "/^[ \t]*$/g",
+    ],
     "python.languageServer": "Pylance",
     "textmarker.autoSelectDistinctiveTextColor": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"

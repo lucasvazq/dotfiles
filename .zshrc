@@ -240,7 +240,7 @@ pk() {
     local processes
     processes=$(lsof -t -i:"$1")
     if [ -n "$processes" ]; then
-      kill -9 processes
+      kill -9 $processes
     fi
   else
     echo Miss port
@@ -349,6 +349,7 @@ pyc() {
   if [ -n "$1" ]; then
     if [ -n "$2" ]; then
       mkvirtualenv --system-site-packages -p "$1" "$2"
+      pip install virtualenvwrapper
       pyd
     else
       echo Miss Env name

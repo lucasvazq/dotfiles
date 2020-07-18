@@ -62,6 +62,7 @@ yay -S visual-studio-code-bin neovim gedit
 code --install-extension alefragnani.bookmarks
 code --install-extension alefragnani.project-manager
 code --install-extension batisteo.vscode-django
+code --install-extension bierner.markdown-checkbox
 code --install-extension cdonohue.quill-icons
 code --install-extension christian-kohler.path-intellisense
 code --install-extension chunsen.bracket-select
@@ -79,7 +80,6 @@ code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension oderwat.indent-rainbow
 code --install-extension ryu1kn.text-marker
 code --install-extension sirmspencer.vscode-autohide
-code --install-extension shd101wyy.markdown-preview-enhanced
 code --install-extension sourcery.sourcery
 code --install-extension usernamehw.errorlens
 code --install-extension usernamehw.highlight-logical-line
@@ -113,7 +113,7 @@ git config --global color.diff.new "green bold"
 git config --global color.diff.whitespace "red reverse"
 
 # Python
-pip install pipenv virtualenvwrapper ipython pywal --user
+pip install pipenv virtualenvwrapper ipython ipykernel pywal --user
 
 # PostgreSQL
 yay -S postgresql
