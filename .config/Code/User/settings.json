@@ -1,13 +1,14 @@
 {
+    "editor.accessibilitySupport": "on",
     "editor.find.seedSearchStringFromSelection": false,
     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans'",
     "editor.lineHeight": 17,
+    "editor.minimap.enabled": false,
     "editor.rulers": [
         79,
         119
     ],
     "editor.suggestSelection": "first",
-    "editor.minimap.enabled": false,
     "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 119,
     "editor.wrappingIndent": "same",
@@ -27,7 +28,7 @@
     "search.showLineNumbers": true,
     "telemetry.enableTelemetry": false,
     "window.menuBarVisibility": "toggle",
-    "window.zoomLevel": -1,
+    "window.zoomLevel": -2,
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Wal",
     "workbench.iconTheme": "quill-icons",
@@ -61,6 +62,7 @@
         "body > .monaco-workbench > .monaco-grid-view > .monaco-grid-branch-node > .monaco-split-view2 > .split-view-container > .split-view-view > .monaco-grid-branch-node .monaco-split-view2.horizontal > .split-view-container > .split-view-view.visible": "margin-top: -2px"
     },
     "gistpad.comments.showThread": "never",
+    "gistpad.scratchNotes.show": false,
     "gitblame.ignoreWhitespace": true,
     "indentRainbow.colors": [
         "rgba(0, 0, 0, 0.3)",
@@ -68,7 +70,6 @@
         "rgba(0, 0, 0, 0)",
         "rgba(0, 0, 0, 0)",
         "rgba(0, 0, 0, 0)",
-        "rgba(0, 0, 0, 0.1)",
         "rgba(0, 0, 0, 0)",
         "rgba(0, 0, 0, 0)",
         "rgba(0, 0, 0, 0)",
@@ -81,7 +82,18 @@
         "rgba(0, 0, 0, 0)",
         "rgba(0, 0, 0, 0)",
         "rgba(0, 0, 0, 0)",
-        "rgba(0, 0, 0, 0)"
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 0)",
+        "rgba(0, 0, 0, 1)"
     ],
     "indentRainbow.excludedLanguages": [
         "django-html",
@@ -90,7 +102,9 @@
         "plaintext"
     ],
     "indentRainbow.errorColor": "rgba(255, 255, 0, 0.15)",
-    "indentRainbow.tabmixColor": "rgba(255, 0, 0, 0.15)",
+    "indentRainbow.ignoreLinePatterns" : [
+        "/^[ \t]*$/g",
+    ],
     "python.languageServer": "Pylance",
     "textmarker.autoSelectDistinctiveTextColor": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"

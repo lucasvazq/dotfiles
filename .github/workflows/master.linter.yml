@@ -1,7 +1,7 @@
 # Github Super-linter for master branch
 
 
-name: Super-Linter [master]
+name: Linter [master]
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
       - master
 
 jobs:
-  super-linter:
+  linter:
     name: Linter
     runs-on: ubuntu-latest
 
@@ -20,33 +20,104 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Lint
+      - name: Super-Linter
         uses: github/super-linter@v2.1.0
+        env:
+          VALIDATE_BASH: false
+
+      - name: pylint
+        uses: cclauss/GitHub-Action-for-pylint@master
+        with:
+          args: "pip install requests; pylint --disable=C0301,C0103 .local/bin/picture-of-the-day"
 
       # Shellcheck
 
-      - name: shellcheck for .zshrc
-        uses: reviewdog/action-shellcheck@v1.0.0
-        with:
-          # .zshrc includes Programs/.programsrc, Workspaces/.hrc and Workspaces/.jrc
-          pattern: ".zshrc"
+      # - files of ~/
 
-      - name: shellcheck for .profile
-        uses: reviewdog/action-shellcheck@v1.0.0
+      - name: shellcheck for ~/.profile
+        uses: reviewdog/action-shellcheck@v1.3.0
         with:
           pattern: ".profile"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
 
-      - name: shellcheck for .local/bin/change-brackground
-        uses: reviewdog/action-shellcheck@v1.0.0
+      - name: shellcheck for ~/.zshrc
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: ".zshrc"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
+
+      - name: shellcheck for ~/setup.sh
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: "setup.sh"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
+
+      # - files of ~/.local/bin
+
+      - name: shellcheck for ~/.local/bin/change-background
+        uses: reviewdog/action-shellcheck@v1.3.0
         with:
           pattern: "change-background"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
 
-      - name: shellcheck for .local/bin/sleep-monitor
-        uses: reviewdog/action-shellcheck@v1.0.0
+      - name: shellcheck for ~/.local/bin/sleep-monitor
+        uses: reviewdog/action-shellcheck@v1.3.0
         with:
           pattern: "sleep-monitor"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
 
-      - name: shellcheck for .local/bin/start-script
-        uses: reviewdog/action-shellcheck@v1.0.0
+      - name: shellcheck for ~/.local/bin/start-script
+        uses: reviewdog/action-shellcheck@v1.3.0
         with:
           pattern: "start-script"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
+
+      # - files of ~/.oh-my-zsh/themes
+
+      - name: shellcheck for ~/.oh-my-zsh/custom.zsh-theme
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: "custom.zsh-theme"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2016,2039,2091,2154"
+
+      # - files of ~/Programs
+
+      - name: shellcheck for Programs/.programsrc
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: ".programsrc"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
+
+      # - files of ~/Workspaces
+
+      - name: shellcheck for Workspaces/.hrc
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: ".hrc"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
+
+      - name: shellcheck for Workspaces/.jrc
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: ".jrc"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"

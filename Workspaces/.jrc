@@ -1,0 +1,22 @@
+#!/bin/sh
+
+
+wj_cleanall() {
+    # Clean env vars and virtual envs of J workspaces
+    #
+    # When we switch from one work environment to another, we often want to
+    # clean up all env vars and virtual envs related to other workspaces. For
+    # this, it is necessary to have a function that automatically does it for
+    # us.
+    # Because all environment variables related to type J workspaces are
+    # configured in this file, the purpose of this feature is to clean all envs
+    # for all things related to this type of workspaces that are loaded via
+    # functions.
+    #
+    # Tip: it would be ideal if every time you change your environment, this
+    # function runs automatically to clean everything, before setting new envs
+    # again. For that, you can use the function zshrc.cleanworkspaces, which
+    # executes this function and the analogous one for H workspaces.
+
+    true; # remove this after fill this function
+}

@@ -1,17 +1,28 @@
-!! Reload:
-! xrdb -merge ~/.Xresources
+! #############################################################################
+! Basic config
+! #############################################################################
 
-!! Basic config
+
 URxvt*font:                         xft:JetBrainsMono Nerd Font Mono:pixelsize=15:minspace=False
 URxvt*inheritPixmap:                true
 URxvt*transparent:                  true
 
-!! Keybindings
+
+! #############################################################################
+! Keybindings
+! #############################################################################
+
+
 URxvt.iso14755:                     false
 URxvt.keysym.Shift-Control-V:       eval:paste_clipboard
 URxvt.keysym.Shift-Control-C:       eval:selection_to_clipboard
 
-!! Rofi
+
+! #############################################################################
+! Rofi
+! #############################################################################
+
+
 rofi.color-enabled:                 true
 rofi.separator-style:               solid
 rofi.sidebar-mode:                  false
@@ -23,7 +34,10 @@ rofi.padding:                       5
 rofi.fixed-num-lines:               true
 rofi.hide-scrollbar:                true
 
-!! Colors
+
+! #############################################################################
+! Colors
+! #############################################################################
 ! It's really doesn't matter bc pywal
 !
 ! Color type                        Light / Dark
@@ -35,6 +49,8 @@ rofi.hide-scrollbar:                true
 ! Magenta                           5-13
 ! Cyan                              6-14
 ! White                             7-15
+
+
 *color0:                            #000000
 *color1:                            #ffffff
 *color2:                            #ff0000
