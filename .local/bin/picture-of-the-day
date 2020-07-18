@@ -39,7 +39,12 @@ def main() -> NoReturn:
         if web_response.status_code != 200:
             change_background()
 
-        elif image_match := re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text):
+        else:
+            image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
+
+            if not image_match:
+                change_background()
+
             # Save the image
             image_path = image_match.groupdict()['image']
             image = requests.get(f"{nasa_base_url}/{image_path}")
@@ -49,19 +54,17 @@ def main() -> NoReturn:
                 file.write(image.content)
 
             # Add EXIF description tag to the image
-            if description_match := re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text):
-                description = description_match.groups()[0].strip()
+            description_match = re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text)
+            if description_match:
+                description = description_match.groupdict()['description'].strip()
                 subprocess.call((
                     "exiftool",
                     "-overwrite_original",
                     f"-Description=\"{description}\"",
-                    f"{destination_path}",
+                    destination_path,
                 ))
 
             change_background(destination_path)
-
-        else:
-            change_background()
 
     except requests_exceptions.RequestException:
         change_background()
