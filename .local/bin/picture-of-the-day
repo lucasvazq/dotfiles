@@ -6,10 +6,12 @@ Functions:
     main
 """
 import re
-import requests
-import shlex, subprocess
+import shlex
+import subprocess
 from pathlib import Path
 from typing import NoReturn
+
+import requests
 
 
 def main() -> NoReturn:
