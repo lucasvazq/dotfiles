@@ -240,7 +240,7 @@ pk() {
     local processes
     processes=$(lsof -t -i:"$1")
     if [ -n "$processes" ]; then
-      kill -9 $processes
+      kill -9 "$processes"
     fi
   else
     echo Miss port
