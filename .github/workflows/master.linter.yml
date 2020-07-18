@@ -26,8 +26,9 @@ jobs:
           VALIDATE_BASH: false
 
       - name: pylint
-        uses: cclauss/GitHub-Action-for-pylint@maste
-        args: pylint .local/bin/picture-of-the-day
+        uses: cclauss/GitHub-Action-for-pylint@master
+        with:
+          args: pylint .local/bin/picture-of-the-day
 
       # Shellcheck
 
