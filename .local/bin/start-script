@@ -1,8 +1,8 @@
 #!/bin/sh
-# In this script, we run startup programs that require timeouts before starts
+# Run programs that have to run in chronological order
 
 
-# restart pulseaudio
+# Restart pulseaudio
 pkill pulseaudio &
 pulseaudio &
 

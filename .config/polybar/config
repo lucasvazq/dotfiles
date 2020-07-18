@@ -1,3 +1,8 @@
+; #############################################################################
+; Basic config
+; #############################################################################
+
+
 [settings]
 screenchange-reload = true
 
@@ -24,8 +29,11 @@ color14 = ${xrdb:color14}
 color15 = ${xrdb:color15}
 
 
-; Bars:
+; #############################################################################
+; Bars
+; #############################################################################
 ; - custom
+
 
 [bar/custom]
 width = 100%
@@ -49,7 +57,11 @@ modules-center = cpu cpu-temperature-1 cpu-temperature-2 separator gpu-temperatu
 modules-right = date separator audio-config volume separator wifi
 
 
+; #############################################################################
 ; Desktop workspaces
+; #############################################################################
+
+
 [module/i3]
 type = internal/i3
 strip-wsnumbers = true
@@ -73,8 +85,11 @@ label-urgent = %name%
 label-urgent-background = ${colors.color8}
 
 
+; #############################################################################
 ; System info
+; #############################################################################
 ; Display free usage percentage
+
 
 [module/cpu]
 type = internal/cpu
@@ -109,7 +124,9 @@ format-unmounted-underline = ${colors.color1}
 label-unmounted = " DISK: %mountpoint%: not mounted "
 
 
+; #############################################################################
 ; Temperatures
+; #############################################################################
 ; Useful command:
 ; - sensors
 ; To get thermal zones run:
@@ -117,6 +134,7 @@ label-unmounted = " DISK: %mountpoint%: not mounted "
 ; To get temperature sysfs path run:
 ; - for i in /sys/class/hwmon/hwmon*/temp*_input; do echo "$(<$(dirname $i)/name): $(cat ${i%_*}_label 2>/dev/null || echo $(basename ${i%_*})) $(readlink -f $i)"; done
 ; The sysfs path can change their location. For that we have a fallback version 2 of each temperature info module
+
 
 [module/cpu-temperature-1]
 type = internal/temperature
@@ -155,7 +173,11 @@ format-underline = ${colors.color1}
 label = " GPU: %temperature-c% "
 
 
+; #############################################################################
 ; Date
+; #############################################################################
+
+
 [module/date]
 type = custom/script
 exec = date "+%m/%d %H:%M"
@@ -164,7 +186,10 @@ label = " %output% "
 format-underline = ${colors.color1}
 
 
+; #############################################################################
 ; Audio
+; #############################################################################
+
 
 [module/audio-config]
 type = custom/text
@@ -183,10 +208,14 @@ format-muted-underline = ${colors.color1}
 label-muted = " VOL: MUTE "
 
 
+; #############################################################################
 ; Networks
+; #############################################################################
 ; To list them run:
 ; - nmcli device status
 ; - nmcli connection show
+
+
 [module/wifi]
 type = internal/network
 interface = wlp3s0
@@ -207,7 +236,11 @@ format-disconnected-underline = ${colors.color1}
 format-disconnected = %{A1:nm-connection-editor:} NETWORK: <label-disconnected> %{A}
 
 
+; #############################################################################
 ; Separator
+; #############################################################################
+
+
 [module/separator]
 type = custom/text
 content = " "

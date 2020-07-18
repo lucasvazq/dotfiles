@@ -60,6 +60,9 @@ Run Heroku server. You can specify the port.
 - ds
 Open Django shell. You can specify a db schema.
 
+- dsp
+Open Django shell extended version. You can specify a db schema.
+
 - hrs
 Open Django shell in a Heroku App. You can specify a db schema.
 

@@ -1,9 +1,9 @@
 #!/bin/sh
 
 
-# ============================================================================
+###############################################################################
 # General config
-# ============================================================================
+###############################################################################
 
 
 # Start new terminals with tmux and add pywal color scheme
@@ -22,14 +22,17 @@ source ~/Programs/.programsrc
 
 # zsh config
 export ZSH=~/.oh-my-zsh
-ZSH_THEME=custom
-plugins=(git virtualenv shrink-path)
+export ZSH_THEME=custom
+export plugins=(git virtualenv shrink-path)
 source $ZSH/oh-my-zsh.sh
 
+# Custom ls config
+alias ls="ls -F -h --color=always -a"
 
-# ============================================================================
+
+###############################################################################
 # Weird zone
-# ============================================================================
+###############################################################################
 
 
 bk() {
@@ -42,7 +45,7 @@ bk() {
   #
   # Without args:
   #   Select a random wallpaper
-  sh change-background >> /dev/null $1
+  sh change-background >> /dev/null "$1"
   clear
   neo
 }
@@ -51,16 +54,14 @@ desc() {
   # Print the description of the Astronomic Picture of the Day
   cat ~/.config/wal/image-description.txt
 }
-desc # Run at start
+desc # run at start
 
 fav() {
   # Set preferred color schema
   # Good themes:
   # - base16-materia
-  # - base16-materialer
-  # - sexy-gnometerm
   # - sexy-theme2
-  wal -q --theme sexy-gnometerm
+  wal -q --theme sexy-theme2
 }
 
 lolban() {
@@ -68,10 +69,10 @@ lolban() {
   #
   # Args:
   #   $1: Message
-  if [ ! -z "$1" ]; then
+  if [ -n "$1" ]; then
     # Cool fonts list:
     # ~/.local/share/figlet-fonts/3d.flf
-    figlet $@ -f ~/.local/share/figlet-fonts/3d.flf | lolcat
+    figlet "$@" -f ~/.local/share/figlet-fonts/3d.flf | lolcat
   else
     echo Miss message
   fi
@@ -95,9 +96,9 @@ neo() {
 }
 
 
-# ============================================================================
+###############################################################################
 # Productivity
-# ============================================================================
+###############################################################################
 
 
 # Alias for open the default UI editor
@@ -108,8 +109,8 @@ open () {
   #
   # Args:
   #   $1: Link
-  if [ ! -z "$1" ]; then
-    $BROWSER $1
+  if [ -n "$1" ]; then
+    $BROWSER "$1"
   else
     echo Miss link
   fi
@@ -136,7 +137,7 @@ cud() {
   #
   # Without Args:
   #   Set the time to auto
-  if [ ! -z "$1" ]; then
+  if [ -n "$1" ]; then
     if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
       timedatectl setq-ntp false
     fi
@@ -169,14 +170,14 @@ cud() {
       timezone=$(date +%Z)
 
       # - Get the absolute value of the difference
-      diff=$(echo $timezone | grep -Po '(?<=\+|-)[0-9]+')
+      diff=$(grep -Po '(?<=\+|-)[0-9]+' <<< "$timezone")
 
       # - When it's positive
-      if [[ $(echo $timezone | grep -Po '[+](?<=[0-9])*') ]]; then
+      if grep -Pq '[+](?<=[0-9])*' <<< "$timezone"; then
         hour=$(($4 + $diff))
 
       # - When it's negative
-      elif [[ $(echo $timezone | grep -Po '[-](?<=[0-9])*') ]]; then
+      elif grep -Pq '[-](?<=[0-9])*' <<< "$timezone"; then
         hour=$(($4 - $diff))
 
       # - Whatever
@@ -194,12 +195,12 @@ cud() {
       minute=$(date +%M)
     fi
 
-    echo BEFORE: $(date +"%Y-%m-%d %H:%M:%S")
+    echo BEFORE: "$(date +"%Y-%m-%d %H:%M:%S")"
     sudo date -s "$year-$month-$day $hour:$minute:$(date +%S)" >> /dev/null
-    echo AFTER: $(date +"%Y-%m-%d %H:%M:%S")
+    echo AFTER: "$(date +"%Y-%m-%d %H:%M:%S")"
   else
     timedatectl set-ntp true
-    echo RESTORED: $(date +"%Y-%m-%d %H:%M:%S")
+    echo RESTORED: "$(date +"%Y-%m-%d %H:%M:%S")"
   fi
 }
 
@@ -209,14 +210,14 @@ wgc() {
   # Args:
   #   $1: "h" | "j": Clone for H or J workspace
   #   $2: Repo
-  if [ ! -z "$1" ]; then
-    if [ ! -z "$2" ]; then
+  if [ -n "$1" ]; then
+    if [ -n "$2" ]; then
       case $1 in
         h|H)
-          git -C ~/Workspaces/H clone $2
+          git -C ~/Workspaces/H clone "$2"
           ;;
         j|J)
-          git -C ~/Workspaces/J clone $2
+          git -C ~/Workspaces/J clone "$2"
           ;;
         *)
           echo Bad workspace
@@ -235,11 +236,11 @@ pk() {
   #
   # Args:
   #   $1: Port
-  if [ ! -z "$1" ]; then
+  if [ -n "$1" ]; then
     local processes
-    processes=$(lsof -t -i:$1)
-    if [ processes ]; then
-      kill -9 processes
+    processes=$(lsof -t -i:"$1")
+    if [ -n "$processes" ]; then
+      kill -9 "$processes"
     fi
   else
     echo Miss port
@@ -247,9 +248,9 @@ pk() {
 }
 
 
-# ============================================================================
+###############################################################################
 # Servers
-# ============================================================================
+###############################################################################
 
 
 drs() {
@@ -257,8 +258,8 @@ drs() {
   #
   # Args:
   #   $1 (optional): Port
-  if [ ! -z "$1" ]; then
-    python manage.py runserver 127.0.0.1:$1
+  if [ -n "$1" ]; then
+    python manage.py runserver 127.0.0.1:"$1"
   else
     python manage.py runserver
   fi
@@ -269,20 +270,32 @@ hl() {
   #
   # Args:
   #   $1 (optional): Port
-  if [ ! -z "$1" ]; then
-    heroku local -p $1
+  if [ -n "$1" ]; then
+    heroku local -p "$1"
   else
     heroku local
   fi
 }
 
 ds() {
-  # Open Django extended shell
+  # Open Django shell
   #
   # Args:
   #   $1 (optional): DB schema
-  if [ ! -z "$1" ]; then
-    python manage.py tenant_command shell_plus --print-sql --schema=$1
+  if [ -n "$1" ]; then
+    python manage.py tenant_command --schema="$1"
+  else
+    python manage.py shell
+  fi
+}
+
+dsp() {
+  # Open Django shell extended version
+  #
+  # Args:
+  #   $1 (optional): DB schema
+  if [ -n "$1" ]; then
+    python manage.py tenant_command shell_plus --print-sql --schema="$1"
   else
     python manage.py shell_plus --print-sql
   fi
@@ -294,11 +307,11 @@ hrs() {
   # Args:
   #   $1: Heroku App
   #   $2 (optional): DB schema
-  if [ ! -z "$1" ]; then
-    if [ ! -z "$2" ]; then
-      heroku run python manage.py tenant_command shell --schema=$2 -a $1
+  if [ -n "$1" ]; then
+    if [ -n "$2" ]; then
+      heroku run python manage.py tenant_command shell --schema="$2" -a "$1"
     else
-      heroku run python manage.py shell -a $1
+      heroku run python manage.py shell -a "$1"
     fi
   else
     echo Miss positional-only parameters: Heroku App, Tenant \(optional\)
@@ -310,17 +323,17 @@ hrq() {
   #
   # Args:
   #   $1: Heroku App
-  if [ ! -z "$1" ]; then
-    heroku pg:psql -a $1
+  if [ -n "$1" ]; then
+    heroku pg:psql -a "$1"
   else
     echo Miss Heroku App
   fi
 }
 
 
-# ============================================================================
+###############################################################################
 # Python
-# ============================================================================
+###############################################################################
 
 
 export PIPENV_VERBOSITY=-1
@@ -333,9 +346,10 @@ pyc() {
   # Args:
   #   $1: Python interpreter source
   #   $2: Env name
-  if [ ! -z "$1" ]; then
-    if [ ! -z "$2" ]; then
-      mkvirtualenv --system-site-packages -p $1 $2
+  if [ -n "$1" ]; then
+    if [ -n "$2" ]; then
+      mkvirtualenv --system-site-packages -p "$1" "$2"
+      pip install virtualenvwrapper
       pyd
     else
       echo Miss Env name
@@ -350,8 +364,8 @@ pya() {
   #
   # Args:
   #   $1: Env name
-  if [ ! -z "$1" ]; then
-    source $WORKON_HOME/$1/bin/activate
+  if [ -n "$1" ]; then
+    source $WORKON_HOME/"$1"/bin/activate
   else
     echo Miss Env name
   fi
@@ -367,8 +381,8 @@ pyr() {
   #
   # Args:
   #   $1: Env name
-  if [ ! -z "$1" ]; then
-    rmvirtualenv $1
+  if [ -n "$1" ]; then
+    rmvirtualenv "$1"
   else
     echo Miss Env name
   fi
@@ -382,13 +396,13 @@ pyd() {
 }
 
 
-# ============================================================================
+###############################################################################
 # Workspaces
-# ============================================================================
+###############################################################################
 
 
-WORKSPACE_H=~/Workspaces/H
-WORKSPACE_J=~/Workspaces/J
+export WORKSPACE_H=~/Workspaces/H
+export WORKSPACE_J=~/Workspaces/J
 source ~/Workspaces/.hrc
 source ~/Workspaces/.jrc
 
