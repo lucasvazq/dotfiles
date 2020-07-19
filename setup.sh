@@ -46,7 +46,7 @@ yay -S pulseeffects
 yay -S brave google-chrome-stable
 
 # Terminal
-yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat
+yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 trash ~/.zshrc.pre-oh-my-zsh
 chsh -s "$(which zsh) $USER"
@@ -115,10 +115,9 @@ git config --global color.diff.whitespace "red reverse"
 # Python
 pip install pipenv virtualenvwrapper ipython ipykernel pywal --user
 
-# PostgreSQL
-yay -S postgresql
-sudo systemctl enable postgresql.service
-psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
+# Deno and NodeJS
+yay -S deno nvm
+nvm install node
 
 # Fonts
 yay -S noto-fonts-emoji

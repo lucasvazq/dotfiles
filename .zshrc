@@ -142,34 +142,37 @@ cud() {
       timedatectl setq-ntp false
     fi
 
-    local year month day hour minute
-
+    local year
     if [[ $1 && "$1" != "*" ]]; then
       year=$1
     else
       year=$(date +%Y)
     fi
 
+    local month
     if [[ $2 && "$2" != "*" ]]; then
       month=$2
     else
       month=$(date +%m)
     fi
 
+    local day
     if [[ $3 && "$3" != "*" ]]; then
       day=$3
     else
       day=$(date +%d)
     fi
 
+    local hour
     if [[ $4 && "$4" != "*" ]]; then
 
       # Fix UTC differences
 
-      local timezone diff
+      local timezone
       timezone=$(date +%Z)
 
       # - Get the absolute value of the difference
+      local diff
       diff=$(grep -Po '(?<=\+|-)[0-9]+' <<< "$timezone")
 
       # - When it's positive
@@ -189,6 +192,7 @@ cud() {
       hour=$(date +%H)
     fi
 
+    local minute
     if [[ $5 && "$5" != "*" ]]; then
       minute=$5
     else
