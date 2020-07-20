@@ -49,27 +49,6 @@ Clone a repo in any of the workspaces.
 Kill a process running in a custom port.
 ```
 
-## Servers
-```yaml
-- drs
-Run Django server. You can specify the port.
-
-- hl
-Run Heroku server. You can specify the port.
-
-- ds
-Open Django shell. You can specify a db schema.
-
-- dsp
-Open Django shell extended version. You can specify a db schema.
-
-- hrs
-Open Django shell in a Heroku App. You can specify a db schema.
-
-- hrq
-Open PostgreSQL CLI in a Heroku App.
-```
-
 ## Python
 ```yaml
 - pyc

@@ -12,7 +12,7 @@
 
 _When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
 _Based on the colors of this image, the general color scheme of the rest of the components of your ship was established._
-_I've improved it for coding in Python, Node.js and Duno, using tmux, Vscode and Github as a repository hosting service._
+_I've improved it for coding in Python, Deno and NodeJS, using tmux, Vscode and Github._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
@@ -35,10 +35,9 @@ shutdown -r now
 
 After rebooting, there are other things you should do manually
 
-**Establish secure communications with Github and Heroku**
+**Establish secure communications with Github**
 
 ```sh
-heroku login
 git config --global user.name "YOUR_NAME"
 git config --global user.email "YOUR_EMAIL"
 ```

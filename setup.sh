@@ -46,7 +46,7 @@ yay -S pulseeffects
 yay -S brave google-chrome-stable
 
 # Terminal
-yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
+yay -S alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 trash ~/.zshrc.pre-oh-my-zsh
 chsh -s "$(which zsh) $USER"
