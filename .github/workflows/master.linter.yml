@@ -106,6 +106,14 @@ jobs:
 
       # - files of ~/Workspaces
 
+      - name: shellcheck for Workspaces/.crc
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: ".crc"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039"
+
       - name: shellcheck for Workspaces/.hrc
         uses: reviewdog/action-shellcheck@v1.3.0
         with:
