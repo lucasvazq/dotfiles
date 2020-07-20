@@ -41,7 +41,7 @@ bk() {
   # The color scheme is set using the selected background
   #
   # Args:
-  #   $1 (optional): Wallpaper path
+  #   $1 (optional): wallpaper path
   #
   # Without args:
   #   Select a random wallpaper
@@ -68,14 +68,15 @@ lolban() {
   # Print a rainbow message with special ASCII font
   #
   # Args:
-  #   $1: Message
-  if [ -n "$1" ]; then
-    # Cool fonts list:
-    # ~/.local/share/figlet-fonts/3d.flf
-    figlet "$@" -f ~/.local/share/figlet-fonts/3d.flf | lolcat
-  else
+  #   $1: message
+  if [ -z "$1" ]; then
     echo Miss message
+    return 1
   fi
+
+  # Cool fonts list:
+  # - ~/.local/share/figlet-fonts/3d.flf
+  figlet "$@" -f ~/.local/share/figlet-fonts/3d.flf | lolcat
 }
 
 cow() {
@@ -108,12 +109,13 @@ open () {
   # Open a link in the default browser
   #
   # Args:
-  #   $1: Link
-  if [ -n "$1" ]; then
-    $BROWSER "$1"
-  else
+  #   $1: link
+  if [ -z "$1" ]; then
     echo Miss link
+    return 1
   fi
+
+  $BROWSER "$1"
 }
 
 cud() {
@@ -129,208 +131,95 @@ cud() {
   # If no arguments are passed, the time is set automatically.
   #
   # Args:
-  #   $1 (optional): Year
-  #   $2 (optional): Month
-  #   $3 (optional): Day
-  #   $4 (optional): Hour
-  #   $5 (optional): Minute
+  #   $1 (optional): year
+  #   $2 (optional): month
+  #   $3 (optional): day
+  #   $4 (optional): hour
+  #   $5 (optional): minute
   #
   # Without Args:
   #   Set the time to auto
-  if [ -n "$1" ]; then
-    if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
-      timedatectl setq-ntp false
-    fi
-
-    local year
-    if [[ $1 && "$1" != "*" ]]; then
-      year=$1
-    else
-      year=$(date +%Y)
-    fi
-
-    local month
-    if [[ $2 && "$2" != "*" ]]; then
-      month=$2
-    else
-      month=$(date +%m)
-    fi
-
-    local day
-    if [[ $3 && "$3" != "*" ]]; then
-      day=$3
-    else
-      day=$(date +%d)
-    fi
-
-    local hour
-    if [[ $4 && "$4" != "*" ]]; then
-
-      # Fix UTC differences
-
-      local timezone
-      timezone=$(date +%Z)
-
-      # - Get the absolute value of the difference
-      local diff
-      diff=$(grep -Po '(?<=\+|-)[0-9]+' <<< "$timezone")
-
-      # - When it's positive
-      if grep -Pq '[+](?<=[0-9])*' <<< "$timezone"; then
-        hour=$(($4 + $diff))
-
-      # - When it's negative
-      elif grep -Pq '[-](?<=[0-9])*' <<< "$timezone"; then
-        hour=$(($4 - $diff))
-
-      # - Whatever
-      else
-        hour=$4
-      fi
-
-    else
-      hour=$(date +%H)
-    fi
-
-    local minute
-    if [[ $5 && "$5" != "*" ]]; then
-      minute=$5
-    else
-      minute=$(date +%M)
-    fi
-
-    echo BEFORE: "$(date +"%Y-%m-%d %H:%M:%S")"
-    sudo date -s "$year-$month-$day $hour:$minute:$(date +%S)" >> /dev/null
-    echo AFTER: "$(date +"%Y-%m-%d %H:%M:%S")"
-  else
+  if [ -z "$1" ]; then
     timedatectl set-ntp true
     echo RESTORED: "$(date +"%Y-%m-%d %H:%M:%S")"
+    return 0
   fi
-}
 
-wgc() {
-  # Clone git repository in the appropriated workspace
-  #
-  # Args:
-  #   $1: "h" | "j": Clone for H or J workspace
-  #   $2: Repo
-  if [ -n "$1" ]; then
-    if [ -n "$2" ]; then
-      case $1 in
-        h|H)
-          git -C ~/Workspaces/H clone "$2"
-          ;;
-        j|J)
-          git -C ~/Workspaces/J clone "$2"
-          ;;
-        *)
-          echo Bad workspace
-          ;;
-      esac
-    else
-      echo Miss Repo
-    fi
-  else
-    echo Miss positional-only parameters. Workspace "( \"h\" | \"j\" )" and Repo
+  if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
+    timedatectl setq-ntp false
   fi
+
+  local year month day hour minute
+
+  if [[ $1 && "$1" != "*" ]]; then
+    year=$1
+  else
+    year=$(date +%Y)
+  fi
+
+  if [[ $2 && "$2" != "*" ]]; then
+    month=$2
+  else
+    month=$(date +%m)
+  fi
+
+  if [[ $3 && "$3" != "*" ]]; then
+    day=$3
+  else
+    day=$(date +%d)
+  fi
+
+  if [[ $4 && "$4" != "*" ]]; then
+
+    # Fix UTC differences
+    local timezone diff
+    timezone=$(date +%Z)
+
+    # - Get the absolute value of the difference
+    diff=$(grep -Po '(?<=\+|-)[0-9]+' <<< "$timezone")
+
+    # - When it's positive
+    if grep -Pq '[+](?<=[0-9])*' <<< "$timezone"; then
+      hour=$(($4 + $diff))
+
+    # - When it's negative
+    elif grep -Pq '[-](?<=[0-9])*' <<< "$timezone"; then
+      hour=$(($4 - $diff))
+
+    # - Whatever
+    else
+      hour=$4
+    fi
+
+  else
+    hour=$(date +%H)
+  fi
+
+  if [[ $5 && "$5" != "*" ]]; then
+    minute=$5
+  else
+    minute=$(date +%M)
+  fi
+
+  echo BEFORE: "$(date +"%Y-%m-%d %H:%M:%S")"
+  sudo date -s "$year-$month-$day $hour:$minute:$(date +%S)" >> /dev/null
+  echo AFTER: "$(date +"%Y-%m-%d %H:%M:%S")"
 }
 
 pk() {
   # Terminate all processes related to a port
   #
   # Args:
-  #   $1: Port
-  if [ -n "$1" ]; then
-    local processes
-    processes=$(lsof -t -i:"$1")
-    if [ -n "$processes" ]; then
-      kill -9 "$processes"
-    fi
-  else
+  #   $1: port
+  if [ -z "$1" ]; then
     echo Miss port
+    return 1
   fi
-}
 
-
-###############################################################################
-# Servers
-###############################################################################
-
-
-drs() {
-  # Run Django server in localhost
-  #
-  # Args:
-  #   $1 (optional): Port
-  if [ -n "$1" ]; then
-    python manage.py runserver 127.0.0.1:"$1"
-  else
-    python manage.py runserver
-  fi
-}
-
-hl() {
-  # Run Heroku server in localhost
-  #
-  # Args:
-  #   $1 (optional): Port
-  if [ -n "$1" ]; then
-    heroku local -p "$1"
-  else
-    heroku local
-  fi
-}
-
-ds() {
-  # Open Django shell
-  #
-  # Args:
-  #   $1 (optional): DB schema
-  if [ -n "$1" ]; then
-    python manage.py tenant_command --schema="$1"
-  else
-    python manage.py shell
-  fi
-}
-
-dsp() {
-  # Open Django shell extended version
-  #
-  # Args:
-  #   $1 (optional): DB schema
-  if [ -n "$1" ]; then
-    python manage.py tenant_command shell_plus --print-sql --schema="$1"
-  else
-    python manage.py shell_plus --print-sql
-  fi
-}
-
-hrs() {
-  # Open Django shell in a Heroku App
-  #
-  # Args:
-  #   $1: Heroku App
-  #   $2 (optional): DB schema
-  if [ -n "$1" ]; then
-    if [ -n "$2" ]; then
-      heroku run python manage.py tenant_command shell --schema="$2" -a "$1"
-    else
-      heroku run python manage.py shell -a "$1"
-    fi
-  else
-    echo Miss positional-only parameters: Heroku App, Tenant \(optional\)
-  fi
-}
-
-hrq() {
-  # Run PostgreSQL CLI in a Heroku App
-  #
-  # Args:
-  #   $1: Heroku App
-  if [ -n "$1" ]; then
-    heroku pg:psql -a "$1"
-  else
-    echo Miss Heroku App
+  local processes
+  processes=$(lsof -t -i:"$1")
+  if [ -n "$processes" ]; then
+    kill -9 "$processes"
   fi
 }
 
@@ -344,35 +233,50 @@ export PIPENV_VERBOSITY=-1
 export WORKON_HOME=~/.Envs/Python
 source ~/.local/bin/virtualenvwrapper.sh
 
+__check_py_virtual_env() {
+  if [[ $(python -c 'import os; print(1 if os.getenv("VIRTUAL_ENV") else 0)') == "1" ]]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 pyc() {
   # Create a python environment
   #
   # Args:
-  #   $1: Python interpreter source
-  #   $2: Env name
-  if [ -n "$1" ]; then
-    if [ -n "$2" ]; then
-      mkvirtualenv --system-site-packages -p "$1" "$2"
-      pip install virtualenvwrapper
-      pyd
-    else
-      echo Miss Env name
-    fi
-  else
-    echo Miss positional-only parameters: Python source, Env name
+  #   $1: python interpreter
+  #   $2: env name
+  if __check_py_virtual_env; then
+    echo Deactivate the actual python environment first
   fi
+
+  if [ -z "$1" ]; then
+    echo Miss python interpreter and env name
+    return 1
+  fi
+
+  if [ -z "$2" ]; then
+    echo Miss env name
+    return 1
+  fi
+
+  mkvirtualenv --system-site-packages -p "$1" "$2"
+  pip install virtualenvwrapper
+  pyd
 }
 
 pya() {
   # Activate a python environment
   #
   # Args:
-  #   $1: Env name
-  if [ -n "$1" ]; then
-    source $WORKON_HOME/"$1"/bin/activate
-  else
-    echo Miss Env name
+  #   $1: env name
+  if [ -z "$1" ]; then
+    echo Miss env name
+    return 1
   fi
+
+  source $WORKON_HOME/"$1"/bin/activate
 }
 
 pyl() {
@@ -384,19 +288,33 @@ pyr() {
   # Remove a python environment
   #
   # Args:
-  #   $1: Env name
-  if [ -n "$1" ]; then
-    rmvirtualenv "$1"
-  else
-    echo Miss Env name
+  #   $1: env name
+  if [ -z "$1" ]; then
+    echo Miss env name
+    return 1
   fi
+
+  rmvirtualenv "$1"
 }
 
 pyd() {
   # Deactivate the present python environment if any
-  if [[ $(python -c 'import os; print(1 if os.getenv("VIRTUAL_ENV") else 0)') == "1" ]]; then
+  if __check_py_virtual_env; then
     deactivate
   fi
+}
+
+
+###############################################################################
+# Deno and NodeJS
+###############################################################################
+
+
+source /usr/share/nvm/init-nvm.sh
+
+nd() {
+  # Use the default node version
+  nvm use node
 }
 
 
@@ -409,11 +327,89 @@ export WORKSPACE_H=~/Workspaces/H
 export WORKSPACE_J=~/Workspaces/J
 source ~/Workspaces/.hrc
 source ~/Workspaces/.jrc
+source ~/Workspaces/.crc
 
-cleanworkspaces() {
-  # Clean all workspaces
+__goto_clone() {
+  # Change to a clone of a repo
+  #
+  # Args:
+  #   $1: repo base folder
+  #   $2: repo name
+  #   $3: clone number
+  if [ -z "$3" ]; then
+    return 1
+  fi
+
+  local clone head_path
+  head_path="$1"/"$2"
+  clone="$head_path"/"$3"/"$2"
+  if [ -d "$clone" ]; then
+    cd "$clone" || return
+  else
+    echo Making clone nº "$3" using clone nº 1
+    cp "$head_path"/1/"$2" "$clone"
+    cd "$clone" || return
+  fi
+}
+
+clean() {
+  # Clean all workspaces envs
   #
   # It's mean all env vars and virtual envs set by the workspaces are removed
-  wh_cleanall
-  wj_cleanall
+  __wh_cleanall
+  __wj_cleanall
+  pyd
+  nd
+}
+
+wgc() {
+  # Clone git repository in the appropriated workspace
+  #
+  # Args:
+  #   $1: "h" | "j": Clone for H or J workspace
+  #   $2: repo user
+  #   $3: repo name
+  #   $4 (optional): base folder
+  #
+  # Example:
+  #   wgc h jackfrued Python-100-Days learn
+  if [ -z "$1" ]; then
+    echo Miss the definition of workspace "( \"h\" | \"j\" )", repo user and repo name
+    return 1
+  fi
+
+  if [ "$1" != h ] && [ "$1" != j ]; then
+    echo Bad workspace
+    return 1
+  fi
+
+  if [ -z "$2" ]; then
+    echo Miss repo user and repo name
+    return 1
+  fi
+
+  if [ -z "$3" ]; then
+    echo Miss repo name
+    return 1
+  fi
+
+  local workspace folder
+
+  case $1 in
+    h)
+      workspace=H
+      ;;
+    j)
+      workspace=J
+      ;;
+  esac
+
+  if [ -n "$4" ]; then
+    folder=~/Workspaces/"$workspace"/"$4"/"$3"/1
+  else
+    folder=~/Workspaces/"$workspace"/"$3"/1
+  fi
+
+  mkdir -p "$folder"
+  git -C "$folder" clone git@github.com:"$2"/"$3".git
 }

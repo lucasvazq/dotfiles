@@ -479,6 +479,10 @@
         "command": "workbench.action.toggleSidebarVisibility"
     },
     {
+        "key": "ctrl+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
         "key": "ctrl+k 0",
         "command": "workbench.files.action.showActiveFileInExplorer"
     },
