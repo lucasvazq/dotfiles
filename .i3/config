@@ -34,7 +34,6 @@ exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
 exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave'
 exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
-exec --no-startup-id i3-msg 'workspace 3:Terminal; append_layout ~/.i3/workspace-Terminal.json; exec alacritty'
 exec --no-startup-id i3-msg 'workspace 1:Web'
 
 #### Keybinds
@@ -89,7 +88,7 @@ bindsym $mod+f fullscreen toggle
 # Names
 set $ws1 "1:Web"
 set $ws2 "2:Ed"
-set $ws3 "3:Terminal"
+set $ws3 3
 set $ws4 4
 set $ws5 5
 set $ws6 6
