@@ -35,7 +35,7 @@ alias ls="ls -F -h --color=always -a"
 ###############################################################################
 
 
-bk() {
+function bk {
   # Change background and color scheme, and run neo function
   #
   # The color scheme is set using the selected background
@@ -50,13 +50,13 @@ bk() {
   neo
 }
 
-desc() {
+function desc {
   # Print the description of the Astronomic Picture of the Day
   cat ~/.config/wal/image-description.txt
 }
 desc # run at start
 
-fav() {
+function fav {
   # Set preferred color schema
   # Good themes:
   # - base16-materia
@@ -64,7 +64,7 @@ fav() {
   wal -q --theme sexy-theme2
 }
 
-lolban() {
+function lolban {
   # Print a rainbow message with special ASCII font
   #
   # Args:
@@ -79,12 +79,12 @@ lolban() {
   figlet "$@" -f ~/.local/share/figlet-fonts/3d.flf | lolcat
 }
 
-cow() {
+function cow {
   # Invoke a psychedelic cow that tells your fortune
   fortune | cowsay -w -f three-eyes | lolcat
 }
 
-neo() {
+function neo {
   # Run a custom neofetch config
 
   # If Ctrl+C is pressed, we clear the screen
@@ -105,7 +105,7 @@ neo() {
 # Alias for open the default UI editor
 alias ed=code
 
-open () {
+function open {
   # Open a link in the default browser
   #
   # Args:
@@ -118,7 +118,7 @@ open () {
   $BROWSER "$1"
 }
 
-cud() {
+function cud {
   # Interact with the current datetime
   #
   # You can change the datetime using UTC timezone, passing, in the following order, year, month, days, hours, and/or
@@ -206,7 +206,7 @@ cud() {
   echo AFTER: "$(date +"%Y-%m-%d %H:%M:%S")"
 }
 
-pk() {
+function pk {
   # Terminate all processes related to a port
   #
   # Args:
@@ -220,6 +220,8 @@ pk() {
   processes=$(lsof -t -i:"$1")
   if [ -n "$processes" ]; then
     kill -9 "$processes"
+  else
+    return 1
   fi
 }
 
@@ -233,7 +235,7 @@ export PIPENV_VERBOSITY=-1
 export WORKON_HOME=~/.Envs/Python
 source ~/.local/bin/virtualenvwrapper.sh
 
-__check_py_virtual_env() {
+function __check_py_virtual_env {
   if [[ $(python -c 'import os; print(1 if os.getenv("VIRTUAL_ENV") else 0)') == "1" ]]; then
     return 0
   else
@@ -241,7 +243,7 @@ __check_py_virtual_env() {
   fi
 }
 
-pyc() {
+function pyc {
   # Create a python environment
   #
   # Args:
@@ -266,7 +268,7 @@ pyc() {
   pyd
 }
 
-pya() {
+function pya {
   # Activate a python environment
   #
   # Args:
@@ -279,12 +281,12 @@ pya() {
   source $WORKON_HOME/"$1"/bin/activate
 }
 
-pyl() {
+function pyl {
   # List all python environments
   lsvirtualenv
 }
 
-pyr() {
+function pyr {
   # Remove a python environment
   #
   # Args:
@@ -297,7 +299,7 @@ pyr() {
   rmvirtualenv "$1"
 }
 
-pyd() {
+function pyd {
   # Deactivate the present python environment if any
   if __check_py_virtual_env; then
     deactivate
@@ -312,7 +314,7 @@ pyd() {
 
 source /usr/share/nvm/init-nvm.sh
 
-nd() {
+function nd {
   # Use the default node version
   nvm use node
 }
@@ -329,7 +331,7 @@ source ~/Workspaces/.hrc
 source ~/Workspaces/.jrc
 source ~/Workspaces/.crc
 
-__goto_clone() {
+function __goto_clone {
   # Change to a clone of a repo
   #
   # Args:
@@ -346,13 +348,13 @@ __goto_clone() {
   if [ -d "$clone" ]; then
     cd "$clone" || return
   else
-    echo Making clone nº "$3" using clone nº 1
+    echo Making clone number "$3" using clone number 1
     cp "$head_path"/1/"$2" "$clone"
     cd "$clone" || return
   fi
 }
 
-clean() {
+function clean {
   # Clean all workspaces envs
   #
   # It's mean all env vars and virtual envs set by the workspaces are removed
@@ -362,7 +364,7 @@ clean() {
   nd >> /dev/null
 }
 
-wgc() {
+function wgc {
   # Clone git repository in the appropriated workspace
   #
   # Args:

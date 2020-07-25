@@ -1,17 +1,17 @@
 #!/bin/sh
 
 
-__prompt_virtualenv() {
+function __prompt_virtualenv {
   if [[ -n $VIRTUAL_ENV && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     echo -n "[$(basename "$VIRTUAL_ENV")] "
   fi
 }
 
-__prompt_dir() {
+function __prompt_dir {
   echo -n "%{%F{blue}%}$(shrink_path -f)%{%F{default}%}"
 }
 
-__prompt_git() {
+function __prompt_git {
   (( $+commands[git] )) || return
 
   if [[ "$(git config --get oh-my-zsh.hide-status 2>/dev/null)" = 1 ]]; then
@@ -56,7 +56,7 @@ __prompt_git() {
   echo -n "%{%F{default}%} "
 }
 
-__prompt_end() {
+function __prompt_end {
   if [[ $RETVAL -ne 0 ]]; then
     echo -n "%{%F{red}%}x%{%F{default}%} "
   else
@@ -64,7 +64,7 @@ __prompt_end() {
   fi
 }
 
-__build_prompt() {
+function __build_prompt {
   RETVAL=$?
   __prompt_virtualenv
   __prompt_dir
