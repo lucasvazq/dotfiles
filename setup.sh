@@ -17,7 +17,7 @@ yay -Syu
 timedatectl set-ntp true
 
 # Make useful dirs
-mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J}
+mkdir -p ~/{.Envs,Workspaces/H/DB,Workspaces/J/DB}
 
 # Clean unused apps, folders and files
 yay -S trash-cli

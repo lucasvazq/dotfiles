@@ -14,11 +14,11 @@ function __prompt_dir {
 function __prompt_git {
   (( $+commands[git] )) || return
 
-  if [[ "$(git config --get oh-my-zsh.hide-status 2>/dev/null)" = 1 ]]; then
+  if [[ "$(git config --get oh-my-zsh.hide-status 2> /dev/null)" = 1 ]]; then
     return
   fi
 
-  if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
+  if $(git rev-parse --is-inside-work-tree > /dev/null 2>&1); then
     local dirty ref mode repo_path
 
     dirty=$(parse_git_dirty)
@@ -30,7 +30,7 @@ function __prompt_git {
 
     ref=$(git symbolic-ref HEAD 2> /dev/null) || ref="➦ $(git rev-parse --short HEAD 2> /dev/null)"
 
-    repo_path=$(git rev-parse --git-dir 2>/dev/null)
+    repo_path=$(git rev-parse --git-dir 2> /dev/null)
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
       mode=" <B>"
     elif [[ -e "${repo_path}/MERGE_HEAD" ]]; then
