@@ -359,7 +359,7 @@ clean() {
   __wh_cleanall
   __wj_cleanall
   pyd
-  nd
+  nd >> /dev/null
 }
 
 wgc() {
