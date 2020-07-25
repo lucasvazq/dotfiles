@@ -17,7 +17,7 @@ yay -Syu
 timedatectl set-ntp true
 
 # Make useful dirs
-mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J,Workspaces/.workspaces}
+mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J}
 
 # Clean unused apps, folders and files
 yay -S trash-cli
@@ -60,7 +60,6 @@ trash -rf ~/shell-color-scripts
 # Code editors
 yay -S visual-studio-code-bin neovim gedit
 code --install-extension alefragnani.bookmarks
-code --install-extension alefragnani.project-manager
 code --install-extension batisteo.vscode-django
 code --install-extension bierner.markdown-checkbox
 code --install-extension cdonohue.quill-icons
