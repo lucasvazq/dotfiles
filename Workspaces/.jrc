@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-wj_cleanall() {
+function wj_cleanall {
     # Clean env vars and virtual envs of J workspaces
     #
     # When we switch from one work environment to another, we often want to

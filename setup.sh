@@ -17,7 +17,7 @@ yay -Syu
 timedatectl set-ntp true
 
 # Make useful dirs
-mkdir -p ~/{.Envs,Workspaces/H,Workspaces/J,Workspaces/.workspaces}
+mkdir -p ~/{.Envs,Workspaces/H/DB,Workspaces/J/DB}
 
 # Clean unused apps, folders and files
 yay -S trash-cli
@@ -46,7 +46,7 @@ yay -S pulseeffects
 yay -S brave google-chrome-stable
 
 # Terminal
-yay -S alacritty tmux heroku-cli neofetch cowsay fortune-mod figlet pipes.sh lolcat
+yay -S alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 trash ~/.zshrc.pre-oh-my-zsh
 chsh -s "$(which zsh) $USER"
@@ -60,7 +60,6 @@ trash -rf ~/shell-color-scripts
 # Code editors
 yay -S visual-studio-code-bin neovim gedit
 code --install-extension alefragnani.bookmarks
-code --install-extension alefragnani.project-manager
 code --install-extension batisteo.vscode-django
 code --install-extension bierner.markdown-checkbox
 code --install-extension cdonohue.quill-icons
@@ -115,10 +114,9 @@ git config --global color.diff.whitespace "red reverse"
 # Python
 pip install pipenv virtualenvwrapper ipython ipykernel pywal --user
 
-# PostgreSQL
-yay -S postgresql
-sudo systemctl enable postgresql.service
-psql -U postgres -c "CREATE ROLE $USER WITH SUPERUSER LOGIN"
+# Deno and NodeJS
+yay -S deno nvm
+nvm install node
 
 # Fonts
 yay -S noto-fonts-emoji
