@@ -22,8 +22,9 @@ def main() -> NoReturn:
     APD site: https://apod.nasa.gov/apod/astropix.html
 
     Some changes to site structure or connection problems may generate
-    exceptions. If this occurs, we set a random background and schema colors.
-    The image is saved in ~/Pictures/Wallpapers folder.
+    problems. If this occurs, we set a random background and scheme colors.
+    Else, the image is saved in ~/Pictures/Wallpapers folder and the color
+    scheme and the background is setted using that picture.
     """
 
     def change_background(image_path: Optional[str] = None) -> NoReturn:

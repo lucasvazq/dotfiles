@@ -8,6 +8,7 @@
 4) [Python](#python)
 
 ## Weird zone
+
 ```yaml
 - bk
 Change background image and general color scheme.
@@ -31,6 +32,7 @@ Take selfie from space.
 ```
 
 ## Productivity
+
 ```yaml
 - ed
 Open code editor.
@@ -42,48 +44,42 @@ Open link with the default browser.
 Change the timezone based on UTC. You can pass the year, month, day, hour or
 minute. Otherwise, if you don't pass any arguments, the time sets to auto.
 
-- wgc
-Clone a repo in any of the workspaces.
-
 - pk
 Kill a process running in a custom port.
 ```
 
-## Servers
-```yaml
-- drs
-Run Django server. You can specify the port.
-
-- hl
-Run Heroku server. You can specify the port.
-
-- ds
-Open Django shell. You can specify a db schema.
-
-- dsp
-Open Django shell extended version. You can specify a db schema.
-
-- hrs
-Open Django shell in a Heroku App. You can specify a db schema.
-
-- hrq
-Open PostgreSQL CLI in a Heroku App.
-```
-
 ## Python
+
 ```yaml
 - pyc
-Create Python environment.
+Create a python environment.
 
 - pya
-Activate Python environment.
+Activate a python environment.
 
 - pyl
-List all Python environments.
+List all python environments.
 
 - pyr
-Remove Python environment.
+Remove a python environment.
 
 - pyd
-Deactivate Python environment if any.
+Deactivate the present python environment if any.
+```
+
+## Deno and NodeJS
+
+```yaml
+- nd
+Use the default node version.
+```
+
+## Workspaces
+
+```yaml
+- clean
+Clean all workspaces envs
+
+- wgc
+Clone a repo in any of the workspaces.
 ```

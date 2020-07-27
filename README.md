@@ -12,7 +12,7 @@
 
 _When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
 _Based on the colors of this image, the general color scheme of the rest of the components of your ship was established._
-_I've improved it for coding in Python, using tmux and Vscode. Also, there are some default services: PostgreSQL for the database, Github for Git repository hosting and Heroku for creating apps._
+_I've improved it for coding in Python, Deno and NodeJS, using tmux, Vscode and Github._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
@@ -35,10 +35,9 @@ shutdown -r now
 
 After rebooting, there are other things you should do manually
 
-**Establish secure communications with Github and Heroku**
+**Establish secure communications with Github**
 
 ```sh
-heroku login
 git config --global user.name "YOUR_NAME"
 git config --global user.email "YOUR_EMAIL"
 ```
@@ -62,6 +61,10 @@ _The second situation in which we can find ourselves developing is when we do it
 _This is why it seemed appropriate to me to have two separate folders where the works we carry out are kept, depending on the situation we are in when we develop them._
 _The works that we do as hobbies are stored in `~/Workspaces/H`, those that we carry out under responsibilities are located in `~/Workspaces/J`._
 _Everything related with the command interpreter, that are related to the **H** folder, are stored in `~/Workspaces/.hrc`. Everything related to the other folder, in `~/Workspaces/.jrc`._
+_For databases there is also a special place. For each workspace there is a **DB** folder._
+_The idea behind this is to store, in these folders, all the backup copies of the databases related to each of the repositories for each of the corresponding workspaces._
+_Finally, I want to make a special mention of one more file._
+_Some functions and variables belong to the workspace and that can be useful for both. That is why these functions and variables must be located in the `~/Workspaces/.crc` file._
 
 Considering the words above, there are a couple of things to know to approach this methodology:
 
