@@ -58,6 +58,17 @@ def main() -> NoReturn:
             description_match = re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text)
             if description_match:
                 description = description_match.groupdict()['description'].strip()
+
+                # Prevent exiftool error: empty rdf:Seq list error
+                subprocess.call((
+                    "exiftool",
+                    "-xmp:all=",
+                    "-tagsfromfile",
+                    "@",
+                    "-xmp:all",
+                    destination_path,
+                ))
+
                 subprocess.call((
                     "exiftool",
                     "-overwrite_original",
