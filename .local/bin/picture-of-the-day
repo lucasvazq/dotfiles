@@ -59,7 +59,7 @@ def main() -> NoReturn:
             if description_match:
                 description = description_match.groupdict()['description'].strip()
 
-                # Prevent empty rdf:Seq list error
+                # Prevent exiftool error: empty rdf:Seq list error
                 subprocess.call((
                     "exiftool",
                     "-xmp:all=",
