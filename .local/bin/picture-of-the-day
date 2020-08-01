@@ -60,6 +60,14 @@ def main() -> NoReturn:
                 description = description_match.groupdict()['description'].strip()
                 subprocess.call((
                     "exiftool",
+                    "-xmp:all=",
+                    "-tagsfromfile",
+                    "@",
+                    "-xmp:all",
+                    destination_path,
+                ))
+                subprocess.call((
+                    "exiftool",
                     "-overwrite_original",
                     f"-Description=\"{description}\"",
                     destination_path,
