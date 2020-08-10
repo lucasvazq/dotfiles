@@ -23,10 +23,12 @@
     "files.exclude": {
         "**/**.pyc": true
     },
+    "scm.diffDecorations": "none",
     "search.exclude": {
         "**/htmlcov": true,
         "**/locale": true
     },
+    "search.searchEditor.defaultNumberOfContextLines": null,
     "search.searchOnType": false,
     "search.showLineNumbers": true,
     "telemetry.enableTelemetry": false,
