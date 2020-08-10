@@ -1,4 +1,7 @@
 {
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "editor.accessibilitySupport": "on",
     "editor.find.seedSearchStringFromSelection": false,
     "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans'",
@@ -28,7 +31,7 @@
     "search.showLineNumbers": true,
     "telemetry.enableTelemetry": false,
     "window.menuBarVisibility": "toggle",
-    "window.zoomLevel": -2,
+    "window.zoomLevel": -1,
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Wal",
     "workbench.iconTheme": "quill-icons",
@@ -108,6 +111,7 @@
     "indentRainbow.ignoreLinePatterns" : [
         "/^[ \t]*$/g",
     ],
+    "prettier.printWidth": 999,
     "python.languageServer": "Pylance",
     "textmarker.autoSelectDistinctiveTextColor": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"

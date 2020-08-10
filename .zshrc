@@ -349,7 +349,8 @@ function __goto_clone {
     cd "$clone" || return
   else
     echo Making clone number "$3" using clone number 1
-    cp "$head_path"/1/"$2" "$clone"
+    mkdir "$head_path"/"$3"
+    cp -r "$head_path"/1/"$2" "$clone"
     cd "$clone" || return
   fi
 }
