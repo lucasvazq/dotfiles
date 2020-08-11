@@ -4,7 +4,7 @@
     },
     "editor.accessibilitySupport": "on",
     "editor.find.seedSearchStringFromSelection": false,
-    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans'",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Color Emoji', 'Noto Sans Mono'",
     "editor.lineHeight": 17,
     "editor.minimap.enabled": false,
     "editor.rulers": [
