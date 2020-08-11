@@ -219,7 +219,7 @@ function pk {
   local processes
   processes=$(lsof -t -i:"$1")
   if [ -n "$processes" ]; then
-    echo -e "$processes" | while read pid; do
+    echo -e "$processes" | while read -r pid; do
       kill -9 "$pid"
     done
   else
