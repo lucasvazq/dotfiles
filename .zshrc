@@ -146,7 +146,7 @@ function cud {
   fi
 
   if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
-    timedatectl setq-ntp false
+    timedatectl set-ntp false
   fi
 
   local year month day hour minute
