@@ -61,11 +61,13 @@ trash -rf ~/shell-color-scripts
 yay -S visual-studio-code-bin neovim gedit
 code --install-extension alefragnani.bookmarks
 code --install-extension batisteo.vscode-django
+code --install-extension be5invis.vscode-icontheme-nomo-dark
 code --install-extension bierner.markdown-checkbox
-code --install-extension cdonohue.quill-icons
 code --install-extension christian-kohler.path-intellisense
 code --install-extension chunsen.bracket-select
+code --install-extension dbaeumer.vscode-eslint
 code --install-extension dlasagno.wal-theme
+code --install-extension esbenp.prettier-vscode
 code --install-extension iocave.customize-ui
 code --install-extension kaiwood.indentation-level-movement
 code --install-extension krnik.vscode-jumpy

@@ -195,6 +195,7 @@ editor.action.replaceAll:                           Ctrl+Shift+Alt+1
 closeFindWidget:                                    Alt+p
 
 # File search
+search.action.openInEditor:                         Ctrl+k Alt+u
 search.action.replaceAll:                           Ctrl+Shift+Alt+1
 search.focus.previousInputBox:                      Ctrl+Alt+k
 search.focus.nextInputBox:                          Ctrl+Alt+l
