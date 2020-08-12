@@ -17,6 +17,7 @@ x-scheme-handler/mailto=brave-browser.desktop
 message/rfc822=userapp-brave-browser.desktop
 application/pdf=epdfview.desktop
 application/x-bittorrent=deluge.desktop
+x-scheme-handler/webcal=brave-browser.desktop
 
 [Added Associations]
 x-scheme-handler/http=brave-browser.desktop;
@@ -37,5 +38,6 @@ x-scheme-handler/mailto=userapp-Thunderbird.desktop;
 message/rfc822=userapp-Thunderbird.desktop;
 application/pdf=brave-browser.desktop;epdfview.desktop;
 application/x-bittorrent=deluge.desktop;
-video/mp4=brave-browser.desktop;
-audio/x-mpegurl=brave-browser.desktop;
+video/mp4=brave-vlc.desktop;
+audio/x-mpegurl=vlc.desktop;
+video/webm=vlc.desktop;
