@@ -36,7 +36,7 @@
     "window.zoomLevel": -1,
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Wal",
-    "workbench.iconTheme": "quill-icons",
+    "workbench.iconTheme": "vs-nomo-dark",
     "workbench.sideBar.location": "right",
     "workbench.startupEditor": "none",
     "workbench.statusBar.visible": true,

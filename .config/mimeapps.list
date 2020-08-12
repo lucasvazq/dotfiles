@@ -38,6 +38,6 @@ x-scheme-handler/mailto=userapp-Thunderbird.desktop;
 message/rfc822=userapp-Thunderbird.desktop;
 application/pdf=brave-browser.desktop;epdfview.desktop;
 application/x-bittorrent=deluge.desktop;
-video/mp4=brave-vlc.desktop;
+video/mp4=vlc.desktop;
 audio/x-mpegurl=vlc.desktop;
 video/webm=vlc.desktop;
