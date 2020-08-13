@@ -10,7 +10,7 @@ set $mod Mod4
 set $alt Mod1
 
 # Font for window titles
-font xft:JetBrainsMono Nerd Font Mono 10
+font xft:JetBrainsMono Nerd Font Mono 10, xft:Noto Color Emoji 10, xft:Noto Sans Mono 10
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border normal
@@ -197,7 +197,7 @@ set_from_resource $color13 color13
 set_from_resource $color14 color14
 set_from_resource $color15 color15
 
-# class                 border      background  text        indicator   child_border
+# class                 border      background  text        indicator
 client.focused          $color1     $color1     $color7     $color1
 client.focused_inactive $color0     $color0     $color7     $color0
 client.unfocused        $color0     $color0     $color7     $color0

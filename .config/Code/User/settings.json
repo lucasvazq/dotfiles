@@ -1,7 +1,10 @@
 {
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "editor.accessibilitySupport": "on",
     "editor.find.seedSearchStringFromSelection": false,
-    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Sans'",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Noto Color Emoji', 'Noto Sans Mono'",
     "editor.lineHeight": 17,
     "editor.minimap.enabled": false,
     "editor.rulers": [
@@ -20,18 +23,20 @@
     "files.exclude": {
         "**/**.pyc": true
     },
+    "scm.diffDecorations": "none",
     "search.exclude": {
         "**/htmlcov": true,
         "**/locale": true
     },
+    "search.searchEditor.defaultNumberOfContextLines": null,
     "search.searchOnType": false,
     "search.showLineNumbers": true,
     "telemetry.enableTelemetry": false,
     "window.menuBarVisibility": "toggle",
-    "window.zoomLevel": -2,
+    "window.zoomLevel": -1,
     "workbench.activityBar.visible": false,
     "workbench.colorTheme": "Wal",
-    "workbench.iconTheme": "quill-icons",
+    "workbench.iconTheme": "vs-nomo-dark",
     "workbench.sideBar.location": "right",
     "workbench.startupEditor": "none",
     "workbench.statusBar.visible": true,
@@ -108,6 +113,7 @@
     "indentRainbow.ignoreLinePatterns" : [
         "/^[ \t]*$/g",
     ],
+    "prettier.printWidth": 999,
     "python.languageServer": "Pylance",
     "textmarker.autoSelectDistinctiveTextColor": true,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"

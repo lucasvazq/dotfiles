@@ -3,7 +3,9 @@
 ! #############################################################################
 
 
-URxvt*font:                         xft:JetBrainsMono Nerd Font Mono:pixelsize=15:minspace=False
+URxvt*font:                         xft:JetBrainsMono Nerd Font Mono:pixelsize=15:minspace=False, \
+                                    xft:Noto Color Emoji:style=Regular, \
+                                    xft:Noto Sans Mono:style=Regular
 URxvt*inheritPixmap:                true
 URxvt*transparent:                  true
 

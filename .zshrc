@@ -125,9 +125,9 @@ function cud {
   # minutes.
   # All of these args are optional, and you can pass a year without passing month using the next format: "cud 2020".
   # This set the actual year to 2020, keeping all other values.
-  # Also, you can pass month ignoring year using an asterisk (*). E.g. "cud * 12". This set the month to December,
+  # Also, you can pass month ignoring year using a dot (.). E.g. "cud . 12". This set the month to December,
   # keeping all other values.
-  # Another example: "cud * * * 15 12" set the time to UTC 3:12 p.m. maintaining the year, month and day.
+  # Another example: "cud . . . 15 12" set the time to UTC 3:12 p.m. maintaining the year, month and day.
   # If no arguments are passed, the time is set automatically.
   #
   # Args:
@@ -146,30 +146,30 @@ function cud {
   fi
 
   if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
-    timedatectl setq-ntp false
+    timedatectl set-ntp false
   fi
 
   local year month day hour minute
 
-  if [[ $1 && "$1" != "*" ]]; then
+  if [[ $1 && "$1" != "." ]]; then
     year=$1
   else
     year=$(date +%Y)
   fi
 
-  if [[ $2 && "$2" != "*" ]]; then
+  if [[ $2 && "$2" != "." ]]; then
     month=$2
   else
     month=$(date +%m)
   fi
 
-  if [[ $3 && "$3" != "*" ]]; then
+  if [[ $3 && "$3" != "." ]]; then
     day=$3
   else
     day=$(date +%d)
   fi
 
-  if [[ $4 && "$4" != "*" ]]; then
+  if [[ $4 && "$4" != "." ]]; then
 
     # Fix UTC differences
     local timezone diff
@@ -195,7 +195,7 @@ function cud {
     hour=$(date +%H)
   fi
 
-  if [[ $5 && "$5" != "*" ]]; then
+  if [[ $5 && "$5" != "." ]]; then
     minute=$5
   else
     minute=$(date +%M)
@@ -219,7 +219,9 @@ function pk {
   local processes
   processes=$(lsof -t -i:"$1")
   if [ -n "$processes" ]; then
-    kill -9 "$processes"
+    echo -e "$processes" | while read -r pid; do
+      kill -9 "$pid"
+    done
   else
     return 1
   fi
@@ -349,7 +351,8 @@ function __goto_clone {
     cd "$clone" || return
   else
     echo Making clone number "$3" using clone number 1
-    cp "$head_path"/1/"$2" "$clone"
+    mkdir "$head_path"/"$3"
+    cp -r "$head_path"/1/"$2" "$clone"
     cd "$clone" || return
   fi
 }
