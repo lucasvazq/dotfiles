@@ -197,7 +197,7 @@ set_from_resource $color13 color13
 set_from_resource $color14 color14
 set_from_resource $color15 color15
 
-# class                 border      background  text        indicator   child_border
+# class                 border      background  text        indicator
 client.focused          $color1     $color1     $color7     $color1
 client.focused_inactive $color0     $color0     $color7     $color0
 client.unfocused        $color0     $color0     $color7     $color0

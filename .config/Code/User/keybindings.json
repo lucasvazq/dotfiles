@@ -400,6 +400,11 @@
         "when": "editorFocus && findWidgetVisible"
     },
     {
+        "key": "ctrl+k alt+u",
+        "command": "search.action.openInEditor",
+        "when": "hasSearchResult && searchViewletFocus"
+    },
+    {
         "key": "ctrl+shift+alt+1",
         "command": "search.action.replaceAll",
         "when": "replaceActive && searchViewletVisible && !findWidgetVisible"
