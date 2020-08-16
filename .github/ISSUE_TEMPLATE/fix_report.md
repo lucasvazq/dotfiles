@@ -1,18 +1,14 @@
 ---
-name: Bug report
+name: Fix report
 about: Create a report to help us improve
 title: ''
-labels: 'bug'
+labels: 'fix'
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
-
-**To Reproduce**
-Steps to reproduce the behavior:
-
+**Describe the fix**
+A clear and concise description of what the fix is about.
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
