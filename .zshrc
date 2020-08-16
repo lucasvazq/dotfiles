@@ -265,7 +265,7 @@ function pyc {
     return 1
   fi
 
-  mkvirtualenv --system-site-packages -p "$1" "$2"
+  mkvirtualenv -p "$1" "$2"
   pip install virtualenvwrapper
   pyd
 }
