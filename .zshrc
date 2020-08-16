@@ -238,7 +238,7 @@ export WORKON_HOME=~/.Envs/Python
 source ~/.local/bin/virtualenvwrapper.sh
 
 function __check_py_virtual_env {
-  if [[ $(python -c "import os; print(1 if os.getenv(\"VIRTUAL_ENV\") else 0)") == "1" ]]; then
+  if [[ $(python -c "import os; print(1 if os.getenv('VIRTUAL_ENV') else 0)") == "1" ]]; then
     return 0
   else
     return 1
