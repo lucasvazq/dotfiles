@@ -246,17 +246,17 @@ function __check_py_virtual_env {
 }
 
 function pyc {
-  # Create a python environment
+  # Create a Python environment
   #
   # Args:
-  #   $1: python interpreter
+  #   $1: Python interpreter
   #   $2: env name
   if __check_py_virtual_env; then
-    echo Deactivate the actual python environment first
+    echo Deactivate the actual Python environment first
   fi
 
   if [ -z "$1" ]; then
-    echo Miss python interpreter and env name
+    echo Miss Python interpreter and env name
     return 1
   fi
 
@@ -271,7 +271,7 @@ function pyc {
 }
 
 function pya {
-  # Activate a python environment
+  # Activate a Python environment
   #
   # Args:
   #   $1: env name
@@ -284,12 +284,12 @@ function pya {
 }
 
 function pyl {
-  # List all python environments
+  # List all Python environments
   lsvirtualenv
 }
 
 function pyr {
-  # Remove a python environment
+  # Remove a Python environment
   #
   # Args:
   #   $1: env name
@@ -302,7 +302,7 @@ function pyr {
 }
 
 function pyd {
-  # Deactivate the present python environment if any
+  # Deactivate the present Python environment if any
   if __check_py_virtual_env; then
     deactivate
   fi
@@ -315,11 +315,14 @@ function pyd {
 
 
 source /usr/share/nvm/init-nvm.sh
-export DENO_INSTALL=~/.deno
-export PATH="$DENO_INSTALL/bin:$PATH"
+
+function dd {
+  # Use default Deno version
+  dvm use v1.3.0
+}
 
 function nd {
-  # Use the default node version
+  # Use the default NodeJS version
   nvm use node
 }
 
