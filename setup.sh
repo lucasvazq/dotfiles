@@ -7,58 +7,77 @@
 ###############################################################################
 
 
+# Ask for password and save it to don't ask for it again in the future
+local correct_password password
+correct_password=false
+until [ $correct_password ]; do
+    echo -n "Password: "
+    IFS= read -rs password
+    sudo -k
+    if echo "$password" | sudo -Sl &> /dev/null; then
+        correct_password=true
+    fi
+done
+
 # Config yay
-yay --save --nocleanmenu --nodiffmenu
+yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides
 
 # Update and Upgrade
-yay -Syu
+yay -Syu --noconfirm
 
 # Update timezone
-timedatectl set-ntp true
+echo "$password" | sudo -S timedatectl set-ntp true
 
 # Make useful dirs
 mkdir -p ~/{.Envs,Pictures/Screenshots,Workspaces/H/DB,Workspaces/J/DB}
 
 # Clean unused apps, folders and files
-yay -S trash-cli
-trash Desktop Music Public Templates Videos
-yay -R deluge hexchat
+yes | yay -S --noconfirm trash-cli
+trash ~/Desktop ~/Music ~/Public ~/Templates ~/Videos
+yes | yay -R --noconfirm deluge hexchat
 trash ~/.config/hexchat
 trash ~/.config/compton.conf
 
 
 ###############################################################################
-# Install apps
+# Installations
 ###############################################################################
 
 
+# Fonts
+yes | yay -S --noconfirm noto-fonts-emoji
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+unzip -d ~/.local/share/fonts JetBrainsMono.zip
+trash JetBrainsMono.zip
+fc-cache ~/.local/share/fonts
+
 # Launcher
-yay -S rofi rofimoji
+yes | yay -S --noconfirm rofi rofimoji
 
 # Status bar
-polybar
+yes | yay -S --noconfirm polybar
 
 # Audio
-install_pulse # run pulseaudio builtin installer
-yay -S pulseeffects
+yes | yay -S lib32-jack && yes | install_pulse # run pulseaudio builtin installer
+yes | yay -S --noconfirm pulseeffects
 
 # Browsers
-yay -S brave google-chrome-stable
+yes | yay -S --noconfirm brave google-chrome-stable
 
 # Terminal
-yay -S alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+yes | yay -S --noconfirm alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
+yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 trash ~/.zshrc.pre-oh-my-zsh
-chsh -s "$(which zsh) $USER"
+echo "$password" | chsh -s "$(which zsh) $USER"
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
 sudo mkdir /opt/shell-color-scripts
-sudo mv ~/shell-color-scripts/colorscripts /opt/shell-color-scripts
-sudo mv ~/shell-color-scripts/colorscript.sh /usr/bin/colorscript
-trash -rf ~/shell-color-scripts
+sudo mv ./shell-color-scripts/colorscripts /opt/shell-color-scripts
+sudo mv ./shell-color-scripts/colorscript.sh /usr/bin/colorscript
+trash -rf ./shell-color-scripts
 
 # Code editors
-yay -S visual-studio-code-bin neovim gedit
+yes | yay -S --noconfirm visual-studio-code-bin neovim gedit
 code --install-extension alefragnani.bookmarks
 code --install-extension batisteo.vscode-django
 code --install-extension be5invis.vscode-icontheme-nomo-dark
@@ -91,13 +110,13 @@ code --install-extension wholroyd.jinja
 code --install-extension ybaumes.highlight-trailing-white-spaces
 
 # Image editors
-yay -S inkscape pinta
+yes | yay -S --noconfirm inkscape pinta
 
 # Others
-yay -S mplayer unzip zip numlockx unclutter perl-anyevent-i3 slop
+yes | yay -S --noconfirm mplayer unzip zip slop numlockx unclutter perl-anyevent-i3
 
 # Git
-yay -S github-cli diff-so-fancy
+yes | yay -S --noconfirm github-cli diff-so-fancy
 git config --global pull.rebase false
 git config --global core.excludesfile ~/.config/git/.gitignore
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
@@ -117,15 +136,9 @@ git config --global color.diff.whitespace "red reverse"
 pip install pipenv virtualenvwrapper ipython ipykernel pywal --user
 
 # Deno and NodeJS
-yay -S deno nvm
+curl -fsSL https://deno.land/x/install/install.sh | sh
+yes | yay -S --noconfirm nvm
 nvm install node
-
-# Fonts
-yay -S noto-fonts-emoji
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
-unzip -d ~/.local/share/fonts JetBrainsMono.zip
-trash JetBrainsMono.zip
-fc-cache ~/.local/share/fonts
 
 
 ###############################################################################
@@ -134,9 +147,8 @@ fc-cache ~/.local/share/fonts
 
 
 # Paste dotfiles and clean directory
-mv ./* ~/
-cd ..
-trash dotfiles .git .github CODE_OF_CONDUCT.md CONTRIBUTING.md LICENSE README.md docs screenshots.gif SECURITY.md setup.sh
+cp -r . ~/
+trash ~/dotfiles ~/.git ~/.github ~/CODE_OF_CONDUCT.md ~/CONTRIBUTING.md ~/LICENSE ~/README.md ~/docs ~/screenshots.gif ~/SECURITY.md ~/setup.sh
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background
