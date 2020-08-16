@@ -29,7 +29,7 @@ yay -Syu --noconfirm
 echo "$password" | sudo -S timedatectl set-ntp true
 
 # Make useful dirs
-mkdir -p ~/{.Envs,Workspaces/H/DB,Workspaces/J/DB}
+mkdir -p ~/{.Envs,Pictures/Screenshots,Workspaces/H/DB,Workspaces/J/DB}
 
 # Clean unused apps, folders and files
 yes | yay -S --noconfirm trash-cli
@@ -113,7 +113,7 @@ code --install-extension ybaumes.highlight-trailing-white-spaces
 yes | yay -S --noconfirm inkscape pinta
 
 # Others
-yes | yay -S --noconfirm mplayer unzip zip numlockx unclutter perl-anyevent-i3
+yes | yay -S --noconfirm mplayer unzip zip slop numlockx unclutter perl-anyevent-i3
 
 # Git
 yes | yay -S --noconfirm github-cli diff-so-fancy
@@ -153,6 +153,7 @@ trash ~/dotfiles ~/.git ~/.github ~/CODE_OF_CONDUCT.md ~/CONTRIBUTING.md ~/LICEN
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background
+chmod 711 ~/.local/bin/custom-scrot
 chmod 711 ~/.local/bin/picture-of-the-day
 chmod 711 ~/.local/bin/sleep-monitor
 chmod 711 ~/.local/bin/start-script
