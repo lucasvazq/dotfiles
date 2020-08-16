@@ -1,6 +1,4 @@
-# Terminal Functions
-
-## Index
+# Index
 
 1) [Weird zone](#weird-zone)
 2) [Productivity](#productivity)

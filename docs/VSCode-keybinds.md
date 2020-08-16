@@ -1,6 +1,4 @@
-# VSCode Keybinds
-
-## Index
+# Index
 
 1) [Text editor](#text-editor)
     - 1 [Cursors and Selections](#cursors-and-selections)

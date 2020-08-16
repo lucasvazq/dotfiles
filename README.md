@@ -13,7 +13,7 @@
 
 _When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
 _Based on the colors of this image, the general color scheme of the rest of the components of your ship was established._
-_I've improved it for coding in Python, Deno and NodeJS, using Tmux, VSCode and Github._
+_I've improved it for coding in Python, Deno and NodeJS, using tmux, VSCode and Github._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
@@ -78,7 +78,7 @@ Considering the words above, there are a couple of things to know to approach th
 
 ### Command center
 
-Using this ship is difficult because the steering wheel has been very tunned.
-I leave at hand a document that helps to know the customized keyboard shortcuts used for VScode, tmux, and i3, and that also lists all the useful functions that are available for the shell.
+Using this ship is difficult because the rudder has been very tunned.
+I leave at hand a wiki that helps to know the customized keyboard shortcuts used for VSCode, tmux, and i3, and that also lists all the useful functions that are available for the shell.
 
-[Command center](./docs/command_center.md)
+[Command center](https://github.com/lucasvazq/dotfiles/wiki)
