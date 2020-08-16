@@ -1,6 +1,4 @@
-# I3wm Keybinds
-
-## Index
+# Index
 
 1) [References](#references)
 2) [Apps](#apps)
