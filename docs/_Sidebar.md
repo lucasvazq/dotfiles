@@ -1,6 +1,7 @@
 # [Home](https://github.com/lucasvazq/dotfiles/wiki)
 
 ### Keybinds
+
 [Keyboard layout](https://github.com/lucasvazq/dotfiles/blob/master/docs/keyboard_layout.png)
 
 - [VSCode keybinds](https://github.com/lucasvazq/dotfiles/wiki/VSCode-keybinds)
