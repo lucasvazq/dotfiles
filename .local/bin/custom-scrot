@@ -1,0 +1,24 @@
+#!/bin/sh
+# Custom scrot command
+#
+# Flags:
+#   --select_screen: select part of the screen to be screenshotted
+
+
+if [[ "$1" == "--select_screen" ]]; then
+	SELECT_SCREEN=true
+else
+    SELECT_SCREEN=false
+fi
+
+FILENAME=~/Pictures/Screenshots/"$(date +%Y-%m-%d_%H-%M-%S)".png
+if [ "$SELECT_SCREEN" = true ]; then
+    SLOP_VALUE=$(slop -f "%x,%y,%w,%h")
+    if [ -n "$SLOP_VALUE" ]; then
+        scrot -a "$SLOP_VALUE" "$FILENAME"
+        notify-send "$FILENAME"
+    fi
+else
+    scrot "$FILENAME"
+    notify-send "$FILENAME"
+fi

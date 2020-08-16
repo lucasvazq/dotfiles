@@ -32,9 +32,9 @@ exec --no-startup-id unclutter
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
-exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave'
-exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
-exec --no-startup-id i3-msg 'workspace 1:Web'
+exec --no-startup-id i3-msg "workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave"
+exec --no-startup-id i3-msg "workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code"
+exec --no-startup-id i3-msg "workspace 1:Web"
 
 #### Keybinds
 bindsym $alt+1 exec brave
@@ -47,8 +47,8 @@ bindsym $mod+d exec --no-startup-id rofi -show run
 bindsym $mod+Shift+d exec --no-startup-id rofimoji
 bindsym $mod+z exec --no-startup-id morc_menu
 bindsym $mod+Ctrl+m exec pulseeffects
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+bindsym Print exec --no-startup-id custom-scrot
+bindsym $mod+Shift+Print exec --no-startup-id custom-scrot --select_screen
 
 
 ###############################################################################
@@ -204,7 +204,6 @@ client.unfocused        $color0     $color0     $color7     $color0
 client.urgent           $color1     $color1     $color7     $color1
 client.placeholder      $color0     $color0     $color7     $color0
 client.background       $color0
-
 
 
 ###############################################################################

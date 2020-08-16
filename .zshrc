@@ -61,7 +61,7 @@ function fav {
   # Good themes:
   # - base16-materia
   # - sexy-theme2
-  wal -q --theme sexy-theme2
+  wal -q --theme base16-materia
 }
 
 function lolban {
@@ -145,7 +145,7 @@ function cud {
     return 0
   fi
 
-  if [[ $(timedatectl show --value --property NTPSynchronized) == 'no' ]]; then
+  if [[ $(timedatectl show --value --property NTPSynchronized) == "no" ]]; then
     timedatectl set-ntp false
   fi
 
@@ -176,14 +176,14 @@ function cud {
     timezone=$(date +%Z)
 
     # - Get the absolute value of the difference
-    diff=$(grep -Po '(?<=\+|-)[0-9]+' <<< "$timezone")
+    diff=$(grep -Po "(?<=\+|-)[0-9]+" <<< "$timezone")
 
     # - When it's positive
-    if grep -Pq '[+](?<=[0-9])*' <<< "$timezone"; then
+    if grep -Pq "[+](?<=[0-9])*" <<< "$timezone"; then
       hour=$(($4 + $diff))
 
     # - When it's negative
-    elif grep -Pq '[-](?<=[0-9])*' <<< "$timezone"; then
+    elif grep -Pq "[-](?<=[0-9])*" <<< "$timezone"; then
       hour=$(($4 - $diff))
 
     # - Whatever
@@ -238,7 +238,7 @@ export WORKON_HOME=~/.Envs/Python
 source ~/.local/bin/virtualenvwrapper.sh
 
 function __check_py_virtual_env {
-  if [[ $(python -c 'import os; print(1 if os.getenv("VIRTUAL_ENV") else 0)') == "1" ]]; then
+  if [[ $(python -c "import os; print(1 if os.getenv('VIRTUAL_ENV') else 0)") == "1" ]]; then
     return 0
   else
     return 1
@@ -246,17 +246,17 @@ function __check_py_virtual_env {
 }
 
 function pyc {
-  # Create a python environment
+  # Create a Python environment
   #
   # Args:
-  #   $1: python interpreter
+  #   $1: Python interpreter
   #   $2: env name
   if __check_py_virtual_env; then
-    echo Deactivate the actual python environment first
+    echo Deactivate the actual Python environment first
   fi
 
   if [ -z "$1" ]; then
-    echo Miss python interpreter and env name
+    echo Miss Python interpreter and env name
     return 1
   fi
 
@@ -265,13 +265,13 @@ function pyc {
     return 1
   fi
 
-  mkvirtualenv --system-site-packages -p "$1" "$2"
+  mkvirtualenv -p "$1" "$2"
   pip install virtualenvwrapper
   pyd
 }
 
 function pya {
-  # Activate a python environment
+  # Activate a Python environment
   #
   # Args:
   #   $1: env name
@@ -284,12 +284,12 @@ function pya {
 }
 
 function pyl {
-  # List all python environments
+  # List all Python environments
   lsvirtualenv
 }
 
 function pyr {
-  # Remove a python environment
+  # Remove a Python environment
   #
   # Args:
   #   $1: env name
@@ -302,7 +302,7 @@ function pyr {
 }
 
 function pyd {
-  # Deactivate the present python environment if any
+  # Deactivate the present Python environment if any
   if __check_py_virtual_env; then
     deactivate
   fi
@@ -316,8 +316,13 @@ function pyd {
 
 source /usr/share/nvm/init-nvm.sh
 
+function dd {
+  # Use default Deno version
+  dvm use v1.3.0
+}
+
 function nd {
-  # Use the default node version
+  # Use the default NodeJS version
   nvm use node
 }
 

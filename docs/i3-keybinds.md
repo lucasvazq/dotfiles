@@ -1,6 +1,4 @@
-# I3wm Keybinds
-
-## Index
+# Index
 
 1) [References](#references)
 2) [Apps](#apps)
@@ -41,8 +39,8 @@ morc_menu:                                          $mod+z
 pulseeffects:                                       $mod+Ctrl+m
 
 # Screenshot
-i3-scrot:                                           Print
-i3-scrot -s:                                        $mod+Shift+Print
+custom_scrot:                                       Print
+custom_scrot --select_screen:                       $mod+Shift+Print
 ```
 
 ## Containers and desktop workspaces

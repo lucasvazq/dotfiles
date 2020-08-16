@@ -1,6 +1,4 @@
-# tmux Keybinds
-
-## Index
+# Index
 
 1) [Prefix](#prefix)
 2) [copy-mode-vi](#copy-mode-vi)

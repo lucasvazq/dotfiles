@@ -1,6 +1,4 @@
-# Terminal Functions
-
-## Index
+# Index
 
 1) [Weird zone](#weird-zone)
 2) [Productivity](#productivity)
@@ -52,26 +50,28 @@ Kill a process running in a custom port.
 
 ```yaml
 - pyc
-Create a python environment.
+Create a Python environment.
 
 - pya
-Activate a python environment.
+Activate a Python environment.
 
 - pyl
-List all python environments.
+List all Python environments.
 
 - pyr
-Remove a python environment.
+Remove a Python environment.
 
 - pyd
-Deactivate the present python environment if any.
+Deactivate the present Python environment if any.
 ```
 
 ## Deno and NodeJS
 
 ```yaml
+- dd
+Use the default Deno version.
 - nd
-Use the default node version.
+Use the default NodeJS version.
 ```
 
 ## Workspaces
