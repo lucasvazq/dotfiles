@@ -32,9 +32,9 @@ exec --no-startup-id unclutter
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id picom -b
 exec --no-startup-id nm-applet
-exec --no-startup-id i3-msg 'workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave'
-exec --no-startup-id i3-msg 'workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code'
-exec --no-startup-id i3-msg 'workspace 1:Web'
+exec --no-startup-id i3-msg "workspace 1:Web; append_layout ~/.i3/workspace-Web.json; exec brave"
+exec --no-startup-id i3-msg "workspace 2:Ed; append_layout ~/.i3/workspace-Ed.json; exec code"
+exec --no-startup-id i3-msg "workspace 1:Web"
 
 #### Keybinds
 bindsym $alt+1 exec brave

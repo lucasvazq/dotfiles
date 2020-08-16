@@ -28,7 +28,7 @@ def main() -> NoReturn:
     """
 
     def change_background(image_path: Optional[str] = None) -> NoReturn:
-        subprocess_args = ['change-background']
+        subprocess_args = ["change-background"]
         if image_path:
             subprocess_args.append(image_path)
         subprocess.call(subprocess_args)
@@ -41,13 +41,13 @@ def main() -> NoReturn:
             change_background()
 
         else:
-            image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
+            image_match = re.search(r"href='(?P<image>image\/\d{4}\/[^\"]*.jpg)'", web_response.text)
 
             if not image_match:
                 change_background()
 
             # Save the image
-            image_path = image_match.groupdict()['image']
+            image_path = image_match.groupdict()["image"]
             image = requests.get(f"{nasa_base_url}/{image_path}")
             image_name = image_path.split("/")[-1]
             destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
@@ -57,7 +57,7 @@ def main() -> NoReturn:
             # Add EXIF description tag to the image
             description_match = re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text)
             if description_match:
-                description = description_match.groupdict()['description'].strip()
+                description = description_match.groupdict()["description"].strip()
 
                 # Prevent exiftool error: empty rdf:Seq list error
                 subprocess.call((
@@ -72,7 +72,7 @@ def main() -> NoReturn:
                 subprocess.call((
                     "exiftool",
                     "-overwrite_original",
-                    f"-Description=\"{description}\"",
+                    f"-Description='{description}'",
                     destination_path,
                 ))
 
