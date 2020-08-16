@@ -217,7 +217,6 @@ label-muted = " VOL: MUTE "
 
 
 [module/wifi]
-DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}' | head -n1)
 type = internal/network
 interface = ${env:DEFAULT_NETWORK_INTERFACE}
 ping-interval = 0.5
