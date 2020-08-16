@@ -17,7 +17,7 @@ yay -Syu
 timedatectl set-ntp true
 
 # Make useful dirs
-mkdir -p ~/{.Envs,Workspaces/H/DB,Workspaces/J/DB}
+mkdir -p ~/{.Envs,Pictures/Screenshots,Workspaces/H/DB,Workspaces/J/DB}
 
 # Clean unused apps, folders and files
 yay -S trash-cli
@@ -94,7 +94,7 @@ code --install-extension ybaumes.highlight-trailing-white-spaces
 yay -S inkscape pinta
 
 # Others
-yay -S mplayer unzip zip numlockx unclutter perl-anyevent-i3
+yay -S mplayer unzip zip numlockx unclutter perl-anyevent-i3 slop
 
 # Git
 yay -S github-cli diff-so-fancy
