@@ -24,10 +24,10 @@ Run the following commands
 
 ```sh
 # ⚙ Go to the home folder and clone the repo ⚙
-cd && git clone git@github.com:lucasvazq/dotfiles && cd dotfiles
+cd && git clone https://github.com/lucasvazq/dotfiles.git && cd dotfiles
 
 # 🔥 Start launch 🔥
-./setup.sh
+chmod 777 ./setup.sh && ./setup.sh
 
 # 🚨 Restart the system 🚨
 shutdown -r now
