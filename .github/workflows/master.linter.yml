@@ -68,6 +68,14 @@ jobs:
           filter_mode: nofilter
           shellcheck_flags: "-s sh -e 1090,1091,2004,2039,2113"
 
+      - name: shellcheck for ~/.local/bin/custom-scrot
+        uses: reviewdog/action-shellcheck@v1.3.0
+        with:
+          pattern: "custom-scrot"
+          github_token: ${{ secrets.REVIEWDOG_GITHUB_API_TOKEN }}
+          filter_mode: nofilter
+          shellcheck_flags: "-s sh -e 1090,1091,2004,2039,2113"
+
       - name: shellcheck for ~/.local/bin/sleep-monitor
         uses: reviewdog/action-shellcheck@v1.3.0
         with:

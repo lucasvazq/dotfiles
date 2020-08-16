@@ -140,6 +140,7 @@ trash dotfiles .git .github CODE_OF_CONDUCT.md CONTRIBUTING.md LICENSE README.md
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background
+chmod 711 ~/.local/bin/custom-scrot
 chmod 711 ~/.local/bin/picture-of-the-day
 chmod 711 ~/.local/bin/sleep-monitor
 chmod 711 ~/.local/bin/start-script
