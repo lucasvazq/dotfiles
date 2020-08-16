@@ -1,9 +1,9 @@
 ---
-name: Fix report
-about: Create a report to help us improve
-title: ''
-labels: 'fix'
-assignees: ''
+name: Fix request
+about: Create a fix request to help us improve
+title: ""
+labels: "fix"
+assignees: ""
 
 ---
 

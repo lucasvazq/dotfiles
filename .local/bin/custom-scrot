@@ -13,7 +13,7 @@ fi
 
 FILENAME=~/Pictures/Screenshots/"$(date +%Y-%m-%d_%H-%M-%S)".png
 if [ "$SELECT_SCREEN" = true ]; then
-    SLOP_VALUE=$(slop -f '%x,%y,%w,%h')
+    SLOP_VALUE=$(slop -f "%x,%y,%w,%h")
     if [ -n "$SLOP_VALUE" ]; then
         scrot -a "$SLOP_VALUE" "$FILENAME"
         notify-send "$FILENAME"
