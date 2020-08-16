@@ -71,9 +71,9 @@ trash ~/.zshrc.pre-oh-my-zsh
 echo "$password" | chsh -s "$(which zsh) $USER"
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
-sudo mkdir /opt/shell-color-scripts
-sudo mv ./shell-color-scripts/colorscripts /opt/shell-color-scripts
-sudo mv ./shell-color-scripts/colorscript.sh /usr/bin/colorscript
+echo "$password" | sudo mkdir /opt/shell-color-scripts
+echo "$password" | sudo mv ./shell-color-scripts/colorscripts /opt/shell-color-scripts
+echo "$password" | sudo mv ./shell-color-scripts/colorscript.sh /usr/bin/colorscript
 trash -rf ./shell-color-scripts
 
 # Code editors
@@ -112,9 +112,6 @@ code --install-extension ybaumes.highlight-trailing-white-spaces
 # Image editors
 yes | yay -S --noconfirm inkscape pinta
 
-# Others
-yes | yay -S --noconfirm mplayer unzip zip slop numlockx unclutter perl-anyevent-i3
-
 # Git
 yes | yay -S --noconfirm github-cli diff-so-fancy
 git config --global pull.rebase false
@@ -140,6 +137,9 @@ curl -fsSL https://raw.githubusercontent.com/axetroy/dvm/master/install.sh | sud
 dvm install v1.3.0
 yes | yay -S --noconfirm nvm
 nvm install node
+
+# Others
+yes | yay -S --noconfirm mplayer unzip zip slop numlockx unclutter perl-anyevent-i3
 
 
 ###############################################################################
