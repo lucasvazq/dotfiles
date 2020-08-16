@@ -61,7 +61,7 @@ function fav {
   # Good themes:
   # - base16-materia
   # - sexy-theme2
-  wal -q --theme sexy-theme2
+  wal -q --theme base16-materia
 }
 
 function lolban {
@@ -315,6 +315,8 @@ function pyd {
 
 
 source /usr/share/nvm/init-nvm.sh
+export DENO_INSTALL=~/.deno
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 function nd {
   # Use the default node version
