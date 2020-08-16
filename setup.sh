@@ -14,7 +14,7 @@ until [ $correct_password ]; do
     echo -n "Password: "
     IFS= read -rs password
     sudo -k
-    if echo $password | sudo -Sl &> /dev/null; then
+    if echo "$password" | sudo -Sl &> /dev/null; then
         correct_password=true
     fi
 done
@@ -26,7 +26,7 @@ yay --save --answerclean None --answerdiff None --answeredit None --noremovemake
 yay -Syu --noconfirm
 
 # Update timezone
-echo $password | sudo -S timedatectl set-ntp true
+echo "$password" | sudo -S timedatectl set-ntp true
 
 # Make useful dirs
 mkdir -p ~/{.Envs,Workspaces/H/DB,Workspaces/J/DB}
@@ -68,7 +68,7 @@ yes | yay -S --noconfirm brave google-chrome-stable
 yes | yay -S --noconfirm alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
 yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 trash ~/.zshrc.pre-oh-my-zsh
-echo $password | chsh -s "$(which zsh) $USER"
+echo "$password" | chsh -s "$(which zsh) $USER"
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
 sudo mkdir /opt/shell-color-scripts
