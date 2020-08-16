@@ -133,7 +133,7 @@ git config --global color.diff.whitespace "red reverse"
 pip install pipenv virtualenvwrapper ipython ipykernel pywal --user
 
 # Deno and NodeJS
-echo "$password" | sudo -S $(curl -fsSL https://raw.githubusercontent.com/axetroy/dvm/master/install.sh | bash)
+echo "$password" | sudo -S "$(curl -fsSL https://raw.githubusercontent.com/axetroy/dvm/master/install.sh | bash)"
 dvm install v1.3.0
 yes | yay -S --noconfirm nvm
 nvm install node
