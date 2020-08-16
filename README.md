@@ -13,7 +13,7 @@
 
 _When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
 _Based on the colors of this image, the general color scheme of the rest of the components of your ship was established._
-_I've improved it for coding in Python, Deno and NodeJS, using tmux, Vscode and Github._
+_I've improved it for coding in Python, Deno and NodeJS, using Tmux, VSCode and Github._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
