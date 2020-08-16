@@ -71,9 +71,9 @@ trash ~/.zshrc.pre-oh-my-zsh
 echo "$password" | chsh -s "$(which zsh) $USER"
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
-echo "$password" | sudo mkdir /opt/shell-color-scripts
-echo "$password" | sudo mv ./shell-color-scripts/colorscripts /opt/shell-color-scripts
-echo "$password" | sudo mv ./shell-color-scripts/colorscript.sh /usr/bin/colorscript
+echo "$password" | sudo -S mkdir /opt/shell-color-scripts
+echo "$password" | sudo -S mv ./shell-color-scripts/colorscripts /opt/shell-color-scripts
+echo "$password" | sudo -S mv ./shell-color-scripts/colorscript.sh /usr/bin/colorscript
 trash -rf ./shell-color-scripts
 
 # Code editors
@@ -133,7 +133,7 @@ git config --global color.diff.whitespace "red reverse"
 pip install pipenv virtualenvwrapper ipython ipykernel pywal --user
 
 # Deno and NodeJS
-curl -fsSL https://raw.githubusercontent.com/axetroy/dvm/master/install.sh | sudo bash
+echo "$password" | sudo -S $(curl -fsSL https://raw.githubusercontent.com/axetroy/dvm/master/install.sh | bash)
 dvm install v1.3.0
 yes | yay -S --noconfirm nvm
 nvm install node
