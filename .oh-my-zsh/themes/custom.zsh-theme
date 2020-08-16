@@ -71,4 +71,4 @@ function __build_prompt {
   __prompt_git
   __prompt_end
 }
-export PROMPT='%{%f%b%k%}$(__build_prompt)'
+export PROMPT='%{%f%b%k%}$(__build_prompt)' # Don't use doble quotes
