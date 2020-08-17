@@ -1,7 +1,7 @@
 #!/bin/sh
 
 
-DEFAULT_NETWORK_INTERFACE="$(ip route | grep "^default" | awk '{print $5}' | head -n1)"
+DEFAULT_NETWORK_INTERFACE=$(ip route | grep "^default" | awk '{print $5}' | head -n1)
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export EDITOR=/usr/bin/nvim
