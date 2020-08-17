@@ -218,7 +218,7 @@ label-muted = " VOL: MUTE "
 
 [module/wifi]
 type = internal/network
-interface = ${env:DEFAULT_NETWORK_INTERFACE}
+interface = ${env:POLYBAR_DEFAULT_NETWORK_INTERFACE}
 ping-interval = 0.5
 interval = 0.5
 
