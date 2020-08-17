@@ -95,6 +95,6 @@ Considering the words above, there are a couple of things to know to approach th
 
 Using this ship is difficult because the rudder has been very tunned.
 
-I leave at hand a wiki that helps to know the customized keyboard shortcuts used for VSCode, tmux, and i3, and that also lists all the useful functions that are available for the shell.
+I leave at hand a wiki that helps to know the customized keyboard shortcuts used for VSCode, ranger, tmux, and i3, and that also lists all the useful functions that are available for the shell.
 
 [Command center](https://github.com/lucasvazq/dotfiles/wiki)

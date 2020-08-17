@@ -2,7 +2,7 @@
 
 
 ###############################################################################
-# General config
+# Basic config
 ###############################################################################
 
 
@@ -26,7 +26,10 @@ export ZSH_THEME=custom
 export plugins=(git virtualenv shrink-path)
 source $ZSH/oh-my-zsh.sh
 
-# Custom ls config
+# ranger config
+export RANGER_LOAD_DEFAULT_RC=false
+
+# ls alias
 alias ls="ls -F -h --color=always -a"
 
 

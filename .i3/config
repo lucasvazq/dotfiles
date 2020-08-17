@@ -98,6 +98,7 @@ set $ws9 9
 
 # Specify open type
 for_window [class="^.*"] border pixel 2
+for_window [class="^Viewnior$"] border normal
 for_window [class="^Pulseeffects$"] floating enable border pixel 2
 for_window [class="^Pavucontrol$"] floating enable border pixel 2
 for_window [class="^Nm-connection-editor$"] floating enable border pixel 2
