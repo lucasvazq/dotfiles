@@ -28,7 +28,6 @@ EXCLUDED_FILES = (
     'CONTRIBUTING.md',
     'LICENSE',
     'README.md',
-    'screenshots.gif',
     'SECURITY.md',
     'setup.sh',
 )
