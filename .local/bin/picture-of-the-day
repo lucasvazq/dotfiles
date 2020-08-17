@@ -41,7 +41,7 @@ def main() -> NoReturn:
             change_background()
 
         else:
-            image_match = re.search(r"href='(?P<image>image\/\d{4}\/[^\"]*.jpg)'", web_response.text)
+            image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
 
             if not image_match:
                 change_background()

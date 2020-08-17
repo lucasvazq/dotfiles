@@ -149,7 +149,7 @@ yes | yay -S --noconfirm mplayer unzip zip slop numlockx unclutter perl-anyevent
 
 # Paste dotfiles and clean directory
 cp -r . ~/
-trash ~/dotfiles ~/.git ~/.github ~/CODE_OF_CONDUCT.md ~/CONTRIBUTING.md ~/LICENSE ~/README.md ~/docs ~/screenshots.gif ~/SECURITY.md ~/setup.sh
+trash ~/dotfiles ~/.git ~/.github ~/CODE_OF_CONDUCT.md ~/CONTRIBUTING.md ~/LICENSE ~/README.md ~/docs ~/SECURITY.md ~/setup.sh
 
 # Give permissions to commands
 chmod 711 ~/.local/bin/change-background
