@@ -22,7 +22,7 @@ done
 yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides
 
 # Update and Upgrade
-yay -Syu
+yes | yay -Syu --sudoloop
 
 # Update timezone
 echo "$PASSWORD" | sudo -S timedatectl set-ntp true
