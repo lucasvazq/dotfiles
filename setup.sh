@@ -8,14 +8,13 @@
 
 
 # Ask for password and save it to don't ask for it again in the future
-local correct_password password
-correct_password=false
-until [ $correct_password ]; do
+CORRECT_PASSWORD=false
+until [ $CORRECT_PASSWORD ]; do
     echo -n "Password: "
-    IFS= read -rs password
+    IFS= read -rs PASSWORD
     sudo -k
-    if echo "$password" | sudo -Sl &> /dev/null; then
-        correct_password=true
+    if echo "$PASSWORD" | sudo -Sl &> /dev/null; then
+        CORRECT_PASSWORD=true
     fi
 done
 
@@ -23,18 +22,18 @@ done
 yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides
 
 # Update and Upgrade
-yay -Syu --noconfirm
+yes | yay -Syu --sudoloop
 
 # Update timezone
-echo "$password" | sudo -S timedatectl set-ntp true
+echo "$PASSWORD" | sudo -S timedatectl set-ntp true
 
 # Make useful dirs
 mkdir -p ~/{.Envs,Pictures/Screenshots,Workspaces/H/DB,Workspaces/J/DB}
 
 # Clean unused apps, folders and files
-yes | yay -S --noconfirm trash-cli
+yes | yay -S trash-cli
 trash ~/Desktop ~/Music ~/Public ~/Templates ~/Videos
-yes | yay -R --noconfirm deluge hexchat
+yes | yay -R deluge hexchat
 trash ~/.config/hexchat
 trash ~/.config/compton.conf
 
@@ -45,39 +44,39 @@ trash ~/.config/compton.conf
 
 
 # Fonts
-yes | yay -S --noconfirm noto-fonts-emoji
+yes | yay -S noto-fonts-emoji
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
 unzip -d ~/.local/share/fonts JetBrainsMono.zip
 trash JetBrainsMono.zip
 fc-cache ~/.local/share/fonts
 
 # Launcher
-yes | yay -S --noconfirm rofi rofimoji
+yes | yay -S rofi rofimoji
 
 # Status bar
-yes | yay -S --noconfirm polybar
+yes | yay -S polybar
 
 # Audio
 yes | yay -S lib32-jack && yes | install_pulse # run pulseaudio builtin installer
-yes | yay -S --noconfirm pulseeffects
+yes | yay -S pulseeffects
 
 # Browsers
-yes | yay -S --noconfirm brave google-chrome-stable
+yes | yay -S brave google-chrome-stable
 
 # Terminal
-yes | yay -S --noconfirm alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
+yes | yay -S alacritty tmux neofetch cowsay fortune-mod figlet pipes.sh lolcat shellcheck
 yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 trash ~/.zshrc.pre-oh-my-zsh
-echo "$password" | chsh -s "$(which zsh) $USER"
+echo "$PASSWORD" | chsh -s "$(which zsh) $USER"
 git clone https://github.com/xero/figlet-fonts ~/.local/share/figlet-fonts
 git clone https://gitlab.com/dwt1/shell-color-scripts.git
-echo "$password" | sudo -S mkdir /opt/shell-color-scripts
-echo "$password" | sudo -S mv ./shell-color-scripts/colorscripts /opt/shell-color-scripts
-echo "$password" | sudo -S mv ./shell-color-scripts/colorscript.sh /usr/bin/colorscript
+echo "$PASSWORD" | sudo -S mkdir /opt/shell-color-scripts
+echo "$PASSWORD" | sudo -S mv ./shell-color-scripts/colorscripts /opt/shell-color-scripts
+echo "$PASSWORD" | sudo -S mv ./shell-color-scripts/colorscript.sh /usr/bin/colorscript
 trash -rf ./shell-color-scripts
 
 # Code editors
-yes | yay -S --noconfirm visual-studio-code-bin neovim gedit
+yes | yay -S visual-studio-code-bin neovim gedit
 code --install-extension alefragnani.bookmarks
 code --install-extension batisteo.vscode-django
 code --install-extension be5invis.vscode-icontheme-nomo-dark
@@ -110,10 +109,10 @@ code --install-extension wholroyd.jinja
 code --install-extension ybaumes.highlight-trailing-white-spaces
 
 # Image editors
-yes | yay -S --noconfirm inkscape pinta
+yes | yay -S inkscape pinta
 
 # Git
-yes | yay -S --noconfirm github-cli diff-so-fancy
+yes | yay -S github-cli diff-so-fancy
 git config --global pull.rebase false
 git config --global core.excludesfile ~/.config/git/.gitignore
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
@@ -133,13 +132,13 @@ git config --global color.diff.whitespace "red reverse"
 pip install pipenv virtualenvwrapper ipython ipykernel pywal --user
 
 # Deno and NodeJS
-echo "$password" | sudo -S "$(curl -fsSL https://raw.githubusercontent.com/axetroy/dvm/master/install.sh | bash)"
+echo "$PASSWORD" | sudo -S "$(curl -fsSL https://raw.githubusercontent.com/axetroy/dvm/master/install.sh | bash)"
 dvm install v1.3.0
-yes | yay -S --noconfirm nvm
+yes | yay -S nvm
 nvm install node
 
 # Others
-yes | yay -S --noconfirm mplayer unzip zip slop numlockx unclutter perl-anyevent-i3
+yes | yay -S mplayer unzip zip slop numlockx unclutter perl-anyevent-i3
 
 
 ###############################################################################
