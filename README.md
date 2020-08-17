@@ -19,7 +19,7 @@ _I've improved it for coding in Python, Deno and NodeJS, using tmux, VSCode and 
 
 🧲 ⚡ **Requirements:** Manjaro I3
 
-🛰 ✨ **Gallery:** [Gallery][gallery]
+🛰 ✨ **Gallery:** [Screenshots][gallery]
 
 [gallery]: ./docs/Gallery/
 
