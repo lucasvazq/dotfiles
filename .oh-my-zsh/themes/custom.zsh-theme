@@ -14,7 +14,7 @@ function __prompt_dir {
 function __prompt_git {
   (( $+commands[git] )) || return
 
-  if [[ "$(git config --get oh-my-zsh.hide-status 2> /dev/null)" = 1 ]]; then
+  if [[ $(git config --get oh-my-zsh.hide-status 2> /dev/null) = 1 ]]; then
     return
   fi
 
