@@ -1,8 +1,8 @@
 # Index
 
 1) [Cursor](#cursor)
-1) [Insert](#insert)
-1) [Quit](#quit)
+2) [Insert](#insert)
+3) [Quit](#quit)
 
 ## Cursor
 ```yaml
