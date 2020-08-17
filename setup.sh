@@ -9,20 +9,22 @@
 
 # Ask for password and save it to don't ask for it again in the future
 CORRECT_PASSWORD=false
-until [ $CORRECT_PASSWORD ]; do
+until [ $CORRECT_PASSWORD == true ]; do
     echo -n "Password: "
     IFS= read -rs PASSWORD
     sudo -k
     if echo "$PASSWORD" | sudo -Sl &> /dev/null; then
         CORRECT_PASSWORD=true
+    else
+        echo -e "\nWrong password"
     fi
 done
 
 # Config yay
-yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides
+yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides --sudoloop
 
 # Update and Upgrade
-yes | yay -Syu --sudoloop
+yes | yay -Syu
 
 # Update timezone
 echo "$PASSWORD" | sudo -S timedatectl set-ntp true
