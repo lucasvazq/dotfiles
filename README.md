@@ -8,7 +8,7 @@
 
 <p align="center">
 
-  ![Screenshot](./screenshots.gif)
+  ![Screenshot](./docs/Gallery/screenshots.gif)
 </p>
 
 _When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
