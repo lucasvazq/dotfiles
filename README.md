@@ -19,6 +19,10 @@ _I've improved it for coding in Python, Deno and NodeJS, using tmux, VSCode and 
 
 🧲 ⚡ **Requirements:** Manjaro I3
 
+🛰 ✨ **Gallery:** [Gallery][gallery]
+
+[gallery]: ./docs/Gallery/
+
 ## Ready, Set, Launch 🚀
 
 Run the following commands
@@ -49,7 +53,7 @@ git config --global user.email "YOUR_EMAIL"
 
 **Add Sourcery token**
 
-Sign In and obtain a token. [Link][token_link]
+[Click here][token_link] to Sign In and obtain a token.
 
 Then, search for sourcery in the VSCode settings and enter the token into the Sourcery Token field.
 
@@ -60,14 +64,18 @@ Then, search for sourcery in the VSCode settings and enter the token into the So
 ### How to drive through the meteorites
 
 _The idea of ​​this setup is based on the fact that I consider there are two different moments in which we develop things._
+
 _The first moment is when we do it for personal enjoyment, far from any responsibility that commits third parties._
 _This moment is associated with when we do it for pleasure and develop for the simple fact of developing._
 _The second situation in which we can find ourselves developing is when we do it because we have a responsibility with a third party, that is, when we are doing a job._
+
 _This is why it seemed appropriate to me to have two separate folders where the works we carry out are kept, depending on the situation we are in when we develop them._
 _The works that we do as hobbies are stored in `~/Workspaces/H`, those that we carry out under responsibilities are located in `~/Workspaces/J`._
 _Everything related with the command interpreter, that are related to the **H** folder, are stored in `~/Workspaces/.hrc`. Everything related to the other folder, in `~/Workspaces/.jrc`._
+
 _For databases there is also a special place. For each workspace there is a **DB** folder._
 _The idea behind this is to store, in these folders, all the backup copies of the databases related to each of the repositories for each of the corresponding workspaces._
+
 _Finally, I want to make a special mention of one more file._
 _Some functions and variables belong to the workspace and that can be useful for both. That is why these functions and variables must be located in the `~/Workspaces/.crc` file._
 
