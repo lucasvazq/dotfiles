@@ -1,5 +1,5 @@
 Using this ship is difficult because the rudder has been very tunned.
-I leave at hand this wiki that helps to know the customized keyboard shortcuts used for VSCode, tmux, and i3, and that also lists all the useful functions that are available for the shell.
+I leave at hand this wiki that helps to know the customized keyboard shortcuts used for VSCode, ranger, tmux, and i3, and that also lists all the useful functions that are available for the shell.
 
 ## Keybinds
 
@@ -16,6 +16,7 @@ I leave at hand this wiki that helps to know the customized keyboard shortcuts u
 </span>
 
 - [VSCode keybinds](https://github.com/lucasvazq/dotfiles/wiki/VSCode-keybinds)
+- [ranger keybinds](https://github.com/lucasvazq/dotfiles/wiki/ranger-keybinds)
 - [tmux keybinds](https://github.com/lucasvazq/dotfiles/wiki/tmux-keybinds)
 - [i3wm keybinds](https://github.com/lucasvazq/dotfiles/wiki/i3-keybinds)
 
