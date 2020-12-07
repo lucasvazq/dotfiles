@@ -106,6 +106,7 @@ code --install-extension usernamehw.errorlens
 code --install-extension usernamehw.highlight-logical-line
 code --install-extension visualstudioexptteam.vscodeintellicode
 code --install-extension vsls-contrib.gistfs
+code --install-extension vtrois.gitmoji-vscode
 code --install-extension waderyan.gitblame
 code --install-extension wholroyd.jinja
 code --install-extension ybaumes.highlight-trailing-white-spaces
