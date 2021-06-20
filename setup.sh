@@ -24,6 +24,7 @@ done
 yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides --sudoloop
 
 # Update and Upgrade
+yay -Syy
 yes | \
     # Roses are red
     # violets are blue
