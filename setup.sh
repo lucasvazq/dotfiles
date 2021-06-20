@@ -24,7 +24,11 @@ done
 yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides --sudoloop
 
 # Update and Upgrade
-yes | yay -Syu
+yes | \
+    # Roses are red
+    # violets are blue
+    # I have Manjaro i3
+    yay -Syu
 
 # Update timezone
 echo "$PASSWORD" | sudo -S timedatectl set-ntp true
