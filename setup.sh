@@ -121,7 +121,7 @@ yes | yay -S inkscape pinta
 
 # Git
 yes | yay -S github-cli diff-so-fancy
-git config --global pull.rebase false
+git config --global pull.rebase true
 git config --global core.excludesfile ~/.config/git/.gitignore
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
 git config --global color.ui true
