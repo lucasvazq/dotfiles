@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -e
+
 # Ask for password and save it to don't ask for it again while the installation.
 local correct_password password
 correct_password=false
@@ -13,23 +16,23 @@ until [ $correct_password == true ]; do
     fi
 done
 
-git clone git@github.com:lucasvazq/dotfiles.git
-cp dotfiles ~
-#.gitignore has .vscode
-
-yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --cleanafter --noprovides --sudoloop
-# Update and Upgrade
+yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop
 sudo pacman-mirrors -f
 yes | \
     # Roses are red
     # violets are blue
-    # I have Manjaro i3
-    yay -Syyu
+    # I have Endeavour i3
+    yay -Syu
 
-pacman -Syu & yay -Syu
+# Copy config files.
+cd ~
+git clone git@github.com:lucasvazq/dotfiles.git
+cp dotfiles/* .
+
+# Install packages
+yay -S gnome-keyring
 yay -S zsh
 yay -S trash-cli
-trash ~/Desktop ~/Music ~/Public ~/Templates
 yay -S google-chrome
 chsh -s $(which zsh)
 yay -S warp-terminal-bin
@@ -37,31 +40,21 @@ yay -S starship
 yay -S docker-desktop
 yay -S visual-studio-code-bin
 yay -S github-cli
-yay -S neohtop
-yay -S libreoffice-fresh
+yes | yay -S neohtop
+yes | yay -S libreoffice-fresh
+yes | yay -S gimp shotcut
+
+# what about numlock?
 
 # add CDNs
-# add fonts: jetbrains noto nerd font regular 
+# add fonts: jetbrains noto nerd font regular
 # install venv for python and then create a default one at ~/.config/Envs/Python
 yes | yay -S nvm
 nvm install node
 
-# Wallpaper
-mkdir ~/Pictures/Wallpapers
-
-# Screenshots
-mkdir ~/Pictures/Screenshots
-
-# Workspaces
-mkdir ~/Workspaces
-
 git config --global init.defaultBranch main
 git config --global pull.rebase false
 git config --global core.excludesfile ~/.config/git/gitignore
-
-
-###!/usr/bin/env bash
-set -e
 
 echo "Detecting GPU..."
 GPU_INFO=$(lspci | grep -E "VGA|3D")
@@ -98,7 +91,18 @@ echo "You can verify Vulkan with: vulkaninfo | grep 'GPU id'"
 
 yay -S steam
 
+chmod 711 ~/.local/bin/picture-of-the-day
 
+# Handle directories.
+trash ~/Desktop ~/Music ~/Public ~/Templates ~/dotfiles
+mkdir -p ~/Pictures/{Wallpapers,Screenshots}
+mkdir -p ~/Workspaces
+
+
+
+# Run picture-of-the-day one time per day at 00:00
+(crontab -l ; echo "00 00 * * * picture-of-the-day") | crontab -
 
 
 echo "remember to install KVM"
+echo "RESET!"
