@@ -1,0 +1,14 @@
+# - Pictures
+!Pictures
+
+# - - Wallpapers
+!Pictures/Wallpapers
+!Pictures/Wallpapers/*
+
+# - .local
+!.local
+
+# - - bin
+!.local/bin
+!.local/bin/change-background
+!.local/bin/custom-scrot
