@@ -94,7 +94,7 @@ for_window [floating] border normal
 new_window normal
 title_align center
 
-@REM # split in horizontal orientation ?????
+# @REM # split in horizontal orientation ?????
 # bindsym $mod+h split h
 
 # split in vertical orientation ?????
