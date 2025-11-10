@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Change background image and set color scheme.
+#
+# Args:
+#   $1 (optional): Wallpaper. If not provided, one random is selected.
+set -euo pipefail
+
+function main {
+    local wallpaper
+    if [[ -n "$1" ]]; then
+        wallpaper="$1"
+    else
+        wallpaper="$(_get_random_wallpaper)"
+        if [[ -z "${wallpaper}" ]]; then
+            exit 0
+        fi
+    fi
+
+    _change_wallpaper "${wallpaper}"
+    _change_theme "${wallpaper}"
+}
+
+function _get_random_wallpaper {
+    local wallpapers_folder wallpapers wallpaper
+
+    wallpapers_folder="${HOME}/Pictures/Wallpapers"
+    mkdir -p "${wallpapers_folder}"
+
+    wallpapers=()
+    while IFS= read -r -d '' file; do
+        wallpapers+=("${file}")
+    done < <(find "${wallpapers_folder}" -maxdepth 1 -type f -print0)
+
+    if [ ${#wallpapers[@]} -eq 0 ]; then
+        wallpaper=""
+    else
+        wallpaper="${wallpapers[RANDOM % ${#wallpapers[@]}]}"
+    fi
+
+    echo "${wallpaper}"
+}
+
+function _change_wallpaper {
+    local wallpaper
+    wallpaper="$1"
+
+    feh --bg-fill "${wallpaper}"
+}
+
+function _change_theme {
+    local wallpaper
+    wallpaper="$1"
+
+    # Generate color scheme with `pywal`.
+    # This will set the color scheme for `i3`.
+    wal -q -i "${wallpaper}"
+
+    # Reload `dunst` colors.
+    ln -sf "${HOME}/.cache/wal/dunstrc" "${HOME}/.config/dunst/dunstrc"
+    pkill dunst
+    dunst &
+}
+
+main "$@"

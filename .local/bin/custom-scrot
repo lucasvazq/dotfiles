@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Custom wrapper for the "scrot" command.
+#
+# Flags:
+#   --select_screen: select a region of the screen to capture.
+set -euo pipefail
+
+function main {
+    local select_screen
+    if [[ -n "$1" ]]; then
+        if [[ "$1" == "--select_screen" ]]; then
+            select_screen=true
+        else
+            exit 1
+        fi
+    else
+        select_screen=false
+    fi
+
+    _custom_scrot "${select_screen}"
+}
+
+function _custom_scrot {
+    local select_screen
+    select_screen="$1"
+
+    local base_folder filename
+    base_folder="${HOME}/Pictures/Screenshots"
+    filename="${base_folder}/$(date +%Y-%m-%d_%H-%M-%S).png"
+    mkdir -p "${base_folder}"
+
+    if "${select_screen}"; then
+        local slop_value
+        slop_value="$(slop -f "%x,%y,%w,%h")"
+        if [ -n "${slop_value}" ]; then
+            scrot --autoselect="${slop_value}" "${filename}"
+        fi
+    else
+        scrot "${filename}"
+    fi
+
+    notify-send --icon=empty "${filename}"
+}
+
+main "$@"
