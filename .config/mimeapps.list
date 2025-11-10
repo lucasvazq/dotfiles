@@ -1,0 +1,372 @@
+# TODO add: https://www.iana.org/assignments/media-types/media-types.xhtml
+# TODO add: https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+[Default Applications]
+
+# Videos.
+application/mp4=vlc.desktop
+video/3gpp2=vlc.desktop
+video/3gpp=vlc.desktop
+video/MP2T=vlc.desktop
+video/avi=vlc.desktop
+video/divx=vlc.desktop
+video/dv=vlc.desktop
+video/h261=vlc.desktop
+video/h263=vlc.desktop
+video/h264=vlc.desktop
+video/jpeg=vlc.desktop
+video/jpm=vlc.desktop
+video/mj2=vlc.desktop
+video/mp2t=vlc.desktop
+video/mp4=vlc.desktop
+video/mpeg=vlc.desktop
+video/ogg=vlc.desktop
+video/quicktime=vlc.desktop
+video/vnd.avi=vlc.desktop
+video/vnd.fvt=vlc.desktop
+video/vnd.mpegurl=vlc.desktop
+video/vnd.ms-playready.media.pyv=vlc.desktop
+video/vnd.vivo=vlc.desktop
+video/webm=vlc.desktop
+video/x-f4v=vlc.desktop
+video/x-fli=vlc.desktop
+video/x-flv=vlc.desktop
+video/x-m4v=vlc.desktop
+video/x-matroska-3d=vlc.desktop
+video/x-matroska=vlc.desktop
+video/x-mng=vlc.desktop
+video/x-ms-asf=vlc.desktop
+video/x-ms-wm=vlc.desktop
+video/x-ms-wmv=vlc.desktop
+video/x-ms-wmx=vlc.desktop
+video/x-ms-wvx=vlc.desktop
+video/x-msvideo=vlc.desktop
+video/x-ogm=vlc.desktop
+video/x-sgi-movie=vlc.desktop
+video/x-vob=vlc.desktop
+
+# Audio.
+audio/3gpp2=vlc.desktop
+audio/L16=vlc.desktop
+audio/L24=vlc.desktop
+audio/aac=vlc.desktop
+audio/aacp=vlc.desktop
+audio/ac3=vlc.desktop
+audio/adpcm=vlc.desktop
+audio/aiff=vlc.desktop
+audio/basic=vlc.desktop
+audio/eac3=vlc.desktop
+audio/flac=vlc.desktop
+audio/m4a=vlc.desktop
+audio/midi=vlc.desktop
+audio/mp3=vlc.desktop
+audio/mp4=vlc.desktop
+audio/mp4a-latm=vlc.desktop
+audio/mpeg=vlc.desktop
+audio/ogg=vlc.desktop
+audio/opus=vlc.desktop
+audio/vnd.digital-winds=vlc.desktop
+audio/vnd.dts.hd=vlc.desktop
+audio/vnd.dts=vlc.desktop
+audio/vnd.lucent.voice=vlc.desktop
+audio/vnd.ms-playready.media.pya=vlc.desktop
+audio/vnd.nuera.ecelp4800=vlc.desktop
+audio/vnd.nuera.ecelp7470=vlc.desktop
+audio/vnd.nuera.ecelp9600=vlc.desktop
+audio/vnd.wav=vlc.desktop
+audio/vorbis=vlc.desktop
+audio/wav=vlc.desktop
+audio/webm=vlc.desktop
+audio/x-ape=vlc.desktop
+audio/x-cue=vlc.desktop
+audio/x-dts=vlc.desktop
+audio/x-it=vlc.desktop
+audio/x-matroska=vlc.desktop
+audio/x-mod=vlc.desktop
+audio/x-mpegurl=vlc.desktop
+audio/x-ms-wax=vlc.desktop
+audio/x-ms-wma=vlc.desktop
+audio/x-pn-aiff=vlc.desktop
+audio/x-pn-realaudio-plugin=vlc.desktop
+audio/x-pn-realaudio=vlc.desktop
+audio/x-realaudio=vlc.desktop
+audio/x-s3m=vlc.desktop
+audio/x-scpls=vlc.desktop
+audio/x-shorten=vlc.desktop
+audio/x-speex=vlc.desktop
+audio/x-tta=vlc.desktop
+audio/x-wavpack=vlc.desktop
+audio/x-wma=vlc.desktop
+audio/x-xm=vlc.desktop
+
+# Images.
+image/avif-sequence=google-chrome.desktop
+image/avif=google-chrome.desktop
+image/bmp=google-chrome.desktop
+image/cgm=google-chrome.desktop
+image/g3fax=google-chrome.desktop
+image/gif=google-chrome.desktop
+image/heic=google-chrome.desktop
+image/heif=google-chrome.desktop
+image/ief=google-chrome.desktop
+image/jpeg=google-chrome.desktop
+image/jpg=google-chrome.desktop
+image/jxl=google-chrome.desktop
+image/pjpeg=google-chrome.desktop
+image/png=google-chrome.desktop
+image/prs.btif=google-chrome.desktop
+image/svg+xml=google-chrome.desktop
+image/svg=google-chrome.desktop
+image/tiff=google-chrome.desktop
+image/vnd.djvu=google-chrome.desktop
+image/vnd.dwg=google-chrome.desktop
+image/vnd.dxf=google-chrome.desktop
+image/vnd.fastbidsheet=google-chrome.desktop
+image/vnd.fpx=google-chrome.desktop
+image/vnd.fst=google-chrome.desktop
+image/vnd.fujixerox.edmics-mmr=google-chrome.desktop
+image/vnd.fujixerox.edmics-rlc=google-chrome.desktop
+image/vnd.microsoft.icon=google-chrome.desktop
+image/vnd.ms-modi=google-chrome.desktop
+image/vnd.net-fpx=google-chrome.desktop
+image/vnd.wap.wbmp=google-chrome.desktop
+image/vnd.xiff=google-chrome.desktop
+image/webp=google-chrome.desktop
+image/x-adobe-dng=google-chrome.desktop
+image/x-canon-cr2=google-chrome.desktop
+image/x-canon-crw=google-chrome.desktop
+image/x-cmu-raster=google-chrome.desktop
+image/x-cmx=google-chrome.desktop
+image/x-epson-erf=google-chrome.desktop
+image/x-freehand=google-chrome.desktop
+image/x-fuji-raf=google-chrome.desktop
+image/x-icns=google-chrome.desktop
+image/x-ico=google-chrome.desktop
+image/x-icon=google-chrome.desktop
+image/x-kodak-dcr=google-chrome.desktop
+image/x-kodak-k25=google-chrome.desktop
+image/x-kodak-kdc=google-chrome.desktop
+image/x-minolta-mrw=google-chrome.desktop
+image/x-nikon-nef=google-chrome.desktop
+image/x-olympus-orf=google-chrome.desktop
+image/x-panasonic-raw=google-chrome.desktop
+image/x-pcx=google-chrome.desktop
+image/x-pentax-pef=google-chrome.desktop
+image/x-pict=google-chrome.desktop
+image/x-portable-anymap=google-chrome.desktop
+image/x-portable-bitmap=google-chrome.desktop
+image/x-portable-graymap=google-chrome.desktop
+image/x-portable-pixmap=google-chrome.desktop
+image/x-rgb=google-chrome.desktop
+image/x-sigma-x3f=google-chrome.desktop
+image/x-sony-arw=google-chrome.desktop
+image/x-sony-sr2=google-chrome.desktop
+image/x-sony-srf=google-chrome.desktop
+image/x-xbitmap=google-chrome.desktop
+image/x-xpixmap=google-chrome.desktop
+image/x-xwindowdump=google-chrome.desktop
+
+# Text.
+application/javascript=code.desktop
+application/json=code.desktop
+application/rtf=code.desktop
+application/rdf+xml=code.desktop
+application/sql=code.desktop
+application/vnd.sqlite3=code.desktop
+application/xhtml+xml=code.desktop
+application/xml-dtd=code.desktop
+application/xml=code.desktop
+application/yaml=code.desktop
+application/x-sh=code.desktop
+application/x-shellscript==code.desktop
+application/x-texinfo=code.desktop
+inode/x-empty=code.desktop
+text/css=code.desktop
+text/csv=code.desktop
+text/html=code.desktop
+text/javascript=code.desktop
+text/markdown=code.desktop
+text/plain=code.desktop
+text/tab-separated-values=code.desktop
+text/xml=code.desktop
+text/yaml=code.desktop
+text/x-config=code.desktop
+text/x-dockerfile=code.desktop
+text/x-ini=code.desktop
+text/x-jsx=code.desktop
+text/x-less=code.desktop
+text/x-log=code.desktop
+text/x-makefile=code.desktop
+text/x-python=code.desktop
+text/x-readme=code.desktop
+text/x-rst=code.desktop
+text/x-sass=code.desktop
+text/x-scss=code.desktop
+text/x-shellscript=code.desktop
+text/x-toml=code.desktop
+text/x-tsx=code.desktop
+text/x-txt=code.desktop
+text/x-typescript=code.desktop
+
+# Office.
+application/pdf=google-chrome.desktop
+application/msword=libreoffice-writer.desktop
+application/vnd.oasis.opendocument.text=libreoffice-writer.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+application/vnd.ms-excel=libreoffice-calc.desktop
+application/vnd.oasis.opendocument.spreadsheet=libreoffice-calc.desktop
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop
+
+# Media Editing Projects.
+application/x-shotcut-project=shotcut.desktop
+image/vnd.adobe.photoshop=gimp.desktop
+image/x-xcf=gimp.desktop
+
+# Compressed files.
+application/gzip=x-archive.desktop
+application/java-archive=x-archive.desktop
+application/vnd.debian.binary-package=x-archive.desktop
+application/vnd.ms-cab-compressed=x-archive.desktop
+application/vnd.rar=x-archive.desktop
+application/zip=x-archive.desktop
+application/zip-compressed=x-archive.desktop
+application/x-7z-compressed=x-archive.desktop
+application/x-ace-compressed=x-archive.desktop
+application/x-apple-diskimage=x-archive.desktop
+application/x-ar=x-archive.desktop
+application/x-archive=x-archive.desktop
+application/x-bzip-compressed-tar=x-archive.desktop
+application/x-bzip2=x-archive.desktop
+application/x-compress=x-archive.desktop
+application/x-compressed-tar=x-archive.desktop
+application/x-cpio=x-archive.desktop
+application/x-deb=x-archive.desktop
+application/x-iso9660-image=x-archive.desktop
+application/x-lha=x-archive.desktop
+application/x-lzh-compressed=x-archive.desktop
+application/x-lzip-compressed-tar=x-archive.desktop
+application/x-lzip=x-archive.desktop
+application/x-lzma=x-archive.desktop
+application/x-lzop=x-archive.desktop
+application/x-rar-compressed=x-archive.desktop
+application/x-rar=x-archive.desktop
+application/x-rpm=x-archive.desktop
+application/x-tar=x-archive.desktop
+application/x-xz-compressed-tar=x-archive.desktop
+application/x-xz=x-archive.desktop
+
+# Schema handlers.
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/mailto=google-chrome.desktop
+
+
+# TODO, review
+
+chrome
+application/lost+xml:
+application/xop+xml:
+
+vlc
+application/hyperstudio
+audio/adpcm: Represents Adaptive Differential Pulse-Code Modulation audio; used in telephony or low-bitrate sound.
+audio/vnd.wav: Denotes WAV audio variants; standard uncompressed sound.
+audio/x-pn-realaudio: Pertains to RealAudio content; legacy streaming audio.
+audio/x-pn-realaudio-plugin: Indicates RealAudio plugin files; for embedded playback.
+audio/vnd.nuera.ecelp4800: Refers to Nuera ECELP at 4800 bps; voice codecs.
+audio/vnd.nuera.ecelp7470: Denotes Nuera ECELP at 7470 bps; enhanced voice.
+audio/vnd.nuera.ecelp9600: Pertains to Nuera ECELP at 9600 bps; high-quality voice.
+audio/vnd.ms-playready.media.pya: Represents PlayReady audio; DRM-protected sound.
+audio/vnd.lucent.voice: Indicates Lucent voice codecs; telephony audio.
+audio/vnd.digital-winds: Refers to Digital Winds audio; specialized sound formats.
+audio/x-ms-wax: Denotes Windows Media Audio Redirector; streaming links.
+audio/aiff: Pertains to Audio Interchange File Format; uncompressed Mac audio.
+audio/vnd.nuera.ecelp9600: Indicates Nuera ECELP 9600 (duplicate for emphasis); voice.
+audio/aacp: Refers to Advanced Audio Coding Plus; enhanced AAC.
+audio/mp4a-latm: Denotes MP4 audio with LATM transport; streaming audio.
+audio/3gpp2: Pertains to 3GPP2 audio; mobile multimedia.
+audio/midi: Represents MIDI files; sequenced music.
+
+office
+application/vnd.ms-word.document.macroenabled.12: Represents macro-enabled Word documents (.docm); enables automation in text processing.
+application/vnd.ms-word.template.macroenabled.12: Denotes macro-enabled Word templates (.dotm); for reusable document structures.
+application/vnd.ms-excel.addin.macroenabled.12: Pertains to macro-enabled Excel add-ins (.xlam); extends spreadsheet functionality.
+application/vnd.ms-excel.sheet.binary.macroenabled.12: Indicates binary macro-enabled Excel sheets (.xlsb); optimized for large data.
+application/vnd.ms-excel.sheet.macroenabled.12: Refers to macro-enabled Excel sheets (.xlsm); supports VBA scripts.
+application/vnd.ms-excel.template.macroenabled.12: Denotes macro-enabled Excel templates (.xltm); for standardized spreadsheets.
+application/vnd.openxmlformats-officedocument.wordprocessingml.template: Represents Word templates (.dotx); non-macro versions for documents.
+application/vnd.openxmlformats-officedocument.spreadsheetml.template: Pertains to Excel templates (.xltx); for spreadsheet designs.
+
+code
+application/vnd.oasis.opendocument.text-template: Denotes ODT templates (.ott); standardized text formats.
+
+compress
+application/vnd.android.package-archive: Denotes Android APK files; app packages.
+application/x-sv4crc: Pertains to System V Release 4 CRC archives; legacy Unix archives.
+application/x-msdownload: Indicates Microsoft executable downloads (.exe/.dll); installers.
+application/x-sv4cpio: Refers to SVR4 cpio archives; Unix file bundles.
+application/ogg: Denotes Ogg containers; multimedia archives.
+application/x-gtar: Represents GNU tar archives (.tar); common in source code distribution.
+application/x-bzip: Pertains to BZIP compressed files (.bz); single-file compression.
+application/java-archive: Indicates Java Archives (.jar); packaged classes.
+application/x-ustar: Refers to POSIX tar archives; standardized tar.
+application/x-bcpio: Denotes binary cpio archives; Unix file copies.
+application/x-stuffit: Pertains to StuffIt archives (.sit); Mac compression.
+application/x-stuffitx: Indicates StuffIt X archives (.sitx); enhanced compression.
+application/vnd.google-earth.kmz: Represents KMZ files (zipped KML); geospatial archives.
+application/epub+zip: Denotes EPUB e-books (zipped); digital publications.
+application/vnd.macports.portpkg: Pertains to MacPorts packages; software ports.
+application/x-debian-package: Indicates Debian packages (.deb); Linux software installs.
+application/x-zip-compressed: Refers to compressed ZIP files; general archives.
+application/x-redhat-package-manager: Denotes RPM packages (.rpm); Red Hat software.
+application/vnd.ms-cab-compressed: Represents Cabinet archives (.cab); Microsoft compression.<
+
+Review for office / code / chrome
+application/vnd.ms-word.document.macroenabled.12: Represents macro-enabled Word documents (.docm); enables automation in text processing.
+application/vnd.ms-word.template.macroenabled.12: Denotes macro-enabled Word templates (.dotm); for reusable document structures.
+application/vnd.ms-excel.addin.macroenabled.12: Pertains to macro-enabled Excel add-ins (.xlam); extends spreadsheet functionality.
+application/vnd.ms-excel.sheet.binary.macroenabled.12: Indicates binary macro-enabled Excel sheets (.xlsb); optimized for large data.
+application/vnd.ms-excel.sheet.macroenabled.12: Refers to macro-enabled Excel sheets (.xlsm); supports VBA scripts.
+application/vnd.ms-excel.template.macroenabled.12: Denotes macro-enabled Excel templates (.xltm); for standardized spreadsheets.
+application/vnd.openxmlformats-officedocument.wordprocessingml.template: Represents Word templates (.dotx); non-macro versions for documents.
+application/vnd.openxmlformats-officedocument.spreadsheetml.template: Pertains to Excel templates (.xltx); for spreadsheet designs.
+application/vnd.openxmlformats-officedocument.presentationml.template: Indicates PowerPoint templates (.potx); for presentations.
+application/vnd.openxmlformats-officedocument.presentationml.presentation: Refers to PowerPoint presentations (.pptx); slide-based content.
+application/vnd.openxmlformats-officedocument.presentationml.slide: Denotes individual PowerPoint slides (.sldx); modular presentation elements.
+application/vnd.openxmlformats-officedocument.presentationml.slideshow: Pertains to PowerPoint slideshows (.ppsx); for view-only presentations.
+application/vnd.ms-powerpoint: Represents legacy PowerPoint files (.ppt); backward-compatible presentations.
+application/vnd.ms-powerpoint.addin.macroenabled.12: Indicates macro-enabled PowerPoint add-ins (.ppam); extends functionality.
+application/vnd.ms-powerpoint.presentation.macroenabled.12: Refers to macro-enabled presentations (.pptm); scripted slides.
+application/vnd.ms-powerpoint.slide.macroenabled.12: Denotes macro-enabled slides (.sldm); individual scripted elements.
+application/vnd.ms-powerpoint.slideshow.macroenabled.12: Pertains to macro-enabled slideshows (.ppsm); automated views.
+application/vnd.ms-powerpoint.template.macroenabled.12: Represents macro-enabled templates (.potm); reusable presentation designs.
+application/vnd.ms-project: Indicates Microsoft Project files (.mpp); for project management tracking.
+application/vnd.oasis.opendocument.text-master: Refers to OpenDocument master documents (.odm); for large text assemblies.
+application/vnd.oasis.opendocument.text-template: Denotes ODT templates (.ott); standardized text formats.
+application/vnd.oasis.opendocument.text-web: Pertains to web-oriented ODT (.oth); HTML-integrated documents.
+application/vnd.oasis.opendocument.spreadsheet-template: Indicates ODS templates (.ots); for spreadsheets.
+application/vnd.oasis.opendocument.presentation-template: Refers to ODP templates (.otp); for presentations.
+application/vnd.oasis.opendocument.graphics-template: Denotes ODG templates (.otg); vector graphics.
+application/vnd.oasis.opendocument.image-template: Pertains to ODI templates (.oti); image-based docs.
+application/vnd.oasis.opendocument.formula-template: Represents ODF templates (.otf); mathematical formulas.
+application/vnd.oasis.opendocument.database: Indicates ODB databases (.odb); embedded data storage.
+application/vnd.oasis.opendocument.formula: Refers to ODF formula documents (.odf); standalone equations.
+application/vnd.oasis.opendocument.graphics: Denotes ODG graphics (.odg); vector drawings.
+application/vnd.oasis.opendocument.image: Pertains to ODI images (.odi); image documents.
+application/vnd.stardivision.writer: Represents StarWriter documents; legacy OpenOffice text.
+application/vnd.stardivision.writer-global: Indicates global StarWriter docs; master documents.
+application/vnd.stardivision.calc: Refers to StarCalc spreadsheets; legacy calc.
+application/vnd.stardivision.draw: Denotes StarDraw graphics; vector art.
+application/vnd.stardivision.impress: Pertains to StarImpress presentations; slides.
+application/vnd.stardivision.math: Represents StarMath formulas; equations.
+application/vnd.sun.xml.calc: Indicates OpenOffice Calc XML; spreadsheets.
+application/vnd.sun.xml.calc.template: Refers to Calc templates; reusable sheets.
+application/vnd.sun.xml.draw: Denotes Draw XML; graphics.
+application/vnd.sun.xml.draw.template: Pertains to Draw templates.
+application/vnd.sun.xml.impress: Represents Impress XML; presentations.
+application/vnd.sun.xml.impress.template: Indicates Impress templates.
+application/vnd.sun.xml.math: Refers to Math XML; formulas.
+application/vnd.sun.xml.writer: Denotes Writer XML; text docs.
+application/vnd.sun.xml.writer.global: Pertains to global Writer; masters.
+application/vnd.sun.xml.writer.template: Represents Writer templates.
+application/vnd.visio: Indicates Visio diagrams (.vsd); flowcharts and diagrams.
+
