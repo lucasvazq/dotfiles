@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+cd "${HOME}"
 
 # Ask for password and save it to don't ask for it again while the installation.
 local correct_password password
 correct_password=false
-until [ $correct_password == true ]; do
+until [ "${correct_password}" == true ]; do
     echo -n "Password: "
     IFS= read -rs password
     sudo -k
-    if echo "$password" | sudo -Sl &> /dev/null; then
+    if echo "${password}" | sudo -Sl &> /dev/null; then
         correct_password=true
     else
         echo -e "\nWrong password"
@@ -34,15 +35,19 @@ yay -S gnome-keyring
 yay -S zsh
 yay -S trash-cli
 yay -S google-chrome
-chsh -s $(which zsh)
+chsh -s "$(which zsh)"
 yay -S warp-terminal-bin
 yay -S starship
 yay -S docker-desktop
+yay -S slop
 yay -S visual-studio-code-bin
 yay -S github-cli
 yes | yay -S neohtop
 yes | yay -S libreoffice-fresh
 yes | yay -S gimp shotcut
+
+# Fonts.
+yes | yay -S ttf-jetbrains-mono-nerd noto-fonts-emoji
 
 # what about numlock?
 
@@ -57,27 +62,27 @@ git config --global pull.rebase false
 git config --global core.excludesfile ~/.config/git/gitignore
 
 echo "Detecting GPU..."
-GPU_INFO=$(lspci | grep -E "VGA|3D")
-echo "-> $GPU_INFO"
+GPU_INFO="$(lspci | grep -E "VGA|3D")"
+echo "-> ${GPU_INFO}"
 
 # Ensure multilib is enabled
 if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
     echo "Warning: [multilib] repository not enabled. 32-bit support (for Steam) won't work."
 fi
 
-if echo "$GPU_INFO" | grep -qi "NVIDIA"; then
+if echo "${GPU_INFO}" | grep -qi "NVIDIA"; then
     echo "NVIDIA GPU detected."
     sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings
-    if echo "$GPU_INFO" | grep -qi "Intel"; then
+    if echo "${GPU_INFO}" | grep -qi "Intel"; then
         echo "Hybrid Intel + NVIDIA setup detected. Installing PRIME offload support..."
         sudo pacman -S --needed nvidia-prime
     fi
 
-elif echo "$GPU_INFO" | grep -qi "AMD"; then
+elif echo "${GPU_INFO}" | grep -qi "AMD"; then
     echo "AMD GPU detected."
     sudo pacman -S --needed mesa vulkan-radeon lib32-vulkan-radeon
 
-elif echo "$GPU_INFO" | grep -qi "Intel"; then
+elif echo "${GPU_INFO}" | grep -qi "Intel"; then
     echo "Intel GPU detected."
     sudo pacman -S --needed mesa vulkan-intel lib32-vulkan-intel
 
@@ -89,20 +94,21 @@ fi
 echo "GPU driver setup completed."
 echo "You can verify Vulkan with: vulkaninfo | grep 'GPU id'"
 
+pip install pywal
+
 yay -S steam
 
-chmod 711 ~/.local/bin/picture-of-the-day
-
 # Handle directories.
-trash ~/Desktop ~/Music ~/Public ~/Templates ~/dotfiles
-mkdir -p ~/Pictures/{Wallpapers,Screenshots}
-mkdir -p ~/Workspaces
-
-
+trash Desktop Music Public Templates dotfiles
+mkdir -p Pictures/{Wallpapers,Screenshots}
+mkdir -p Workspaces
+chmod 711 .local/bin/change-background
+chmod 711 .local/bin/custom-scrot
+chmod 711 .local/bin/picture-of-the-day
 
 # Run picture-of-the-day one time per day at 00:00
+# TODO: make this.... idempotent?
 (crontab -l ; echo "00 00 * * * picture-of-the-day") | crontab -
-
 
 echo "remember to install KVM"
 echo "RESET!"
