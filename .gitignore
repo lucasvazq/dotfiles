@@ -1,14 +1,36 @@
+# [root]
+*
+!.gitignore
+!.profile
+!.zshrc
+!README.md
+!setup.sh
+
+# - .config
+!.config/
+!.config/mimeapp.list
+!.config/starship.toml
+!.config/user-dirs.dirs
+
+# - - i3
+!.config/i3/*
+
+# - - git
+!.config/git/
+!.config/git/gitignore
+
+# - .local
+!.local/
+
+# - - bin
+!.local/bin/
+!.local/bin/change-background
+!.local/bin/custom-scrot
+!.local/bin/picture-of-the-day
+
 # - Pictures
 !Pictures
 
 # - - Wallpapers
 !Pictures/Wallpapers
 !Pictures/Wallpapers/*
-
-# - .local
-!.local
-
-# - - bin
-!.local/bin
-!.local/bin/change-background
-!.local/bin/custom-scrot
