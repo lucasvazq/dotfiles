@@ -1,0 +1,11 @@
+# Merged into ~Downloads.
+XDG_DOWNLOAD_DIR="${HOME}/Downloads"
+XDG_DESKTOP_DIR="${HOME}/Downloads"
+XDG_TEMPLATES_DIR="${HOME}/Downloads"
+XDG_PUBLICSHARE_DIR="${HOME}/Downloads"
+XDG_MUSIC_DIR="${HOME}/Downloads"
+
+# Rest.
+XDG_DOCUMENTS_DIR="${HOME}/Documents"
+XDG_PICTURES_DIR="${HOME}/Pictures"
+XDG_VIDEOS_DIR="${HOME}/Videos"
