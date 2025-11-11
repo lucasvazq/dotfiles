@@ -1,114 +1,244 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd "${HOME}"
+function main {
+    _presentation
 
-# Ask for password and save it to don't ask for it again while the installation.
-local correct_password password
-correct_password=false
-until [ "${correct_password}" == true ]; do
-    echo -n "Password: "
-    IFS= read -rs password
-    sudo -k
-    if echo "${password}" | sudo -Sl &> /dev/null; then
-        correct_password=true
+    local password
+    password="$(_get_password)"
+
+    _setup_configuration_files
+    _configure_yay "${password}"
+    _install_drivers "${password}"
+    _install_packages "${password}"
+    _configure_dns "${password}"
+    _setup_crontab
+    _post_installation_cleanup
+
+    echo ""
+    echo "Post installation: Look at the README.md for next steps!"
+}
+
+function _presentation {
+    function _show_frame_lines() {
+        local frames
+        frames=("$@")
+        clear
+        echo ""
+        echo -e "${frames[@]}"
+        echo ""
+        sleep 0.075
+    }
+
+    local main_color reflect reset
+    main_color="\e[96m"
+    reflect="\e[97m"
+    reset="\e[0m"
+
+    local frame_logo \
+        frame_reflect_1 frame_reflect_2 frame_reflect_3 frame_reflect_4 frame_reflect_5 frame_reflect_6
+    frame_logo=(
+        " ${main_color}██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗\n"
+        "${main_color}██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝\n"
+        "${main_color}██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗\n"
+        "${main_color}██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║\n"
+        "${main_color}██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║\n"
+        "${main_color}╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝\n"
+    )
+    frame_reflect_1=(
+        " ${reflect}███${main_color}███╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗\n"
+        "${reflect}██${main_color}╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝\n"
+        "${reflect}█${main_color}█║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗\n"
+        "${main_color}██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║\n"
+        "${main_color}██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║\n"
+        "${main_color}╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝\n"
+    )
+    frame_reflect_2=(
+        " ${main_color}██████╗  ${reflect}██████${main_color}╗ ████████╗███████╗██╗██╗     ███████╗███████╗\n"
+        "${main_color}██╔══██╗${reflect}██╔═══${main_color}██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝\n"
+        "${main_color}██║  ██${reflect}║██║  ${main_color} ██║   ██║   █████╗  ██║██║     █████╗  ███████╗\n"
+        "${main_color}██║  █${reflect}█║██║ ${main_color}  ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║\n"
+        "${main_color}█████${reflect}█╔╝╚██${main_color}████╔╝   ██║   ██║     ██║███████╗███████╗███████║\n"
+        "${main_color}╚═══${reflect}══╝  ╚${main_color}═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝\n"
+    )
+    frame_reflect_3=(
+        " ${main_color}██████╗  ██████╗ ████${reflect}████╗█${main_color}██████╗██╗██╗     ███████╗███████╗\n"
+        "${main_color}██╔══██╗██╔═══██╗╚══${reflect}██╔══╝${main_color}██╔════╝██║██║     ██╔════╝██╔════╝\n"
+        "${main_color}██║  ██║██║   ██║  ${reflect} ██║  ${main_color} █████╗  ██║██║     █████╗  ███████╗\n"
+        "${main_color}██║  ██║██║   ██║ ${reflect}  ██║ ${main_color}  ██╔══╝  ██║██║     ██╔══╝  ╚════██║\n"
+        "${main_color}██████╔╝╚██████╔╝${reflect}   ██║${main_color}   ██║     ██║███████╗███████╗███████║\n"
+        "${main_color}╚═════╝  ╚═════╝${reflect}    ╚═${main_color}╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝\n"
+    )
+    frame_reflect_4=(
+        " ${main_color}██████╗  ██████╗ ████████╗███████${reflect}╗██╗██${main_color}╗     ███████╗███████╗\n"
+        "${main_color}██╔══██╗██╔═══██╗╚══██╔══╝██╔═══${reflect}═╝██║█${main_color}█║     ██╔════╝██╔════╝\n"
+        "${main_color}██║  ██║██║   ██║   ██║   █████${reflect}╗  ██║${main_color}██║     █████╗  ███████╗\n"
+        "${main_color}██║  ██║██║   ██║   ██║   ██╔═${reflect}═╝  ██${main_color}║██║     ██╔══╝  ╚════██║\n"
+        "${main_color}██████╔╝╚██████╔╝   ██║   ██║${reflect}     █${main_color}█║███████╗███████╗███████║\n"
+        "${main_color}╚═════╝  ╚═════╝    ╚═╝   ╚═${reflect}╝     ${main_color}╚═╝╚══════╝╚══════╝╚══════╝\n"
+    )
+    frame_reflect_5=(
+        " ${main_color}██████╗  ██████╗ ████████╗███████╗██╗██╗     ${reflect}██████${main_color}█╗███████╗\n"
+        "${main_color}██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║    ${reflect} ██╔══${main_color}══╝██╔════╝\n"
+        "${main_color}██║  ██║██║   ██║   ██║   █████╗  ██║██║   ${reflect}  ████${main_color}█╗  ███████╗\n"
+        "${main_color}██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║  ${reflect}   ██╔${main_color}══╝  ╚════██║\n"
+        "${main_color}██████╔╝╚██████╔╝   ██║   ██║     ██║████${reflect}███╗██${main_color}█████╗███████║\n"
+        "${main_color}╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══${reflect}════╝╚${main_color}══════╝╚══════╝\n"
+    )
+    frame_reflect_6=(
+        " ${main_color}██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗████${reflect}███╗\n"
+        "${main_color}██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔${reflect}════╝\n"
+        "${main_color}██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ██${reflect}█████╗\n"
+        "${main_color}██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚${reflect}════██${main_color}║\n"
+        "${main_color}██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗${reflect}██████${main_color}█║\n"
+        "${main_color}╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════${reflect}╝╚════${main_color}══╝\n"
+    )
+
+    _show_frame_lines "${frame_logo[@]}"
+    _show_frame_lines "${frame_reflect_1[@]}"
+    _show_frame_lines "${frame_reflect_2[@]}"
+    _show_frame_lines "${frame_reflect_3[@]}"
+    _show_frame_lines "${frame_reflect_4[@]}"
+    _show_frame_lines "${frame_reflect_5[@]}"
+    _show_frame_lines "${frame_reflect_6[@]}"
+    _show_frame_lines "${frame_logo[@]}"
+    echo -e "${reset}"
+}
+
+function _get_password {
+    # Ask for password and save it to don't ask for it again while the installation.
+    local correct_password password
+    correct_password=false
+    until [ "${correct_password}" == true ]; do
+        echo -n "Password: "
+        IFS= read -rs password
+        if echo "${password}" | sudo -S -k -v &> /dev/null; then
+            correct_password=true
+        else
+            echo -e "\nWrong password"
+        fi
+    done
+    echo "${password}"
+}
+
+function _setup_configuration_files {
+    git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles"
+    rsync -a "${HOME}/dotfiles/" "${HOME}/"
+
+    chmod 711 "${HOME}/.local/bin/change-background"
+    chmod 711 "${HOME}/.local/bin/custom-scrot"
+    chmod 711 "${HOME}/.local/bin/picture-of-the-day"
+    mkdir -p "${HOME}/Pictures"/{Wallpapers,Screenshots}
+    mkdir -p "${HOME}/Workspaces"
+}
+
+function _configure_yay {
+    local password
+    password="$1"
+
+    echo "${password}" | sudo -S -k eos-rankmirrors
+    yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop
+    yes | \
+        # Roses are red
+        # violets are blue
+        # I have Endeavour i3
+        yay -Syu
+}
+
+function _install_drivers {
+    local password
+    password="$1"
+
+    # GPU Drivers.
+    local gpu_info
+    gpu_info="$(lspci | grep -E "VGA|3D")"
+    if echo "${gpu_info}" | grep -qi "NVIDIA"; then
+        yes | yay -S nvidia-inst
+        echo "${password}" | sudo -S -k nvidia-inst
+    elif echo "${gpu_info}" | grep -qi "AMD"; then
+        yes | yay -S mesa vulkan-radeon lib32-vulkan-radeon
+    elif echo "${gpu_info}" | grep -qi "Intel"; then
+        yes | yay -S mesa vulkan-intel lib32-vulkan-intel
     else
-        echo -e "\nWrong password"
+        yes | yay -S mesa vulkan-swrast lib32-vulkan-swrast
     fi
-done
+}
 
-yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop
-sudo pacman-mirrors -f
-yes | \
-    # Roses are red
-    # violets are blue
-    # I have Endeavour i3
-    yay -Syu
+function _install_packages {
+    local password
+    password="$1"
 
-# Copy config files.
-cd ~
-git clone git@github.com:lucasvazq/dotfiles.git
-cp dotfiles/* .
+    # Utilities & Required by system.
+    yes | yay -S trash-cli
+    yes | yay -S gnome-keyring
+    yes | yay -S slop python-pywal
+    yes | yay -S ttf-jetbrains-mono-nerd noto-fonts-emoji
 
-# Install packages
-yay -S gnome-keyring
-yay -S zsh
-yay -S trash-cli
-yay -S google-chrome
-chsh -s "$(which zsh)"
-yay -S warp-terminal-bin
-yay -S starship
-yay -S docker-desktop
-yay -S slop
-yay -S visual-studio-code-bin
-yay -S github-cli
-yes | yay -S neohtop
-yes | yay -S libreoffice-fresh
-yes | yay -S gimp shotcut
+    # Shell.
+    yes | yay -S zsh starship
+    echo "${password}" | chsh -s "$(command -v zsh)"
 
-# Fonts.
-yes | yay -S ttf-jetbrains-mono-nerd noto-fonts-emoji
+    # Apps.
+    yes | yay -S google-chrome
+    yes | yay -S visual-studio-code-bin warp-terminal-bin
+    yes | yay -S libreoffice-fresh
+    yes | yay -S gimp shotcut
+    yes | yay -S neohtop
+    yes | yay -S steam
 
-# what about numlock?
+    # GitHub & Git.
+    yes | yay -S github-cli
+    git config --global init.defaultBranch main
+    git config --global pull.rebase false
+    git config --global core.excludesfile "${HOME}/.config/git/gitignore"
 
-# add CDNs
-# add fonts: jetbrains noto nerd font regular
-# install venv for python and then create a default one at ~/.config/Envs/Python
-yes | yay -S nvm
-nvm install node
+    # Docker.
+    yes | yay -S docker-desktop
+    echo "${password}" | sudo -S -k usermod -aG docker "${USER}"
+    echo "${password}" | sudo -S -k rm -f /etc/firewalld/policies/docker*
+    echo "${password}" | sudo -S -k rm -f /etc/firewalld/zones/docker*
+    echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker || true
+    echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker-forwarding || true
+    echo "${password}" | sudo -S -k firewall-cmd --reload
+    echo "${password}" | sudo -S -k systemctl enable docker
 
-git config --global init.defaultBranch main
-git config --global pull.rebase false
-git config --global core.excludesfile ~/.config/git/gitignore
+    # Python.
+    yes | yay -S python-pip
 
-echo "Detecting GPU..."
-GPU_INFO="$(lspci | grep -E "VGA|3D")"
-echo "-> ${GPU_INFO}"
+    # JavaScript.
+    yes | yay -S nvm
+    source /usr/share/nvm/init-nvm.sh
+    nvm install node
+}
 
-# Ensure multilib is enabled
-if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
-    echo "Warning: [multilib] repository not enabled. 32-bit support (for Steam) won't work."
-fi
+function _configure_dns {
+    local password
+    password="$1"
 
-if echo "${GPU_INFO}" | grep -qi "NVIDIA"; then
-    echo "NVIDIA GPU detected."
-    sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings
-    if echo "${GPU_INFO}" | grep -qi "Intel"; then
-        echo "Hybrid Intel + NVIDIA setup detected. Installing PRIME offload support..."
-        sudo pacman -S --needed nvidia-prime
+    { printf "%s\n" "${password}"; printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n"; } \
+        | sudo -S -k tee /etc/resolv.conf > /dev/null
+    { printf "%s\n" "${password}"; printf "[main]\ndns=none\n"; } \
+        | sudo -S -k tee /etc/NetworkManager/NetworkManager.conf > /dev/null
+}
+
+function _setup_crontab {
+    local job current
+    job="00 00 * * * ${HOME}/.local/bin/picture-of-the-day"
+    current="$(crontab -l 2>/dev/null || true)"
+    if ! grep -Fqx -- "${job}" <<< "${current}"; then
+        ( printf "%s\n" "${current}"; printf "%s\n" "${job}" ) | crontab -
     fi
+}
 
-elif echo "${GPU_INFO}" | grep -qi "AMD"; then
-    echo "AMD GPU detected."
-    sudo pacman -S --needed mesa vulkan-radeon lib32-vulkan-radeon
+function _post_installation_cleanup {
+    # Merge some default folders into the Downloads folder.
+    xdg-user-dirs-update --set XDG_DESKTOP_DIR "${HOME}/Downloads"
+    xdg-user-dirs-update --set XDG_MUSIC_DIR "${HOME}/Downloads"
+    xdg-user-dirs-update --set XDG_TEMPLATES_DIR "${HOME}/Downloads"
+    xdg-user-dirs-update --set XDG_PUBLICSHARE_DIR "${HOME}/Downloads"
+    trash "${HOME}/Desktop" "${HOME}/Music" "${HOME}/Public" "${HOME}/Templates"
 
-elif echo "${GPU_INFO}" | grep -qi "Intel"; then
-    echo "Intel GPU detected."
-    sudo pacman -S --needed mesa vulkan-intel lib32-vulkan-intel
+    trash "${HOME}/dotfiles"
+}
 
-else
-    echo "Unknown GPU vendor. Installing generic Mesa drivers."
-    sudo pacman -S --needed mesa vulkan-swrast lib32-vulkan-swrast
-fi
-
-echo "GPU driver setup completed."
-echo "You can verify Vulkan with: vulkaninfo | grep 'GPU id'"
-
-pip install pywal
-
-yay -S steam
-
-# Handle directories.
-trash Desktop Music Public Templates dotfiles
-mkdir -p Pictures/{Wallpapers,Screenshots}
-mkdir -p Workspaces
-chmod 711 .local/bin/change-background
-chmod 711 .local/bin/custom-scrot
-chmod 711 .local/bin/picture-of-the-day
-
-# Run picture-of-the-day one time per day at 00:00
-# TODO: make this.... idempotent?
-(crontab -l ; echo "00 00 * * * picture-of-the-day") | crontab -
-
-echo "remember to install KVM"
-echo "RESET!"
+main
