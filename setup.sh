@@ -94,7 +94,7 @@ fi
 echo "GPU driver setup completed."
 echo "You can verify Vulkan with: vulkaninfo | grep 'GPU id'"
 
-pip install pywal
+yes | yay -S python-pywal qt5ct
 
 yay -S steam
 

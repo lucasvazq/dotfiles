@@ -108,6 +108,7 @@ function ls {
 # - JavaScript
 source /usr/share/nvm/init-nvm.sh
 # - Python.
+# TODO: review this
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin:${PATH}"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -120,7 +121,6 @@ source "${HOME}/.config/venv/bin/activate" > /dev/null 2>&1
 eval "$(starship init zsh)"
 
 # Line Separator.
-sleep 0.01
 local _START _RESET _BOLD _COLOR_BLACK _COLOR_SEPARATOR_FIRST_TIME _COLOR_SEPARATOR
 _START=true
 _RESET="\033[0m"

@@ -7,7 +7,7 @@ set -euo pipefail
 
 function main {
     local select_screen
-    if [[ -n "$1" ]]; then
+    if [[ -n "${1:-}" ]]; then
         if [[ "$1" == "--select_screen" ]]; then
             select_screen=true
         else

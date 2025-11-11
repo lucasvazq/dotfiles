@@ -4,8 +4,9 @@ export BROWSER=google-chrome
 
 # Executables.
 export PATH="${PATH}:${HOME}/.local/bin"
-# TODO, probably remove this...
-export PATH="${PATH}:${HOME}/.config/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
+
+# Themes.
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 # Python.
 export PYTHONUNBUFFERED=1

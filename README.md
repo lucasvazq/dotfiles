@@ -2,6 +2,22 @@
 
   # i3 Starship dotfiles
 
+```
+TODO
+add slop
+google-chrome-stable
+
+sudo usermod -aG docker $USER
+sudo rm /etc/firewalld/policies/docker*
+sudo rm /etc/firewalld/zones/docker*
+sudo firewall-cmd --permanent --delete-zone=docker | true
+sudo firewall-cmd --permanent --delete-zone=docker-forwarding | true
+sudo firewall-cmd --reload
+sudo systemctl enable docker
+
+# yes | yay -S python-pip ?
+```
+
 </span>
 
 _Made with love, from my own dreams._
