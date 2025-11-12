@@ -1,3 +1,7 @@
+###############################################################################
+# Shell.
+###############################################################################
+
 # Zsh.
 # - Completion.
 zstyle :compinstall filename "${HOME}/.zshrc"
@@ -8,8 +12,61 @@ HISTFILE="${HOME}/.config/.histfile"
 HISTSIZE=1000
 SAVEHIST=1000
 
+# Starship.
+eval "$(starship init zsh)"
+
+# Lines Separator.
+local _START _RESET _BOLD _COLOR_BLACK _COLOR_SEPARATOR_FIRST_TIME _COLOR_SEPARATOR
+_START=true
+_RESET="\033[0m"
+_BOLD="\033[1m"
+_COLOR_BLACK="\033[30m"
+_COLOR_SEPARATOR_FIRST_TIME="\033[48;5;231m"
+_COLOR_SEPARATOR="\033[48;5;146m"
+
+function _separator {
+    local string background newline
+    string="${1}"
+    background="${2}"
+    newline="${3:-false}"
+
+    if [[ "${_START}" == "true" ]]; then
+        _START=false
+    else
+        echo
+    fi
+
+    local text width
+    if [[ "${newline}" == "false" ]]; then
+        text="${_COLOR_BLACK}"
+    fi
+    width=$(($(tput cols)-${#string}))
+    printf "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))\033[0m"
+    echo -e "${_COLOR_RESET}"
+
+    if [[ "${newline}" == "true" ]]; then
+        echo
+    fi
+}
+
+precmd() {
+    if [[ "${_START}" == "true" ]]; then
+        _separator "> Init" "${_COLOR_SEPARATOR_FIRST_TIME}"
+    else
+        _separator "> Execute Command" "${_COLOR_SEPARATOR}"
+    fi
+}
+
+preexec() {
+    _separator "> Output" "${_COLOR_SEPARATOR}" true
+}
+
+###############################################################################
 # Bindings.
+###############################################################################
+
 WORDCHARS=""
+
 bindkey -e
 #       Action                              Key
 #       ------------------------------------------------
@@ -23,10 +80,14 @@ bindkey "^[[3~" delete-char         # Supr
 bindkey "^[[3;5~" kill-word         # Ctrl + Delete
 bindkey "^W" backward-kill-word     # Ctrl + Backspace
 
+###############################################################################
 # Alias.
+###############################################################################
+
 alias code='code --password-store="gnome-libsecret"'
 alias grep="grep --color=auto"
 alias rm="trash"
+
 function curl {
     local output status_code json
     output="$(/usr/bin/curl $@ -sS -w "\nstatus: %{http_code}" -H "Content-Type: application/json")"
@@ -40,6 +101,7 @@ function curl {
     fi
     echo "${response}" | jq . 2>/dev/null || echo "${response}"
 }
+
 function ls {
     (
         echo -e "USER\tGROUP\tOTHER\tNAME\tSIZE\tMODIFIED"
@@ -104,61 +166,12 @@ function ls {
     ) | column -t -s $'\t'
 }
 
+###############################################################################
 # Language specific.
-# - JavaScript
+###############################################################################
+
+# Python.
+source "${HOME}/.config/.venv/bin/activate"
+
+# JavaScript
 source /usr/share/nvm/init-nvm.sh
-# - Python.
-export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin:${PATH}"
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-pyenv global system
-source "${HOME}/.config/venv/bin/activate" > /dev/null 2>&1
-
-# Starship.
-eval "$(starship init zsh)"
-
-# Line Separator.
-sleep 0.01
-local _START _RESET _BOLD _COLOR_BLACK _COLOR_SEPARATOR_FIRST_TIME _COLOR_SEPARATOR
-_START=true
-_RESET="\033[0m"
-_BOLD="\033[1m"
-_COLOR_BLACK="\033[30m"
-_COLOR_SEPARATOR_FIRST_TIME="\033[48;5;231m"
-_COLOR_SEPARATOR="\033[48;5;146m"
-function separator {
-    local string background newline
-    string="${1}"
-    background="${2}"
-    newline="${3:-false}"
-
-    if [[ "${_START}" == "true" ]]; then
-        _START=false
-    else
-        echo
-    fi
-
-    local text width
-    if [[ "${newline}" == "false" ]]; then
-        text="${_COLOR_BLACK}"
-    fi
-    width=$(($(tput cols)-${#string}))
-    printf "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))\033[0m"
-    echo -e "${_COLOR_RESET}"
-
-    if [[ "${newline}" == "true" ]]; then
-        echo
-    fi
-}
-precmd() {
-    if [[ "${_START}" == "true" ]]; then
-        separator "> Init" "${_COLOR_SEPARATOR_FIRST_TIME}"
-    else
-        separator "> Execute Command" "${_COLOR_SEPARATOR}"
-    fi
-}
-preexec() {
-    separator "> Output" "${_COLOR_SEPARATOR}" true
-}

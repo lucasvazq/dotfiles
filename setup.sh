@@ -204,6 +204,7 @@ function _install_packages {
 
     # Python.
     yes | yay -S python-pip
+    python -m venv "${HOME}/.config/.venv"
 
     # JavaScript.
     yes | yay -S nvm
