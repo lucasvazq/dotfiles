@@ -14,18 +14,18 @@ for_window [class="Gimp"] border normal
 for_window [class="Shotcut"] border normal
 title_align center
 
-
 ###############################################################################
 # Apps.
 ###############################################################################
 
-##### Autostart.
-
+# Autostart.
 exec --no-startup-id numlockx
-exec --no-startup-id picture-of-the-day
+exec --no-startup-id dunst
+exec --no-startup-id "${HOME}/.local/bin/picture-of-the-day"
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id eval $(gnome-keyring-daemon --start)
 
-##### Bindings.
-
+# Bindings.
 bindsym $mod+w exec --no-startup-id google-chrome-stable
 bindsym $mod+n exec --no-startup-id thunar
 bindsym $mod+Return exec --no-startup-id warp-terminal
@@ -35,12 +35,12 @@ bindsym $mod+Shift+e exec --no-startup-id "${HOME}/.config/i3/scripts/powermenu"
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -config "${HOME}/.config/rofi/rofidmenu.rasi"
 
 ###############################################################################
-# Containers and desktop workspaces.
+# Containers and Desktop Workspaces.
 ###############################################################################
 
-##### Focus & Move.
+# Focus & Move.
 
-# Focus.
+# - Focus.
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
@@ -48,14 +48,14 @@ bindsym $mod+Right focus right
 focus_on_window_activation none
 focus_follows_mouse no
 
-# Move.
+# - Move.
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 floating_modifier $mod
 
-# Move focused container to N desktop workspace.
+# - Move focused container to N Desktop Workspace.
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -66,7 +66,7 @@ bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 
-# Resize.
+# - Resize.
 bindsym $mod+r mode "$resize"
 set $resize Resize using ARROWS. (Esc)ape to exit.
 mode "$resize" {
@@ -77,14 +77,14 @@ mode "$resize" {
     bindsym Escape mode "default"
 }
 
-# Extra.
+# - Extra.
 bindsym $mod+f fullscreen toggle
 bindsym $mod+space floating toggle
 bindsym $mod+q kill
 
-##### Workspaces
+# Workspaces.
 
-# Names.
+# - Names.
 set $ws1 "1: I"
 set $ws2 "2: II"
 set $ws3 "3: III"
@@ -95,7 +95,7 @@ set $ws7 "7: VII"
 set $ws8 "8: VIII"
 set $ws9 "9: IX"
 
-# Switch.
+# - Switch.
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -106,24 +106,15 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
+# - Extra.
 for_window [floating] resize set 640 480 --once
 for_window [floating] move position center --once
 
 ###############################################################################
-# Keyboard layout
+# Keyboard layout.
 ###############################################################################
 
-# ???
-# bindsym $mod+q exec setxkbmap -layout us
-# bindsym $mod+w exec setxkbmap -layout es
-
-#############################################
-# autostart applications/services on login: #
-#############################################
-
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id eval $(/usr/bin/gnome-keyring-daemon --start)
-exec --no-startup-id /usr/bin/dunst
+exec_always setxkbmap -layout us,es -option 'grp:alt_space_toggle'
 
 ###############################################################################
 # Colors.
@@ -146,7 +137,8 @@ set_from_resource $color13 color13
 set_from_resource $color14 color14
 set_from_resource $color15 color15
 
-# class                 border      background  text        indicator
+# Class                 Border      Background  Text        Indicator
+# -------------------------------------------------------------------
 client.focused          $color1     $color1     $color7     $color1
 client.focused_inactive $color0     $color0     $color7     $color0
 client.unfocused        $color0     $color0     $color7     $color0
@@ -187,34 +179,3 @@ strip_workspace_numbers yes
         urgent_workspace    $color5          $color5  $color2      $color0
     }
 }
-
-# you can add different bars for multidisplay setups on each display:
-# set output HDMI-0 to the display you want the bar, --transparency can be set.
-# Transparency needs rgba color codes to be used where the last two letters are the transparency factor see here:
-# https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
-# #08052be6 --> e6=90%
-
-# bar {
-#   font pango: Noto Sans Regular 10
-#   status_command i3blocks -c ~/.config/i3/i3blocks-2.conf
-#   i3bar_command i3bar --transparency
-#   output HDMI-0
-#   position bottom
-#
-# When strip_workspace_numbers is set to yes,
-# any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-#strip_workspace_numbers yes
-##strip_workspace_name no
-#
-#   colors {
-#       separator          $purple
-#       background         $darkbluetrans
-#           statusline         $white
-#                           border          bg              txt         indicator
-#       focused_workspace   $lighterblue    $lighterblue    $darkblue   $purple
-#       active_workspace    $lightdblue     $lightdblue     $darkblue   $purple
-#       inactive_workspace  $darkblue       $darkblue       $lightdblue $purple
-#       urgent_workspace    $urgentred      $urgentred      $white      $purple
-#   }
-#}
