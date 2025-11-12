@@ -48,8 +48,8 @@ class Main:
         try:
             with (
                 request.urlopen(
-                    f"{_BASE_URL}/apod/astropix.html",
-                    timeout=_DEFAULT_TIMEOUT,
+                    f"{self._base_url}/apod/astropix.html",
+                    timeout=self._default_timeout,
                 ) as response
             ):
                 if response.status != 200:
@@ -81,8 +81,8 @@ class Main:
         try:
             with (
                 request.urlopen(
-                    f"{_BASE_URL}/{image_url}",
-                    timeout=_DEFAULT_TIMEOUT,
+                    f"{self._base_url}/{image_url}",
+                    timeout=self._default_timeout,
                 ) as response
             ):
                 image = response.read()
@@ -94,7 +94,6 @@ class Main:
         destination_path.parent.mkdir(parents=True, exist_ok=True)
         with open(destination_path, "wb") as file:
             file.write(image)
-
 
     def _change_background(self, destination_path: Path | None):
         # The "change-background" is an external executable that updates the

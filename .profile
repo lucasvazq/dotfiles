@@ -5,6 +5,9 @@ export PATH="${PATH}:${HOME}/.local/bin"
 export TERMINAL=warp-terminal
 export BROWSER=google-chrome
 
+# Themes.
+export QT_QPA_PLATFORMTHEME=qt5ct
+
 # Python.
 export PYTHONUNBUFFERED=1
 export PYTHONDONTWRITEBYTECODE=1
