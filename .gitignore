@@ -1,4 +1,4 @@
-# [root]
+# ./
 *
 !.gitignore
 !.profile
@@ -6,32 +6,40 @@
 !README.md
 !setup.sh
 
-# - .config
+# ./.config
 !.config/
 !.config/mimeapp.list
 !.config/starship.toml
 !.config/user-dirs.dirs
 
-# - - i3
-!.config/i3/
-!.config/i3/*
-
-# - - git
+# ./.config./git
 !.config/git/
 !.config/git/gitignore
 
-# - .local
+# ./.config./i3
+!.config/i3/
+!.config/i3/config
+!.config/i3/i3blocks.conf
+
+# ./.config./wal
+!.config/wal/
+
+# ./.config./wal/templates
+!.config/wal/templates/
+!.config/wal/templates/dunstrc
+
+# ./.local
 !.local/
 
-# - - bin
+# ./.local/bin
 !.local/bin/
 !.local/bin/change-background
 !.local/bin/custom-scrot
 !.local/bin/picture-of-the-day
 
-# - Pictures
+# ./Pictures
 !Pictures
 
-# - - Wallpapers
+# ./Wallpapers
 !Pictures/Wallpapers/
 !Pictures/Wallpapers/*
