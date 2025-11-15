@@ -1,45 +1,19 @@
 [global]
+    format = "%a %s %p\n%b"
+    font = "JetBrainsMonoNL Nerd Font Mono 10, Noto Color Emoji 10, monospace 10"
     frame_color = "{foreground}"
     separator_color = "{background}"
-    alignment = center
-    browser = brave
-    show_indicators = yes # Display indicators for URLs (U) and actions (A).
-    format = "%a %s %p\n%b"
-    geometry = "0x0-40+63"
-    frame_width = 1
-    sort = yes
-    indicate_hidden = yes
-    bounce_freq = 5
-    show_age_threshold = 60
-    word_wrap = no
-    ignore_newline = no
-    shrink = yes
-    transparency = 0
-    idle_threshold = 120
-    monitor = 0
-    follow = mouse
-    sticky_history = yes
-    history_length = 20
-    line_height = 0
-    separator_height = 1
-    padding = 8
-    horizontal_padding = 10
-    startup_notification = false
-    font = JetBrainsMono Nerd Font Mono 10
-    markup = yes
-    icon_path = /usr/share/icons/Adwaita/16x16/actions/:/usr/share/icons/Adwaita/16x16/apps/:/usr/share/icons/Adwaita/16x16/categories/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/16x16/emblems/:/usr/share/icons/Adwaita/16x16/emotes/:/usr/share/icons/Adwaita/16x16/legacy/:/usr/share/icons/Adwaita/16x16/mimetypes/:/usr/share/icons/Adwaita/16x16/places/:/usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/ui/
+    idle_threshold = 0
+    icon_position = off
 
 [urgency_low]
     background = "{foreground}"
     foreground = "{background}"
-    timeout = 10
 
 [urgency_normal]
     background = "{foreground}"
     foreground = "{background}"
-    timeout = 10
 
 [urgency_critical]
     background = "{color1}"
     foreground = "{foreground}"
-    timeout = 0
