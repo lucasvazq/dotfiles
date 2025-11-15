@@ -1,3 +1,18 @@
+# Sources:
+# - https://github.com/patrickmccallum/mimetype-io
+# - https://www.iana.org/assignments/media-types/media-types.xhtml
+# - https://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
+#
+# TODO:
+#   Review the following links:
+#       - https://www.freeformatter.com/mime-types-list.html
+#       - https://gist.github.com/juniorcesarabreu/22bf0a79583641f3979d2051b0a21d76
+#       - https://cheatsheets.zip/mime
+#       - https://www.digipres.org/formats/mime-types/
+#       - https://s-randomfiles.s3.amazonaws.com/mime/allMimeTypes.txt
+#       - https://web.archive.org/web/20161015175648/http://www.stdicon.com/mimetypes
+#       - https://pastee.dev/p/bQmQH
+
 [Default Applications]
 
 # Videos.
