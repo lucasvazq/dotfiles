@@ -180,7 +180,7 @@ function _install_packages {
 
     # Apps.
     yes | yay -S google-chrome
-    yes | yay -S visual-studio-code-bin warp-terminal-bin
+    yes | yay -S visual-studio-code-bin warp-terminal-bin postman-bin
     yes | yay -S libreoffice-fresh
     yes | yay -S gimp shotcut
     yes | yay -S neohtop
