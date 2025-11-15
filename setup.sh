@@ -203,8 +203,10 @@ function _install_packages {
     echo "${password}" | sudo -S -k systemctl enable docker
 
     # Python.
-    yes | yay -S python-pip
     python -m venv "${HOME}/.config/.venv"
+    source "${HOME}/.config/.venv/bin/activate"
+    pip install ipython
+    source "${HOME}/.config/.venv/bin/deactivate"
 
     # JavaScript.
     yes | yay -S nvm
