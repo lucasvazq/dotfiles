@@ -172,7 +172,7 @@ function _install_packages {
     yes | yay -S trash-cli
     yes | yay -S gnome-keyring
     yes | yay -S slop python-pywal qt5ct qt6ct
-    yes | yay -S ttf-jetbrains-mono-nerd noto-fonts-emoji
+    yes | yay -S xkblayout-state ttf-jetbrains-mono-nerd noto-fonts-emoji
 
     # Shell.
     yes | yay -S zsh starship

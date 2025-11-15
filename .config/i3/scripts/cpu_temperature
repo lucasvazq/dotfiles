@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+function main {
+    local temperature
+    temperature="$(_get_temperature)"
+    if [[ -z "${temperature}" ]]; then
+        _print_temperature "${temperature}"
+    fi
+}
+
+function _get_temperature {
+    for hwmon in /sys/class/hwmon/hwmon*; do
+        local name
+        name="$(cat "${hwmon}/name" 2>/dev/null)"
+        case "${name}" in
+            k10temp|zenpower|coretemp)
+                local temperature
+                temperature=$(cat "${hwmon}/temp1_input" 2>/dev/null)
+                if [[ "${temperature}" =~ ^[0-9]+$ ]]; then
+                    echo "$(( temperature / 1000 ))"
+                    return
+                fi
+                ;;
+        esac
+    done
+}
+
+function _print_temperature {
+    local temperature
+    temperature="$1"
+
+    local reset color_warning color_red parsed_temperature
+    reset="\033[0m"
+    color_warning="\033[33m"
+    color_red="\033[31m"
+    if (( temperature < 60 )); then
+        parsed_temperature="${temperature}"
+    elif (( temperature < 80 )); then
+        parsed_temperature="${color_warning}${temperature}${reset}"
+    else
+        parsed_temperature="${color_red}${temperature}${reset}"
+    fi
+
+    echo -e "${parsed_temperature}º"
+}
+
+main

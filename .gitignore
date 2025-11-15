@@ -21,6 +21,13 @@
 !.config/i3/config
 !.config/i3/i3blocks.conf
 
+# ./.config./i3/scripts
+!.config/i3/scripts/
+!.config/i3/scripts/battery
+!.config/i3/scripts/cpu_temperature
+!.config/i3/scripts/gpu_temperature
+!.config/i3/scripts/gpu_vram
+
 # ./.config./wal
 !.config/wal/
 

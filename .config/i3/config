@@ -67,7 +67,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 
 # - Resize.
-bindsym $mod+r mode "$resize"
+bindsym $mod+r mode $resize
 set $resize Resize using ARROWS. (Esc)ape to exit.
 mode "$resize" {
     bindsym Left resize grow width 5 px
@@ -85,15 +85,15 @@ bindsym $mod+q kill
 # Workspaces.
 
 # - Names.
-set $ws1 "1: I"
-set $ws2 "2: II"
-set $ws3 "3: III"
-set $ws4 "4: IV"
-set $ws5 "5: V"
-set $ws6 "6: VI"
-set $ws7 "7: VII"
-set $ws8 "8: VIII"
-set $ws9 "9: IX"
+set $ws1 "1:I"
+set $ws2 "2:II"
+set $ws3 "3:III"
+set $ws4 "4:IV"
+set $ws5 "5:V"
+set $ws6 "6:VI"
+set $ws7 "7:VII"
+set $ws8 "8:VIII"
+set $ws9 "9:IX"
 
 # - Switch.
 bindsym $mod+1 workspace $ws1
@@ -114,7 +114,7 @@ for_window [floating] move position center --once
 # Keyboard layout.
 ###############################################################################
 
-exec_always setxkbmap -layout us,es -option 'grp:alt_space_toggle'
+exec_always setxkbmap -layout us,es -option grp:alt_space_toggle
 
 ###############################################################################
 # Colors.
@@ -146,36 +146,26 @@ client.urgent           $color1     $color1     $color7     $color1
 client.placeholder      $color0     $color0     $color7     $color0
 client.background       $color0
 
-############################################
-# bar settings (input comes from i3blocks) #
-############################################
+###############################################################################
+# Bar.
+###############################################################################
 
-# Start i3bar to display a workspace bar
-# (plus the system information i3status finds out, if available)
 bar {
-        font pango: Noto Sans Regular 10
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
-            position bottom
-#           i3bar_command i3bar --transparency
-# it could be that you have no primary display set: set one (xrandr --output <output> --primary)
-# reference: https://i3wm.org/docs/userguide.html#_tray_output
-            #tray_output primary
-            tray_padding 0
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    strip_workspace_numbers yes
+    position bottom
+    tray_output none
+    padding 4
+    colors {
+        separator          $color0
+        background         $color1
+        statusline         $color2
 
-# When strip_workspace_numbers is set to yes,
-# any workspace that has a name of the form
-# “[n][:][NAME]” will display only the name.
-strip_workspace_numbers yes
-##strip_workspace_name no
-
-            colors {
-            separator          $color0
-            background         $color1
-            statusline         $color2
-#                           border              bg          txt         indicator
-        focused_workspace   $color4         $color3       $color1   $color0
-        active_workspace    $color6          $color4 $color1   $color0
-        inactive_workspace  $color1           $color1   $color3       $color0
-        urgent_workspace    $color5          $color5  $color2      $color0
+        # Class             Border      Background  Text        Indicator
+        # ---------------------------------------------------------------
+        focused_workspace   $color4     $color3     $color1     $color0
+        active_workspace    $color6     $color4     $color1     $color0
+        inactive_workspace  $color1     $color1     $color3     $color0
+        urgent_workspace    $color5     $color5     $color2     $color0
     }
 }

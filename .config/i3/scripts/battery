@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+function main {
+    if _has_battery; then
+        _print_battery
+    fi
+}
+
+function _detect_if_has_battery {
+    ls /sys/class/power_supply/BAT* >/dev/null 2>&1
+}
+
+function _print_battery {
+    "${HOME}/.config/i3/scripts/battery2"
+}
+
+main
