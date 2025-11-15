@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+function main {
+    _handle_click
+
+    local wifi_connection
+    wifi_connection="$(_get_wifi_connection)"
+    _print_wifi_connection "${wifi_connection}"
+}
+
+function _handle_click {
+    if [[ "${BLOCK_BUTTON}" == "1" ]]; then
+        nm-connection-editor &
+    fi
+}
+
+function _get_wifi_connection {
+    iwgetid -r 2>/dev/null
+}
+
+function _print_wifi_connection {
+    local wifi_connection
+    wifi_connection="$1"
+
+    if [[ -z "${wifi_connection}" ]]; then
+        echo "󰤭"
+        return
+    fi
+
+    echo "󰤥"
+}
+
+main

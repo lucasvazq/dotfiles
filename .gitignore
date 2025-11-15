@@ -27,6 +27,7 @@
 !.config/i3/scripts/cpu_temperature
 !.config/i3/scripts/gpu_temperature
 !.config/i3/scripts/gpu_vram
+!.config/i3/scripts/wifi
 
 # ./.config./wal
 !.config/wal/
