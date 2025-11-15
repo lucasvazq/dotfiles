@@ -15,7 +15,7 @@
 
 [Default Applications]
 
-# Videos.
+# Video.
 application/mp4=vlc.desktop
 video/1d-interleaved-parityfec=vlc.desktop
 video/3gpp-tt=vlc.desktop
@@ -331,7 +331,7 @@ audio/x-tta=vlc.desktop
 audio/x-wavpack=vlc.desktop
 audio/x-wma=vlc.desktop
 
-# Images.
+# Image.
 image/aces=google-chrome.desktop
 image/apng=google-chrome.desktop
 image/avci=google-chrome.desktop
@@ -462,26 +462,27 @@ image/x-xwindowdump=google-chrome.desktop
 application/javascript=code.desktop
 application/json=code.desktop
 application/rdf+xml=code.desktop
-application/rtf=code.desktop
 application/sql=code.desktop
 application/vnd.sqlite3=code.desktop
 application/xhtml+xml=code.desktop
 application/xml-dtd=code.desktop
 application/xml=code.desktop
 application/yaml=code.desktop
+application/x-sh=code.desktop
+application/x-shellscript==code.desktop
+application/x-texinfo=code.desktop
+inode/x-empty=code.desktop
 text/css=code.desktop
+text/csv-schema=code.desktop
 text/csv=code.desktop
 text/html=code.desktop
 text/javascript=code.desktop
 text/markdown=code.desktop
 text/plain=code.desktop
 text/tab-separated-values=code.desktop
+text/xml-external-parsed-entity=code.desktop
 text/xml=code.desktop
 text/yaml=code.desktop
-application/x-sh=code.desktop
-application/x-shellscript==code.desktop
-application/x-texinfo=code.desktop
-inode/x-empty=code.desktop
 text/x-config=code.desktop
 text/x-dockerfile=code.desktop
 text/x-ini=code.desktop
