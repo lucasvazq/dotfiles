@@ -468,6 +468,11 @@ application/xhtml+xml=code.desktop
 application/xml-dtd=code.desktop
 application/xml=code.desktop
 application/yaml=code.desktop
+application/x-extension-htm=code.desktop
+application/x-extension-html=code.desktop
+application/x-extension-shtml=code.desktop
+application/x-extension-xht=code.desktop
+application/x-extension-xhtml=code.desktop
 application/x-sh=code.desktop
 application/x-shellscript==code.desktop
 application/x-texinfo=code.desktop
@@ -549,6 +554,7 @@ application/x-xz-compressed-tar=x-archive.desktop
 application/x-xz=x-archive.desktop
 
 # Schema handlers.
+x-scheme-handler/chrome=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/mailto=google-chrome.desktop
