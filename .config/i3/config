@@ -106,9 +106,10 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
-# - Extra.
+# Start mode.
 for_window [floating] resize set 640 480 --once
 for_window [floating] move position center --once
+for_window [class="Nm-connection-editor"] floating enable
 
 ###############################################################################
 # Keyboard layout.
@@ -155,7 +156,7 @@ bar {
     strip_workspace_numbers yes
     position bottom
     tray_output none
-    padding 4
+    padding 2
     colors {
         separator          $color0
         background         $color1
