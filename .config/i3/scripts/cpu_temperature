@@ -47,7 +47,6 @@ function _print_temperature {
         echo "${temperature}º"
         echo "${color}"
     fi
-
 }
 
 main

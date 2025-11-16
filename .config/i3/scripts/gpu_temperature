@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Get the GPU temperature.
 set -euo pipefail
 
 function main {
@@ -22,8 +23,8 @@ function _get_temperature {
     fi
 
     # AMD/Intel.
+	local name
     for hwmon in /sys/class/hwmon/hwmon*; do
-        local name
         name=$(cat "${hwmon}/name" 2>/dev/null)
         case "${name}" in
             amdgpu|i915|intel|xe)
@@ -41,19 +42,22 @@ function _print_temperature {
     local temperature
     temperature="$1"
 
-    local reset color_warning color_red parsed_temperature
-    reset="\033[0m"
-    color_warning="\033[33m"
-    color_red="\033[31m"
-    if (( temperature < 60 )); then
-        parsed_temperature="${temperature}"
-    elif (( temperature < 80 )); then
-        parsed_temperature="${color_warning}${temperature}${reset}"
+    local color
+    if (( temperature > 60 )); then
+        if (( temperature < 80 )); then
+            color="#FFFC00"
+        else
+            color="#FF0000"
+        fi
     else
-        parsed_temperature="${color_red}${temperature}${reset}"
+        color=""
     fi
 
-    echo -e "${parsed_temperature}º"
+    echo "${temperature}º"
+    if [[ -n "${color}" ]]; then
+        echo "${temperature}º"
+        echo "${color}"
+    fi
 }
 
 main
