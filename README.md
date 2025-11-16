@@ -15,7 +15,7 @@
 
 ---
 
-_Ready to code. Ready to stay chill._
+_Ready to code. Ready to stay chill._ \
 _Every day, the [Astronomy Picture of the Day][astropix] becomes your new wallpaper._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
@@ -29,7 +29,7 @@ _Every day, the [Astronomy Picture of the Day][astropix] becomes your new wallpa
 Run this command in your terminal to set up the dotfiles:
 
 ```sh
-bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.sh)
+bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/master/setup.sh)
 ```
 
 ## Post-Installation Steps 🛰️

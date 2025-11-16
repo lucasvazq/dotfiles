@@ -1,5 +1,6 @@
 [global]
-    format = "%a %s %p\n%b"
+    markup = full
+    format = "<b>%a</b> %s\n%b"
     font = "JetBrainsMonoNL Nerd Font Mono 10, Noto Color Emoji 10, monospace 10"
     frame_color = "{foreground}"
     separator_color = "{background}"

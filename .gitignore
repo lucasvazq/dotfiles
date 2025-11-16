@@ -3,6 +3,7 @@
 !.gitignore
 !.hidden
 !.profile
+!.zshenv
 !.zshrc
 !README.md
 !presentation.gif
@@ -12,29 +13,31 @@
 !.config/
 !.config/mimeapp.list
 !.config/starship.toml
+!.config/starship-ignore-git.toml
 
-# ./.config./git
+# ./.config/git
 !.config/git/
 !.config/git/gitignore
 
-# ./.config./i3
+# ./.config/i3
 !.config/i3/
 !.config/i3/config
 !.config/i3/i3blocks.conf
 
-# ./.config./i3/scripts
+# ./.config/i3/scripts
 !.config/i3/scripts/
 !.config/i3/scripts/battery
 !.config/i3/scripts/cpu_temperature
 !.config/i3/scripts/gpu_temperature
 !.config/i3/scripts/gpu_vram
 !.config/i3/scripts/keyboard-layout
+!.config/i3/scripts/powermenu
 !.config/i3/scripts/wifi
 
-# ./.config./wal
+# ./.config/wal
 !.config/wal/
 
-# ./.config./wal/templates
+# ./.config/wal/templates
 !.config/wal/templates/
 !.config/wal/templates/dunstrc
 !.config/wal/templates/qt5ct.conf

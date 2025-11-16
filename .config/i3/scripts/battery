@@ -5,8 +5,8 @@ set -euo pipefail
 function main {
     if _has_battery; then
         local battery
-		battery="$(_get_battery)"
-		_print_battery "${battery}"
+        battery="$(_get_battery)"
+        _print_battery "${battery}"
     else
         exit 1
     fi
