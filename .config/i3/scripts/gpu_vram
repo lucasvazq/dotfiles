@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
+# Get the VRAM usage.
 set -euo pipefail
 
 function main() {
     local vram
     vram="$(_get_vram)"
-    if [[ -z "${vram}" ]]; then
+    if [[ -n "${vram}" ]]; then
         _print_temperature "${vram}"
+    else
+        exit 1
     fi
 }
 
