@@ -10,7 +10,6 @@
 !.config/
 !.config/mimeapp.list
 !.config/starship.toml
-!.config/user-dirs.dirs
 
 # ./.config./git
 !.config/git/
