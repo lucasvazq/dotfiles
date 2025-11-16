@@ -13,6 +13,17 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 # Starship.
+function _set_starship_config {
+    local git_root
+    git_root=$(command git -C "$PWD" rev-parse --show-toplevel 2>/dev/null || echo "")
+    if [[ -n "$git_root" && "$git_root" == "${HOME}" ]]; then
+        export STARSHIP_CONFIG="${HOME}/.config/starship-ignore-git.toml"
+    else
+        export STARSHIP_CONFIG="${HOME}/.config/starship.toml"
+    fi
+}
+
+precmd_functions=(_set_starship_config "${precmd_functions[@]}")
 eval "$(starship init zsh)"
 
 # Lines Separator.
@@ -48,7 +59,7 @@ function _separator {
     fi
 }
 
-precmd() {
+function precmd {
     if [[ "${_START}" == "true" ]]; then
         _separator "> Init" "${_COLOR_SEPARATOR_FIRST_TIME}"
     else
@@ -56,7 +67,7 @@ precmd() {
     fi
 }
 
-preexec() {
+function preexec {
     _separator "> Output" "${_COLOR_SEPARATOR}" true
 }
 
@@ -163,13 +174,3 @@ function ls {
         '
     ) | column -t -s $'\t'
 }
-
-###############################################################################
-# Language specific.
-###############################################################################
-
-# Python.
-source "${HOME}/.config/.venv/bin/activate"
-
-# JavaScript
-source /usr/share/nvm/init-nvm.sh

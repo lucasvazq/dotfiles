@@ -1,0 +1,28 @@
+format = """
+$time$cmd_duration
+$directory$git_branch$git_status$character"""
+command_timeout = 10000
+
+[directory]
+truncation_length = 8
+truncation_symbol = "…/"
+before_repo_root_style = "bold bright-black"
+repo_root_style = "bold cyan"
+style = "bold bright-black"
+read_only = " [read-only]"
+read_only_style = "bold red"
+
+[time]
+disabled = false
+format = '[\[time:[$time](bold cyan)\]](bold bright-black)'
+
+[cmd_duration]
+min_time = 0
+show_milliseconds = true
+format = '[\[took:[$duration](bold cyan)\]](bold bright-black)'
+
+[git_branch]
+disabled = true
+
+[git_status]
+disabled = true
