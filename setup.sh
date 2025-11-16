@@ -155,7 +155,8 @@ function _configure_yay {
     local password
     password="$1"
 
-    echo "$password" | sudo -S bash -c 'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
+    echo "$password" | sudo -S bash -c \
+        'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
     echo "$password" | sudo -S chmod 440 /etc/sudoers.d/00-yay-nopasswd
     yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
     yes | yay -S eos-rankmirrors || true
