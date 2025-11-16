@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Show the power menu.
+
+declare _OPTIONS=(
+    [lock]="Lock"
+    [reboot]="Reboot"
+    [shutdown]="Shutdown"
+)
+
+function main {
+    local selected_option
+    selected_option="$(_render_menu)"
+    _take_action "${selected_option}"
+}
+
+function _render_menu {
+    menu_options="${_OPTIONS[lock]}\n${_OPTIONS[reboot]}\n${_OPTIONS[shutdown]}"
+    selected_option="$(
+        echo -e "${menu_options}" \
+            | rofi -dmenu -i -config "${HOME}/.config/rofi/rofidmenu.rasi"
+    )"
+    echo "${selected_option}"
+}
+
+function _take_action {
+    local selected_option
+    selected_option="$1"
+
+    case "${selected_option}" in
+        "${lock}")
+            local wallpaper temp_picture
+            wallpaper="$(cat "${HOME}/.cache/wal/wal")"
+            temp_picture=/tmp/i3lock.png
+            magick "${wallpaper}" -blur 5x4 "${temp_picture}"
+            i3lock "--image=${temp_picture}"
+            shred "${temp_picture}"
+            rm "${temp_picture}"
+            ;;
+        "${reboot}")
+            systemctl reboot
+            ;;
+        "${shutdown}")
+            systemctl poweroff
+            ;;
+    esac
+}
+
+main
