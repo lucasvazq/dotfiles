@@ -1,6 +1,0 @@
-#!/bin/sh
-# Script for sleeping the monitor
-
-
-sleep 30 # wait to avoid overwriting
-xset dpms 120 120 120

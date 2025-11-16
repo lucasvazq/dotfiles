@@ -1,24 +1,45 @@
-#!/bin/sh
-# Custom scrot command
+#!/usr/bin/env bash
+# Custom wrapper for the "scrot" command.
 #
 # Flags:
-#   --select_screen: select part of the screen to be screenshotted
+#   --select_screen: select a region of the screen to capture.
+set -euo pipefail
 
-
-if [[ "$1" == "--select_screen" ]]; then
-	SELECT_SCREEN=true
-else
-    SELECT_SCREEN=false
-fi
-
-FILENAME=~/Pictures/Screenshots/"$(date +%Y-%m-%d_%H-%M-%S)".png
-if [ "$SELECT_SCREEN" = true ]; then
-    SLOP_VALUE=$(slop -f "%x,%y,%w,%h")
-    if [ -n "$SLOP_VALUE" ]; then
-        scrot -a "$SLOP_VALUE" "$FILENAME"
-        notify-send "$FILENAME"
+function main {
+    local select_screen
+    if [[ -n "${1:-}" ]]; then
+        if [[ "$1" == "--select_screen" ]]; then
+            select_screen=true
+        else
+            exit 1
+        fi
+    else
+        select_screen=false
     fi
-else
-    scrot "$FILENAME"
-    notify-send "$FILENAME"
-fi
+
+    _custom_scrot "${select_screen}"
+}
+
+function _custom_scrot {
+    local select_screen
+    select_screen="$1"
+
+    local base_folder filename
+    base_folder="${HOME}/Pictures/Screenshots"
+    filename="${base_folder}/$(date +%Y-%m-%d_%H-%M-%S).png"
+    mkdir -p "${base_folder}"
+
+    if "${select_screen}"; then
+        local slop_value
+        slop_value="$(slop -f "%x,%y,%w,%h")"
+        if [ -n "${slop_value}" ]; then
+            scrot --autoselect="${slop_value}" "${filename}"
+        fi
+    else
+        scrot "${filename}"
+    fi
+
+    notify-send --icon=empty "${filename}"
+}
+
+main "$@"

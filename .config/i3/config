@@ -1,0 +1,172 @@
+###############################################################################
+# General config.
+###############################################################################
+
+set $mod Mod4
+font pango: JetBrainsMonoNL Nerd Font Mono 10, Noto Color Emoji 10, monospace 10
+
+# Borders.
+default_border pixel 1
+for_window [class=".*"] border pixel 1
+
+# Titlebars.
+for_window [class="Gimp"] border normal
+for_window [class="Shotcut"] border normal
+title_align center
+
+###############################################################################
+# Apps.
+###############################################################################
+
+# Autostart.
+exec --no-startup-id numlockx
+exec --no-startup-id dunst
+exec --no-startup-id "${HOME}/.local/bin/picture-of-the-day"
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id eval $(gnome-keyring-daemon --start)
+
+# Bindings.
+bindsym $mod+w exec --no-startup-id google-chrome-stable
+bindsym $mod+n exec --no-startup-id nemo
+bindsym $mod+Return exec --no-startup-id warp-terminal
+bindsym Print exec --no-startup-id custom-scrot
+bindsym $mod+Shift+Print exec --no-startup-id custom-scrot --select_screen
+bindsym $mod+Shift+e exec --no-startup-id "${HOME}/.config/i3/scripts/powermenu"
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -config "${HOME}/.config/rofi/rofidmenu.rasi"
+
+###############################################################################
+# Containers and Desktop Workspaces.
+###############################################################################
+
+# Focus & Move.
+
+# - Focus.
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+focus_on_window_activation none
+focus_follows_mouse no
+
+# - Move.
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+floating_modifier $mod
+
+# - Move focused container to N Desktop Workspace.
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+
+# - Resize.
+bindsym $mod+r mode $resize
+set $resize Resize using ARROWS. (Esc)ape to exit.
+mode "$resize" {
+    bindsym Left resize grow width 5 px
+    bindsym Down resize shrink height 5 px
+    bindsym Up resize grow height 5 px
+    bindsym Right resize shrink width 5 px
+    bindsym Escape mode "default"
+}
+
+# - Extra.
+bindsym $mod+f fullscreen toggle
+bindsym $mod+space floating toggle
+bindsym $mod+q kill
+
+# Workspaces.
+
+# - Names.
+set $ws1 "1:I"
+set $ws2 "2:II"
+set $ws3 "3:III"
+set $ws4 "4:IV"
+set $ws5 "5:V"
+set $ws6 "6:VI"
+set $ws7 "7:VII"
+set $ws8 "8:VIII"
+set $ws9 "9:IX"
+
+# - Switch.
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# Start mode.
+for_window [floating] resize set 640 480 --once
+for_window [floating] move position center --once
+for_window [class="Nm-connection-editor"] floating enable
+
+###############################################################################
+# Keyboard layout.
+###############################################################################
+
+exec_always setxkbmap -layout us,es -option grp:alt_space_toggle
+
+###############################################################################
+# Colors.
+###############################################################################
+
+set_from_resource $color0 color0
+set_from_resource $color1 color1
+set_from_resource $color2 color2
+set_from_resource $color3 color3
+set_from_resource $color4 color4
+set_from_resource $color5 color5
+set_from_resource $color6 color6
+set_from_resource $color7 color7
+set_from_resource $color8 color8
+set_from_resource $color9 color9
+set_from_resource $color10 color10
+set_from_resource $color11 color11
+set_from_resource $color12 color12
+set_from_resource $color13 color13
+set_from_resource $color14 color14
+set_from_resource $color15 color15
+
+# Class                 Border      Background  Text        Indicator
+# -------------------------------------------------------------------
+client.focused          $color1     $color1     $color7     $color1
+client.focused_inactive $color0     $color0     $color7     $color0
+client.unfocused        $color0     $color0     $color7     $color0
+client.urgent           $color1     $color1     $color7     $color1
+client.placeholder      $color0     $color0     $color7     $color0
+client.background       $color0
+
+###############################################################################
+# Bar.
+###############################################################################
+
+bar {
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    strip_workspace_numbers yes
+    position bottom
+    tray_output none
+    padding 2
+    colors {
+        separator $color0
+        background $color1
+        statusline $color2
+
+        # Class             Border      Background  Text        Indicator
+        # ---------------------------------------------------------------
+        focused_workspace   $color4     $color3     $color1     $color0
+        active_workspace    $color6     $color4     $color1     $color0
+        inactive_workspace  $color1     $color1     $color3     $color0
+        urgent_workspace    $color5     $color5     $color2     $color0
+    }
+}

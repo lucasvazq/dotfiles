@@ -1,85 +1,107 @@
 #!/usr/bin/env python3
 """
-Executable module that's set the background and color scheme
+Executable module that sets the background and color scheme.
 
-Functions:
-    main
+Executable functions:
+    main: Main function that handles all the executable module behaviour.
 """
 import re
 import subprocess
 from pathlib import Path
-from typing import NoReturn, Optional
-
-import requests
-from requests import exceptions as requests_exceptions
+from urllib import request, error
 
 
-def main() -> NoReturn:
+def main():
+    Main()()
+
+
+class Main:
     """
-    Set the background and the color scheme based on the APD* site
+    Set the background and color scheme based on the picture of the day.
 
-    * APD: Astronomy Picture of the Day
-    APD site: https://apod.nasa.gov/apod/astropix.html
+    The image is fetched from the "Astronomy Picture of the Day" page:
+    - https://apod.nasa.gov/apod/astropix.html
 
-    Some changes to site structure or connection problems may generate
-    problems. If this occurs, we set a random background and scheme colors.
-    Else, the image is saved in ~/Pictures/Wallpapers folder and the color
-    scheme and the background is setted using that picture.
+    Some changes to site structure or connection issues may cause problems. If
+    this occurs, we set a random background and scheme colors. Otherwise the
+    image is saved in ~/Pictures/Wallpapers and the background and color scheme
+    are set using that picture.
+
+    Methods:
+        __call__: Executes the class logic.
     """
+    _base_url = "https://apod.nasa.gov"
+    _default_timeout = 10
 
-    def change_background(image_path: Optional[str] = None) -> NoReturn:
-        subprocess_args = ["change-background"]
-        if image_path:
-            subprocess_args.append(image_path)
-        subprocess.call(subprocess_args)
-
-    nasa_base_url = "https://apod.nasa.gov"
-    try:
-        web_response = requests.get(f"{nasa_base_url}/apod/astropix.html")
-
-        if web_response.status_code != 200:
-            change_background()
-
+    def __call__(self):
+        if (
+            (image_url := self._get_image_url())
+            and (image := self._download_image(image_url))
+        ):
+            destination_path = self._get_destination_path(image_url)
+            self._save_image(destination_path, image)
         else:
-            image_match = re.search(r"href=\"(?P<image>image\/\d{4}\/[^\"]*.jpg)\"", web_response.text)
+            destination_path = None
+        self._change_background(destination_path)
 
-            if not image_match:
-                change_background()
+    def _get_image_url(self) -> str | None:
+        try:
+            with (
+                request.urlopen(
+                    f"{self._base_url}/apod/astropix.html",
+                    timeout=self._default_timeout,
+                ) as response
+            ):
+                if response.status != 200:
+                    return
 
-            # Save the image
-            image_path = image_match.groupdict()["image"]
-            image = requests.get(f"{nasa_base_url}/{image_path}")
-            image_name = image_path.split("/")[-1]
-            destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
-            with open(destination_path, "wb") as file:
-                file.write(image.content)
+                html_content = response.read().decode("utf-8")
+                image_match = re.search(
+                    r"href=\"(?P<image>image\/\d{4}\/[^\"]+\..+)\"",
+                    html_content,
+                )
 
-            # Add EXIF description tag to the image
-            description_match = re.search(r"<center>\s*<b>(?P<description>.*)</b>", web_response.text)
-            if description_match:
-                description = description_match.groupdict()["description"].strip()
+                if not image_match:
+                    return
 
-                # Prevent exiftool error: empty rdf:Seq list error
-                subprocess.call((
-                    "exiftool",
-                    "-xmp:all=",
-                    "-tagsfromfile",
-                    "@",
-                    "-xmp:all",
-                    destination_path,
-                ))
+                image_url = image_match.groupdict()["image"]
+                return image_url
 
-                subprocess.call((
-                    "exiftool",
-                    "-overwrite_original",
-                    f"-Description='{description}'",
-                    destination_path,
-                ))
+        except error.URLError:
+            return
 
-            change_background(destination_path)
+    def _get_destination_path(self, image_url: str) -> Path:
+        image_name = image_url.split("/")[-1]
+        destination_path = (
+            Path.home() / "Pictures" / "Wallpapers" / image_name
+        )
+        return destination_path
 
-    except requests_exceptions.RequestException:
-        change_background()
+    def _download_image(self, image_url: str) -> bytes | None:
+        try:
+            with (
+                request.urlopen(
+                    f"{self._base_url}/{image_url}",
+                    timeout=self._default_timeout,
+                ) as response
+            ):
+                image = response.read()
+                return image
+        except error.URLError:
+            return
+
+    def _save_image(self, destination_path: Path, image: bytes):
+        destination_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(destination_path, "wb") as file:
+            file.write(image)
+
+    def _change_background(self, destination_path: Path | None):
+        # The "change-background" is an external executable that updates the
+        # background and color scheme.
+        subprocess_args = ["change-background"]
+        if destination_path:
+            subprocess_args.append(str(destination_path))
+        subprocess.call(subprocess_args)
 
 
 if __name__ == "__main__":

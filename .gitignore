@@ -1,0 +1,58 @@
+# ./
+*
+!.gitignore
+!.hidden
+!.profile
+!.zshrc
+!README.md
+!presentation.gif
+!setup.sh
+
+# ./.config
+!.config/
+!.config/mimeapp.list
+!.config/starship.toml
+
+# ./.config./git
+!.config/git/
+!.config/git/gitignore
+
+# ./.config./i3
+!.config/i3/
+!.config/i3/config
+!.config/i3/i3blocks.conf
+
+# ./.config./i3/scripts
+!.config/i3/scripts/
+!.config/i3/scripts/battery
+!.config/i3/scripts/cpu_temperature
+!.config/i3/scripts/gpu_temperature
+!.config/i3/scripts/gpu_vram
+!.config/i3/scripts/keyboard-layout
+!.config/i3/scripts/wifi
+
+# ./.config./wal
+!.config/wal/
+
+# ./.config./wal/templates
+!.config/wal/templates/
+!.config/wal/templates/dunstrc
+!.config/wal/templates/qt5ct.conf
+!.config/wal/templates/colors-qt5ct.conf
+!.config/wal/templates/gtk-3.0-settings.ini
+
+# ./.local
+!.local/
+
+# ./.local/bin
+!.local/bin/
+!.local/bin/change-background
+!.local/bin/custom-scrot
+!.local/bin/picture-of-the-day
+
+# ./Pictures
+!Pictures/
+
+# ./Wallpapers
+!Pictures/Wallpapers/
+!Pictures/Wallpapers/*

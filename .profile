@@ -1,7 +1,13 @@
-#!/bin/sh
+# Executables.
+export PATH="${PATH}:${HOME}/.local/bin"
 
+# Apps.
+export TERMINAL=warp-terminal
+export BROWSER=google-chrome
 
-export QT_QPA_PLATFORMTHEME="qt5ct"
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export EDITOR=/usr/bin/nvim
-export BROWSER=/usr/bin/brave
+# Themes.
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+# Python.
+export PYTHONUNBUFFERED=1
+export PYTHONDONTWRITEBYTECODE=1

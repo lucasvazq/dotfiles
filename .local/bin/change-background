@@ -1,28 +1,79 @@
-#!/bin/sh
-# Change background image and set color scheme
+#!/usr/bin/env bash
+# Change background image and set color scheme.
 #
 # Args:
-#   $1 (optional): Wallpaper. If not provided, one random is selected from
-#     ~/Pictures/Wallpapers
+#   $1 (optional): Wallpaper. If not provided, one random is selected.
+set -euo pipefail
 
+function main {
+    local wallpaper
+	if [[ -n "${1:-}" ]]; then
+        wallpaper="$1"
+    else
+        wallpaper="$(_get_random_wallpaper)"
+        if [[ -z "${wallpaper}" ]]; then
+            exit 0
+        fi
+    fi
 
-if [ -n "$1" ]; then
-    WALLPAPER=$1
-else
-    WALLPAPERS=(~/Pictures/Wallpapers/*)
-    WALLPAPER=${WALLPAPERS[RANDOM % ${#WALLPAPERS[@]}]}
-fi
+    _change_wallpaper "${wallpaper}"
+    _change_theme "${wallpaper}"
+}
 
-# Set a new description for polybar
-exiftool -S -Description "$WALLPAPER" | grep -Po "(?<=Description: ).*" > ~/.config/wal/image-description.txt
+function _get_random_wallpaper {
+    local wallpapers_folder wallpapers wallpaper
 
-# Change wallpaper
-nitrogen --set-zoom-fill "$WALLPAPER"
+    wallpapers_folder="${HOME}/Pictures/Wallpapers"
+    mkdir -p "${wallpapers_folder}"
 
-# Change polybar and terminal colors
-wal -q -i "$WALLPAPER"
+    wallpapers=()
+    while IFS= read -r -d '' file; do
+        wallpapers+=("${file}")
+    done < <(find "${wallpapers_folder}" -maxdepth 1 -type f -print0)
 
-# Change dunst color
-ln -sf "${HOME}"/.cache/wal/dunstrc "${HOME}"/.config/dunst/dunstrc
-pkill dunst
-dunst &
+    if [ ${#wallpapers[@]} -eq 0 ]; then
+        wallpaper=""
+    else
+        wallpaper="${wallpapers[RANDOM % ${#wallpapers[@]}]}"
+    fi
+
+    echo "${wallpaper}"
+}
+
+function _change_wallpaper {
+    local wallpaper
+    wallpaper="$1"
+
+    feh --bg-fill "${wallpaper}"
+}
+
+function _change_theme {
+    local wallpaper
+    wallpaper="$1"
+
+    # Generate color scheme with `pywal`.
+    # This will set the color scheme for `i3`.
+    wal -i "${wallpaper}" --backend colorthief
+
+    # Change QT5 colors.
+    mkdir -p "${HOME}/.config/qt5ct/colors"
+    cp "${HOME}/.cache/wal/qt5ct.conf" "${HOME}/.config/qt5ct/qt5ct.conf"
+    cp "${HOME}/.cache/wal/colors-qt5ct.conf" "${HOME}/.config/qt5ct/colors/colors.conf"
+
+    # Change GTK colors.
+    /opt/oomox/plugins/theme_oomox/change_color.sh -o colors "${HOME}/.cache/wal/colors-oomox"
+    cp "${HOME}/.cache/wal/gtk-3.0-settings.ini" "${HOME}/.config/gtk-3.0/settings.ini"
+
+    # Change Xresources colors.
+    cp "${HOME}/.cache/wal/colors.Xresources" "${HOME}/.Xresources"
+
+    # Change `dunst` colors.
+    cp "${HOME}/.cache/wal/dunstrc" "${HOME}/.config/dunst/dunstrc"
+    pkill dunst
+    dunst &
+
+    # Change `rofi` colors.
+    cp "${HOME}/.cache/wal/colors-rofi-dark.rasi" "${HOME}/.config/rofi/rofidmenu.rasi"
+}
+
+main "$@"

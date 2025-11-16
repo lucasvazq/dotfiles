@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Get the GPU temperature.
+set -euo pipefail
+
+function main {
+    local temperature
+    temperature="$(_get_temperature)"
+    if [[ -n "${temperature}" ]]; then
+        _print_temperature "${temperature}"
+    else
+        exit 1
+    fi
+}
+
+function _get_temperature {
+    local temperature
+
+    # NVIDIA.
+    if command -v nvidia-smi >/dev/null 2>&1; then
+        temperature="$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader 2>/dev/null)"
+        if [[ "${temperature}" =~ ^[0-9]+$ ]]; then
+            echo "${temperature}"
+            return
+        fi
+    fi
+
+    # AMD/Intel.
+    local name
+    for hwmon in /sys/class/hwmon/hwmon*; do
+        name=$(cat "${hwmon}/name" 2>/dev/null)
+        case "${name}" in
+            amdgpu|i915|intel|xe)
+                temperature=$(cat "${hwmon}/temp1_input" 2>/dev/null)
+                if [[ "${temperature}" =~ ^[0-9]+$ ]]; then
+                    echo "$((temperature/1000))"
+                    return
+                fi
+                ;;
+        esac
+    done
+}
+
+function _print_temperature {
+    local temperature
+    temperature="$1"
+
+    local color
+    if (( temperature > 60 )); then
+        if (( temperature < 80 )); then
+            color="#FFFC00"
+        else
+            color="#FF0000"
+        fi
+    else
+        color=""
+    fi
+
+    echo "${temperature}º"
+    if [[ -n "${color}" ]]; then
+        echo "${temperature}º"
+        echo "${color}"
+    fi
+}
+
+main

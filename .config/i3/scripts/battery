@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# Get the current battery.
+set -euo pipefail
+
+function main {
+    if _has_battery; then
+        local battery
+		battery="$(_get_battery)"
+		_print_battery "${battery}"
+    else
+        exit 1
+    fi
+}
+
+function _has_battery {
+    compgen -G "/sys/class/power_supply/BAT*" > /dev/null
+}
+
+function _get_battery {
+    local bat_path capacity
+    bat_path=$(compgen -G "/sys/class/power_supply/BAT*" | head -n1)
+    capacity=$(<"${bat_path}/capacity")
+    echo "${capacity}"
+}
+
+function _print_battery {
+    local battery
+    battery="$1"
+
+    local color
+    if (( battery < 30 )); then
+        if (( battery < 10 )); then
+            color="#FF0000"
+        else
+            color="#FFFC00"
+        fi
+    else
+        color=""
+    fi
+
+    echo "${battery}%"
+    if [[ -n "${color}" ]]; then
+        echo "${battery}%"
+        echo "${color}"
+    fi
+}
+
+main

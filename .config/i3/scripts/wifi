@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Check if there is any WiFi connection alive.
+set -eo pipefail
+
+function main {
+    _handle_click
+
+    local wifi_connection
+    wifi_connection="$(_get_wifi_connection)"
+    _print_wifi_connection "${wifi_connection}"
+}
+
+function _handle_click {
+    if [[ "${BLOCK_BUTTON}" == "1" ]]; then
+        nm-connection-editor &
+    fi
+}
+
+function _get_wifi_connection {
+    nmcli --terse --fields TYPE,STATE device \
+        | awk -F: '$1=="wifi" && $2=="connected" {print 1}'
+}
+
+function _print_wifi_connection {
+    local wifi_connection
+    wifi_connection="$1"
+
+    if [[ -z "${wifi_connection}" ]]; then
+        echo "󰤭"
+        return
+    fi
+
+    echo "󰤥"
+}
+
+main

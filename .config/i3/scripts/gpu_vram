@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Get the VRAM usage.
+set -euo pipefail
+
+function main() {
+    local vram
+    vram="$(_get_vram)"
+    if [[ -n "${vram}" ]]; then
+        _print_temperature "${vram}"
+    else
+        exit 1
+    fi
+}
+
+function _get_vram() {
+    local used total
+
+    # NVIDIA.
+    if command -v nvidia-smi >/dev/null 2>&1; then
+        local percent
+        used="$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits)"
+        total="$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits)"
+        percent="$(( used * 100 / total ))"
+        echo "${percent}%"
+        return
+    fi
+
+    # AMD/Intel.
+    used="$(cat /sys/class/drm/card*/device/mem_info_vram_used 2>/dev/null | head -n1)"
+    total="$(cat /sys/class/drm/card*/device/mem_info_vram_total 2>/dev/null | head -n1)"
+    if [[ -n "${used}" && -n "${total}" ]]; then
+        local percent
+        percent="$(( used * 100 / total ))"
+        echo "${percent}%"
+    fi
+}
+
+main
