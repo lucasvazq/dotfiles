@@ -1,44 +1,45 @@
 <div align="center">
-
-  # i3 Starship dotfiles
-
+  <h1>i3 Starship dotfiles</h1>
 </div>
 
 <div align="center">
   <picture>
-    <source srcset="..." type="image/png">
-    <img src="./..." alt="logo">
+    <source srcset="..TODO.." type="image/gif">
+    <img src="./presentation.gif" alt="presentation image">
   </picture>
 </div>
 
 <div align="center">
-  <sub><i>Made with love, from my own dreams.</i></sub>
+  <sub><i>Casual, minimal, and simple environment with a space toast.</i></sub>
 </div>
 
 ---
 
-_Casual and simple environment ready to develop with VS Code, Github, JavaScript and Python, and also play games with Steam._ \
-_When a new day starts, the [Astronomy Picture of the Day][astropix] is selected as your new wallpaper._
+_Ready to code. Ready to stay chill._
+_Every day, the [Astronomy Picture of the Day][astropix] becomes your new wallpaper._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
-🧲 ⚡ **Requirements:** [EndeavourOS i3]
+## Requirements ⚡
 
-[EndeavourOS i3]: https://endeavouros.com/
+- [EndeavourOS i3](https://endeavouros.com/)
 
-## Installation
+## Ready, Set, Launch 🚀
+
+Run this command in your terminal to set up the dotfiles:
 
 ```sh
 bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.sh)
 ```
 
-**Post-Installation Steps**
+## Post-Installation Steps 🛰️
 
-- Reboot the PC.
-- Setup KVM (Kernel-based Virtual Machine) on BIOS/UEFI.
-- Setup GitHub & Git.
+1. Reboot your system.
 
-Setup Github & Git:
+2. Enable KVM (Kernel-based Virtual Machine) in BIOS/UEFI.
+
+3. Configure Git & GitHub:
+
 ```sh
 gh auth login --hostname github.com --git-protocol ssh
 git config --global user.name "<YOUR_NAME>"
