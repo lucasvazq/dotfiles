@@ -171,7 +171,7 @@ function _install_packages {
     # Utilities & Required by system.
     yes | yay -S trash-cli
     yes | yay -S gnome-keyring
-    yes | yay -S slop python-pywal qt5ct qt6ct
+    yes | yay -S slop python-pywal qt5ct themix-theme-oomox-git
     yes | yay -S xkblayout-state ttf-jetbrains-mono-nerd noto-fonts-emoji
 
     # Shell.

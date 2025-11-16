@@ -53,10 +53,18 @@ function _change_theme {
 
     # Generate color scheme with `pywal`.
     # This will set the color scheme for `i3`.
-    wal -q -i "${wallpaper}"
+    wal -i "${wallpaper}"
 
-    # Reload `dunst` colors.
-    ln -sf "${HOME}/.cache/wal/dunstrc" "${HOME}/.config/dunst/dunstrc"
+    # Change QT5 colors.
+    cp "${HOME}/.cache/wal/qt5ct.conf" "${HOME}/.config/qt5ct/qt5ct.conf"
+    cp "${HOME}/.cache/wal/colors-qt5ct.conf" "${HOME}/.config/qt5ct/colors/colors.conf"
+
+    # Change GTK colors.
+    /opt/oomox/plugins/theme_oomox/change_color.sh -o colors "${HOME}/.cache/wal/colors-oomox"
+    cp "${HOME}/.cache/wal/gtk-3.0-settings.ini" "${HOME}/.config/gtk-3.0/settings.ini"
+
+    # Change `dunst` colors.
+    cp "${HOME}/.cache/wal/dunstrc" "${HOME}/.config/dunst/dunstrc"
     pkill dunst
     dunst &
 }
