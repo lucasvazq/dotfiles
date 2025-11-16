@@ -182,7 +182,7 @@ function _install_packages {
     yes | yay -S google-chrome
     yes | yay -S visual-studio-code-bin warp-terminal-bin postman-bin
     yes | yay -S libreoffice-fresh
-    yes | yay -S gimp shotcut
+    yes | yay -S gimp kdenlive
     yes | yay -S neohtop
     yes | yay -S steam
 

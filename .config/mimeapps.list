@@ -516,7 +516,7 @@ text/csv=libreoffice-calc.desktop
 text/tab-separated-values=libreoffice-calc.desktop
 
 # Media Editing Projects.
-application/x-shotcut-project=shotcut.desktop
+application/x-kdenlive-project=kdenlive.desktop
 image/vnd.adobe.photoshop=gimp.desktop
 image/x-xcf=gimp.desktop
 
