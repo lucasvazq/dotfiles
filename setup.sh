@@ -27,7 +27,7 @@ function _presentation {
         echo ""
         echo -e "${frames[@]}"
         echo ""
-        sleep 0.075
+        sleep 0.1
     }
 
     local main_color reflect reset
@@ -102,7 +102,7 @@ function _presentation {
     _show_frame_lines "${frame_reflect_5[@]}"
     _show_frame_lines "${frame_reflect_6[@]}"
     _show_frame_lines "${frame_logo[@]}"
-    echo -e "${reset}"
+    echo "${reset}"
 }
 
 function _get_password {
