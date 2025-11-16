@@ -5,8 +5,10 @@ set -euo pipefail
 function main {
     local temperature
     temperature="$(_get_temperature)"
-    if [[ -z "${temperature}" ]]; then
+    if [[ -n "${temperature}" ]]; then
         _print_temperature "${temperature}"
+    else
+        exit 1
     fi
 }
 
@@ -23,7 +25,7 @@ function _get_temperature {
     fi
 
     # AMD/Intel.
-	local name
+    local name
     for hwmon in /sys/class/hwmon/hwmon*; do
         name=$(cat "${hwmon}/name" 2>/dev/null)
         case "${name}" in

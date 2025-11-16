@@ -7,6 +7,8 @@ function main {
     temperature="$(_get_temperature)"
     if [[ -n "${temperature}" ]]; then
         _print_temperature "${temperature}"
+    else
+        exit 1
     fi
 }
 
