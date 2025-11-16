@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Show the power menu.
 
-declare _OPTIONS=(
+declare -A _OPTIONS=(
     [lock]="Lock"
     [reboot]="Reboot"
     [shutdown]="Shutdown"
@@ -25,6 +25,10 @@ function _render_menu {
 function _take_action {
     local selected_option
     selected_option="$1"
+
+    if [[ -z "${selected_option}" ]]; then
+        return
+    fi
 
     case "${selected_option}" in
         "${lock}")
