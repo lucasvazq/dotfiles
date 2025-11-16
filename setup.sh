@@ -212,6 +212,7 @@ function _install_packages {
 
     # Apps.
     yes | yay -S \
+        nemo \
         google-chrome \
         visual-studio-code-bin warp-terminal-bin postman-bin \
         libreoffice-fresh \
@@ -276,7 +277,9 @@ function _setup_crontab {
 function _post_installation_cleanup {
     _log "Cleaning files..."
 
-    # Merge some default folders into the Downloads folder.
+    gsettings set org.gnome.desktop.privacy remember-recent-files false
+
+    # Merge most of default folders into the Downloads folder.
     xdg-user-dirs-update --set XDG_DESKTOP_DIR "${HOME}/Downloads"
     xdg-user-dirs-update --set XDG_MUSIC_DIR "${HOME}/Downloads"
     xdg-user-dirs-update --set XDG_TEMPLATES_DIR "${HOME}/Downloads"

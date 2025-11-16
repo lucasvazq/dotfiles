@@ -27,7 +27,7 @@ exec --no-startup-id eval $(gnome-keyring-daemon --start)
 
 # Bindings.
 bindsym $mod+w exec --no-startup-id google-chrome-stable
-bindsym $mod+n exec --no-startup-id thunar
+bindsym $mod+n exec --no-startup-id nemo
 bindsym $mod+Return exec --no-startup-id warp-terminal
 bindsym Print exec --no-startup-id custom-scrot
 bindsym $mod+Shift+Print exec --no-startup-id custom-scrot --select_screen

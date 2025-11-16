@@ -1,6 +1,7 @@
 # ./
 *
 !.gitignore
+!.hidden
 !.profile
 !.zshrc
 !README.md
