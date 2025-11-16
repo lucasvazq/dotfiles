@@ -159,15 +159,15 @@ bar {
     tray_output none
     padding 2
     colors {
-        separator $color0
+        separator $color1
         background $color1
-        statusline $color2
+        statusline $color7
 
         # Class             Border      Background  Text        Indicator
         # ---------------------------------------------------------------
-        focused_workspace   $color4     $color3     $color1     $color0
-        active_workspace    $color6     $color4     $color1     $color0
-        inactive_workspace  $color1     $color1     $color3     $color0
-        urgent_workspace    $color5     $color5     $color2     $color0
+        focused_workspace   $color0     $color0     $color7     $color0
+        active_workspace    $color15    $color15    $color0     $color0
+        inactive_workspace  $color1     $color1     $color7     $color0
+        urgent_workspace    $color8     $color8     $color7     $color0
     }
 }
