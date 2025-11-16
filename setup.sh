@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Install the dotfiles.
 set -euo pipefail
 
 _TEMP_PASSWORD=""
@@ -11,7 +12,7 @@ function main {
     password="${_TEMP_PASSWORD}"
     _TEMP_PASSWORD=""
 
-    _log "Saving logs at ${HOME}/.cache/dotfiles.log"
+    echo "Saving logs at ${HOME}/.cache/dotfiles.log"
     sleep 2
 
     _setup_configuration_files
@@ -26,14 +27,19 @@ function main {
 }
 
 function _presentation {
+    local last_frame
+    last_frame=false
+
     function _show_frame_lines() {
         local frames
         frames=("$@")
         clear
-        echo ""
+        echo -e "\n"
         echo -e "${frames[@]}"
-        echo ""
-        sleep 0.1
+        if ! "${last_frame}"; then
+            echo ""
+            sleep 0.1
+        fi
     }
 
     local main_color reflect reset
@@ -107,6 +113,7 @@ function _presentation {
     _show_frame_lines "${frame_reflect_4[@]}"
     _show_frame_lines "${frame_reflect_5[@]}"
     _show_frame_lines "${frame_reflect_6[@]}"
+    last_frame=true
     _show_frame_lines "${frame_logo[@]}"
     echo -e "${reset}"
 }
@@ -120,6 +127,7 @@ function _get_password {
         IFS= read -rs password
         if echo "${password}" | sudo -S -k -v &> /dev/null; then
             correct_password=true
+            echo "\n"
         else
             echo -e "\nWrong password"
         fi
@@ -131,7 +139,7 @@ function _get_password {
 function _setup_configuration_files {
     _log "Configuring files..."
 
-    git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles" --branch=new_version
+    git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles"
     rsync -a "${HOME}/dotfiles/" "${HOME}/"
 
     chmod 711 "${HOME}/.local/bin/change-background"
@@ -147,6 +155,8 @@ function _configure_yay {
     local password
     password="$1"
 
+    echo "$password" | sudo -S bash -c 'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
+    echo "$password" | sudo -S chmod 440 /etc/sudoers.d/00-yay-nopasswd
     yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
     yes | yay -S eos-rankmirrors || true
     echo "${password}" | sudo -S -k eos-rankmirrors
@@ -221,8 +231,6 @@ function _install_packages {
     echo "${password}" | sudo -S -k usermod -aG docker "${USER}"
     echo "${password}" | sudo -S -k rm -f /etc/firewalld/policies/docker*
     echo "${password}" | sudo -S -k rm -f /etc/firewalld/zones/docker*
-    # todo: here ask for password, why?
-    echo "ASK FOR PASSWORD"
     echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker || true
     echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker-forwarding || true
     echo "${password}" | sudo -S -k firewall-cmd --reload
@@ -273,9 +281,11 @@ function _post_installation_cleanup {
     xdg-user-dirs-update --set XDG_MUSIC_DIR "${HOME}/Downloads"
     xdg-user-dirs-update --set XDG_TEMPLATES_DIR "${HOME}/Downloads"
     xdg-user-dirs-update --set XDG_PUBLICSHARE_DIR "${HOME}/Downloads"
-    trash "${HOME}/Desktop" "${HOME}/Music" "${HOME}/Public" "${HOME}/Templates"
+    trash "${HOME}/Desktop" "${HOME}/Music" "${HOME}/Public" "${HOME}/Templates" || true
 
     trash "${HOME}/dotfiles"
+
+    echo "${password}" | sudo -S -k rm /etc/sudoers.d/00-yay-nopasswd
 }
 
 function _log {
@@ -286,12 +296,11 @@ function _log {
     main_color="\e[96m"
     reset="\e[0m"
 
-    echo "${main_color}"
-    echo "================================"
-    echo " [setup.sh] ${message}"
-    echo "================================"
-    echo "${reset}"
+    echo -e "${main_color}"
+    echo -e "================================"
+    echo -e " [setup.sh] ${message}"
+    echo -e "================================"
+    echo -e "${reset}"
 }
 
 main 2>&1 | tee -a "${HOME}/.cache/dotfiles.log"
-
