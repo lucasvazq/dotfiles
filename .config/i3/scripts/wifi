@@ -15,7 +15,8 @@ function _handle_click {
 }
 
 function _get_wifi_connection {
-    iwgetid -r 2>/dev/null
+    nmcli --terse --fields TYPE,STATE device \
+        | awk -F: '$1=="wifi" && $2=="connected" {print 1}'
 }
 
 function _print_wifi_connection {
