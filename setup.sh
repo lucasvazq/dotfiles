@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+_TEMP_PASSWORD=""
+
 function main {
     _presentation
 
     local password
-    password="$(_get_password)"
+    _get_password
+    password="${_TEMP_PASSWORD}"
+    _TEMP_PASSWORD=""
+
+    _log "Saving logs at ${HOME}/.cache/dotfiles.log"
+    sleep 2
 
     _setup_configuration_files
     _configure_yay "${password}"
@@ -15,8 +22,7 @@ function main {
     _setup_crontab
     _post_installation_cleanup
 
-    echo ""
-    echo "Post installation: Look at the README.md for next steps!"
+    _log "Post installation: Look at the README.md for next steps!"
 }
 
 function _presentation {
@@ -102,7 +108,7 @@ function _presentation {
     _show_frame_lines "${frame_reflect_5[@]}"
     _show_frame_lines "${frame_reflect_6[@]}"
     _show_frame_lines "${frame_logo[@]}"
-    echo "${reset}"
+    echo -e "${reset}"
 }
 
 function _get_password {
@@ -118,11 +124,14 @@ function _get_password {
             echo -e "\nWrong password"
         fi
     done
-    echo "${password}"
+
+    _TEMP_PASSWORD="${password}"
 }
 
 function _setup_configuration_files {
-    git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles"
+    _log "Configuring files..."
+
+    git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles" --branch=new_version
     rsync -a "${HOME}/dotfiles/" "${HOME}/"
 
     chmod 711 "${HOME}/.local/bin/change-background"
@@ -133,19 +142,27 @@ function _setup_configuration_files {
 }
 
 function _configure_yay {
+    _log "Configuring yay..."
+
     local password
     password="$1"
 
+    yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
+    yes | yay -S eos-rankmirrors || true
     echo "${password}" | sudo -S -k eos-rankmirrors
-    yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop
+
     yes | \
         # Roses are red
         # violets are blue
         # I have Endeavour i3
-        yay -Syu
+        yay -Syu \
+            \
+            || true
 }
 
 function _install_drivers {
+    _log "Installing drivers..."
+
     local password
     password="$1"
 
@@ -153,50 +170,59 @@ function _install_drivers {
     local gpu_info
     gpu_info="$(lspci | grep -E "VGA|3D")"
     if echo "${gpu_info}" | grep -qi "NVIDIA"; then
-        yes | yay -S nvidia-inst
+        yes | yay -S nvidia-inst || true
         echo "${password}" | sudo -S -k nvidia-inst
     elif echo "${gpu_info}" | grep -qi "AMD"; then
-        yes | yay -S mesa vulkan-radeon lib32-vulkan-radeon
+        yes | yay -S mesa vulkan-radeon lib32-vulkan-radeon || true
     elif echo "${gpu_info}" | grep -qi "Intel"; then
-        yes | yay -S mesa vulkan-intel lib32-vulkan-intel
+        yes | yay -S mesa vulkan-intel lib32-vulkan-intel || true
     else
-        yes | yay -S mesa vulkan-swrast lib32-vulkan-swrast
+        yes | yay -S mesa vulkan-swrast lib32-vulkan-swrast || true
     fi
 }
 
 function _install_packages {
+    _log "Installing packages..."
+
     local password
     password="$1"
 
     # Utilities & Required by system.
-    yes | yay -S trash-cli
-    yes | yay -S gnome-keyring
-    yes | yay -S slop python-pywal qt5ct themix-theme-oomox-git
-    yes | yay -S xkblayout-state ttf-jetbrains-mono-nerd noto-fonts-emoji
+    yes | yay -S \
+        trash-cli \
+        gnome-keyring \
+        slop python-pywal qt5ct themix-theme-oomox-git \
+        xkblayout-state ttf-jetbrains-mono-nerd noto-fonts-emoji \
+        qt6-multimedia-ffmpeg \
+        || true
 
     # Shell.
-    yes | yay -S zsh starship
+    yes | yay -S zsh starship || true
     echo "${password}" | chsh -s "$(command -v zsh)"
 
     # Apps.
-    yes | yay -S google-chrome
-    yes | yay -S visual-studio-code-bin warp-terminal-bin postman-bin
-    yes | yay -S libreoffice-fresh
-    yes | yay -S gimp kdenlive
-    yes | yay -S neohtop
-    yes | yay -S steam
+    yes | yay -S \
+        google-chrome \
+        visual-studio-code-bin warp-terminal-bin postman-bin \
+        libreoffice-fresh \
+        gimp kdenlive \
+        neohtop \
+        steam \
+        || true
 
-    # GitHub & Git.
-    yes | yay -S github-cli
+    # Github & Git.
+    yes | yay -S github-cli || true
     git config --global init.defaultBranch main
     git config --global pull.rebase false
     git config --global core.excludesfile "${HOME}/.config/git/gitignore"
 
     # Docker.
-    yes | yay -S docker-desktop
+    yes | yay -S docker-desktop || true
     echo "${password}" | sudo -S -k usermod -aG docker "${USER}"
     echo "${password}" | sudo -S -k rm -f /etc/firewalld/policies/docker*
     echo "${password}" | sudo -S -k rm -f /etc/firewalld/zones/docker*
+    # todo: here ask for password, why?
+    echo "ASK FOR PASSWORD"
     echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker || true
     echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker-forwarding || true
     echo "${password}" | sudo -S -k firewall-cmd --reload
@@ -206,15 +232,17 @@ function _install_packages {
     python -m venv "${HOME}/.config/.venv"
     source "${HOME}/.config/.venv/bin/activate"
     pip install ipython
-    source "${HOME}/.config/.venv/bin/deactivate"
+    deactivate
 
     # JavaScript.
-    yes | yay -S nvm
+    yes | yay -S nvm || true
     source /usr/share/nvm/init-nvm.sh
     nvm install node
 }
 
 function _configure_dns {
+    _log "Configuring DNS..."
+
     local password
     password="$1"
 
@@ -225,6 +253,10 @@ function _configure_dns {
 }
 
 function _setup_crontab {
+    _log "Adding Crontab..."
+
+    yes | yay -S systemd-cron || true
+
     local job current
     job="00 00 * * * ${HOME}/.local/bin/picture-of-the-day"
     current="$(crontab -l 2>/dev/null || true)"
@@ -234,6 +266,8 @@ function _setup_crontab {
 }
 
 function _post_installation_cleanup {
+    _log "Cleaning files..."
+
     # Merge some default folders into the Downloads folder.
     xdg-user-dirs-update --set XDG_DESKTOP_DIR "${HOME}/Downloads"
     xdg-user-dirs-update --set XDG_MUSIC_DIR "${HOME}/Downloads"
@@ -244,4 +278,20 @@ function _post_installation_cleanup {
     trash "${HOME}/dotfiles"
 }
 
-main
+function _log {
+    local message
+    message="$1"
+
+    local main_color reset
+    main_color="\e[96m"
+    reset="\e[0m"
+
+    echo "${main_color}"
+    echo "================================"
+    echo " [setup.sh] ${message}"
+    echo "================================"
+    echo "${reset}"
+}
+
+main 2>&1 | tee -a "${HOME}/.cache/dotfiles.log"
+
