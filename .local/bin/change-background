@@ -53,7 +53,7 @@ function _change_theme {
 
     # Generate color scheme with `pywal`.
     # This will set the color scheme for `i3`.
-    wal -i "${wallpaper}"
+    wal -i "${wallpaper}" --backend colorthief
 
     # Change QT5 colors.
     mkdir -p "${HOME}/.config/qt5ct/colors"

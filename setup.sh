@@ -201,7 +201,7 @@ function _install_packages {
     yes | yay -S \
         trash-cli \
         gnome-keyring \
-        slop python-pywal qt5ct themix-theme-oomox-git \
+        slop python-pywal python-colorthief qt5ct themix-theme-oomox-git \
         xkblayout-state ttf-jetbrains-mono-nerd noto-fonts-emoji \
         qt6-multimedia-ffmpeg \
         || true
