@@ -50,7 +50,7 @@
 !.local/bin/picture-of-the-day
 
 # ./Pictures
-!Pictures
+!Pictures/
 
 # ./Wallpapers
 !Pictures/Wallpapers/

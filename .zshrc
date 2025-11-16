@@ -16,7 +16,6 @@ SAVEHIST=1000
 eval "$(starship init zsh)"
 
 # Lines Separator.
-local _START _RESET _BOLD _COLOR_BLACK _COLOR_SEPARATOR_FIRST_TIME _COLOR_SEPARATOR
 _START=true
 _RESET="\033[0m"
 _BOLD="\033[1m"
@@ -41,7 +40,7 @@ function _separator {
         text="${_COLOR_BLACK}"
     fi
     width=$(($(tput cols)-${#string}))
-    printf "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))\033[0m"
+    echo -e "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))\033[0m"
     echo -e "${_COLOR_RESET}"
 
     if [[ "${newline}" == "true" ]]; then
@@ -90,7 +89,7 @@ alias rm="trash"
 
 function curl {
     local output status_code json
-    output="$(/usr/bin/curl $@ -sS -w "\nstatus: %{http_code}" -H "Content-Type: application/json")"
+    output="$(/usr/bin/curl "$@" -sS -w "\nstatus: %{http_code}" -H "Content-Type: application/json")"
     status_code=$(echo "${output}" | tail -n1)
     json=$(echo "${output}" | sed '$d')
     if echo "${json}" | jq empty 2>/dev/null; then
@@ -99,7 +98,6 @@ function curl {
     else
         echo "${output}"
     fi
-    echo "${response}" | jq . 2>/dev/null || echo "${response}"
 }
 
 function ls {

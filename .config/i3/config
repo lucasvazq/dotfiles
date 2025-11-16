@@ -158,9 +158,9 @@ bar {
     tray_output none
     padding 2
     colors {
-        separator          $color0
-        background         $color1
-        statusline         $color2
+        separator $color0
+        background $color1
+        statusline $color2
 
         # Class             Border      Background  Text        Indicator
         # ---------------------------------------------------------------

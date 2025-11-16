@@ -127,7 +127,7 @@ function _get_password {
         IFS= read -rs password
         if echo "${password}" | sudo -S -k -v &> /dev/null; then
             correct_password=true
-            echo "\n"
+            echo -e "\n"
         else
             echo -e "\nWrong password"
         fi
