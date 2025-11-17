@@ -2,7 +2,7 @@
 *
 !.gitignore
 !.hidden
-!.profile
+!.xprofile
 !.zshenv
 !.zshrc
 !README.md
@@ -30,7 +30,6 @@
 !.config/i3/scripts/cpu_temperature
 !.config/i3/scripts/gpu_temperature
 !.config/i3/scripts/gpu_vram
-!.config/i3/scripts/keyboard-layout
 !.config/i3/scripts/powermenu
 !.config/i3/scripts/wifi
 
