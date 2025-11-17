@@ -267,7 +267,7 @@ function _setup_crontab {
     yes | yay -S aur/systemd-cron || true
 
     local job current
-    job="00 00 * * * ${HOME}/.local/bin/picture-of-the-day"
+    job="0 */6 * * * ${HOME}/.local/bin/picture-of-the-day"
     current="$(crontab -l 2>/dev/null || true)"
     if ! grep -Fqx -- "${job}" <<< "${current}"; then
         ( printf "%s\n" "${current}"; printf "%s\n" "${job}" ) | crontab -
