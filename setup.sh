@@ -182,11 +182,11 @@ function _install_drivers {
         yes | yay -S nvidia-inst || true
         echo "${password}" | sudo -S -k nvidia-inst
     elif echo "${gpu_info}" | grep -qi "AMD"; then
-        yes | yay -S mesa vulkan-radeon lib32-vulkan-radeon || true
+        yes | yay -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
     elif echo "${gpu_info}" | grep -qi "Intel"; then
-        yes | yay -S mesa vulkan-intel lib32-vulkan-intel || true
+        yes | yay -S extra/mesa extra/vulkan-intel multilib/lib32-vulkan-intel || true
     else
-        yes | yay -S mesa vulkan-swrast lib32-vulkan-swrast || true
+        yes | yay -S extra/mesa extra/vulkan-swrast multilib/lib32-vulkan-swrast || true
     fi
 }
 
@@ -198,37 +198,37 @@ function _install_packages {
 
     # Utilities & Required by system.
     yes | yay -S \
-        trash-cli \
-        gnome-keyring \
-        slop python-pywal python-colorthief qt5ct themix-theme-oomox-git \
-        xkblayout-state ttf-jetbrains-mono-nerd noto-fonts-emoji \
-        qt6-multimedia-ffmpeg \
+        extra/trash-cli \
+        extra/gnome-keyring \
+        extra/slop extra/python-pywal extra/python-colorthief extra/qt5ct aur/themix-theme-oomox-git \
+        aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
+        extra/qt6-multimedia-ffmpeg \
         || true
 
     # Shell.
-    yes | yay -S zsh starship || true
+    yes | yay -S extra/zsh extra/starship || true
     echo "${password}" | chsh -s "$(command -v zsh)"
 
     # Apps.
     yes | yay -S \
-        nemo \
-        google-chrome \
-        visual-studio-code-bin postman-bin \
-        kitty warp-terminal-bin \
-        libreoffice-fresh \
-        gimp kdenlive obs-studio \
-        neohtop \
-        steam \
+        extra/nemo \
+        aur/google-chrome \
+        aur/visual-studio-code-bin aur/postman-bin \
+        extra/kitty aur/warp-terminal-bin \
+        extra/libreoffice-fresh \
+        extra/gimp extra/kdenlive extra/obs-studio \
+        aur/neohtop \
+        multilib/steam \
         || true
 
     # Github & Git.
-    yes | yay -S github-cli || true
+    yes | yay -S extra/github-cli || true
     git config --global init.defaultBranch main
     git config --global pull.rebase false
     git config --global core.excludesfile "${HOME}/.config/git/gitignore"
 
     # Docker.
-    yes | yay -S docker-desktop || true
+    yes | yay -S aur/docker-desktop || true
     echo "${password}" | sudo -S -k usermod -aG docker "${USER}"
     echo "${password}" | sudo -S -k rm -f /etc/firewalld/policies/docker*
     echo "${password}" | sudo -S -k rm -f /etc/firewalld/zones/docker*
@@ -244,7 +244,7 @@ function _install_packages {
     deactivate
 
     # JavaScript.
-    yes | yay -S nvm || true
+    yes | yay -S extra/nvm || true
     source /usr/share/nvm/init-nvm.sh
     nvm install node
 }
