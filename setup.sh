@@ -22,7 +22,7 @@ function main {
     _install_packages "${password}"
     _configure_dns "${password}"
     _setup_crontab
-    _post_installation_cleanup
+    _post_installation_cleanup "${password}"
 
     _log "Post installation: Look at the README.md for next steps!"
 }
@@ -276,6 +276,9 @@ function _setup_crontab {
 
 function _post_installation_cleanup {
     _log "Cleaning files..."
+
+    local password
+    password="$1"
 
     gsettings set org.gnome.desktop.privacy remember-recent-files false
 
