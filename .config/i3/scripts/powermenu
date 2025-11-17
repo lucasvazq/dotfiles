@@ -31,19 +31,26 @@ function _take_action {
     fi
 
     case "${selected_option}" in
-        "${lock}")
-            local wallpaper temp_picture
+        "${_OPTIONS[lock]}")
+            local wallpaper temp_picture resolution
             wallpaper="$(cat "${HOME}/.cache/wal/wal")"
             temp_picture=/tmp/i3lock.png
-            magick "${wallpaper}" -blur 5x4 "${temp_picture}"
+            resolution="$(xrandr | awk '/\*/ {print $1; exit}')"
+            magick \
+                "${wallpaper}" \
+                -resize "${resolution}^" \
+                -gravity center \
+                -extent "${resolution}" \
+                -blur 5x4 \
+                "${temp_picture}"
             i3lock "--image=${temp_picture}"
             shred "${temp_picture}"
             rm "${temp_picture}"
             ;;
-        "${reboot}")
+        "${_OPTIONS[reboot]}")
             systemctl reboot
             ;;
-        "${shutdown}")
+        "${_OPTIONS[shutdown]}")
             systemctl poweroff
             ;;
     esac
