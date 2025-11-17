@@ -6,7 +6,7 @@ function main() {
     local vram
     vram="$(_get_vram)"
     if [[ -n "${vram}" ]]; then
-        _print_temperature "${vram}"
+        _print_percentage "${vram}"
     else
         exit 1
     fi
@@ -21,7 +21,7 @@ function _get_vram() {
         used="$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits)"
         total="$(nvidia-smi --query-gpu=memory.total --format=csv,noheader,nounits)"
         percent="$(( used * 100 / total ))"
-        echo "${percent}%"
+        echo "${percent}"
         return
     fi
 
@@ -31,8 +31,35 @@ function _get_vram() {
     if [[ -n "${used}" && -n "${total}" ]]; then
         local percent
         percent="$(( used * 100 / total ))"
-        echo "${percent}%"
+        echo "${percent}"
     fi
+}
+
+function _print_percentage {
+    local percentage
+    percentage="$1"
+
+    local color exit_code
+    if (( percentage > 60 )); then
+        if (( percentage > 80 )); then
+            color="#FF0000"
+            exit_code=33
+        else
+            color="#FFFC00"
+            exit_code=0
+        fi
+    else
+        color=""
+        exit_code=0
+    fi
+
+    echo "${percentage}%"
+    if [[ -n "${color}" ]]; then
+        echo "${percentage}%"
+        echo "${color}"
+    fi
+
+    exit "${exit_code}"
 }
 
 main
