@@ -4,8 +4,8 @@
 
 <div align="center">
   <picture>
-    <source srcset="..TODO.." type="image/gif">
-    <img src="./presentation.gif" alt="presentation image">
+    <source srcset="https://i.postimg.cc/bNdvdsWT/presentation.png" type="image/gif">
+    <img src="./presentation.png" alt="presentation image">
   </picture>
 </div>
 
@@ -16,7 +16,7 @@
 ---
 
 _Ready to code. Ready to stay chill._ \
-_Every day, the [Astronomy Picture of the Day][astropix] becomes your new wallpaper._
+_And yes, every day, the [Astronomy Picture of the Day][astropix] sets your wallpaper and your system theme._
 
 [astropix]: https://apod.nasa.gov/apod/astropix.html
 
@@ -29,7 +29,7 @@ _Every day, the [Astronomy Picture of the Day][astropix] becomes your new wallpa
 Run this command in your terminal to set up the dotfiles:
 
 ```sh
-bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/master/setup.sh)
+bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.sh)
 ```
 
 ## Post-Installation Steps 🛰️
