@@ -168,6 +168,6 @@ bar {
         focused_workspace   $color0     $color0     $color7     $color0
         active_workspace    $color15    $color15    $color0     $color0
         inactive_workspace  $color1     $color1     $color7     $color0
-        urgent_workspace    $color8     $color8     $color7     $color0
+        urgent_workspace    $color0     $color0     $color1     $color0
     }
 }

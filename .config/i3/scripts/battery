@@ -6,7 +6,7 @@ function main {
     if _has_battery; then
         local battery
         battery="$(_get_battery)"
-        _print_battery "${battery}"
+        _print_percentage "${battery}"
     else
         exit 1
     fi
@@ -23,26 +23,31 @@ function _get_battery {
     echo "${capacity}"
 }
 
-function _print_battery {
-    local battery
-    battery="$1"
+function _print_percentage {
+    local percentage
+    percentage="$1"
 
-    local color
-    if (( battery < 30 )); then
-        if (( battery < 10 )); then
+    local color exit_code
+    if (( percentage < 30 )); then
+        if (( percentage < 10 )); then
             color="#FF0000"
+            exit_code=33
         else
             color="#FFFC00"
+            exit_code=0
         fi
     else
         color=""
+        exit_code=0
     fi
 
-    echo "${battery}%"
+    echo "${percentage}%"
     if [[ -n "${color}" ]]; then
-        echo "${battery}%"
+        echo "${percentage}%"
         echo "${color}"
     fi
+
+    exit "${exit_code}"
 }
 
 main

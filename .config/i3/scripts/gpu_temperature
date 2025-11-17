@@ -44,12 +44,14 @@ function _print_temperature {
     local temperature
     temperature="$1"
 
-    local color
+    local color exit_code
     if (( temperature > 60 )); then
-        if (( temperature < 80 )); then
-            color="#FFFC00"
-        else
+        if (( temperature > 80 )); then
             color="#FF0000"
+            exit_code=33
+        else
+            color="#FFFC00"
+            exit_code=0
         fi
     else
         color=""
@@ -60,6 +62,8 @@ function _print_temperature {
         echo "${temperature}º"
         echo "${color}"
     fi
+
+    exit "${exit_code}"
 }
 
 main

@@ -27,7 +27,7 @@ function _print_wifi_connection {
 
     if [[ -z "${wifi_connection}" ]]; then
         echo "󰤭"
-        return
+        exit 33
     fi
 
     echo "󰤥"
