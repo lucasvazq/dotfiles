@@ -11,7 +11,7 @@ for_window [class=".*"] border pixel 1
 
 # Titlebars.
 for_window [class="Gimp"] border normal
-for_window [class="Shotcut"] border normal
+for_window [class="kdenlive"] border normal
 title_align center
 
 ###############################################################################

@@ -292,12 +292,14 @@ function _post_installation_cleanup {
 }
 
 function _log {
-    local message dont_add_top_padding top_padding
+    local message top_padding
     message="$1"
-    dont_add_top_padding="$2"
-
-    if [[ "${dont_add_top_padding}" == "--dont-add-top-padding" ]]; then
-        top_padding=false
+    if [[ -n "${2:-}" ]]; then
+        if [[ "$2" == "--dont-add-top-padding" ]]; then
+            top_padding=false
+        else
+            exit 1
+        fi
     else
         top_padding=true
     fi
