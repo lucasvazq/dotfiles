@@ -559,3 +559,6 @@ x-scheme-handler/chrome=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/mailto=google-chrome.desktop
+
+# Folders.
+inode/directory=nemo.desktop
