@@ -309,9 +309,9 @@ function _log {
     reset="\e[0m"
 
     if "${top_padding}"; then
-        echo -n "${main_color}"
-    else
         echo -e "${main_color}"
+    else
+        echo -n "${main_color}"
     fi
     echo -e "================================"
     echo -e "[setup.sh] ${message}"
