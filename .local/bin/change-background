@@ -69,7 +69,7 @@ function _change_theme {
 
     # Change `dunst` colors.
     cp "${HOME}/.cache/wal/dunstrc" "${HOME}/.config/dunst/dunstrc"
-    pkill dunst
+    pkill dunst 2>/dev/null || true
     dunst &
 
     # Change `rofi` colors.
