@@ -264,7 +264,7 @@ function _configure_dns {
 function _setup_crontab {
     _log "Adding Crontab..."
 
-    yes | yay -S systemd-cron || true
+    yes | yay -S aur/systemd-cron || true
 
     local job current
     job="00 00 * * * ${HOME}/.local/bin/picture-of-the-day"
