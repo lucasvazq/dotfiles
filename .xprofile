@@ -2,7 +2,7 @@
 export PATH="${PATH}:${HOME}/.local/bin"
 
 # Apps.
-export TERMINAL=warp-terminal
+export TERMINAL=kitty
 export BROWSER=google-chrome
 
 # Themes.
