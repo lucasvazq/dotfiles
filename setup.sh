@@ -13,7 +13,7 @@ function main {
     _TEMP_PASSWORD=""
 
     echo "Saving logs at ${HOME}/.cache/dotfiles.log"
-    echo ""
+    echo
     sleep 2
 
     _setup_configuration_files
@@ -38,7 +38,7 @@ function _presentation {
         echo -e "\n"
         echo -e "${frames[@]}"
         if ! "${last_frame}"; then
-            echo ""
+            echo
             sleep 0.1
         fi
     }

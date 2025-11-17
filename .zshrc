@@ -15,7 +15,7 @@ SAVEHIST=1000
 # Starship.
 function _set_starship_config {
     local git_root
-    git_root=$(command git -C "$PWD" rev-parse --show-toplevel 2>/dev/null || echo "")
+    git_root=$(command git -C "$PWD" rev-parse --show-toplevel 2>/dev/null || echo)
     if [[ -n "$git_root" && "$git_root" == "${HOME}" ]]; then
         export STARSHIP_CONFIG="${HOME}/.config/starship-ignore-git.toml"
     else
@@ -51,8 +51,7 @@ function _separator {
         text="${_COLOR_BLACK}"
     fi
     width=$(($(tput cols)-${#string}))
-    echo -e "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))\033[0m"
-    echo -e "${_COLOR_RESET}"
+    echo -e "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))${_RESET}"
 
     if [[ "${newline}" == "true" ]]; then
         echo
