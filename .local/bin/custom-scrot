@@ -39,7 +39,7 @@ function _custom_scrot {
         scrot "${filename}"
     fi
 
-    notify-send --icon=empty "${filename}"
+    notify-send --app-name="Screenshot" "${filename}"
 }
 
 main "$@"

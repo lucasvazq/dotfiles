@@ -28,7 +28,8 @@ exec --no-startup-id eval $(gnome-keyring-daemon --start)
 # Bindings.
 bindsym $mod+w exec --no-startup-id google-chrome-stable
 bindsym $mod+n exec --no-startup-id nemo
-bindsym $mod+Return exec --no-startup-id warp-terminal
+bindsym $mod+Return exec --no-startup-id kitty
+bindsym $mod+Shift+Return exec --no-startup-id warp-terminal
 bindsym Print exec --no-startup-id custom-scrot
 bindsym $mod+Shift+Print exec --no-startup-id custom-scrot --select_screen
 bindsym $mod+Shift+e exec --no-startup-id "${HOME}/.config/i3/scripts/powermenu"
@@ -70,10 +71,10 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+r mode $resize
 set $resize Resize using ARROWS. (Esc)ape to exit.
 mode "$resize" {
-    bindsym Left resize grow width 5 px
-    bindsym Down resize shrink height 5 px
-    bindsym Up resize grow height 5 px
-    bindsym Right resize shrink width 5 px
+    bindsym Right resize grow width 5 px
+    bindsym Up resize shrink height 5 px
+    bindsym Down resize grow height 5 px
+    bindsym Left resize shrink width 5 px
     bindsym Escape mode "default"
 }
 
@@ -107,8 +108,8 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 
 # Start mode.
-for_window [floating] resize set 640 480 --once
-for_window [floating] move position center --once
+for_window [floating] resize set 640 480
+for_window [floating] move position center
 for_window [class="Nm-connection-editor"] floating enable
 
 ###############################################################################
@@ -158,15 +159,15 @@ bar {
     tray_output none
     padding 2
     colors {
-        separator $color0
-        background $color1
-        statusline $color2
+        separator $color1
+        background $color0
+        statusline $color7
 
         # Class             Border      Background  Text        Indicator
         # ---------------------------------------------------------------
-        focused_workspace   $color4     $color3     $color1     $color0
-        active_workspace    $color6     $color4     $color1     $color0
-        inactive_workspace  $color1     $color1     $color3     $color0
-        urgent_workspace    $color5     $color5     $color2     $color0
+        focused_workspace   $color1     $color1     $color7     $color0
+        active_workspace    $color1     $color1     $color7     $color0
+        inactive_workspace  $color0     $color0     $color7     $color0
+        urgent_workspace    $color1     $color1     $color7     $color0
     }
 }

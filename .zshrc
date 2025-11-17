@@ -13,6 +13,17 @@ HISTSIZE=1000
 SAVEHIST=1000
 
 # Starship.
+function _set_starship_config {
+    local git_root
+    git_root=$(command git -C "$PWD" rev-parse --show-toplevel 2>/dev/null || echo)
+    if [[ -n "$git_root" && "$git_root" == "${HOME}" ]]; then
+        export STARSHIP_CONFIG="${HOME}/.config/starship-ignore-git.toml"
+    else
+        export STARSHIP_CONFIG="${HOME}/.config/starship.toml"
+    fi
+}
+
+precmd_functions=(_set_starship_config "${precmd_functions[@]}")
 eval "$(starship init zsh)"
 
 # Lines Separator.
@@ -40,15 +51,14 @@ function _separator {
         text="${_COLOR_BLACK}"
     fi
     width=$(($(tput cols)-${#string}))
-    echo -e "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))\033[0m"
-    echo -e "${_COLOR_RESET}"
+    echo -e "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))${_RESET}"
 
     if [[ "${newline}" == "true" ]]; then
         echo
     fi
 }
 
-precmd() {
+function precmd {
     if [[ "${_START}" == "true" ]]; then
         _separator "> Init" "${_COLOR_SEPARATOR_FIRST_TIME}"
     else
@@ -56,7 +66,7 @@ precmd() {
     fi
 }
 
-preexec() {
+function preexec {
     _separator "> Output" "${_COLOR_SEPARATOR}" true
 }
 
@@ -163,13 +173,3 @@ function ls {
         '
     ) | column -t -s $'\t'
 }
-
-###############################################################################
-# Language specific.
-###############################################################################
-
-# Python.
-source "${HOME}/.config/.venv/bin/activate"
-
-# JavaScript
-source /usr/share/nvm/init-nvm.sh

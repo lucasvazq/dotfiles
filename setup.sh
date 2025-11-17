@@ -13,6 +13,7 @@ function main {
     _TEMP_PASSWORD=""
 
     echo "Saving logs at ${HOME}/.cache/dotfiles.log"
+    echo
     sleep 2
 
     _setup_configuration_files
@@ -37,7 +38,7 @@ function _presentation {
         echo -e "\n"
         echo -e "${frames[@]}"
         if ! "${last_frame}"; then
-            echo ""
+            echo
             sleep 0.1
         fi
     }
@@ -137,15 +138,12 @@ function _get_password {
 }
 
 function _setup_configuration_files {
-    _log "Configuring files..."
+    _log "Configuring files..." --dont-add-top-padding
 
     git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles"
     rsync -a "${HOME}/dotfiles/" "${HOME}/"
 
-    chmod 711 "${HOME}/.local/bin/change-background"
-    chmod 711 "${HOME}/.local/bin/custom-scrot"
-    chmod 711 "${HOME}/.local/bin/picture-of-the-day"
-    mkdir -p "${HOME}/Pictures"/{Wallpapers,Screenshots}
+    mkdir -p "${HOME}/Pictures/Screenshots"
     mkdir -p "${HOME}/Workspaces"
 }
 
@@ -215,9 +213,10 @@ function _install_packages {
     yes | yay -S \
         nemo \
         google-chrome \
-        visual-studio-code-bin warp-terminal-bin postman-bin \
+        visual-studio-code-bin postman-bin \
+        kitty warp-terminal-bin \
         libreoffice-fresh \
-        gimp kdenlive \
+        gimp kdenlive obs-studio \
         neohtop \
         steam \
         || true
@@ -293,16 +292,27 @@ function _post_installation_cleanup {
 }
 
 function _log {
-    local message
+    local message dont_add_top_padding top_padding
     message="$1"
+    dont_add_top_padding="$2"
+
+    if [[ "${dont_add_top_padding}" == "--dont-add-top-padding" ]]; then
+        top_padding=false
+    else
+        top_padding=true
+    fi
 
     local main_color reset
     main_color="\e[96m"
     reset="\e[0m"
 
-    echo -e "${main_color}"
+    if "${top_padding}"; then
+        echo -n "${main_color}"
+    else
+        echo -e "${main_color}"
+    fi
     echo -e "================================"
-    echo -e " [setup.sh] ${message}"
+    echo -e "[setup.sh] ${message}"
     echo -e "================================"
     echo -e "${reset}"
 }

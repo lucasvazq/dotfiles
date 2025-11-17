@@ -7,7 +7,7 @@ set -euo pipefail
 
 function main {
     local wallpaper
-	if [[ -n "${1:-}" ]]; then
+    if [[ -n "${1:-}" ]]; then
         wallpaper="$1"
     else
         wallpaper="$(_get_random_wallpaper)"
@@ -69,11 +69,14 @@ function _change_theme {
 
     # Change `dunst` colors.
     cp "${HOME}/.cache/wal/dunstrc" "${HOME}/.config/dunst/dunstrc"
-    pkill dunst
+    pkill dunst 2>/dev/null || true
     dunst &
 
     # Change `rofi` colors.
     cp "${HOME}/.cache/wal/colors-rofi-dark.rasi" "${HOME}/.config/rofi/rofidmenu.rasi"
+
+    # Change `kitty` colors.
+    cp "${HOME}/.cache/wal/colors-kitty.conf" "${HOME}/.config/kitty/kitty.conf"
 }
 
 main "$@"
