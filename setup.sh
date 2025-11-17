@@ -223,10 +223,13 @@ function _install_packages {
 
     # Github & Git.
     systemctl --user enable ssh-agent.service
-    yes | yay -S extra/github-cli || true
+    yes | yay -S extra/github-cli extra/diff-so-fancy || true
     git config --global init.defaultBranch main
     git config --global pull.rebase false
     git config --global core.excludesfile "${HOME}/.config/git/gitignore"
+    git config --global core.pager "diff-so-fancy | less --tabs=4 -RF"
+    git config --global interactive.diffFilter "diff-so-fancy --patch"
+    git config --bool --global diff-so-fancy.stripLeadingSymbols false
 
     # Docker.
     yes | yay -S aur/docker-desktop || true
