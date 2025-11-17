@@ -222,6 +222,7 @@ function _install_packages {
         || true
 
     # Github & Git.
+    systemctl --user enable ssh-agent.service
     yes | yay -S extra/github-cli || true
     git config --global init.defaultBranch main
     git config --global pull.rebase false

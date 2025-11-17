@@ -41,7 +41,7 @@ bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.s
 3. Configure Git & GitHub:
 
 ```sh
-gh auth login --hostname github.com --git-protocol ssh
+gh auth login --hostname github.com --git-protocol ssh --web
 git config --global user.name "<YOUR_NAME>"
 git config --global user.email "<YOUR_EMAIL>"
 git remote set-url origin git@github.com:lucasvazq/dotfiles.git
