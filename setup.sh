@@ -200,7 +200,7 @@ function _install_packages {
     yes | yay -S \
         extra/trash-cli \
         extra/gnome-keyring \
-        extra/slop extra/python-pywal extra/python-colorthief extra/qt5ct aur/themix-theme-oomox-git \
+        extra/slop extra/qt5ct aur/themix-theme-oomox-git \
         aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
         extra/qt6-multimedia-ffmpeg \
         || true
@@ -240,7 +240,7 @@ function _install_packages {
     # Python.
     python -m venv "${HOME}/.config/.venv"
     source "${HOME}/.config/.venv/bin/activate"
-    pip install ipython
+    pip install ipython pywal colorthief
     deactivate
 
     # JavaScript.
