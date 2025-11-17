@@ -71,10 +71,10 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+r mode $resize
 set $resize Resize using ARROWS. (Esc)ape to exit.
 mode "$resize" {
-    bindsym Left resize grow width 5 px
-    bindsym Down resize shrink height 5 px
-    bindsym Up resize grow height 5 px
-    bindsym Right resize shrink width 5 px
+    bindsym Right resize grow width 5 px
+    bindsym Up resize shrink height 5 px
+    bindsym Down resize grow height 5 px
+    bindsym Left resize shrink width 5 px
     bindsym Escape mode "default"
 }
 
