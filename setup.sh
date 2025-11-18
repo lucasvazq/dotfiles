@@ -244,7 +244,7 @@ function _install_packages {
     # Python.
     python -m venv "${HOME}/.config/.venv"
     source "${HOME}/.config/.venv/bin/activate"
-    pip install ipython pywal colorthief
+    pip install pywal colorthief ipython ipdb requests
     deactivate
 
     # JavaScript.
