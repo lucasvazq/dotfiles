@@ -211,7 +211,6 @@ function _install_packages {
 
     # Apps.
     yes | yay -S \
-        extra/nemo \
         aur/google-chrome \
         aur/visual-studio-code-bin aur/postman-bin \
         extra/kitty aur/warp-terminal-bin \
@@ -220,6 +219,12 @@ function _install_packages {
         aur/neohtop \
         multilib/steam \
         || true
+
+	# File manager.
+	yes | yay -S extra/nemo
+	gsettings set org.nemo.preferences show-image-thumbnails always
+	gsettings set org.nemo.preferences thumbnail-limit 8589934592
+	gsettings set org.gnome.desktop.privacy remember-recent-files false
 
     # Github & Git.
     systemctl --user enable ssh-agent.service
@@ -283,8 +288,6 @@ function _post_installation_cleanup {
 
     local password
     password="$1"
-
-    gsettings set org.gnome.desktop.privacy remember-recent-files false
 
     # Merge most of default folders into the Downloads folder.
     xdg-user-dirs-update --set XDG_DESKTOP_DIR "${HOME}/Downloads"
