@@ -26,11 +26,11 @@ function _print_wifi_connection {
     wifi_connection="$1"
 
     if [[ -z "${wifi_connection}" ]]; then
-        echo "󰤭"
+        echo " W "
         exit 33
     fi
 
-    echo "󰤥"
+    echo "󰤥 "
 }
 
 main
