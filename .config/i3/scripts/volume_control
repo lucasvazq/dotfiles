@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+# Check if there is any WiFi connection alive.
+set -eo pipefail
+
+function main {
+    local action
+    action="$1"
+
+    local volume
+    _do_action "${action}"
+    volume="$(_get_current_volume)"
+    if [[ "${action}" == "--show" ]]; then
+        _print_volume "${volume}"
+    else
+        _send_notification "${volume}"
+    fi
+}
+
+function _do_action {
+    local action
+    action="$1"
+    case "${action}" in
+        --up)
+            pactl set-sink-mute @DEFAULT_SINK@ 0
+            pactl set-sink-volume @DEFAULT_SINK@ +5%
+        ;;
+        --down)
+            pactl set-sink-mute @DEFAULT_SINK@ 0
+            pactl set-sink-volume @DEFAULT_SINK@ -5%
+        ;;
+        --mute)
+            pactl set-sink-mute @DEFAULT_SINK@ toggle
+        ;;
+    esac
+}
+
+function _get_current_volume {
+    local is_muted
+    is_muted="$(pactl get-sink-mute @DEFAULT_SINK@ | awk '/Mute/ {print $2}')"
+    if [[ "${is_muted}" == "yes" ]]; then
+        echo "0"
+    else
+        pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]{1,3}(?=%)" | head -1
+    fi
+}
+
+function _print_volume {
+    local volume
+    volume="$1"
+    echo "${volume}%"
+}
+
+function _send_notification {
+    local volume
+    volume="$1"
+    notify-send --replace-id=1 --app-name=Volume "--hint=int:value:${volume}" "Volume: ${volume}%"
+}
+
+main "$@"

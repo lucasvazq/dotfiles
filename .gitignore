@@ -31,6 +31,7 @@
 !.config/i3/scripts/gpu_temperature
 !.config/i3/scripts/gpu_vram
 !.config/i3/scripts/powermenu
+!.config/i3/scripts/volume_control
 !.config/i3/scripts/wifi
 
 # ./.config/wal

@@ -34,6 +34,9 @@ bindsym Print exec --no-startup-id custom-scrot
 bindsym $mod+Shift+Print exec --no-startup-id custom-scrot --select_screen
 bindsym $mod+Shift+e exec --no-startup-id "${HOME}/.config/i3/scripts/powermenu"
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -config "${HOME}/.config/rofi/rofidmenu.rasi"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "${HOME}/.config/i3/scripts/volume_control --up"
+bindsym XF86AudioLowerVolume exec --no-startup-id "${HOME}/.config/i3/scripts/volume_control --down"
+bindsym XF86AudioMute exec --no-startup-id "${HOME}/.config/i3/scripts/volume_control --mute"
 
 ###############################################################################
 # Containers and Desktop Workspaces.
