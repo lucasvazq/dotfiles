@@ -173,3 +173,15 @@ function ls {
         '
     ) | column -t -s $'\t'
 }
+
+docker() {
+    local first_argument
+    first_argument="$1"
+
+    if [[ "${first_argument}" == "ps" ]]; then
+        shift
+        command docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" "$@"
+    else
+        command docker "$@"
+    fi
+}
