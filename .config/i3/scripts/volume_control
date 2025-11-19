@@ -6,23 +6,29 @@ function main {
     local action
     action="$1"
 
-    local volume
-    _do_action "${action}"
-    volume="$(_get_current_volume)"
+    local old_volume new_volume
+    old_volume="$(_get_current_volume)"
+    _do_action "${action}" "${old_volume}"
+    new_volume="$(_get_current_volume)"
     if [[ "${action}" == "--show" ]]; then
-        _print_volume "${volume}"
+        _print_volume "${new_volume}"
     else
-        _send_notification "${volume}"
+        _send_notification "${new_volume}"
     fi
 }
 
 function _do_action {
-    local action
+    local action volume
     action="$1"
+    volume="$2"
     case "${action}" in
         --up)
             pactl set-sink-mute @DEFAULT_SINK@ 0
-            pactl set-sink-volume @DEFAULT_SINK@ +5%
+            if [[ $volume -ge 95 ]]; then
+                pactl set-sink-volume @DEFAULT_SINK@ 100%
+            else
+                pactl set-sink-volume @DEFAULT_SINK@ +5%
+            fi
         ;;
         --down)
             pactl set-sink-mute @DEFAULT_SINK@ 0
