@@ -5,6 +5,7 @@ Executable module that sets the background and color scheme.
 Executable functions:
     main: Main function that handles all the executable module behaviour.
 """
+
 import re
 import subprocess
 from pathlib import Path
@@ -30,13 +31,13 @@ class Main:
     Methods:
         __call__: Executes the class logic.
     """
+
     _base_url = "https://apod.nasa.gov"
     _default_timeout = 10
 
     def __call__(self):
-        if (
-            (image_url := self._get_image_url())
-            and (image := self._download_image(image_url))
+        if (image_url := self._get_image_url()) and (
+            image := self._download_image(image_url)
         ):
             destination_path = self._get_destination_path(image_url)
             self._save_image(destination_path, image)
@@ -46,12 +47,10 @@ class Main:
 
     def _get_image_url(self) -> str | None:
         try:
-            with (
-                request.urlopen(
-                    f"{self._base_url}/apod/astropix.html",
-                    timeout=self._default_timeout,
-                ) as response
-            ):
+            with request.urlopen(
+                f"{self._base_url}/apod/astropix.html",
+                timeout=self._default_timeout,
+            ) as response:
                 if response.status != 200:
                     return
 
@@ -72,19 +71,15 @@ class Main:
 
     def _get_destination_path(self, image_url: str) -> Path:
         image_name = image_url.split("/")[-1]
-        destination_path = (
-            Path.home() / "Pictures" / "Wallpapers" / image_name
-        )
+        destination_path = Path.home() / "Pictures" / "Wallpapers" / image_name
         return destination_path
 
     def _download_image(self, image_url: str) -> bytes | None:
         try:
-            with (
-                request.urlopen(
-                    f"{self._base_url}/{image_url}",
-                    timeout=self._default_timeout,
-                ) as response
-            ):
+            with request.urlopen(
+                f"{self._base_url}/{image_url}",
+                timeout=self._default_timeout,
+            ) as response:
                 image = response.read()
                 return image
         except error.URLError:

@@ -24,7 +24,7 @@ function _get_temperature {
                     echo "$(( temperature / 1000 ))"
                     return
                 fi
-                ;;
+            ;;
         esac
     done
 }

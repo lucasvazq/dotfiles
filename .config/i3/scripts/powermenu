@@ -17,7 +17,7 @@ function _render_menu {
     menu_options="${_OPTIONS[lock]}\n${_OPTIONS[reboot]}\n${_OPTIONS[shutdown]}"
     selected_option="$(
         echo -e "${menu_options}" \
-            | rofi -dmenu -i -config "${HOME}/.config/rofi/rofidmenu.rasi"
+        | rofi -dmenu -i -config "${HOME}/.config/rofi/rofidmenu.rasi"
     )"
     echo "${selected_option}"
 }
@@ -37,22 +37,22 @@ function _take_action {
             temp_picture=/tmp/i3lock.png
             resolution="$(xrandr | awk '/\*/ {print $1; exit}')"
             magick \
-                "${wallpaper}" \
-                -resize "${resolution}^" \
-                -gravity center \
-                -extent "${resolution}" \
-                -blur 5x4 \
-                "${temp_picture}"
+            "${wallpaper}" \
+            -resize "${resolution}^" \
+            -gravity center \
+            -extent "${resolution}" \
+            -blur 5x4 \
+            "${temp_picture}"
             i3lock "--image=${temp_picture}"
             shred "${temp_picture}"
             rm "${temp_picture}"
-            ;;
+        ;;
         "${_OPTIONS[reboot]}")
             systemctl reboot
-            ;;
+        ;;
         "${_OPTIONS[shutdown]}")
             systemctl poweroff
-            ;;
+        ;;
     esac
 }
 

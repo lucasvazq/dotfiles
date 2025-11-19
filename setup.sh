@@ -49,7 +49,7 @@ function _presentation {
     reset="\e[0m"
 
     local frame_logo \
-        frame_reflect_1 frame_reflect_2 frame_reflect_3 frame_reflect_4 frame_reflect_5 frame_reflect_6
+    frame_reflect_1 frame_reflect_2 frame_reflect_3 frame_reflect_4 frame_reflect_5 frame_reflect_6
     frame_logo=(
         " ${main_color}██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗\n"
         "${main_color}██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝\n"
@@ -154,7 +154,7 @@ function _configure_yay {
     password="$1"
 
     echo "$password" | sudo -S bash -c \
-        'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
+    'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
     echo "$password" | sudo -S chmod 440 /etc/sudoers.d/00-yay-nopasswd
     yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
     yes | yay -S eos-rankmirrors || true
@@ -165,8 +165,8 @@ function _configure_yay {
         # violets are blue
         # I have Endeavour i3
         yay -Syu \
-            \
-            || true
+    \
+    || true
 }
 
 function _install_drivers {
@@ -198,12 +198,12 @@ function _install_packages {
 
     # Utilities & Required by system.
     yes | yay -S \
-        extra/trash-cli \
-        extra/gnome-keyring \
-        extra/slop extra/qt5ct aur/themix-theme-oomox-git \
-        aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
-        extra/qt6-multimedia-ffmpeg \
-        || true
+    extra/trash-cli \
+    extra/gnome-keyring \
+    extra/slop extra/qt5ct aur/themix-theme-oomox-git \
+    aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
+    extra/qt6-multimedia-ffmpeg \
+    || true
 
     # Shell.
     yes | yay -S extra/zsh extra/starship || true
@@ -211,20 +211,22 @@ function _install_packages {
 
     # Apps.
     yes | yay -S \
-        aur/google-chrome \
-        aur/visual-studio-code-bin aur/postman-bin \
-        extra/kitty aur/warp-terminal-bin \
-        extra/libreoffice-fresh \
-        extra/gimp extra/kdenlive extra/obs-studio \
-        aur/neohtop \
-        multilib/steam \
-        || true
+    aur/google-chrome \
+    aur/visual-studio-code-bin aur/postman-bin \
+    extra/kitty aur/warp-terminal-bin \
+    extra/libreoffice-fresh \
+    extra/gimp extra/kdenlive extra/obs-studio \
+    aur/neohtop \
+    multilib/steam \
+    || true
 
-	# File manager.
-	yes | yay -S extra/nemo
-	gsettings set org.nemo.preferences show-image-thumbnails always
-	gsettings set org.nemo.preferences thumbnail-limit 8589934592
-	gsettings set org.gnome.desktop.privacy remember-recent-files false
+    # File manager.
+    local size
+    size=$((8 * 1024 * 1024 * 1024)) # 8 GiB
+    yes | yay -S extra/nemo
+    gsettings set org.nemo.preferences show-image-thumbnails always
+    gsettings set org.nemo.preferences thumbnail-limit "${size}"
+    gsettings set org.gnome.desktop.privacy remember-recent-files false
 
     # Github & Git.
     systemctl --user enable ssh-agent.service
@@ -265,9 +267,9 @@ function _configure_dns {
     password="$1"
 
     { printf "%s\n" "${password}"; printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n"; } \
-        | sudo -S -k tee /etc/resolv.conf > /dev/null
+    | sudo -S -k tee /etc/resolv.conf > /dev/null
     { printf "%s\n" "${password}"; printf "[main]\ndns=none\n"; } \
-        | sudo -S -k tee /etc/NetworkManager/NetworkManager.conf > /dev/null
+    | sudo -S -k tee /etc/NetworkManager/NetworkManager.conf > /dev/null
 }
 
 function _setup_crontab {
@@ -278,7 +280,7 @@ function _setup_crontab {
     local job current
     job="0 */6 * * * ${HOME}/.local/bin/picture-of-the-day"
     current="$(crontab -l 2>/dev/null || true)"
-    if ! grep -Fqx -- "${job}" <<< "${current}"; then
+    if ! echo "${current}" | grep -Fq -- "${job}"; then
         ( printf "%s\n" "${current}"; printf "%s\n" "${job}" ) | crontab -
     fi
 }
