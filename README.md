@@ -36,9 +36,7 @@ bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.s
 
 1. Reboot your system.
 
-2. Enable KVM (Kernel-based Virtual Machine) in BIOS/UEFI.
-
-3. Configure Git & GitHub:
+2. Configure Git & GitHub:
 
 ```sh
 gh auth login --hostname github.com --git-protocol ssh --web
