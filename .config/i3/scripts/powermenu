@@ -8,8 +8,15 @@ declare -A _OPTIONS=(
 )
 
 function main {
+    local option
+    option="$1"
+
     local selected_option
-    selected_option="$(_render_menu)"
+    if [[ -n "${option}" ]]; then
+        selected_option="${_OPTIONS[${option}]}"
+    else
+        selected_option="$(_render_menu)"
+    fi
     _take_action "${selected_option}"
 }
 
@@ -56,4 +63,4 @@ function _take_action {
     esac
 }
 
-main
+main "$@"

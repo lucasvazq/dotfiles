@@ -3,6 +3,8 @@
 ###############################################################################
 
 # Zsh.
+# - General.
+setopt NO_BEEP
 # - Completion.
 zstyle :compinstall filename "${HOME}/.zshrc"
 autoload -Uz compinit
@@ -178,7 +180,7 @@ docker() {
     local first_argument
     first_argument="$1"
 
-    if [[ "${first_argument}" == "ps" ]]; then
+    if [[ "${first_argument}" == "ps" && "$#" -eq 1 ]]; then
         shift
         command docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" "$@"
     else
