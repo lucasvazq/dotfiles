@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install the dotfiles.
-set -xeuo pipefail
+set -euo pipefail
 
 _TEMP_PASSWORD=""
 
@@ -25,6 +25,13 @@ function _execute_steps {
     echo
     sleep 2
 
+    local start_time
+    start_time="$(date +"%Y-%m-%d %H:%M:%S")"
+    local original_ps4
+    original_ps4="$PS4"
+    export PS4='[$(basename "$0")] [$(date "+%Y-%m-%d %H:%M:%S")] '
+    set -x
+
     _setup_configuration_files
     _configure_yay "${password}"
     _install_drivers "${password}"
@@ -33,7 +40,13 @@ function _execute_steps {
     _setup_crontab
     _post_installation_cleanup "${password}"
 
-    _log "Post installation: Look at the README.md for next steps!"
+    set -x
+    export PS4="${original_ps4}"
+    local end_time duration
+    end_time="$(date +"%Y-%m-%d %H:%M:%S")"
+    duration="$(_get_duration "${start_time}" "${end_time}")"
+
+    _log "Done.\nDuration: ${duration}\nPost installation: Look at the README.md for next steps!"
 }
 
 function _presentation {
@@ -312,6 +325,38 @@ function _post_installation_cleanup {
     echo "${password}" | sudo -S -k rm /etc/sudoers.d/00-yay-nopasswd
 }
 
+function _get_duration {
+    local start_time end_time
+    start_time="$1"
+    end_time="$2"
+
+    local duration_in_seconds hours minutes seconds
+    duration_in_seconds="$(($(date -u -d "${end_time}" +"%s") - $(date -u -d "${start_time}" +"%s")))"
+    hours=$((duration_in_seconds / 3600))
+    minutes=$(((duration_in_seconds % 3600) / 60))
+    seconds=$((duration_in_seconds % 60))
+
+    local response
+    response=""
+    if [[ "${hours}" -gt 0 ]]; then
+        response="${hours}h "
+    fi
+    if [[ "${minutes}" -gt 0 ]]; then
+        if [[ -n "${response}" ]]; then
+            response="${response} "
+        fi
+        response="${response}${minutes}m"
+    fi
+    if [[ "${seconds}" -gt 0 ]]; then
+        if [[ -n "${response}" ]]; then
+            response="${response} "
+        fi
+        response="${response}${seconds}s"
+    fi
+
+    echo "${response}"
+}
+
 function _log {
     local message top_padding
     message="$1"
@@ -335,7 +380,7 @@ function _log {
         echo -n "${main_color}"
     fi
     echo -e "================================"
-    echo -e "[setup.sh] ${message}"
+    echo -e "${message}"
     echo -e "================================"
     echo -e "${reset}"
 }
