@@ -26,7 +26,7 @@ _And yes, every day, the [Astronomy Picture of the Day][astropix] sets your wall
 
 ## Ready, Set, Launch 🚀
 
-Run this command in your terminal to set up the dotfiles:
+Run this command to set up or update the dotfiles on your system:
 
 ```sh
 bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.sh)
