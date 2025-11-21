@@ -3,7 +3,7 @@
 #
 # Args:
 #   $1 (optional): Wallpaper. If not provided, one random is selected.
-set -euo pipefail
+set -xeuo pipefail
 
 function main {
     local wallpaper

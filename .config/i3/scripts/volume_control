@@ -1,20 +1,45 @@
 #!/usr/bin/env bash
-# Check if there is any WiFi connection alive.
-set -eo pipefail
+# Handle volume.
+#
+# Args:
+#   $1 (optional): Action to perform.
+#		Choices:
+#			--show (default): Show current volume.
+#	   		--up: Increase volume.
+#	   		--down: Decrease volume.
+#	   		--mute: Mute/Unmute the volume.
+set -xeuo pipefail
 
 function main {
     local action
     action="$1"
 
-    local old_volume new_volume
-    old_volume="$(_get_current_volume)"
-    _do_action "${action}" "${old_volume}"
-    new_volume="$(_get_current_volume)"
+    local current_volume
+    current_volume="$(_get_current_volume)"
     if [[ "${action}" == "--show" ]]; then
-        _print_volume "${new_volume}"
+        _print_volume "${current_volume}"
     else
+        local new_volume
+        _do_action "${action}" "${current_volume}"
+        new_volume="$(_get_current_volume)"
         _send_notification "${new_volume}"
     fi
+}
+
+function _get_current_volume {
+    local is_muted
+    is_muted="$(pactl get-sink-mute @DEFAULT_SINK@ | awk '/Mute/ {print $2}')"
+    if [[ "${is_muted}" == "yes" ]]; then
+        echo "0"
+    else
+        pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]{1,3}(?=%)" | head -1
+    fi
+}
+
+function _print_volume {
+    local volume
+    volume="$1"
+    echo "${volume}%"
 }
 
 function _do_action {
@@ -38,22 +63,6 @@ function _do_action {
             pactl set-sink-mute @DEFAULT_SINK@ toggle
         ;;
     esac
-}
-
-function _get_current_volume {
-    local is_muted
-    is_muted="$(pactl get-sink-mute @DEFAULT_SINK@ | awk '/Mute/ {print $2}')"
-    if [[ "${is_muted}" == "yes" ]]; then
-        echo "0"
-    else
-        pactl get-sink-volume @DEFAULT_SINK@ | grep -Po "[0-9]{1,3}(?=%)" | head -1
-    fi
-}
-
-function _print_volume {
-    local volume
-    volume="$1"
-    echo "${volume}%"
 }
 
 function _send_notification {

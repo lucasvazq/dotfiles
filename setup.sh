@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 # Install the dotfiles.
-set -euo pipefail
+set -xeuo pipefail
 
 _TEMP_PASSWORD=""
 
 function main {
+    local log_file
+    log_file="${HOME}/.cache/dotfiles-$(date +%Y-%m-%d_%H-%M-%S).log"
+    _execute_steps "${log_file}" 2>&1 | tee -a "${log_file}"
+}
+
+function _execute_steps {
+    local log_file
+    log_file="$1"
+
     _presentation
 
     local password
@@ -12,7 +21,7 @@ function main {
     password="${_TEMP_PASSWORD}"
     _TEMP_PASSWORD=""
 
-    echo "Saving logs at ${HOME}/.cache/dotfiles.log"
+    echo "Saving logs at ${log_file}"
     echo
     sleep 2
 
@@ -331,4 +340,4 @@ function _log {
     echo -e "${reset}"
 }
 
-main 2>&1 | tee -a "${HOME}/.cache/dotfiles.log"
+main

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Get the current battery.
-set -euo pipefail
+set -xeuo pipefail
 
 function main {
     if _has_battery; then

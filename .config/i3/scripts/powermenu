@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
-# Show the power menu.
+# Handle the power menu.
+#
+# Args:
+#   $1 (optional): Action to perform.
+#		If no argument is given, a menu will be shown to select an option.
+#		Choices:
+#			--lock: Lock the screen.
+#	   		--reboot: Reboot the system.
+#	   		--shutdown: Shutdown the system.
+set -xeuo pipefail
 
 declare -A _OPTIONS=(
-    [lock]="Lock"
-    [reboot]="Reboot"
-    [shutdown]="Shutdown"
+    [--lock]="Lock"
+    [--reboot]="Reboot"
+    [--shutdown]="Shutdown"
 )
 
 function main {
@@ -21,7 +30,7 @@ function main {
 }
 
 function _render_menu {
-    menu_options="${_OPTIONS[lock]}\n${_OPTIONS[reboot]}\n${_OPTIONS[shutdown]}"
+    menu_options="${_OPTIONS[--lock]}\n${_OPTIONS[--reboot]}\n${_OPTIONS[--shutdown]}"
     selected_option="$(
         echo -e "${menu_options}" \
         | rofi -dmenu -i -config "${HOME}/.config/rofi/rofidmenu.rasi"
@@ -38,7 +47,7 @@ function _take_action {
     fi
 
     case "${selected_option}" in
-        "${_OPTIONS[lock]}")
+        "${_OPTIONS[--lock]}")
             local wallpaper temp_picture resolution
             wallpaper="$(cat "${HOME}/.cache/wal/wal")"
             temp_picture=/tmp/i3lock.png
@@ -54,10 +63,10 @@ function _take_action {
             shred "${temp_picture}"
             rm "${temp_picture}"
         ;;
-        "${_OPTIONS[reboot]}")
+        "${_OPTIONS[--reboot]}")
             systemctl reboot
         ;;
-        "${_OPTIONS[shutdown]}")
+        "${_OPTIONS[--shutdown]}")
             systemctl poweroff
         ;;
     esac

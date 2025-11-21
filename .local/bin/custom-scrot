@@ -3,7 +3,7 @@
 #
 # Flags:
 #   --select_screen: select a region of the screen to capture.
-set -euo pipefail
+set -xeuo pipefail
 
 function main {
     local select_screen

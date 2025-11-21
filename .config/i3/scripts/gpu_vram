@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Get the VRAM usage.
-set -euo pipefail
+set -xeuo pipefail
 
 function main() {
     local vram
