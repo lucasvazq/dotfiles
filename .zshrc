@@ -182,7 +182,7 @@ docker() {
 
     if [[ "${first_argument}" == "ps" && "$#" -eq 1 ]]; then
         shift
-        command docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" "$@"
+        command docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
     else
         command docker "$@"
     fi
