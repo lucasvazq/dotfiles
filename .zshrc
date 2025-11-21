@@ -95,7 +95,7 @@ bindkey "^W" backward-kill-word     # Ctrl + Backspace
 # Alias.
 ###############################################################################
 
-alias code='code --password-store="gnome-libsecret"'
+alias code="code --password-store=gnome-libsecret"
 alias grep="grep --color=auto"
 alias rm="trash"
 
