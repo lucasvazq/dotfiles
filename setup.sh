@@ -213,7 +213,7 @@ function _install_packages {
     yes | yay -S \
     aur/google-chrome \
     aur/visual-studio-code-bin aur/postman-bin \
-    extra/kitty aur/warp-terminal-bin \
+    extra/kitty \
     extra/libreoffice-fresh \
     extra/gimp extra/kdenlive extra/obs-studio \
     aur/neohtop \

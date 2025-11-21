@@ -30,7 +30,6 @@ exec --no-startup-id xidlehook --not-when-fullscreen --timer 600 "${HOME}/.confi
 bindsym $mod+w exec --no-startup-id google-chrome-stable
 bindsym $mod+n exec --no-startup-id nemo
 bindsym $mod+Return exec --no-startup-id kitty
-bindsym $mod+Shift+Return exec --no-startup-id warp-terminal
 bindsym Print exec --no-startup-id custom-scrot
 bindsym $mod+Shift+Print exec --no-startup-id custom-scrot --select_screen
 bindsym $mod+Shift+e exec --no-startup-id "${HOME}/.config/i3/scripts/powermenu"
