@@ -15,20 +15,18 @@ function main {
     echo
     sleep 2
 
-    local duration
-    duration=$(_execute_steps 2>&1 | tee -a "${log_file}")
+    local start_time end_time duration
+    start_time="$(date +%s)"
+    _execute_steps 2>&1 | tee -a "${log_file}"
+    end_time="$(date +%s)"
+    duration="$(_get_duration "${start_time}" "${end_time}")"
+
     _log "Done!\nDuration: ${duration}\nNext step: Check the README.md for post-installation steps!"
 }
 
 function _execute_steps {
-    local start_time
-    start_time="$(date +"%Y-%m-%d %H:%M:%S")"
-    local original_ps4
-    original_ps4="$PS4"
     export PS4='[$(basename "$0")] [$(date "+%Y-%m-%d %H:%M:%S")] '
-    yay --save --builddir yay --verbose
     set -x
-
     _setup_configuration_files
     _configure_yay
     _install_drivers
@@ -36,14 +34,6 @@ function _execute_steps {
     _configure_dns
     _setup_crontab
     _cleanup_configuration_files
-
-    set +x
-    yay --save --nobuilddir
-    export PS4="${original_ps4}"
-    local end_time duration
-    end_time="$(date +"%Y-%m-%d %H:%M:%S")"
-    duration="$(_get_duration "${start_time}" "${end_time}")"
-    echo "${duration}"
 }
 
 function _presentation {
@@ -174,7 +164,7 @@ function _configure_yay {
     'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
     sudo chmod 440 /etc/sudoers.d/00-yay-nopasswd
     yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
-    yes | yay -S eos-rankmirrors || true
+    yes | yay --verbose --noconfirm -S eos-rankmirrors || true
     sudo eos-rankmirrors
 
     yes | \
@@ -182,7 +172,7 @@ function _configure_yay {
 		# violets are blue
 		# I have Endeavour i3
 		yay -Syu \
-    \
+    --verbose --noconfirm \
     || true
 }
 
@@ -193,14 +183,14 @@ function _install_drivers {
     local gpu_info
     gpu_info="$(lspci | grep -E "VGA|3D")"
     if echo "${gpu_info}" | grep -qi "NVIDIA"; then
-        yes | yay -S nvidia-inst || true
+        yes | yay --verbose --noconfirm -S nvidia-inst || true
         sudo nvidia-inst
     elif echo "${gpu_info}" | grep -qi "AMD"; then
-        yes | yay -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
+        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
     elif echo "${gpu_info}" | grep -qi "Intel"; then
-        yes | yay -S extra/mesa extra/vulkan-intel multilib/lib32-vulkan-intel || true
+        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-intel multilib/lib32-vulkan-intel || true
     else
-        yes | yay -S extra/mesa extra/vulkan-swrast multilib/lib32-vulkan-swrast || true
+        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-swrast multilib/lib32-vulkan-swrast || true
     fi
 }
 
@@ -208,7 +198,7 @@ function _install_packages {
     _log "Installing packages..."
 
     # Utilities & Required by system.
-    yes | yay -S \
+    yes | yay --verbose --noconfirm -S \
     extra/trash-cli \
     extra/gnome-keyring \
     extra/slop extra/qt5ct aur/themix-theme-oomox-git \
@@ -217,11 +207,11 @@ function _install_packages {
     || true
 
     # Shell.
-    yes | yay -S extra/zsh extra/starship || true
+    yes | yay --verbose --noconfirm -S extra/zsh extra/starship || true
     sudo chsh -s "$(command -v zsh)" "$USER"
 
     # Apps.
-    yes | yay -S \
+    yes | yay --verbose --noconfirm -S \
     aur/google-chrome \
     aur/visual-studio-code-bin aur/postman-bin \
     extra/kitty \
@@ -234,14 +224,14 @@ function _install_packages {
     # File manager.
     local size
     size=$((8 * 1024 * 1024 * 1024)) # 8 GiB
-    yes | yay -S extra/nemo
+    yes | yay --verbose --noconfirm -S extra/nemo || true
     gsettings set org.nemo.preferences show-image-thumbnails always
     gsettings set org.nemo.preferences thumbnail-limit "${size}"
     gsettings set org.gnome.desktop.privacy remember-recent-files false
 
     # Github & Git.
     systemctl --user enable ssh-agent.service
-    yes | yay -S extra/github-cli extra/diff-so-fancy || true
+    yes | yay --verbose --noconfirm -S extra/github-cli extra/diff-so-fancy || true
     git config --global init.defaultBranch main
     git config --global pull.rebase false
     git config --global core.excludesfile "${HOME}/.config/git/gitignore"
@@ -250,7 +240,8 @@ function _install_packages {
     git config --bool --global diff-so-fancy.stripLeadingSymbols false
 
     # Docker.
-    yes | yay -S aur/docker-desktop || true
+    yes | yay --verbose --noconfirm -S aur/docker-desktop || true
+    sudo groupadd docker || true
     sudo usermod -aG docker "${USER}"
     sudo rm -f /etc/firewalld/policies/docker*
     sudo rm -f /etc/firewalld/zones/docker*
@@ -266,7 +257,7 @@ function _install_packages {
     deactivate
 
     # JavaScript.
-    yes | yay -S extra/nvm || true
+    yes | yay --verbose --noconfirm -S extra/nvm || true
     source /usr/share/nvm/init-nvm.sh
     nvm install node
 }
@@ -283,7 +274,7 @@ function _configure_dns {
 function _setup_crontab {
     _log "Adding Crontab..."
 
-    yes | yay -S aur/systemd-cron-next-git || true
+    yes | yay --verbose --noconfirm -S extra/cronie || true
 
     local job current
     job="0 */6 * * * ${HOME}/.local/bin/picture-of-the-day"
@@ -313,31 +304,31 @@ function _get_duration {
     start_time="$1"
     end_time="$2"
 
-    local duration_in_seconds hours minutes seconds
-    duration_in_seconds="$(($(date -u -d "${end_time}" +"%s") - $(date -u -d "${start_time}" +"%s")))"
-    hours=$((duration_in_seconds / 3600))
-    minutes=$(((duration_in_seconds % 3600) / 60))
-    seconds=$((duration_in_seconds % 60))
+    local duration hours minutes seconds
+    duration="$((end_time - start_time))"
+    hours=$((duration / 3600))
+    minutes=$(((duration % 3600) / 60))
+    seconds=$((duration % 60))
 
-    local response
-    response=""
+    local parsed_duration
+    parsed_duration=""
     if [[ "${hours}" -gt 0 ]]; then
-        response="${hours}h "
+        parsed_duration="${hours}h "
     fi
     if [[ "${minutes}" -gt 0 ]]; then
-        if [[ -n "${response}" ]]; then
-            response="${response} "
+        if [[ -n "${parsed_duration}" ]]; then
+            parsed_duration="${parsed_duration} "
         fi
-        response="${response}${minutes}m"
+        parsed_duration="${parsed_duration}${minutes}m"
     fi
     if [[ "${seconds}" -gt 0 ]]; then
-        if [[ -n "${response}" ]]; then
-            response="${response} "
+        if [[ -n "${parsed_duration}" ]]; then
+            parsed_duration="${parsed_duration} "
         fi
-        response="${response}${seconds}s"
+        parsed_duration="${parsed_duration}${seconds}s"
     fi
 
-    echo "${response}"
+    echo "${parsed_duration}"
 }
 
 function _log {
@@ -364,7 +355,7 @@ function _log {
     local main_color reset
     main_color="\e[96m"
     reset="\e[0m"
-    if "${top_padding}" | "${x_activated}"; then
+    if "${top_padding}" || "${x_activated}"; then
         echo -e "${main_color}"
     else
         echo -en "${main_color}"
