@@ -2,37 +2,31 @@
 # Install the dotfiles.
 set -euo pipefail
 
+_SUDO_KEEPALIVE_PID=""
+
 function main {
+    _presentation
+    _set_sudo_password
+
     local log_file
     log_file="${HOME}/.cache/dotfiles-$(date +%Y-%m-%d_%H-%M-%S).log"
-    _execute_steps "${log_file}" 2>&1 | tee -a "${log_file}"
-}
-
-function _execute_steps {
-    local log_file
-    log_file="$1"
-
-    _presentation
-
-    local sudo_keepalive_pid
-    sudo -k
-    sudo -v
-    while true; do
-        sudo -v || exit 0
-        sleep 60
-    done &
-    sudo_keepalive_pid=$!
-
     echo
     echo "Saving logs at ${log_file}"
     echo
     sleep 2
 
+    local duration
+    duration=$(_execute_steps 2>&1 | tee -a "${log_file}")
+    _log "Done!\nDuration: ${duration}\nNext step: Check the README.md for post-installation steps!"
+}
+
+function _execute_steps {
     local start_time
     start_time="$(date +"%Y-%m-%d %H:%M:%S")"
     local original_ps4
     original_ps4="$PS4"
     export PS4='[$(basename "$0")] [$(date "+%Y-%m-%d %H:%M:%S")] '
+    yay --save --builddir yay --verbose
     set -x
 
     _setup_configuration_files
@@ -41,18 +35,15 @@ function _execute_steps {
     _install_packages
     _configure_dns
     _setup_crontab
-    _post_installation_cleanup
+    _cleanup_configuration_files
 
     set +x
+    yay --save --nobuilddir
     export PS4="${original_ps4}"
     local end_time duration
     end_time="$(date +"%Y-%m-%d %H:%M:%S")"
     duration="$(_get_duration "${start_time}" "${end_time}")"
-
-    sudo -K || true
-    kill "${sudo_keepalive_pid}" 2>/dev/null || true
-
-    _log "Done!\nDuration: ${duration}\nNext step: Check the README.md for post-installation steps!"
+    echo "${duration}"
 }
 
 function _presentation {
@@ -147,6 +138,25 @@ function _presentation {
     echo -e "${reset}"
 }
 
+function _set_sudo_password {
+    sudo -k
+    sudo -v
+
+    while true; do
+        sudo -v || exit 0
+        sleep 60
+    done &
+    _SUDO_KEEPALIVE_PID=$!
+    trap _cleanup_sudo EXIT INT TERM
+}
+
+function _cleanup_sudo {
+    sudo -K || true
+    if [[ -n "${_SUDO_KEEPALIVE_PID}" ]]; then
+        kill "${_SUDO_KEEPALIVE_PID}" 2>/dev/null || true
+    fi
+}
+
 function _setup_configuration_files {
     _log "Configuring files..." --dont-add-top-padding
 
@@ -208,7 +218,7 @@ function _install_packages {
 
     # Shell.
     yes | yay -S extra/zsh extra/starship || true
-    chsh -s "$(command -v zsh)"
+    sudo chsh -s "$(command -v zsh)" "$USER"
 
     # Apps.
     yes | yay -S \
@@ -283,7 +293,7 @@ function _setup_crontab {
     fi
 }
 
-function _post_installation_cleanup {
+function _cleanup_configuration_files {
     _log "Cleaning files..."
 
     # Merge most of default folders into the Downloads folder.
@@ -343,19 +353,30 @@ function _log {
         top_padding=true
     fi
 
+    local x_activated
+    if set -o | grep xtrace | grep on; then
+        x_activated=true
+        set +x
+    else
+        x_activated=false
+    fi
+
     local main_color reset
     main_color="\e[96m"
     reset="\e[0m"
-
-    if "${top_padding}"; then
+    if "${top_padding}" | "${x_activated}"; then
         echo -e "${main_color}"
     else
-        echo -n "${main_color}"
+        echo -en "${main_color}"
     fi
     echo -e "================================"
     echo -e "${message}"
     echo -e "================================"
     echo -e "${reset}"
+
+    if "${x_activated}"; then
+        set -x
+    fi
 }
 
 main
