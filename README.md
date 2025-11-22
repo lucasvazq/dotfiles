@@ -43,4 +43,5 @@ gh auth login --hostname github.com --git-protocol ssh --web
 git config --global user.name "<YOUR_NAME>"
 git config --global user.email "<YOUR_EMAIL>"
 git remote set-url origin git@github.com:lucasvazq/dotfiles.git
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 ```
