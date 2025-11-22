@@ -2,8 +2,6 @@
 # Install the dotfiles.
 set -euo pipefail
 
-_TEMP_PASSWORD=""
-
 function main {
     local log_file
     log_file="${HOME}/.cache/dotfiles-$(date +%Y-%m-%d_%H-%M-%S).log"
@@ -16,10 +14,13 @@ function _execute_steps {
 
     _presentation
 
-    local password
-    _get_password
-    password="${_TEMP_PASSWORD}"
-    _TEMP_PASSWORD=""
+    local sudo_keepalive_pid
+    sudo -k
+    while true; do
+        sudo -v || exit 0
+        sleep 60
+    done &
+    sudo_keepalive_pid=$!
 
     echo "Saving logs at ${log_file}"
     echo
@@ -33,20 +34,23 @@ function _execute_steps {
     set -x
 
     _setup_configuration_files
-    _configure_yay "${password}"
-    _install_drivers "${password}"
-    _install_packages "${password}"
-    _configure_dns "${password}"
+    _configure_yay
+    _install_drivers
+    _install_packages
+    _configure_dns
     _setup_crontab
-    _post_installation_cleanup "${password}"
+    _post_installation_cleanup
 
-    set -x
+    set +x
     export PS4="${original_ps4}"
     local end_time duration
     end_time="$(date +"%Y-%m-%d %H:%M:%S")"
     duration="$(_get_duration "${start_time}" "${end_time}")"
 
-    _log "Done.\nDuration: ${duration}\nPost installation: Look at the README.md for next steps!"
+    sudo -K || true
+    kill "${sudo_keepalive_pid}" 2>/dev/null || true
+
+    _log "Done!\nDuration: ${duration}\nNext step: Check the README.md for post-installation steps!"
 }
 
 function _presentation {
@@ -141,24 +145,6 @@ function _presentation {
     echo -e "${reset}"
 }
 
-function _get_password {
-    # Ask for password and save it to don't ask for it again while the installation.
-    local correct_password password
-    correct_password=false
-    until [ "${correct_password}" == true ]; do
-        echo -n "Password: "
-        IFS= read -rs password
-        if echo "${password}" | sudo -S -k -v &> /dev/null; then
-            correct_password=true
-            echo -e "\n"
-        else
-            echo -e "\nWrong password"
-        fi
-    done
-
-    _TEMP_PASSWORD="${password}"
-}
-
 function _setup_configuration_files {
     _log "Configuring files..." --dont-add-top-padding
 
@@ -172,21 +158,18 @@ function _setup_configuration_files {
 function _configure_yay {
     _log "Configuring yay..."
 
-    local password
-    password="$1"
-
-    echo "$password" | sudo -S bash -c \
+    sudo bash -c \
     'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
-    echo "$password" | sudo -S chmod 440 /etc/sudoers.d/00-yay-nopasswd
+    sudo chmod 440 /etc/sudoers.d/00-yay-nopasswd
     yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
     yes | yay -S eos-rankmirrors || true
-    echo "${password}" | sudo -S -k eos-rankmirrors
+    sudo eos-rankmirrors
 
     yes | \
-        # Roses are red
-        # violets are blue
-        # I have Endeavour i3
-        yay -Syu \
+		# Roses are red
+		# violets are blue
+		# I have Endeavour i3
+		yay -Syu \
     \
     || true
 }
@@ -194,15 +177,12 @@ function _configure_yay {
 function _install_drivers {
     _log "Installing drivers..."
 
-    local password
-    password="$1"
-
     # GPU Drivers.
     local gpu_info
     gpu_info="$(lspci | grep -E "VGA|3D")"
     if echo "${gpu_info}" | grep -qi "NVIDIA"; then
         yes | yay -S nvidia-inst || true
-        echo "${password}" | sudo -S -k nvidia-inst
+        sudo nvidia-inst
     elif echo "${gpu_info}" | grep -qi "AMD"; then
         yes | yay -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
     elif echo "${gpu_info}" | grep -qi "Intel"; then
@@ -215,9 +195,6 @@ function _install_drivers {
 function _install_packages {
     _log "Installing packages..."
 
-    local password
-    password="$1"
-
     # Utilities & Required by system.
     yes | yay -S \
     extra/trash-cli \
@@ -229,7 +206,7 @@ function _install_packages {
 
     # Shell.
     yes | yay -S extra/zsh extra/starship || true
-    echo "${password}" | chsh -s "$(command -v zsh)"
+    chsh -s "$(command -v zsh)"
 
     # Apps.
     yes | yay -S \
@@ -262,13 +239,13 @@ function _install_packages {
 
     # Docker.
     yes | yay -S aur/docker-desktop || true
-    echo "${password}" | sudo -S -k usermod -aG docker "${USER}"
-    echo "${password}" | sudo -S -k rm -f /etc/firewalld/policies/docker*
-    echo "${password}" | sudo -S -k rm -f /etc/firewalld/zones/docker*
-    echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker || true
-    echo "${password}" | sudo -S -k firewall-cmd --permanent --delete-zone=docker-forwarding || true
-    echo "${password}" | sudo -S -k firewall-cmd --reload
-    echo "${password}" | sudo -S -k systemctl enable docker
+    sudo usermod -aG docker "${USER}"
+    sudo rm -f /etc/firewalld/policies/docker*
+    sudo rm -f /etc/firewalld/zones/docker*
+    sudo firewall-cmd --permanent --delete-zone=docker || true
+    sudo firewall-cmd --permanent --delete-zone=docker-forwarding || true
+    sudo firewall-cmd --reload
+    sudo systemctl enable docker
 
     # Python.
     python -m venv "${HOME}/.config/.venv"
@@ -285,13 +262,10 @@ function _install_packages {
 function _configure_dns {
     _log "Configuring DNS..."
 
-    local password
-    password="$1"
-
-    { printf "%s\n" "${password}"; printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n"; } \
-    | sudo -S -k tee /etc/resolv.conf > /dev/null
-    { printf "%s\n" "${password}"; printf "[main]\ndns=none\n"; } \
-    | sudo -S -k tee /etc/NetworkManager/NetworkManager.conf > /dev/null
+    printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n" \
+    | sudo tee /etc/resolv.conf > /dev/null
+    printf "[main]\ndns=none\n" \
+    | sudo tee /etc/NetworkManager/NetworkManager.conf > /dev/null
 }
 
 function _setup_crontab {
@@ -310,9 +284,6 @@ function _setup_crontab {
 function _post_installation_cleanup {
     _log "Cleaning files..."
 
-    local password
-    password="$1"
-
     # Merge most of default folders into the Downloads folder.
     xdg-user-dirs-update --set XDG_DESKTOP_DIR "${HOME}/Downloads"
     xdg-user-dirs-update --set XDG_MUSIC_DIR "${HOME}/Downloads"
@@ -322,7 +293,7 @@ function _post_installation_cleanup {
 
     trash "${HOME}/dotfiles"
 
-    echo "${password}" | sudo -S -k rm /etc/sudoers.d/00-yay-nopasswd
+    sudo rm /etc/sudoers.d/00-yay-nopasswd
 }
 
 function _get_duration {
