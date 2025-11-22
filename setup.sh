@@ -25,7 +25,7 @@ function main {
 }
 
 function _execute_steps {
-    export PS4='[$(basename "$0")] [$(date "+%Y-%m-%d %H:%M:%S")] '
+    export PS4='$(date "+%Y-%m-%d %H:%M:%S") '
     set -x
     _setup_configuration_files
     _configure_yay
@@ -266,9 +266,9 @@ function _configure_dns {
     _log "Configuring DNS..."
 
     printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n" \
-    | sudo tee /etc/resolv.conf > /dev/null
+    | sudo tee /etc/resolv.conf
     printf "[main]\ndns=none\n" \
-    | sudo tee /etc/NetworkManager/NetworkManager.conf > /dev/null
+    | sudo tee /etc/NetworkManager/NetworkManager.conf
 }
 
 function _setup_crontab {
