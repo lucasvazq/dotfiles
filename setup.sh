@@ -16,12 +16,14 @@ function _execute_steps {
 
     local sudo_keepalive_pid
     sudo -k
+    sudo -v
     while true; do
         sudo -v || exit 0
         sleep 60
     done &
     sudo_keepalive_pid=$!
 
+    echo
     echo "Saving logs at ${log_file}"
     echo
     sleep 2
