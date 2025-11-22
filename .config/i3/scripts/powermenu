@@ -18,7 +18,7 @@ declare -A _OPTIONS=(
 
 function main {
     local option
-    option="$1"
+    option="${1:-}"
 
     local selected_option
     if [[ -n "${option}" ]]; then

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Check if there is any WiFi connection alive.
-set -xeo pipefail
+set -xeuo pipefail
 
 function main {
     _handle_click
@@ -11,7 +11,7 @@ function main {
 }
 
 function _handle_click {
-    if [[ "${BLOCK_BUTTON}" == "1" ]]; then
+    if [[ "${BLOCK_BUTTON:-}" == "1" ]]; then
         nm-connection-editor &
     fi
 }
