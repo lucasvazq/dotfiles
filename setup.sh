@@ -29,16 +29,18 @@ function main {
         --post-install)
             _execute_post_installation_steps 2>&1 | tee -a "${log_file}"
         ;;
-        *)
-            echo -e "\nUnknown action: ${action}.\nSupported actions: install, post-install."
-            exit 1
-        ;;
     esac
 
     end_time="$(date +%s)"
     duration="$(_get_duration "${start_time}" "${end_time}")"
-
-    _log "Done!\nDuration: ${duration}\nNext step: Check the README.md for post-installation steps!"
+    case "${action}" in
+        --install)
+            _log "Installation Done!\nDuration: ${duration}\nNext step: Check the README.md for post-installation steps!"
+        ;;
+        --post-install)
+            _log "Post-installation Done!\nDuration: ${duration}\nEnjoy! (no additional steps or restart are required)"
+        ;;
+    esac
 }
 
 function _presentation {
@@ -213,9 +215,10 @@ function _log {
     else
         echo -en "${main_color}"
     fi
-    echo -e "================================"
+    separator_length=64
+    printf '%s\n' "$(printf '=%.0s' $(seq 1 "${separator_length}"))"
     echo -e "${message}"
-    echo -e "================================"
+    printf '%s\n' "$(printf '=%.0s' $(seq 1 "${separator_length}"))"
     echo -e "${reset}"
 
     if "${x_activated}"; then
@@ -420,7 +423,7 @@ function _configure_github_account {
 
     local github_username
     github_username="$(gh auth status | grep account | head -1 | awk '{print $7}')"
-    ssh-add ~/.ssh/* 2>/dev/null
+    ssh-add ~/.ssh/* || true
     ssh-keyscan github.com >> ~/.ssh/known_hosts
     git config --global user.name "${github_username}"
     git config --global user.email "${github_email}"
