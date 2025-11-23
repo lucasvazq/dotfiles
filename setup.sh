@@ -22,7 +22,6 @@ function main {
     start_time="$(date +%s)"
 
     export PS4='$(date "+%Y-%m-%d %H:%M:%S") '
-    set -x
     case "${action}" in
         --install)
             _execute_installation_steps 2>&1 | tee -a "${log_file}"
@@ -35,7 +34,6 @@ function main {
             exit 1
         ;;
     esac
-    set +x
 
     end_time="$(date +%s)"
     duration="$(_get_duration "${start_time}" "${end_time}")"
@@ -230,12 +228,14 @@ function _log {
 ################################################################################
 
 function _execute_installation_steps {
+    set -x
     _setup_configuration_files
     _configure_yay
     _install_drivers
     _install_packages
     _setup_crontab
     _cleanup_configuration_files
+    set +x
 }
 
 function _setup_configuration_files {
@@ -386,12 +386,14 @@ function _cleanup_configuration_files {
 
 function _execute_post_installation_steps {
     local github_email
-    echo "Enter your GitHub email:"
+    echo -n "Enter your GitHub email: "
     IFS= read -r github_email
 
+    set -x
     _configure_dns
-    _load_kvm_modules
     _configure_github_account "${github_email}"
+    _load_kvm_modules
+    set +x
 }
 
 function _configure_dns {
@@ -403,26 +405,18 @@ function _configure_dns {
     | sudo tee /etc/NetworkManager/NetworkManager.conf
 }
 
-function _load_kvm_modules {
-    _log "Loading KVM modules..."
-
-    yes | yay --verbose --noconfirm -S qemu libvirt || true
-    sudo systemctl enable --now libvirtd
-    sudo usermod -aG libvirt "${USER}"
-}
-
 function _configure_github_account {
     _log "Configuring GitHub account..."
 
     local github_email
     github_email="$1"
 
-    set +x
     if ! gh auth status; then
+        set +x
         echo
         printf "y\n\n\n\n" | gh auth login --hostname github.com --git-protocol ssh --web
+        set -x
     fi
-    set -x
 
     local github_username
     github_username="$(gh auth status | grep account | head -1 | awk '{print $7}')"
@@ -431,6 +425,14 @@ function _configure_github_account {
     git config --global user.name "${github_username}"
     git config --global user.email "${github_email}"
     git remote set-url origin git@github.com:lucasvazq/dotfiles.git
+}
+
+function _load_kvm_modules {
+    _log "Loading KVM modules..."
+
+    yes | yay --verbose --noconfirm -S qemu libvirt || true
+    sudo systemctl enable --now libvirtd
+    sudo usermod -aG libvirt "${USER}"
 }
 
 ################################################################################
