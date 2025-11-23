@@ -5,6 +5,9 @@ set -euo pipefail
 _SUDO_KEEPALIVE_PID=""
 
 function main {
+    local action
+    action="${1:---install}"
+
     _presentation
     _set_sudo_password
 
@@ -17,23 +20,27 @@ function main {
 
     local start_time end_time duration
     start_time="$(date +%s)"
-    _execute_steps 2>&1 | tee -a "${log_file}"
+
+    export PS4='$(date "+%Y-%m-%d %H:%M:%S") '
+    set -x
+    case "${action}" in
+        --install)
+            _execute_installation_steps 2>&1 | tee -a "${log_file}"
+        ;;
+        --post-install)
+            _execute_post_installation_steps 2>&1 | tee -a "${log_file}"
+        ;;
+        *)
+            echo -e "\nUnknown action: ${action}.\nSupported actions: install, post-install."
+            exit 1
+        ;;
+    esac
+    set +x
+
     end_time="$(date +%s)"
     duration="$(_get_duration "${start_time}" "${end_time}")"
 
     _log "Done!\nDuration: ${duration}\nNext step: Check the README.md for post-installation steps!"
-}
-
-function _execute_steps {
-    export PS4='$(date "+%Y-%m-%d %H:%M:%S") '
-    set -x
-    _setup_configuration_files
-    _configure_yay
-    _install_drivers
-    _install_packages
-    _configure_dns
-    _setup_crontab
-    _cleanup_configuration_files
 }
 
 function _presentation {
@@ -147,158 +154,6 @@ function _cleanup_sudo {
     fi
 }
 
-function _setup_configuration_files {
-    _log "Configuring files..." --dont-add-top-padding
-
-    git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles"
-    rsync -a "${HOME}/dotfiles/" "${HOME}/"
-
-    mkdir -p "${HOME}/Pictures/Screenshots"
-    mkdir -p "${HOME}/Workspaces"
-}
-
-function _configure_yay {
-    _log "Configuring yay..."
-
-    sudo bash -c \
-    'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
-    sudo chmod 440 /etc/sudoers.d/00-yay-nopasswd
-    yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
-    yes | yay --verbose --noconfirm -S eos-rankmirrors || true
-    sudo eos-rankmirrors
-
-    yes | \
-		# Roses are red
-		# violets are blue
-		# I have Endeavour i3
-		yay -Syu \
-    --verbose --noconfirm \
-    || true
-}
-
-function _install_drivers {
-    _log "Installing drivers..."
-
-    # GPU Drivers.
-    local gpu_info
-    gpu_info="$(lspci | grep -E "VGA|3D")"
-    if echo "${gpu_info}" | grep -qi "NVIDIA"; then
-        yes | yay --verbose --noconfirm -S nvidia-inst || true
-        sudo nvidia-inst
-    elif echo "${gpu_info}" | grep -qi "AMD"; then
-        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
-    elif echo "${gpu_info}" | grep -qi "Intel"; then
-        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-intel multilib/lib32-vulkan-intel || true
-    else
-        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-swrast multilib/lib32-vulkan-swrast || true
-    fi
-}
-
-function _install_packages {
-    _log "Installing packages..."
-
-    # Utilities & Required by system.
-    yes | yay --verbose --noconfirm -S \
-    extra/trash-cli \
-    extra/gnome-keyring \
-    extra/slop extra/qt5ct aur/themix-theme-oomox-git \
-    aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
-    extra/qt6-multimedia-ffmpeg \
-    || true
-
-    # Shell.
-    yes | yay --verbose --noconfirm -S extra/zsh extra/starship || true
-    sudo chsh -s "$(command -v zsh)" "$USER"
-
-    # Apps.
-    yes | yay --verbose --noconfirm -S \
-    aur/google-chrome \
-    aur/visual-studio-code-bin aur/postman-bin \
-    extra/kitty \
-    extra/libreoffice-fresh \
-    extra/gimp extra/kdenlive extra/obs-studio \
-    aur/neohtop \
-    multilib/steam \
-    || true
-
-    # File manager.
-    local size
-    size=$((8 * 1024 * 1024 * 1024)) # 8 GiB
-    yes | yay --verbose --noconfirm -S extra/nemo || true
-    gsettings set org.nemo.preferences show-image-thumbnails always
-    gsettings set org.nemo.preferences thumbnail-limit "${size}"
-    gsettings set org.gnome.desktop.privacy remember-recent-files false
-
-    # Github & Git.
-    systemctl --user enable ssh-agent.service
-    yes | yay --verbose --noconfirm -S extra/github-cli extra/diff-so-fancy || true
-    git config --global init.defaultBranch main
-    git config --global pull.rebase false
-    git config --global core.excludesfile "${HOME}/.config/git/gitignore"
-    git config --global core.pager "diff-so-fancy | less --tabs=4 -RF"
-    git config --global interactive.diffFilter "diff-so-fancy --patch"
-    git config --bool --global diff-so-fancy.stripLeadingSymbols false
-
-    # Docker.
-    yes | yay --verbose --noconfirm -S aur/docker-desktop || true
-    sudo groupadd docker || true
-    sudo usermod -aG docker "${USER}"
-    sudo rm -f /etc/firewalld/policies/docker*
-    sudo rm -f /etc/firewalld/zones/docker*
-    sudo firewall-cmd --permanent --delete-zone=docker || true
-    sudo firewall-cmd --permanent --delete-zone=docker-forwarding || true
-    sudo firewall-cmd --reload
-    sudo systemctl enable docker
-
-    # Python.
-    python -m venv "${HOME}/.config/.venv"
-    source "${HOME}/.config/.venv/bin/activate"
-    pip install pywal colorthief ipython ipdb requests
-    deactivate
-
-    # JavaScript.
-    yes | yay --verbose --noconfirm -S extra/nvm || true
-    source /usr/share/nvm/init-nvm.sh
-    nvm install node
-}
-
-function _configure_dns {
-    _log "Configuring DNS..."
-
-    printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n" \
-    | sudo tee /etc/resolv.conf
-    printf "[main]\ndns=none\n" \
-    | sudo tee /etc/NetworkManager/NetworkManager.conf
-}
-
-function _setup_crontab {
-    _log "Adding Crontab..."
-
-    yes | yay --verbose --noconfirm -S extra/cronie || true
-
-    local job current
-    job="0 */6 * * * ${HOME}/.local/bin/picture-of-the-day"
-    current="$(crontab -l 2>/dev/null || true)"
-    if ! echo "${current}" | grep -Fq -- "${job}"; then
-        ( printf "%s\n" "${current}"; printf "%s\n" "${job}" ) | crontab -
-    fi
-}
-
-function _cleanup_configuration_files {
-    _log "Cleaning files..."
-
-    # Merge most of default folders into the Downloads folder.
-    xdg-user-dirs-update --set XDG_DESKTOP_DIR "${HOME}/Downloads"
-    xdg-user-dirs-update --set XDG_MUSIC_DIR "${HOME}/Downloads"
-    xdg-user-dirs-update --set XDG_TEMPLATES_DIR "${HOME}/Downloads"
-    xdg-user-dirs-update --set XDG_PUBLICSHARE_DIR "${HOME}/Downloads"
-    trash "${HOME}/Desktop" "${HOME}/Music" "${HOME}/Public" "${HOME}/Templates" || true
-
-    trash "${HOME}/dotfiles"
-
-    sudo rm /etc/sudoers.d/00-yay-nopasswd
-}
-
 function _get_duration {
     local start_time end_time
     start_time="$1"
@@ -370,4 +225,216 @@ function _log {
     fi
 }
 
-main
+################################################################################
+# Installation steps.
+################################################################################
+
+function _execute_installation_steps {
+    _setup_configuration_files
+    _configure_yay
+    _install_drivers
+    _install_packages
+    _setup_crontab
+    _cleanup_configuration_files
+}
+
+function _setup_configuration_files {
+    _log "Configuring files..." --dont-add-top-padding
+
+    git clone https://github.com/lucasvazq/dotfiles.git "${HOME}/dotfiles"
+    rsync -a "${HOME}/dotfiles/" "${HOME}/"
+
+    mkdir -p "${HOME}/Pictures/Screenshots"
+    mkdir -p "${HOME}/Workspaces"
+}
+
+function _configure_yay {
+    _log "Configuring yay..."
+
+    sudo bash -c \
+    'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
+    sudo chmod 440 /etc/sudoers.d/00-yay-nopasswd
+    yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
+    yes | yay --verbose --noconfirm -S eos-rankmirrors || true
+    sudo eos-rankmirrors
+
+    yes | \
+        # Roses are red
+        # violets are blue
+        # I have Endeavour i3
+        yay -Syu \
+    --verbose --noconfirm \
+    || true
+}
+
+function _install_drivers {
+    _log "Installing drivers..."
+
+    # GPU Drivers.
+    local gpu_info
+    gpu_info="$(lspci | grep -E "VGA|3D")"
+    if echo "${gpu_info}" | grep -qi "NVIDIA"; then
+        yes | yay --verbose --noconfirm -S nvidia-inst || true
+        sudo nvidia-inst
+    elif echo "${gpu_info}" | grep -qi "AMD"; then
+        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
+    elif echo "${gpu_info}" | grep -qi "Intel"; then
+        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-intel multilib/lib32-vulkan-intel || true
+    else
+        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-swrast multilib/lib32-vulkan-swrast || true
+    fi
+}
+
+function _install_packages {
+    _log "Installing packages..."
+
+    # Utilities & Required by system.
+    yes | yay --verbose --noconfirm -S \
+    extra/trash-cli \
+    extra/gnome-keyring \
+    extra/slop extra/qt5ct aur/themix-theme-oomox-git \
+    aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
+    extra/qt6-multimedia-ffmpeg \
+    || true
+
+    # Terminal & Shell.
+    yes | yay --verbose --noconfirm -S extra/kitty extra/zsh extra/starship || true
+    sudo chsh -s "$(command -v zsh)" "${USER}"
+
+    # Apps.
+    yes | yay --verbose --noconfirm -S \
+    aur/google-chrome \
+    aur/visual-studio-code-bin aur/postman-bin \
+    extra/libreoffice-fresh \
+    extra/gimp extra/kdenlive extra/obs-studio \
+    aur/neohtop \
+    multilib/steam \
+    || true
+
+    # File manager.
+    local size
+    size=$((8 * 1024 * 1024 * 1024)) # 8 GiB
+    yes | yay --verbose --noconfirm -S extra/nemo || true
+    gsettings set org.nemo.preferences show-image-thumbnails always
+    gsettings set org.nemo.preferences thumbnail-limit "${size}"
+    gsettings set org.gnome.desktop.privacy remember-recent-files false
+
+    # Git & Github.
+    systemctl --user enable ssh-agent.service
+    yes | yay --verbose --noconfirm -S extra/github-cli extra/diff-so-fancy || true
+    git config --global init.defaultBranch main
+    git config --global pull.rebase false
+    git config --global core.excludesfile "${HOME}/.config/git/gitignore"
+    git config --global core.pager "diff-so-fancy | less --tabs=4 -RF"
+    git config --global interactive.diffFilter "diff-so-fancy --patch"
+    git config --bool --global diff-so-fancy.stripLeadingSymbols false
+
+    # Docker.
+    yes | yay --verbose --noconfirm -S aur/docker-desktop || true
+    sudo groupadd docker || true
+    sudo usermod -aG docker "${USER}"
+    sudo rm -f /etc/firewalld/policies/docker*
+    sudo rm -f /etc/firewalld/zones/docker*
+    sudo firewall-cmd --permanent --delete-zone=docker || true
+    sudo firewall-cmd --permanent --delete-zone=docker-forwarding || true
+    sudo firewall-cmd --reload
+    sudo systemctl enable docker
+
+    # Python.
+    python -m venv "${HOME}/.config/.venv"
+    source "${HOME}/.config/.venv/bin/activate"
+    pip install pywal colorthief ipython ipdb requests
+    deactivate
+
+    # JavaScript.
+    yes | yay --verbose --noconfirm -S extra/nvm || true
+    source /usr/share/nvm/init-nvm.sh
+    nvm install node
+}
+
+function _setup_crontab {
+    _log "Adding Crontab..."
+
+    yes | yay --verbose --noconfirm -S extra/cronie || true
+
+    local job current
+    job="0 */6 * * * ${HOME}/.local/bin/picture-of-the-day"
+    current="$(crontab -l 2>/dev/null || true)"
+    if ! echo "${current}" | grep -Fq -- "${job}"; then
+        ( printf "%s\n" "${current}"; printf "%s\n" "${job}" ) | crontab -
+    fi
+}
+
+function _cleanup_configuration_files {
+    _log "Cleaning files..."
+
+    # Merge most of default folders into the Downloads folder.
+    xdg-user-dirs-update --set XDG_DESKTOP_DIR "${HOME}/Downloads"
+    xdg-user-dirs-update --set XDG_MUSIC_DIR "${HOME}/Downloads"
+    xdg-user-dirs-update --set XDG_TEMPLATES_DIR "${HOME}/Downloads"
+    xdg-user-dirs-update --set XDG_PUBLICSHARE_DIR "${HOME}/Downloads"
+    trash -rf "${HOME}/Desktop" "${HOME}/Music" "${HOME}/Public" "${HOME}/Templates"
+
+    trash "${HOME}/dotfiles"
+
+    sudo rm /etc/sudoers.d/00-yay-nopasswd
+}
+
+################################################################################
+# Post-installation steps.
+################################################################################
+
+function _execute_post_installation_steps {
+    local github_email
+    echo "Enter your GitHub email:"
+    IFS= read -r github_email
+
+    _configure_dns
+    _load_kvm_modules
+    _configure_github_account "${github_email}"
+}
+
+function _configure_dns {
+    _log "Configuring DNS..."
+
+    printf "nameserver 8.8.8.8\nnameserver 8.8.4.4\n" \
+    | sudo tee /etc/resolv.conf
+    printf "[main]\ndns=none\n" \
+    | sudo tee /etc/NetworkManager/NetworkManager.conf
+}
+
+function _load_kvm_modules {
+    _log "Loading KVM modules..."
+
+    yes | yay --verbose --noconfirm -S qemu libvirt || true
+    sudo systemctl enable --now libvirtd
+    sudo usermod -aG libvirt "${USER}"
+}
+
+function _configure_github_account {
+    _log "Configuring GitHub account..."
+
+    local github_email
+    github_email="$1"
+
+    set +x
+    if ! gh auth status; then
+        echo
+        printf "y\n\n\n\n" | gh auth login --hostname github.com --git-protocol ssh --web
+    fi
+    set -x
+
+    local github_username
+    github_username="$(gh auth status | grep account | head -1 | awk '{print $7}')"
+    ssh-add ~/.ssh/* 2>/dev/null
+    ssh-keyscan github.com >> ~/.ssh/known_hosts
+    git config --global user.name "${github_username}"
+    git config --global user.email "${github_email}"
+    git remote set-url origin git@github.com:lucasvazq/dotfiles.git
+}
+
+################################################################################
+# Execute main function.
+################################################################################
+
+main "$@"

@@ -34,14 +34,9 @@ bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.s
 
 ## Post-Installation Steps 🛰️
 
-1. Reboot your system.
+1. Reboot into BIOS/UEFI and enable **KVM** (Kernel-based Virtual Machine).
 
-2. Configure Git & GitHub:
-
-```sh
-gh auth login --hostname github.com --git-protocol ssh --web
-git config --global user.name "<YOUR_NAME>"
-git config --global user.email "<YOUR_EMAIL>"
-git remote set-url origin git@github.com:lucasvazq/dotfiles.git
-ssh-keyscan github.com >> ~/.ssh/known_hosts
-```
+2. Boot to desktop and run the following command:
+   ```sh
+   ~/setup.sh --post-install
+   ```
