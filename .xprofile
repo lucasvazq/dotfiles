@@ -1,3 +1,6 @@
+# Themes.
+export QT_QPA_PLATFORMTHEME=qt5ct
+
 # Executables.
 export PATH="${PATH}:${HOME}/.local/bin"
 
@@ -5,13 +8,9 @@ export PATH="${PATH}:${HOME}/.local/bin"
 export TERMINAL=kitty
 export BROWSER=google-chrome-stable
 
-# Themes.
-export QT_QPA_PLATFORMTHEME=qt5ct
+# SSH.
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
 # Python.
 export PYTHONUNBUFFERED=1
 export PYTHONDONTWRITEBYTECODE=1
-
-# SSH.
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-ssh-add ~/.ssh/* 2>/dev/null

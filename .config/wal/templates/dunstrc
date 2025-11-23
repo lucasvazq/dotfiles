@@ -1,20 +1,20 @@
 [global]
-    markup = full
-    format = "<b>%a</b> %s\n%b"
-    font = "JetBrainsMonoNL Nerd Font Mono 10, Noto Color Emoji 10, monospace 10"
-    frame_color = "{foreground}"
-    separator_color = "{background}"
-    idle_threshold = 0
-    icon_position = off
+    markup=full
+    format="<b>%a</b> %s\n%b"
+    font="JetBrainsMonoNL Nerd Font Mono 10, Noto Color Emoji 10, monospace 10"
+    frame_color="{foreground}"
+    separator_color="{background}"
+    idle_threshold=0
+    icon_position=off
 
 [urgency_low]
-    background = "{foreground}"
-    foreground = "{background}"
+    background="{foreground}"
+    foreground="{background}"
 
 [urgency_normal]
-    background = "{foreground}"
-    foreground = "{background}"
+    background="{foreground}"
+    foreground="{background}"
 
 [urgency_critical]
-    background = "{color1}"
-    foreground = "{foreground}"
+    background="{color1}"
+    foreground="{foreground}"

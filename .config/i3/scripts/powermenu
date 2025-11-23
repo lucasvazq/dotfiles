@@ -3,11 +3,11 @@
 #
 # Args:
 #   $1 (optional): Action to perform.
-#		If no argument is given, a menu will be shown to select an option.
-#		Choices:
-#			--lock: Lock the screen.
-#	   		--reboot: Reboot the system.
-#	   		--shutdown: Shutdown the system.
+#       If no argument is given, a menu will be shown to select an option.
+#       Choices:
+#           --lock: Lock the screen.
+#           --reboot: Reboot the system.
+#           --shutdown: Shutdown the system.
 set -xeuo pipefail
 
 declare -A _OPTIONS=(

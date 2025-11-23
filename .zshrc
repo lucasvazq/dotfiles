@@ -1,6 +1,6 @@
-###############################################################################
+################################################################################
 # Shell.
-###############################################################################
+################################################################################
 
 # Zsh.
 # - General.
@@ -17,8 +17,8 @@ SAVEHIST=1000
 # Starship.
 function _set_starship_config {
     local git_root
-    git_root=$(command git -C "$PWD" rev-parse --show-toplevel 2>/dev/null || echo)
-    if [[ -n "$git_root" && "$git_root" == "${HOME}" ]]; then
+    git_root=$(command git -C "${PWD}" rev-parse --show-toplevel 2>/dev/null || echo)
+    if [[ -n "${git_root}" && "${git_root}" == "${HOME}" ]]; then
         export STARSHIP_CONFIG="${HOME}/.config/starship-ignore-git.toml"
     else
         export STARSHIP_CONFIG="${HOME}/.config/starship.toml"
@@ -53,7 +53,7 @@ function _separator {
         text="${_COLOR_BLACK}"
     fi
     width=$(($(tput cols)-${#string}))
-    echo -e "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 $width))${_RESET}"
+    echo -e "${_BOLD}${background}${text}${string}$(printf '%.0s-' $(seq 1 ${width}))${_RESET}"
 
     if [[ "${newline}" == "true" ]]; then
         echo
@@ -72,9 +72,9 @@ function preexec {
     _separator "> Output" "${_COLOR_SEPARATOR}" true
 }
 
-###############################################################################
+################################################################################
 # Bindings.
-###############################################################################
+################################################################################
 
 WORDCHARS=""
 
@@ -91,9 +91,9 @@ bindkey "^[[3~" delete-char         # Supr
 bindkey "^[[3;5~" kill-word         # Ctrl + Delete
 bindkey "^W" backward-kill-word     # Ctrl + Backspace
 
-###############################################################################
+################################################################################
 # Alias.
-###############################################################################
+################################################################################
 
 alias code="code --password-store=gnome-libsecret"
 alias grep="grep --color=auto"

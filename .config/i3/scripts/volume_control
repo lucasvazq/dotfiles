@@ -3,11 +3,11 @@
 #
 # Args:
 #   $1 (optional): Action to perform.
-#		Choices:
-#			--show (default): Show current volume.
-#	   		--up: Increase volume.
-#	   		--down: Decrease volume.
-#	   		--mute: Mute/Unmute the volume.
+#       Choices:
+#           --show (default): Show current volume.
+#           --up: Increase volume.
+#           --down: Decrease volume.
+#           --mute: Mute/Unmute the volume.
 set -xeuo pipefail
 
 function main {
