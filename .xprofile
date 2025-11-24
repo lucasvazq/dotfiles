@@ -1,5 +1,4 @@
 # Themes.
-export XCURSOR_THEME=Adwaita
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 # Executables.

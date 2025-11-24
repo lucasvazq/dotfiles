@@ -313,8 +313,11 @@ function _install_packages {
     aur/neohtop \
     multilib/steam \
     || true
+    xdg-settings set default-web-browser google-chrome-stable.desktop || true
+    xdg-settings set default-url-scheme-handler http google-chrome-stable.desktop || true
+    xdg-settings set default-url-scheme-handler https google-chrome-stable.desktop || true
 
-    # File manager.
+    # Files manager.
     local size
     size=$((8 * 1024 * 1024 * 1024)) # 8 GiB
     yes | yay --verbose --noconfirm -S extra/nemo || true

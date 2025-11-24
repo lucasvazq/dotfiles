@@ -57,12 +57,14 @@ function _change_theme {
 
     # Change QT5 colors.
     mkdir -p "${HOME}/.config/qt5ct/colors"
-    cp "${HOME}/.cache/wal/qt5ct.conf" "${HOME}/.config/qt5ct/qt5ct.conf"
+    sed "s|<HOME>|${HOME}|g" "${HOME}/.cache/wal/qt5ct.conf" > "${HOME}/.config/qt5ct/qt5ct.conf"
     cp "${HOME}/.cache/wal/colors-qt5ct.conf" "${HOME}/.config/qt5ct/colors/colors.conf"
 
     # Change GTK colors.
     /opt/oomox/plugins/theme_oomox/change_color.sh -o colors "${HOME}/.cache/wal/colors-oomox"
     cp "${HOME}/.cache/wal/gtk-3.0-settings.ini" "${HOME}/.config/gtk-3.0/settings.ini"
+    gsettings set org.gnome.desktop.interface gtk-theme colors
+    gsettings set org.gnome.desktop.interface cursor-theme 'Qogir-Dark'
 
     # Change Xresources colors.
     cp "${HOME}/.cache/wal/colors.Xresources" "${HOME}/.Xresources"
