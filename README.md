@@ -34,7 +34,7 @@ bash <(curl -s https://raw.githubusercontent.com/lucasvazq/dotfiles/main/setup.s
 
 ## Post-Installation Steps 🛰️
 
-1. Reboot into BIOS/UEFI and enable **KVM** (Kernel-based Virtual Machine).
+1. Reboot into BIOS/UEFI and enable the Virtualization.
 
 2. Boot to desktop and run the following command:
    ```sh
