@@ -52,10 +52,3 @@
 !.local/bin/change-background
 !.local/bin/custom-scrot
 !.local/bin/picture-of-the-day
-
-# ./Pictures
-!Pictures/
-
-# ./Wallpapers
-!Pictures/Wallpapers/
-!Pictures/Wallpapers/*
