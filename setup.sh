@@ -345,6 +345,7 @@ function _install_packages {
     sudo firewall-cmd --permanent --delete-zone=docker-forwarding || true
     sudo firewall-cmd --reload
     sudo systemctl enable docker
+    docker context use default
 
     # Python.
     python -m venv "${HOME}/.config/.venv"
@@ -362,6 +363,7 @@ function _setup_crontab {
     _log "Adding Crontab..."
 
     yes | yay --verbose --noconfirm -S extra/cronie || true
+    sudo systemctl enable cronie
 
     local job current
     job="0 */6 * * * ${HOME}/.local/bin/picture-of-the-day"
