@@ -1,3 +1,6 @@
+# GNOME Keyring.
+eval "$(gnome-keyring-daemon --start)"
+
 # Themes.
 export QT_QPA_PLATFORMTHEME=qt5ct
 

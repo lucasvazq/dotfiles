@@ -8,12 +8,19 @@ Executable functions:
 
 import re
 import subprocess
+import sys
+import time
 from pathlib import Path
 from urllib import request, error
 
 
-def main():
-    Main()()
+def main(args: list[str]):
+    if "--system-start" in args:
+        max_attempts = 10
+    else:
+        max_attempts = 1
+
+    Main()(max_attempts)
 
 
 class Main:
@@ -27,16 +34,30 @@ class Main:
     this occurs, we set a random background and scheme colors. Otherwise the
     image is saved in ~/Pictures/Wallpapers and the background and color scheme
     are set using that picture.
-
-    Methods:
-        __call__: Executes the class logic.
     """
 
     _base_url = "https://apod.nasa.gov"
     _default_timeout = 10
 
-    def __call__(self):
-        if (image_url := self._get_image_url()) and (
+    def __call__(self, max_attempts: int):
+        """
+        Executes the class main logic.
+
+        Args:
+            max_attempts: Maximum number of attempts to fetch the image URL.
+        """
+        image_url = None
+        attempt = 1
+        while attempt <= max_attempts:
+            print(f"Attempt #{attempt}.")
+            image_url = self._get_image_url()
+            if image_url:
+                print("Found image.")
+                break
+            time.sleep(5)
+            attempt += 1
+
+        if image_url and (
             image := self._download_image(image_url)
         ):
             destination_path = self._get_destination_path(image_url)
@@ -100,4 +121,4 @@ class Main:
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

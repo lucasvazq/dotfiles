@@ -21,9 +21,8 @@ title_align center
 # Autostart.
 exec --no-startup-id numlockx
 exec --no-startup-id dunst
-exec --no-startup-id "${HOME}/.local/bin/picture-of-the-day"
+exec --no-startup-id "${HOME}/.local/bin/picture-of-the-day" --system-start
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id eval $(gnome-keyring-daemon --start)
 exec --no-startup-id xidlehook --not-when-fullscreen --timer 600 "${HOME}/.config/i3/scripts/powermenu --lock" ""
 
 # Bindings.

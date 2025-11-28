@@ -106,6 +106,7 @@ function curl {
     json=$(echo "${output}" | sed '$d')
     if echo "${json}" | jq empty 2>/dev/null; then
         echo "${json}" | jq .
+        echo
         echo "${status_code}"
     else
         echo "${output}"
