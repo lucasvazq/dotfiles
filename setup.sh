@@ -254,8 +254,7 @@ function _setup_configuration_files {
 function _configure_yay {
     _log "Configuring yay..."
 
-    sudo bash -c \
-    'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
+    sudo bash -c 'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
     sudo chmod 440 /etc/sudoers.d/00-yay-nopasswd
     yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
     yes | yay --verbose --noconfirm -S eos-rankmirrors || true
@@ -316,6 +315,7 @@ function _install_packages {
     xdg-settings set default-web-browser google-chrome-stable.desktop || true
     xdg-settings set default-url-scheme-handler http google-chrome-stable.desktop || true
     xdg-settings set default-url-scheme-handler https google-chrome-stable.desktop || true
+    sudo sed -i 's|^Exec=.*|Exec=env WEBKIT_DISABLE_DMABUF_RENDERER=1 /usr/bin/neohtop|' /usr/share/applications/neohtop.desktop
 
     # Files manager.
     local size
@@ -384,8 +384,6 @@ function _cleanup_configuration_files {
     trash -rf "${HOME}/Desktop" "${HOME}/Music" "${HOME}/Public" "${HOME}/Templates"
 
     trash "${HOME}/dotfiles"
-
-    sudo rm /etc/sudoers.d/00-yay-nopasswd
 }
 
 ################################################################################
