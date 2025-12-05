@@ -4,8 +4,7 @@
 
 <div align="center">
   <picture>
-    <source srcset="https://i.postimg.cc/bNdvdsWT/presentation.png" type="image/gif">
-    <img src="./presentation.png" alt="presentation image">
+    <img src="./presentation.gif" alt="presentation image">
   </picture>
 </div>
 
