@@ -102,6 +102,15 @@ alias rm="trash"
 function curl {
     # Enhanced `curl` command that pretty-prints JSON responses and status code.
 
+    # Check if -s flag is present in any argument.
+    # If so, execute directly without enhancements.
+    for arg in "$@"; do
+        if [[ "${arg}" == -* && "${arg}" == *s* ]]; then
+            command /usr/bin/curl "$@"
+            return
+        fi
+    done
+
     # Check if Content-Type header is already provided.
     # Otherwise, add "Content-Type: application/json" by default.
     local content_type_header
