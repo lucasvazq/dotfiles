@@ -107,7 +107,7 @@ function curl {
     local content_type_header
     content_type_header=(-H "Content-Type: application/json")
     for arg in "$@"; do
-        if [[ "${arg,,}" == *"content-type:"* ]]; then
+        if [[ "${arg:l}" == *"content-type:"* ]]; then
             content_type_header=()
             break
         fi
