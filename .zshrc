@@ -138,7 +138,7 @@ function ls {
     #
     # Format:
     #     USER    GROUP    OTHER    NAME    SIZE    MODIFIED
-    #   X rwx   X rwx    X rwx    X       X       YYYY-MM-DD HH:MM:SS
+    #     X rwx   X rwx    X rwx    X       X       YYYY-MM-DD HH:MM:SS
     (
         echo -e "USER\tGROUP\tOTHER\tNAME\tSIZE\tMODIFIED"
         LC_COLLATE=C /usr/bin/ls -lh --almost-all --full-time "$@" | awk '
