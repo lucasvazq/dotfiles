@@ -256,8 +256,8 @@ function _configure_yay {
 
     sudo bash -c 'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
     sudo chmod 440 /etc/sudoers.d/00-yay-nopasswd
-    yes | yay --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
-    yes | yay --verbose --noconfirm -S eos-rankmirrors || true
+    yay --noconfirm --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
+    yay --verbose --noconfirm -S eos-rankmirrors || true
     sudo eos-rankmirrors
 
     yes | \
@@ -276,14 +276,14 @@ function _install_drivers {
     local gpu_info
     gpu_info="$(lspci | grep -E "VGA|3D")"
     if echo "${gpu_info}" | grep -qi "NVIDIA"; then
-        yes | yay --verbose --noconfirm -S nvidia-inst || true
+        yay --verbose --noconfirm -S nvidia-inst || true
         sudo nvidia-inst
     elif echo "${gpu_info}" | grep -qi "AMD"; then
-        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
+        yay --verbose --noconfirm -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
     elif echo "${gpu_info}" | grep -qi "Intel"; then
-        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-intel multilib/lib32-vulkan-intel || true
+        yay --verbose --noconfirm -S extra/mesa extra/vulkan-intel multilib/lib32-vulkan-intel || true
     else
-        yes | yay --verbose --noconfirm -S extra/mesa extra/vulkan-swrast multilib/lib32-vulkan-swrast || true
+        yay --verbose --noconfirm -S extra/mesa extra/vulkan-swrast multilib/lib32-vulkan-swrast || true
     fi
 }
 
@@ -291,20 +291,21 @@ function _install_packages {
     _log "Installing packages..."
 
     # Utilities & Required by system.
-    yes | yay --verbose --noconfirm -S \
+    yay --verbose --noconfirm -S \
     extra/trash-cli \
     extra/gnome-keyring \
+    aur/xidlehook \
     extra/slop extra/qt5ct aur/themix-theme-oomox-git \
     aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
     extra/qt6-multimedia-ffmpeg \
     || true
 
     # Terminal & Shell.
-    yes | yay --verbose --noconfirm -S extra/kitty extra/zsh extra/starship || true
+    yay --verbose --noconfirm -S extra/kitty extra/zsh extra/starship || true
     sudo chsh -s "$(command -v zsh)" "${USER}"
 
     # Apps.
-    yes | yay --verbose --noconfirm -S \
+    yay --verbose --noconfirm -S \
     aur/google-chrome \
     aur/visual-studio-code-bin aur/postman-bin \
     extra/libreoffice-fresh \
@@ -320,14 +321,14 @@ function _install_packages {
     # Files manager.
     local size
     size=$((8 * 1024 * 1024 * 1024)) # 8 GiB
-    yes | yay --verbose --noconfirm -S extra/nemo || true
+    yay --verbose --noconfirm -S extra/nemo || true
     gsettings set org.nemo.preferences show-image-thumbnails always
     gsettings set org.nemo.preferences thumbnail-limit "${size}"
     gsettings set org.gnome.desktop.privacy remember-recent-files false
 
     # Git & Github.
     systemctl --user enable ssh-agent.service
-    yes | yay --verbose --noconfirm -S extra/github-cli extra/diff-so-fancy || true
+    yay --verbose --noconfirm -S extra/github-cli extra/diff-so-fancy || true
     git config --global init.defaultBranch main
     git config --global pull.rebase false
     git config --global core.excludesfile "${HOME}/.config/git/gitignore"
@@ -336,7 +337,7 @@ function _install_packages {
     git config --bool --global diff-so-fancy.stripLeadingSymbols false
 
     # Docker.
-    yes | yay --verbose --noconfirm -S aur/docker-desktop || true
+    yay --verbose --noconfirm -S aur/docker-desktop || true
     sudo groupadd docker || true
     sudo usermod -aG docker "${USER}"
     sudo rm -f /etc/firewalld/policies/docker*
@@ -354,7 +355,7 @@ function _install_packages {
     deactivate
 
     # JavaScript.
-    yes | yay --verbose --noconfirm -S extra/nvm || true
+    yay --verbose --noconfirm -S extra/nvm || true
     source /usr/share/nvm/init-nvm.sh
     nvm install node
 }
@@ -362,7 +363,7 @@ function _install_packages {
 function _setup_crontab {
     _log "Adding Crontab..."
 
-    yes | yay --verbose --noconfirm -S extra/cronie || true
+    yay --verbose --noconfirm -S extra/cronie || true
     sudo systemctl enable cronie
 
     local job current
@@ -436,7 +437,7 @@ function _configure_github_account {
 function _load_kvm_modules {
     _log "Loading KVM modules..."
 
-    yes | yay --verbose --noconfirm -S qemu libvirt || true
+    yay --verbose --noconfirm -S qemu libvirt || true
     sudo systemctl enable --now libvirtd
     sudo usermod -aG libvirt "${USER}"
 }

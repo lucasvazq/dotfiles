@@ -100,8 +100,21 @@ alias grep="grep --color=auto"
 alias rm="trash"
 
 function curl {
+    # Enhanced `curl` command that pretty-prints JSON responses and status code.
+
+    # Check if Content-Type header is already provided.
+    # Otherwise, add "Content-Type: application/json" by default.
+    local content_type_header
+    content_type_header=(-H "Content-Type: application/json")
+    for arg in "$@"; do
+        if [[ "${arg,,}" == *"content-type:"* ]]; then
+            content_type_header=()
+            break
+        fi
+    done
+
     local output status_code json
-    output="$(/usr/bin/curl "$@" -sS -w "\nstatus: %{http_code}" -H "Content-Type: application/json")"
+    output="$(/usr/bin/curl "$@" -sS -w "\nstatus: %{http_code}" "${content_type_header[@]}")"
     status_code=$(echo "${output}" | tail -n1)
     json=$(echo "${output}" | sed '$d')
     if echo "${json}" | jq empty 2>/dev/null; then
@@ -114,6 +127,18 @@ function curl {
 }
 
 function ls {
+    # Enhanced `ls` command with colored output and detailed formatting.
+    #
+    # Usage:
+    #   Sort by: -t (modified time), -S (size). Default: by name.
+    #   Show all files: -a
+    #
+    # Example:
+    #   ls -ta
+    #
+    # Format:
+    #     USER    GROUP    OTHER    NAME    SIZE    MODIFIED
+    #   X rwx   X rwx    X rwx    X       X       YYYY-MM-DD HH:MM:SS
     (
         echo -e "USER\tGROUP\tOTHER\tNAME\tSIZE\tMODIFIED"
         LC_COLLATE=C /usr/bin/ls -lh --almost-all --full-time "$@" | awk '
@@ -178,6 +203,7 @@ function ls {
 }
 
 docker() {
+    # Enhanced `docker` command that provides a more user-friendly output for `ps` argument.
     local first_argument
     first_argument="$1"
 

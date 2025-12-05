@@ -114,7 +114,10 @@ class Main:
     def _change_background(self, destination_path: Path | None):
         # The "change-background" is an external executable that updates the
         # background and color scheme.
-        subprocess_args = ["change-background"]
+        script_folder = Path(__file__).resolve().parent
+        change_background_path = script_folder / "change-background"
+
+        subprocess_args = [str(change_background_path)]
         if destination_path:
             subprocess_args.append(str(destination_path))
         subprocess.call(subprocess_args)
