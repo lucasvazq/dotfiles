@@ -147,56 +147,67 @@ function ls {
             }
             NF > 8 {
                 # Format Permissions.
-                local file_type perm user_perm group_perm other_perm user_perm_str group_perm_str other_perm_str;
-                file_type=substr($1, 1, 1);
-                perm = substr($1, 2);
-                user_perm = substr(perm, 1, 3);
-                group_perm = substr(perm, 4, 3);
-                other_perm = substr(perm, 7, 3);
-                group_perm_str = (group_perm == "---") ? "-" : gensub(/-/, "", "g", group_perm);
-                other_perm_str = (other_perm == "---") ? "-" : gensub(/-/, "", "g", other_perm);
+                file_type = substr($1, 1, 1)
+                perm = substr($1, 2)
+                user_perm = substr(perm, 1, 3)
+                group_perm = substr(perm, 4, 3)
+                other_perm = substr(perm, 7, 3)
+                if (group_perm == "---") {
+                    group_perm_str = "-"
+                } else {
+                    group_perm_str = gensub(/-/, "", "g", group_perm)
+                }
+                if (other_perm == "---") {
+                    other_perm_str = "-"
+                } else {
+                    other_perm_str = gensub(/-/, "", "g", other_perm)
+                }
 
                 if (user_perm == "r--") {
                     # Color the "r" perm in red if user has only read permission.
-                    user_perm_str = color("31", "r");
+                    user_perm_str = color("31", "r")
                 } else {
-                    user_perm_str = (user_perm == "---") ? "-" : gensub(/-/, "", "g", user_perm);
+                    if (user_perm == "---") {
+                        user_perm_str = "-"
+                    } else {
+                        user_perm_str = gensub(/-/, "", "g", user_perm)
+                    }
                 }
 
                 # Combine permission owner with their permissions.
-                local user_col group_col other_col;
-                user_col = $3 " " user_perm_str;
-                group_col = $4 " " group_perm_str;
-                other_col = "other " other_perm_str;
+                user_col = $3 " " user_perm_str
+                group_col = $4 " " group_perm_str
+                other_col = "other " other_perm_str
 
                 # Handle filename (including multi-word names).
-                local name;
-                name = $9;
-                for (i = 10; i <= NF; i++) name = name " " $i;
+                name = $9
+                for (index = 10; index <= NF; index++) {
+                    name = name " " $index
+                }
 
                 # Append "/" to directories.
-                if (file_type == "d") name = name "/";
+                if (file_type == "d") {
+                    name = name "/"
+                }
 
                 # Color the NAME column based on file type.
                 if (file_type == "d") {
-                    name = color("34", name);
+                    name = color("34", name)
                 } else if (file_type == "l") {
-                    name = color("36", name);
+                    name = color("36", name)
                 } else {
-                    name = color("32", name);
+                    name = color("32", name)
                 }
 
-                # Size
-                local size;
-                size = $5;
+                # Size.
+                size = $5
 
-                # Modification date
-                local date time datetime;
-                date = $6;
-                time = gensub(/\.[0-9]+$/, "", "g", $7);
-                datetime = date " " time;
+                # Modification date.
+                date = $6
+                time = gensub(/\.[0-9]+$/, "", "g", $7)
+                datetime = date " " time
 
-                print user_col "\t" group_col "\t" other_col "\t" name "\t" size "\t" datetime;
+                print user_col "\t" group_col "\t" other_col "\t" name "\t" size "\t" datetime
             }
         '
     ) | column -t -s $'\t'
