@@ -190,8 +190,8 @@ function ls {
 
                 # Handle filename (including multi-word names).
                 name = $9
-                for (index = 10; index <= NF; index++) {
-                    name = name " " $index
+                for (field_index = 10; field_index <= NF; field_index++) {
+                    name = name " " $field_index
                 }
 
                 # Append "/" to directories.
