@@ -235,15 +235,26 @@ update() {
     # violets are blue
     # I have Endeavour i3
     # yay -Syu
-
     sudo -v
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
     sudo eos-rankmirrors \
-        && yes | sudo pacman --verbose --noconfirm -Sy archlinux-keyring \
-        && yes | sudo pacman --verbose --noconfirm -Syuw --needed \
-        && yes | sudo pacman --verbose --noconfirm -Su --needed \
-        && yes | yay --verbose --noconfirm -Sua --timeupdate \
-        && yes | yay --verbose --noconfirm -Yc \
-        && sudo paccache -rk 2 || true
+        && sudo pacman --verbose --noconfirm --needed -Sy \
+        && sudo pacman --verbose --noconfirm --needed -S archlinux-keyring \
+        && sudo pacman --verbose --noconfirm --needed -Syuw \
+        && sudo pacman --verbose --noconfirm --needed -Su \
+        && yay --verbose --noconfirm --timeupdate -Sua \
+        && yay --verbose --noconfirm -Yc \
+        && sudo paccache -rk 2
+
+    # Recreate Python venv if the system Python version changed.
+    local venv_folder python_version
+    venv_folder="${HOME}/.config/.venv"
+    python_version="$(/usr/bin/python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+    if [[ ! -d "${venv_folder}/lib/python${python_version}" ]]; then
+        deactivate 2>/dev/null || true
+        rm -rf "${venv_folder}"
+        python -m venv "${venv_folder}"
+        source "${venv_folder}/bin/activate"
+        pip install pywal colorthief ipython ipdb requests
+    fi
 }

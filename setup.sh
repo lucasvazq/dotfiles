@@ -256,25 +256,29 @@ function _configure_yay {
 
     sudo bash -c 'echo "$(whoami) ALL=(ALL) NOPASSWD: /usr/bin/yay" > /etc/sudoers.d/00-yay-nopasswd'
     sudo chmod 440 /etc/sudoers.d/00-yay-nopasswd
-    yay --noconfirm --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
+    yay --noconfirm --save --answerclean All --answerdiff None --answeredit None --noremovemake --sudoloop || true
     yay --verbose --noconfirm -S eos-rankmirrors || true
     sudo eos-rankmirrors
-    yes | sudo pacman --verbose --noconfirm -Sy archlinux-keyring || true
-    yes | sudo pacman --verbose --noconfirm -Syuw --needed || true
-    yes | sudo pacman --verbose --noconfirm -Su --needed || true
-    yes | yay --verbose --noconfirm -Sua --timeupdate || true
-    yes | yay --verbose --noconfirm -Yc || true
+    sudo pacman --verbose --noconfirm --needed -Sy || true
+    sudo pacman --verbose --noconfirm --needed -S archlinux-keyring || true
+    sudo pacman --verbose --noconfirm --needed -Syuw || true
+    sudo pacman --verbose --noconfirm --needed -Su || true
+    yay --verbose --noconfirm --timeupdate -Sua || true
+    yay --verbose --noconfirm -Yc || true
     sudo paccache -rk 2 || true
 }
 
 function _install_drivers {
     _log "Installing drivers..."
 
+    # Kernel & Drivers support.
+    yay --verbose --noconfirm -S extra/linux-headers extra/linux-lts extra/linux-lts-headers extra/dkms || true
+
     # GPU Drivers.
     local gpu_info
     gpu_info="$(lspci | grep -E "VGA|3D")"
     if echo "${gpu_info}" | grep -qi "NVIDIA"; then
-        yay --verbose --noconfirm -S nvidia-inst || true
+        yay --verbose --noconfirm -S nvidia-inst aur/nvidia-hook || true
         sudo nvidia-inst \
             || yay --verbose --noconfirm -S extra/mesa extra/xf86-video-nouveau || true
     elif echo "${gpu_info}" | grep -qi "AMD"; then
@@ -317,6 +321,11 @@ function _install_packages {
     xdg-settings set default-url-scheme-handler https google-chrome-stable.desktop || true
     sudo sed -i 's|^Exec=.*|Exec=env WEBKIT_DISABLE_DMABUF_RENDERER=1 /usr/bin/neohtop|' /usr/share/applications/neohtop.desktop
 
+    # Limit systemd logs and coredumps to 100M each.
+    sudo mkdir -p /etc/systemd/coredump.conf.d /etc/systemd/journald.conf.d
+    printf "[Coredump]\nMaxUse=100M\n" | sudo tee /etc/systemd/coredump.conf.d/limit.conf
+    printf "[Journal]\nSystemMaxUse=100M\n" | sudo tee /etc/systemd/journald.conf.d/limit.conf
+
     # Files manager.
     local size
     size=$((8 * 1024 * 1024 * 1024)) # 8 GiB
@@ -348,10 +357,11 @@ function _install_packages {
     docker context use default
 
     # Python.
-    python -m venv "${HOME}/.config/.venv"
+    deactivate 2>/dev/null || true
+    rm -rf "${HOME}/.config/.venv"
+    /usr/bin/python -m venv "${HOME}/.config/.venv"
     source "${HOME}/.config/.venv/bin/activate"
     pip install pywal colorthief ipython ipdb requests
-    deactivate
 
     # JavaScript.
     yay --verbose --noconfirm -S extra/nvm || true
