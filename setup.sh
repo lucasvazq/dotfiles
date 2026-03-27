@@ -272,7 +272,7 @@ function _install_drivers {
     _log "Installing drivers..."
 
     # Kernel & Drivers support.
-    yay --verbose --noconfirm -S extra/linux-headers extra/linux-lts extra/linux-lts-headers extra/dkms || true
+    yay --verbose --noconfirm -S extra/linux-headers core/linux-lts core/linux-lts-headers extra/dkms || true
 
     # GPU Drivers.
     local gpu_info
