@@ -259,14 +259,12 @@ function _configure_yay {
     yay --noconfirm --save --answerclean None --answerdiff None --answeredit None --noremovemake --sudoloop || true
     yay --verbose --noconfirm -S eos-rankmirrors || true
     sudo eos-rankmirrors
-
-    yes | \
-        # Roses are red
-        # violets are blue
-        # I have Endeavour i3
-        yay -Syu \
-    --verbose --noconfirm \
-    || true
+    yes | sudo pacman --verbose --noconfirm -Sy archlinux-keyring || true
+    yes | sudo pacman --verbose --noconfirm -Syuw --needed || true
+    yes | sudo pacman --verbose --noconfirm -Su --needed || true
+    yes | yay --verbose --noconfirm -Sua --timeupdate || true
+    yes | yay --verbose --noconfirm -Yc || true
+    sudo paccache -rk 2 || true
 }
 
 function _install_drivers {
@@ -277,7 +275,8 @@ function _install_drivers {
     gpu_info="$(lspci | grep -E "VGA|3D")"
     if echo "${gpu_info}" | grep -qi "NVIDIA"; then
         yay --verbose --noconfirm -S nvidia-inst || true
-        sudo nvidia-inst
+        sudo nvidia-inst \
+            || yay --verbose --noconfirm -S extra/mesa extra/xf86-video-nouveau || true
     elif echo "${gpu_info}" | grep -qi "AMD"; then
         yay --verbose --noconfirm -S extra/mesa extra/vulkan-radeon multilib/lib32-vulkan-radeon || true
     elif echo "${gpu_info}" | grep -qi "Intel"; then

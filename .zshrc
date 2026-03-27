@@ -24,7 +24,6 @@ function _set_starship_config {
         export STARSHIP_CONFIG="${HOME}/.config/starship.toml"
     fi
 }
-
 precmd_functions=(_set_starship_config "${precmd_functions[@]}")
 eval "$(starship init zsh)"
 
@@ -35,7 +34,6 @@ _BOLD="\033[1m"
 _COLOR_BLACK="\033[30m"
 _COLOR_SEPARATOR_FIRST_TIME="\033[48;5;231m"
 _COLOR_SEPARATOR="\033[48;5;146m"
-
 function _separator {
     local string background newline
     string="${1}"
@@ -59,7 +57,6 @@ function _separator {
         echo
     fi
 }
-
 function precmd {
     if [[ "${_START}" == "true" ]]; then
         _separator "> Init" "${_COLOR_SEPARATOR_FIRST_TIME}"
@@ -67,7 +64,6 @@ function precmd {
         _separator "> Execute Command" "${_COLOR_SEPARATOR}"
     fi
 }
-
 function preexec {
     _separator "> Output" "${_COLOR_SEPARATOR}" true
 }
@@ -77,7 +73,6 @@ function preexec {
 ################################################################################
 
 WORDCHARS=""
-
 bindkey -e
 #       Action                              Key
 #       ------------------------------------------------
@@ -233,4 +228,22 @@ docker() {
     else
         command docker "$@"
     fi
+}
+
+update() {
+    # Roses are red
+    # violets are blue
+    # I have Endeavour i3
+    # yay -Syu
+
+    sudo -v
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+    sudo eos-rankmirrors \
+        && yes | sudo pacman --verbose --noconfirm -Sy archlinux-keyring \
+        && yes | sudo pacman --verbose --noconfirm -Syuw --needed \
+        && yes | sudo pacman --verbose --noconfirm -Su --needed \
+        && yes | yay --verbose --noconfirm -Sua --timeupdate \
+        && yes | yay --verbose --noconfirm -Yc \
+        && sudo paccache -rk 2 || true
 }
