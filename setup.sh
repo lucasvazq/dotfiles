@@ -295,27 +295,31 @@ function _install_packages {
 
     # Utilities & Required by system.
     yay --verbose --noconfirm -S \
-    extra/trash-cli \
-    extra/gnome-keyring \
-    aur/xidlehook \
-    extra/slop extra/qt5ct aur/themix-theme-oomox-git \
-    aur/xkblayout-state-git extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
-    extra/qt6-multimedia-ffmpeg \
-    || true
+            extra/trash-cli \
+            extra/gnome-keyring \
+            aur/xidlehook \
+            extra/slop extra/qt5ct aur/themix-theme-oomox-git \
+            extra/ttf-jetbrains-mono-nerd extra/noto-fonts-emoji \
+            extra/qt6-multimedia-ffmpeg \
+        || true
 
     # Terminal & Shell.
     yay --verbose --noconfirm -S extra/kitty extra/zsh extra/starship || true
     sudo chsh -s "$(command -v zsh)" "${USER}"
 
+    # Keyboard layout.
+    yay --verbose --noconfirm -S aur/xkblayout-state-git || true
+    sudo localectl set-x11-keymap us,es "" "" grp:alt_space_toggle
+
     # Apps.
     yay --verbose --noconfirm -S \
-    aur/google-chrome \
-    aur/visual-studio-code-bin aur/postman-bin \
-    extra/libreoffice-fresh \
-    extra/gimp extra/kdenlive extra/obs-studio \
-    aur/neohtop \
-    multilib/steam \
-    || true
+            aur/google-chrome \
+            aur/visual-studio-code-bin aur/postman-bin \
+            extra/libreoffice-fresh \
+            extra/gimp extra/kdenlive extra/obs-studio \
+            aur/neohtop \
+            multilib/steam \
+        || true
     xdg-settings set default-web-browser google-chrome-stable.desktop || true
     xdg-settings set default-url-scheme-handler http google-chrome-stable.desktop || true
     xdg-settings set default-url-scheme-handler https google-chrome-stable.desktop || true
