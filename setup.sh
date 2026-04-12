@@ -263,6 +263,7 @@ function _configure_yay {
     sudo pacman --verbose --noconfirm --needed -S archlinux-keyring || true
     sudo pacman --verbose --noconfirm --needed -Syuw || true
     sudo pacman --verbose --noconfirm --needed -Su || true
+    yay --verbose --noconfirm -Sc || true
     yay --verbose --noconfirm --timeupdate -Sua || true
     yay --verbose --noconfirm -Yc || true
     sudo paccache -rk 2 || true

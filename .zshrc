@@ -231,19 +231,31 @@ docker() {
 }
 
 update() {
+    local sudo_pid
+    sudo -v
+    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+    sudo_pid=$!
+    trap 'kill "${sudo_pid}" 2>/dev/null; sudo -K' RETURN
+
     # Roses are red
     # violets are blue
     # I have Endeavour i3
     # yay -Syu
-    sudo -v
-    while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
     sudo eos-rankmirrors \
-        && sudo pacman --verbose --noconfirm --needed -Sy \
+        && pacman --verbose --noconfirm --needed -Sy \
         && sudo pacman --verbose --noconfirm --needed -S archlinux-keyring \
         && sudo pacman --verbose --noconfirm --needed -Syuw \
         && sudo pacman --verbose --noconfirm --needed -Su \
-        && yay --verbose --noconfirm --timeupdate -Sua \
-        && yay --verbose --noconfirm -Yc \
+        || return 1
+    local exit_code
+    yay --verbose --noconfirm --timeupdate -Sua
+    exit_code="$?"
+    if [[ "${exit_code}" -ne 0 ]]; then
+        yay --verbose --noconfirm -Sc \
+            && yay --verbose --noconfirm --timeupdate -Sua \
+            || return 1
+    fi
+    yay --verbose --noconfirm -Yc \
         && sudo paccache -rk 2
 
     # Recreate Python venv if the system Python version changed.
